@@ -129,14 +129,55 @@
     </script>
     <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0056b3">
-<link rel="apple-touch-icon" href="images/icon-192.png">
+    <link rel="manifest" href="/manifest.json">
 
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-  }
-</script>
-    
+    <meta name="theme-color" content="#0056b3">
+
+    <link rel="apple-touch-icon" href="/images/icon-192.png">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('KGM App : Activée !', reg))
+                    .catch(err => console.log('KGM App : Erreur', err));
+            });
+        }
+    </script>
+<style>
+    /* On force la grille à se comporter correctement */
+    .analyses-grid {
+        display: flex;
+        flex-wrap: wrap; /* Permet de passer à la ligne proprement */
+        gap: 20px; /* Espace entre les blocs */
+        justify-content: center; /* Centre les blocs sur l'écran */
+        padding: 20px 0;
+    }
+
+    /* On définit la taille des blocs pour le 2x2 */
+    .analyse-card {
+        /* On prend 50% de la largeur moins l'espace du gap */
+        flex: 1 1 calc(50% - 20px); 
+        
+        /* On empêche les blocs de devenir trop petits ou trop grands */
+        max-width: 500px;
+        min-width: 300px; 
+        
+        /* Pour l'esthétique professionnelle */
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        padding: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    /* Sur petit mobile (téléphone vertical), on passe à 1 seul bloc par ligne */
+    @media (max-width: 650px) {
+        .analyse-card {
+            flex: 1 1 100%;
+        }
+    }
+</style>
 </head>
 <body>
         <nav>
@@ -228,8 +269,6 @@
                 <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse du cadre législatif et des défis de l'autonomie financière locale.</p>
                 <a href="article-loi-2019.html" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
             </div>
-
-        </div>
     </div>
 </section>
     
