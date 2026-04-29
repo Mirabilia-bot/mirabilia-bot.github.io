@@ -279,10 +279,19 @@
             <div><strong>Guide du Géoréférencement v1.0</strong><br><small>Par K. Gnimdou - Manuel technique pour techniciens Cartographie et SIG</small></div>
             <a href="guide-georef-gnimdou.pdf" class="download" target="_blank">Consulter</a>
         </div>
-            <div class="res-item" style="border-left: 6px solid var(--accent);">
-    <div><strong>Partager l'Expertise</strong><br><small>Diffuser l'application KGM aux collaborateurs</small></div>
-    <button onclick="navigator.share({title:'KGM',url:'https://mirabilia-bot.github.io/'})" style="color:var(--accent); font-weight:bold; border:1px solid var(--accent); background:none; padding:8px 15px; border-radius:4px; cursor:pointer;">Partager 📲</button>
+            <div class="res-item" style="border-left: 6px solid var(--accent); background: #fffdf5; display: flex; flex-direction: column; align-items: flex-start; gap: 10px;">
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <strong>Application KGM Expert</strong><br>
+            <small>Installer sur mobile pour un accès hors-ligne</small>
+        </div>
+        <button onclick="shareApp()" style="color:var(--accent); font-weight:bold; border:1px solid var(--accent); background:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size: 0.8rem;">Partager 📲</button>
+    </div>
+    <div style="font-size: 0.75rem; color: #666; font-style: italic; border-top: 1px solid #eee; width: 100%; pt: 5px;">
+        Note : Pour télécharger, utilisez l'option "Installer" ou "Ajouter à l'écran d'accueil" de votre navigateur.
+    </div>
             </div>
+            
     </section>
 
     <section id="contact" style="text-align: center;"> <h2 class="section-title">Contact & Consultance</h2>
