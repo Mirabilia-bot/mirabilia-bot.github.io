@@ -3,126 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Déchets à Agoè-Nyivé 1 | KODOMMA Gnimdou M.</title>
-        <meta property="og:title" content="Gestion des Déchets à Agoè-Nyivé 1 | KGM">
-<meta property="og:description" content="Analyse des défis financiers et techniques de la gestion des déchets à Agoè-Nyivé 1. Étude basée sur les résultats d'août 2025.">
-<meta property="og:image" content="https://mirabilia-bot.github.io/images/gestion-dechets-agoe.png">
-<meta property="og:url" content="https://mirabilia-bot.github.io/article-gestion-dechets-agoe.html">
+    <title>Gestion des Déchets à Agoè-Nyivé 1 | Expertise Territoriale</title>
     
-    <meta name="description" content="Analyse des défis financiers et techniques de la gestion des déchets à Agoè-Nyivé 1. Étude basée sur les résultats d'août 2025 concernant le sous-financement et la couverture territoriale.">
-<meta name="keywords" content="Agoè-Nyivé 1, commune d'agoè-nyivé, gestion des déchets des communes Togo, décentralisation Togo, KODOMMA Gnimdou M., environnement Togo, budget communal, SIG, services urbains">
-<meta name="author" content="KODOMMA Gnimdou M.">
+    <meta name="description" content="Analyse technique et financière de la gestion des déchets solides à Agoè-Nyivé 1. Étude basée sur les indicateurs de 2025.">
+    <meta name="author" content="KODOMMA Gnimdou M.">
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --primary: #00264d; --secondary: #006a4e; --accent: #d4af37; --text: #2c3e50; --bg: #fdfdfd; }
+        :root { 
+            --primary: #00264d; /* Bleu nuit institutionnel */
+            --secondary: #006a4e; /* Vert forêt (développement durable) */
+            --accent: #d4af37; /* Or (expertise) */
+            --text-dark: #1a1a1a; 
+            --text-light: #4a4a4a;
+            --bg-paper: #ffffff;
+            --bg-shade: #f8f9fa;
+        }
+
+        /* Reset & Base */
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: var(--text-dark); 
+            background: var(--bg-paper); 
+            line-height: 1.7; 
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation Minimaliste */
+        nav { 
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 1.2rem 8%; 
+            border-bottom: 1px solid #eaeaea;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+        }
+
+        /* Structure de l'Article (Largeur standard internationale : 750px) */
+        main { 
+            max-width: 750px; 
+            margin: 120px auto 60px; 
+            padding: 0 25px; 
+        }
+
+        /* En-tête de l'Article */
+        .meta-header { border-bottom: 3px solid var(--primary); padding-bottom: 20px; margin-bottom: 40px; }
+        .tag { color: var(--secondary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
         
-        html, body { height: 100%; margin: 0; }
-        body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; display: flex; flex-direction: column; }
-        
-        nav { background: white; padding: 1rem 8%; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; width: 100%; box-sizing: border-box; }
-        main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; }
-        
-        .tag { background: #e8f5e9; color: var(--secondary); padding: 5px 15px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-        
-        /* SEULE MODIFICATION : On force l'alignement propre pour le titre */
         h1 { 
             font-family: 'Crimson Pro', serif; 
-            font-size: 2.4rem; 
+            font-size: 2.8rem; 
             color: var(--primary); 
+            line-height: 1.15; 
             margin: 15px 0; 
-            line-height: 1.2; 
-            text-align: left; /* Pour supprimer l'étirement vilain */
-            word-spacing: normal; 
+            letter-spacing: -0.5px;
         }
-        
-        .article-img { width: 100%; border-radius: 12px; margin: 30px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        
-        h2 { font-family: 'Crimson Pro', serif; color: var(--secondary); margin-top: 35px; border-bottom: 2px solid #eee; padding-bottom: 8px; }
-        .highlight-box { background: #f4f7f9; border-left: 5px solid var(--accent); padding: 25px; margin: 30px 0; border-radius: 0 8px 8px 0; }
-        
-        footer { background: var(--primary); color: white; padding: 40px 8%; text-align: center; }
-        .back-link { text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
-    </style>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Les défis et perspectives de la gestion des déchets à Agoè-Nyivé 1",
-  "author": {
-    "@type": "Person",
-    "name": "KODOMMA Gnimdou M."
-  },
-  "datePublished": "2026-04-26",
-  "description": "Diagnostic technique et financier de la gestion des déchets au Togo."
-}
-    </script>
-   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0056b3">
-<link rel="apple-touch-icon" href="images/icon-192.png">
 
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-  }
-</script>
-    
+        .chapo { 
+            font-size: 1.25rem; 
+            color: var(--text-light); 
+            font-weight: 300; 
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* Médias & Infographies */
+        .article-img-container { margin: 40px 0; text-align: center; }
+        .article-img { width: 100%; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .img-caption { font-size: 0.8rem; color: #888; margin-top: 10px; font-style: italic; }
+
+        /* Corps de texte */
+        h2 { 
+            font-family: 'Crimson Pro', serif; 
+            font-size: 1.8rem; 
+            color: var(--secondary); 
+            margin-top: 50px; 
+            margin-bottom: 20px;
+        }
+
+        p { margin-bottom: 25px; text-align: justify; }
+
+        /* Callout Box (Note technique) */
+        .highlight-box { 
+            background: var(--bg-shade); 
+            border-left: 4px solid var(--accent); 
+            padding: 30px; 
+            margin: 40px 0; 
+            font-size: 1.05rem;
+            color: var(--text-light);
+        }
+
+        /* Pied de page institutionnel */
+        footer { 
+            background: var(--primary); 
+            color: #ffffff; 
+            padding: 60px 8%; 
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .btn-download {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: opacity 0.3s;
+        }
+        .btn-download:hover { opacity: 0.9; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            main { margin-top: 100px; }
+        }
+    </style>
 </head>
 <body>
 
     <nav>
-        <a href="blog.html" class="back-link">← Retour aux analyses</a>
+        <a href="blog.html" style="text-decoration:none; color:var(--primary); font-weight:600; font-size:0.9rem;">← ANALYSE & GOUVERNANCE</a>
     </nav>
 
     <main>
-        <span class="tag">Environnement & Gouvernance</span>
-        <p style="color: var(--accent); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;" > Analyse| 26 Avril 2026</p>
-        
-        <h1>Les défis de la gestion des déchets solides à Agoè-Nyivé 1 : Diagnostic et perspectives issues des résultats d'études, Août 2025</h1>
+        <div class="meta-header">
+            <span class="tag">Décentralisation & Environnement</span>
+            <h1>Les défis de la gestion des déchets solides à Agoè-Nyivé 1</h1>
+            <p style="color: #888; font-size: 0.9rem;">Par <strong>KODOMMA Gnimdou M.</strong> | Lomé, Togo | 26 Avril 2026</p>
+        </div>
 
-        <p>La gestion des déchets solides ménagers et assimilés constitue aujourd'hui un défi majeur pour le développement durable de la commune d'Agoè-Nyivé 1. Une analyse profonde révèle des failles structurelles nécessitant des réformes urgentes.</p>
+        <p class="chapo">
+            Diagnostic technique et financier de la gestion des déchets ménagers : une étude des mécanismes de financement et de couverture territoriale pour la commune d'Agoè-Nyivé 1.
+        </p>
 
-        <img src="images/gestion-dechets-agoe.png" alt="Infographie gestion des déchets Agoè-Nyivé 1" class="article-img">
+        <p>La gestion des déchets solides ménagers et assimilés constitue aujourd'hui un défi majeur pour le développement durable de la commune d'Agoè-Nyivé 1. Une analyse profonde révèle des failles structurelles nécessitant des réformes urgentes pour garantir la salubrité publique.</p>
 
-        <h2>Un sous-financement chronique</h2>
-        <p>Les contraintes financières pèsent lourdement sur l’efficacité du système communal. Les dépenses allouées à la gestion des déchets ne représentent qu’environ <strong>03 % du budget total</strong> de la commune exercice 2025, révélant une capacité budgétaire largement insuffisante.</p>
+        <div class="article-img-container">
+            <img src="images/gestion-dechets-agoe.png" alt="Infographie gestion des déchets" class="article-img">
+            <p class="img-caption">Figure 1 : Chaîne de valeur et flux de collecte des déchets (Source : KGM Expertise, 2025)</p>
+        </div>
+
+        <h2>I. Un sous-financement budgétaire critique</h2>
+        <p>Les contraintes financières pèsent lourdement sur l’efficacité du système communal. Les dépenses allouées à la gestion des déchets ne représentent qu’environ <strong>03&nbsp;% du budget total</strong> de la commune pour l'exercice 2025, révélant une capacité de mobilisation de ressources largement insuffisante face aux besoins réels.</p>
 
         <div class="highlight-box">
-            <strong>Le paradoxe de la couverture :</strong> Bien que le taux d’abonnement soit relativement élevé (84 %), la couverture effective n’atteint que 50 % du territoire communal, favorisant la prolifération de dépotoirs sauvages.(Résultats d'étude, Juillet et Août 2025)
+            <strong>Indicateur Clé :</strong> Bien que le taux d’abonnement soit de 84&nbsp;%, la couverture spatiale effective n’atteint que 50&nbsp;% du territoire, favorisant l'émergence de zones d'ombre environnementales.
         </div>
 
-        <h2>Des failles techniques et environnementales</h2>
-        <p>L’analyse du dispositif révèle l’absence d’étanchéité au niveau des centres de regroupement intermédiaire, exposant les sols et les nappes phréatiques à des risques de pollution. Cette situation va à l’encontre des principes de précaution environnementale et de salubrité publique.(Résultats d'études, Juillet et Août 2025) </p>
+        <h2>II. Vulnérabilités techniques et environnementales</h2>
+        <p>L’analyse du dispositif révèle l’absence d’étanchéité au niveau des centres de regroupement intermédiaire, exposant les sols et les nappes phréatiques à des risques de pollution chimique. Cette situation contrevient aux principes de précaution environnementale inscrits dans la législation togolaise.</p>
 
-        <h2>Vers une approche systémique</h2>
-        <p>La réussite d’une gestion efficace repose sur une approche intégrée associant :
-            <ul>
-                <li>Une gouvernance performante et un financement adéquat.</li>
-                <li>La mobilisation active des populations (sensibilisation et incitation).</li>
-                <li>L'analyse économique des circuits de valorisation, comme le compostage.</li>
-            </ul>
-        </p>
+        <h2>III. Recommandations stratégiques</h2>
+        <p>La transition vers une gestion performante repose sur trois piliers :</p>
+        <ul style="margin-bottom:30px;">
+            <li style="margin-bottom:10px;"><strong>Renforcement institutionnel :</strong> Optimisation des lignes budgétaires dédiées.</li>
+            <li style="margin-bottom:10px;"><strong>Gouvernance participative :</strong> Intégration des comités de développement à la base.</li>
+            <li style="margin-bottom:10px;"><strong>Économie circulaire :</strong> Développement de filières locales de compostage.</li>
+        </ul>
 
-        <p>Seule une approche participative permettra de faire de la gestion des déchets un véritable levier du développement local durable pour la commune.</p>
+        <div style="text-align:center; margin-top:50px;">
+            <p style="font-size:0.9rem; color:#666;">Cette analyse fait partie du guide complet de géoréférencement.</p>
+            <a href="#" class="btn-download">Télécharger la Note de Synthèse (PDF)</a>
+        </div>
     </main>
-<div style="font-size: 0.75rem; opacity: 0.5; text-align: center; padding: 15px 0; background: var(--bg);">
-    Dernière mise à jour : <span id="date-modif"></span>
-</div>
-        <footer>
-        <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px;">KODOMMA Gnimdou M.</div>
-        <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
-            Spécialiste SIG et gestionnaire des collectivités locales | Consultant en Gouvernance Territoriale
+
+    <footer>
+        <div style="font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: bold; margin-bottom: 10px;">KODOMMA Gnimdou M.</div>
+        <p style="font-size: 0.9rem; opacity: 0.8; max-width: 600px; margin: 0 auto 20px;">
+            Consultant en Gouvernance Territoriale & Systèmes d'Information Géographique (SIG).
         </p>
-        <div style="margin-top: 15px; font-size: 0.7rem; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-            &copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.
+        <div style="font-size: 0.75rem; opacity: 0.5;">
+            &copy; 2026 KGM Expertise - République Togolaise.
         </div>
-        </footer>
-<script>
-    const dateModif = new Date(document.lastModified);
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
-</script>
-    
+    </footer>
+
 </body>
 </html>
