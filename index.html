@@ -60,39 +60,42 @@
         footer { background: var(--primary); color: #fff; padding: 60px 8% 20px; text-align: center; }
         .copy { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
 
-                               @media (max-width: 768px) { 
+                     @media (max-width: 768px) { 
             nav { 
                 flex-direction: column !important; 
                 align-items: flex-start !important; 
                 padding: 15px 5% !important;
                 gap: 12px !important;
             } 
-
-            /* --- SOLUTION DE CENTRAGE --- */
-            /* On centre les grilles et on ajoute de l'air sur les côtés */
+            
+            /* CENTRE LES GRILLES DANS LA PAGE */
             .grid, .analyses-grid {
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important; 
-                padding: 0 15px !important; /* Crée la marge de sécurité à gauche/droite */
+                padding: 0 10px !important;
                 width: 100% !important;
             }
 
-            /* On définit une largeur propre pour les blocs */
+            /* DISPOSITION VERTICALE : Texte en haut, Bouton en bas */
             .res-item, .card, .analyse-card { 
-                width: 100% !important;
-                max-width: 480px !important; /* Largeur idéale pour mobile */
-                margin-bottom: 20px !important;
                 display: flex !important;
+                flex-direction: column !important; /* Force le bouton EN DESSOUS */
+                align-items: center !important;    /* Centre tout le contenu interne */
+                text-align: center !important;     /* Centre le texte */
+                width: 90% !important;             /* Évite de coller aux bords gauche/droite */
+                max-width: 450px !important;
+                margin: 0 auto 20px auto !important;
+                padding: 25px 20px !important;
+                box-sizing: border-box !important;
             }
 
-            /* On garde les textes à gauche et les boutons à droite dans les ressources */
-            .res-item { 
-                flex-direction: row !important; 
-                justify-content: space-between !important;
-                align-items: center !important;
-                text-align: left !important;
-                padding: 20px !important;
+            /* AJUSTEMENT DES BOUTONS */
+            .download, .res-item button, .analyse-card a {
+                margin-top: 15px !important; /* Espace entre le texte et le bouton */
+                width: 100% !important;      /* Le bouton prend toute la largeur du bloc */
+                max-width: 250px !important; /* Mais pas trop large pour rester élégant */
+                display: block !important;
             }
 
             .nav-links { 
@@ -118,7 +121,7 @@
 
             .hero-text { font-size: 1.1rem !important; transform: rotate(0deg) !important; padding: 10px 15px; }
             .hero h1 { font-size: 1.8rem; }
-                               }
+        }
         
         
         
