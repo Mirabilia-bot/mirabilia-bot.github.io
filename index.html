@@ -379,7 +379,6 @@
 </div>
 
 <script>
-    // Logique pour rendre le bouton "vivant"
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -391,17 +390,17 @@
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                    console.log('Utilisateur a installé l'App');
+                    console.log("Utilisateur a installé l'App");
                 }
                 deferredPrompt = null;
             });
         } else {
-            // Si déjà installée ou non supportée, on fait un scroll fluide vers le haut
             window.scrollTo({ top: 0, behavior: 'smooth' });
             alert("L'application est déjà lancée. Vous avez été redirigé vers le tableau de bord principal.");
         }
     }
 </script>
+        
     </div> 
         
     </div>
