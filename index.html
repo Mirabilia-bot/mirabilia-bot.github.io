@@ -60,30 +60,39 @@
         footer { background: var(--primary); color: #fff; padding: 60px 8% 20px; text-align: center; }
         .copy { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
 
-                       @media (max-width: 768px) { 
+                               @media (max-width: 768px) { 
             nav { 
                 flex-direction: column !important; 
                 align-items: flex-start !important; 
                 padding: 15px 5% !important;
                 gap: 12px !important;
             } 
-            
-            /* CENTRE LES GRILLES DANS LA PAGE */
+
+            /* --- SOLUTION DE CENTRAGE --- */
+            /* On centre les grilles et on ajoute de l'air sur les côtés */
             .grid, .analyses-grid {
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important; 
-                padding: 0 !important;
+                padding: 0 15px !important; /* Crée la marge de sécurité à gauche/droite */
                 width: 100% !important;
             }
 
-            /* CENTRE LES BLOCS INDIVIDUELS SANS COLLER AUX BORDS */
+            /* On définit une largeur propre pour les blocs */
             .res-item, .card, .analyse-card { 
+                width: 100% !important;
+                max-width: 480px !important; /* Largeur idéale pour mobile */
+                margin-bottom: 20px !important;
                 display: flex !important;
-                width: 90% !important; /* Force l'espace à gauche et à droite */
-                max-width: 500px !important;
-                margin: 0 auto 20px auto !important; /* Le 'auto' ici fait tout le travail de centrage */
-                box-sizing: border-box !important;
+            }
+
+            /* On garde les textes à gauche et les boutons à droite dans les ressources */
+            .res-item { 
+                flex-direction: row !important; 
+                justify-content: space-between !important;
+                align-items: center !important;
+                text-align: left !important;
+                padding: 20px !important;
             }
 
             .nav-links { 
@@ -101,7 +110,6 @@
             .nav-links a {
                 font-size: 0.92rem !important; 
                 font-weight: 600 !important;
-                margin-left: 0 !important;
                 white-space: nowrap !important;
                 padding: 5px 8px !important; 
                 background: #f0f4f7; 
@@ -110,7 +118,7 @@
 
             .hero-text { font-size: 1.1rem !important; transform: rotate(0deg) !important; padding: 10px 15px; }
             .hero h1 { font-size: 1.8rem; }
-                       }
+                               }
         
         
         
