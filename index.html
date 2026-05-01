@@ -60,7 +60,7 @@
         footer { background: var(--primary); color: #fff; padding: 60px 8% 20px; text-align: center; }
         .copy { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
 
-                              @media (max-width: 768px) { 
+                       @media (max-width: 768px) { 
             nav { 
                 flex-direction: column !important; 
                 align-items: flex-start !important; 
@@ -68,18 +68,22 @@
                 gap: 12px !important;
             } 
             
-            /* SOLUTION RÉELLE : On centre les conteneurs parents sans toucher aux enfants */
+            /* CENTRE LES GRILLES DANS LA PAGE */
             .grid, .analyses-grid {
                 display: flex !important;
                 flex-direction: column !important;
-                align-items: center !important; /* C'est ça qui centre vos blocs dans la page */
-                padding: 0 15px !important;
+                align-items: center !important; 
+                padding: 0 !important;
+                width: 100% !important;
             }
 
-            /* On garde vos blocs à 100% de largeur pour que le texte respire */
+            /* CENTRE LES BLOCS INDIVIDUELS SANS COLLER AUX BORDS */
             .res-item, .card, .analyse-card { 
-                width: 100% !important;
-                margin-bottom: 20px !important;
+                display: flex !important;
+                width: 90% !important; /* Force l'espace à gauche et à droite */
+                max-width: 500px !important;
+                margin: 0 auto 20px auto !important; /* Le 'auto' ici fait tout le travail de centrage */
+                box-sizing: border-box !important;
             }
 
             .nav-links { 
@@ -106,7 +110,8 @@
 
             .hero-text { font-size: 1.1rem !important; transform: rotate(0deg) !important; padding: 10px 15px; }
             .hero h1 { font-size: 1.8rem; }
-                              }
+                       }
+        
         
         
         @media (max-width: 600px) {
