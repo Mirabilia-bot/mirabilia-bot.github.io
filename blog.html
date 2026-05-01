@@ -16,116 +16,80 @@
     <link rel="icon" type="image/png" href="icon.png?v=1">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
         
-            <style>
-        :root { --primary: #00264d; --secondary: #006633; --accent: #d4af37; --light: #fdfdfd; --text: #2c3e50; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* --- STRUCTURE DE PAGE --- */
-        html, body { height: 100%; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            color: var(--text); 
-            background: var(--light); 
-            line-height: 1.7; 
-            padding-top: 85px; 
-            display: flex;
-            flex-direction: column;
-        }
-        main { flex: 1; }
+        <style>
+    :root { --primary: #00264d; --secondary: #006633; --accent: #d4af37; --light: #fdfdfd; --text: #2c3e50; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body { height: 100%; }
+    body { 
+        font-family: 'Inter', sans-serif; 
+        color: var(--text); background: var(--light); 
+        line-height: 1.7; padding-top: 85px; 
+        display: flex; flex-direction: column; 
+    }
+    main { flex: 1; }
 
-        /* --- NAVIGATION --- */
-        nav { 
-            background: white; 
-            padding: 1.2rem 8%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05); 
-            position: fixed; 
-            top: 0; 
-            left: 0;
-            width: 100%;
-            z-index: 2000; 
-        }
-        .logo { 
-            font-family: sans-serif; 
-            font-weight: 800; 
-            color: #1a3a5f; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            border-left: 3px solid #006a4e; 
-            padding-left: 10px; 
-            text-decoration: none; 
-        }
-        .logo-sub { font-size: 0.8rem; color: #fecb00; font-weight: bold; }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { text-decoration: none; color: #1a3a5f; font-weight: bold; font-size: 0.9rem; }
+    nav { 
+        background: white; padding: 1.2rem 8%; 
+        display: flex; justify-content: space-between; align-items: center; 
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: fixed; 
+        top: 0; left: 0; width: 100%; z-index: 2000; 
+    }
+    .logo { 
+        font-family: sans-serif; font-weight: 800; color: #1a3a5f; 
+        display: flex; align-items: center; gap: 10px; 
+        border-left: 3px solid #006a4e; padding-left: 10px; text-decoration: none; 
+    }
+    .logo-sub { font-size: 0.8rem; color: #fecb00; font-weight: bold; }
+    .nav-links { display: flex; gap: 15px; }
+    .nav-links a { text-decoration: none; color: #1a3a5f; font-weight: bold; font-size: 0.9rem; }
 
-        /* --- HEADER --- */
-        .blog-header { background: #1a3a5f; color: white; padding: 60px 20px; text-align: center; }
-        .blog-header h1 { 
-            font-family: 'Crimson Pro', serif; 
-            font-size: 2.8rem; 
-            margin-bottom: 10px; 
-            white-space: nowrap; 
-        }
-        
-        /* --- GRILLE D'ARTICLES CORRIGÉE --- */
-        .container { 
-            max-width: 1100px; 
-            margin: 40px auto; 
-            padding: 0 20px; 
-            display: flex; 
-            flex-wrap: wrap; /* Utilisation de flex pour un meilleur contrôle du dernier élément */
-            gap: 30px; 
-            justify-content: center; 
-        }
-        
-        .card { 
-            background: white; 
-            border-radius: 12px; 
-            padding: 25px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            border: 1px solid #eee; 
-            display: flex; 
-            flex-direction: column; 
-            transition: 0.4s; 
-            /* CORRECTION ICI : Largeur équilibrée pour tous les articles */
-            flex: 1 1 320px; 
-            max-width: 350px; 
-        }
-        .card:hover { transform: translateY(-5px); border-top: 4px solid var(--secondary); }
-        .card h3 { font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 1.4rem; margin-bottom: 15px; }
-        .card-link { color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start; margin-top: auto; }
+    .blog-header { background: #1a3a5f; color: white; padding: 60px 20px; text-align: center; }
+    .blog-header h1 { font-family: 'Crimson Pro', serif; font-size: 2.8rem; margin-bottom: 10px; white-space: nowrap; }
+    
+    /* --- LA SOLUTION TECHNIQUE --- */
+    .container { 
+        max-width: 1100px; 
+        margin: 40px auto; 
+        padding: 0 20px; 
+        display: grid; 
+        /* On crée des colonnes de 340px maximum. S'il n'y a pas assez de place, l'article reste à 340px */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 340px)); 
+        gap: 30px; 
+        /* On aligne la grille à gauche pour que le 5ème article soit aligné sous les autres */
+        justify-content: center; 
+    }
+    
+    .card { 
+        background: white; border-radius: 12px; padding: 25px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; 
+        display: flex; flex-direction: column; transition: 0.4s; 
+        height: 100%;
+    }
+    .card:hover { transform: translateY(-5px); border-top: 4px solid var(--secondary); }
+    .card h3 { font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 1.4rem; margin-bottom: 15px; }
+    .card-link { color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start; margin-top: auto; }
 
-        /* --- SECTIONS --- */
-        section { padding: 80px 8%; border-bottom: 1px solid #eee; text-align: center; }
-        .section-title { 
-            font-family: 'Crimson Pro', serif; 
-            font-size: 2.2rem; 
-            color: var(--primary); 
-            margin-bottom: 40px; 
-            border-bottom: 3px solid var(--accent); 
-            display: inline-block; 
-            white-space: nowrap; 
-            padding-bottom: 5px;
-        }
-        .contact-link { color: var(--primary); text-decoration: none; font-weight: bold; }
-        footer { background: var(--primary); color: #fff; padding: 40px 8% 20px; text-align: center; width: 100%; }
+    section { padding: 80px 8%; border-bottom: 1px solid #eee; text-align: center; }
+    .section-title { 
+        font-family: 'Crimson Pro', serif; font-size: 2.2rem; 
+        color: var(--primary); margin-bottom: 40px; 
+        border-bottom: 3px solid var(--accent); display: inline-block; 
+        white-space: nowrap; padding-bottom: 5px;
+    }
+    .contact-link { color: var(--primary); text-decoration: none; font-weight: bold; }
+    footer { background: var(--primary); color: #fff; padding: 40px 8% 20px; text-align: center; width: 100%; }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) { 
-            .container { padding: 0 15px; }
-            .card { max-width: 100%; flex: 1 1 100%; } /* Prend toute la largeur proprement sur mobile */
-            
-            nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; } 
-            .nav-links { display: flex !important; flex-direction: row !important; gap: 8px !important; width: 100% !important; overflow-x: auto; padding-bottom: 5px; }
-            .nav-links a { font-size: 0.92rem !important; font-weight: 600 !important; white-space: nowrap !important; padding: 5px 8px !important; background: #f0f4f7; border-radius: 4px; }
-            .blog-header h1 { font-size: 2rem; white-space: normal; }
-            .section-title { font-size: 1.7rem; white-space: normal; }
-        }
-            </style>
+    @media (max-width: 768px) { 
+        /* Sur mobile, on force l'affichage en une seule colonne propre */
+        .container { grid-template-columns: 1fr; }
+        nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; } 
+        .nav-links { display: flex !important; flex-direction: row !important; gap: 8px !important; width: 100% !important; overflow-x: auto; padding-bottom: 5px; }
+        .nav-links a { font-size: 0.92rem !important; font-weight: 600 !important; white-space: nowrap !important; padding: 5px 8px !important; background: #f0f4f7; border-radius: 4px; }
+        .blog-header h1 { font-size: 2rem; white-space: normal; }
+        .section-title { font-size: 1.7rem; white-space: normal; }
+    }
+        </style>
     
             
     <script type="application/ld+json">
