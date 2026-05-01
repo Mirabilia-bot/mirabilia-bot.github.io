@@ -60,18 +60,46 @@
         footer { background: var(--primary); color: #fff; padding: 60px 8% 20px; text-align: center; }
         .copy { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
 
-                             @media (max-width: 768px) { 
+                    @media (max-width: 768px) { 
             nav { 
                 flex-direction: column !important; 
                 align-items: flex-start !important; 
                 padding: 15px 5% !important;
                 gap: 12px !important;
             } 
+
+            /* RENDU TOTALEMENT RESPONSIVE : On utilise 100% et border-box pour ne jamais déborder */
+            .grid, .analyses-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                padding: 0 15px !important;
+                width: 100% !important;
+            }
+
+            .analyse-card {
+                width: 100% !important;
+                min-width: unset !important; /* Supprime la rigidité qui causait l'excentrage */
+                max-width: 100% !important;
+                flex: none !important;
+                margin-bottom: 20px !important;
+            }
+
+            /* BOUTONS EN DESSOUS : Correction de l'écrasement sur mobile */
             .res-item { 
                 flex-direction: column !important; 
-                align-items: center !important; 
-                text-align: center !important; 
+                align-items: stretch !important; 
+                text-align: left !important;
+                width: 100% !important;
+                padding: 20px !important;
             }
+
+            .res-item .download, .res-item button {
+                margin-top: 15px !important;
+                width: 100% !important;
+                text-align: center !important;
+            }
+
             .nav-links { 
                 margin-top: 0 !important; 
                 display: flex !important;
@@ -83,18 +111,20 @@
                 overflow-x: auto; 
                 padding-bottom: 5px;
             }
+
             .nav-links a {
                 font-size: 0.92rem !important; 
                 font-weight: 600 !important;
-                margin-left: 0 !important;
                 white-space: nowrap !important;
                 padding: 5px 8px !important; 
                 background: #f0f4f7; 
                 border-radius: 4px;
             }
+
             .hero-text { font-size: 1.1rem !important; transform: rotate(0deg) !important; padding: 10px 15px; }
             .hero h1 { font-size: 1.8rem; }
-        }
+                }
+                        
         
         @media (max-width: 600px) {
             .section-title { font-size: 1.6rem; }
