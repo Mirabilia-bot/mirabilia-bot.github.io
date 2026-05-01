@@ -362,14 +362,47 @@
             </a>
         </div>
 
-                <div class="res-item" style="border-left: 6px solid #e91e63; padding: 25px;">
-            <div style="flex-grow: 1;">
-                <span style="background: #fce4ec; color: #c2185b; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">PLATEFORME DIGITALE</span>
-                <h4 style="margin: 10px 0 5px;">Accès à l'Application</h4>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Interface de gestion et de consultation des données territoriales (PWA).</p>
-            </div>
-            <a href="#accueil" class="download" style="border-color: #e91e63; color: #e91e63; text-align: center;">Ouvrir l'App</a>
-                </div>
+                <div class="res-item" style="border-left: 6px solid #e91e63; padding: 25px; position: relative;">
+    <div style="flex-grow: 1;">
+        <span style="background: #fce4ec; color: #c2185b; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">PLATEFORME DIGITALE</span>
+        <h4 style="margin: 10px 0 5px;">Accès à l'Application</h4>
+        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Interface de gestion et de consultation des données territoriales (PWA).</p>
+        
+        <div style="background: #fff0f5; padding: 8px 12px; border-radius: 6px; font-size: 0.75rem; color: #c2185b; border: 1px dashed #c2185b; margin-top: 5px;">
+            <strong>Note :</strong> L'App est déjà active. Appuyez pour l'installer sur votre écran d'accueil (Mobile/PC) ou revenir au tableau de bord.
+        </div>
+    </div>
+    
+    <button onclick="installApp()" class="download" style="border-color: #e91e63; color: #e91e63; background: none; cursor: pointer; text-align: center; font-family: inherit;">
+        Ouvrir / Installer
+    </button>
+</div>
+
+<script>
+    // Logique pour rendre le bouton "vivant"
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+    });
+
+    function installApp() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('Utilisateur a installé l'App');
+                }
+                deferredPrompt = null;
+            });
+        } else {
+            // Si déjà installée ou non supportée, on fait un scroll fluide vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            alert("L'application est déjà lancée. Vous avez été redirigé vers le tableau de bord principal.");
+        }
+    }
+</script>
+    </div> 
         
     </div>
 
