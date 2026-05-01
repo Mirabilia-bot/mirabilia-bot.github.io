@@ -47,16 +47,15 @@
     .blog-header { background: #1a3a5f; color: white; padding: 60px 20px; text-align: center; }
     .blog-header h1 { font-family: 'Crimson Pro', serif; font-size: 2.8rem; margin-bottom: 10px; white-space: nowrap; }
     
-    /* --- LA SOLUTION TECHNIQUE --- */
+    /* --- LA CORRECTION DÉFINITIVE --- */
     .container { 
         max-width: 1100px; 
         margin: 40px auto; 
         padding: 0 20px; 
         display: grid; 
-        /* On crée des colonnes de 340px maximum. S'il n'y a pas assez de place, l'article reste à 340px */
-        grid-template-columns: repeat(auto-fill, minmax(300px, 340px)); 
+        /* Ici on impose 330px de large par article, ni plus ni moins sur ordi */
+        grid-template-columns: repeat(auto-fill, 330px); 
         gap: 30px; 
-        /* On aligne la grille à gauche pour que le 5ème article soit aligné sous les autres */
         justify-content: center; 
     }
     
@@ -64,6 +63,7 @@
         background: white; border-radius: 12px; padding: 25px; 
         box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; 
         display: flex; flex-direction: column; transition: 0.4s; 
+        width: 100%; /* La carte occupe toute sa colonne de 330px */
         height: 100%;
     }
     .card:hover { transform: translateY(-5px); border-top: 4px solid var(--secondary); }
@@ -81,7 +81,7 @@
     footer { background: var(--primary); color: #fff; padding: 40px 8% 20px; text-align: center; width: 100%; }
 
     @media (max-width: 768px) { 
-        /* Sur mobile, on force l'affichage en une seule colonne propre */
+        /* Sur mobile, on repasse en flexible pour éviter que les 330px ne dépassent du petit écran */
         .container { grid-template-columns: 1fr; }
         nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; } 
         .nav-links { display: flex !important; flex-direction: row !important; gap: 8px !important; width: 100% !important; overflow-x: auto; padding-bottom: 5px; }
@@ -89,7 +89,7 @@
         .blog-header h1 { font-size: 2rem; white-space: normal; }
         .section-title { font-size: 1.7rem; white-space: normal; }
     }
-        </style>
+                  </style>
     
             
     <script type="application/ld+json">
