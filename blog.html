@@ -15,15 +15,13 @@
     
     <link rel="icon" type="image/png" href="icon.png?v=1">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-        <style>
+        
+            <style>
         :root { --primary: #00264d; --secondary: #006633; --accent: #d4af37; --light: #fdfdfd; --text: #2c3e50; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* --- SOLUTION POUR LE PIED DE PAGE --- */
-        html, body {
-            height: 100%; /* Force la hauteur sur les parents */
-        }
-
+        /* --- STRUCTURE DE PAGE --- */
+        html, body { height: 100%; }
         body { 
             font-family: 'Inter', sans-serif; 
             color: var(--text); 
@@ -31,14 +29,11 @@
             line-height: 1.7; 
             padding-top: 85px; 
             display: flex;
-            flex-direction: column; /* Aligne les enfants verticalement */
+            flex-direction: column;
         }
+        main { flex: 1; }
 
-        main {
-            flex: 1; /* Cette section va "pousser" et prendre tout l'espace vide restant */
-        }
-
-        /* --- TÊTE IMMOBILE (FIXÉE) --- */
+        /* --- NAVIGATION --- */
         nav { 
             background: white; 
             padding: 1.2rem 8%; 
@@ -63,14 +58,11 @@
             padding-left: 10px; 
             text-decoration: none; 
         }
-
-        .logo div { line-height: 1.7; }
         .logo-sub { font-size: 0.8rem; color: #fecb00; font-weight: bold; }
-        
         .nav-links { display: flex; gap: 15px; }
         .nav-links a { text-decoration: none; color: #1a3a5f; font-weight: bold; font-size: 0.9rem; }
 
-        /* --- HEADER BLEU --- */
+        /* --- HEADER --- */
         .blog-header { background: #1a3a5f; color: white; padding: 60px 20px; text-align: center; }
         .blog-header h1 { 
             font-family: 'Crimson Pro', serif; 
@@ -79,14 +71,13 @@
             white-space: nowrap; 
         }
         
-        /* --- GRILLE ARTICLES CORRIGÉE --- */
+        /* --- GRILLE D'ARTICLES CORRIGÉE --- */
         .container { 
             max-width: 1100px; 
             margin: 40px auto; 
             padding: 0 20px; 
-            display: grid; 
-            /* On fixe le maximum à 350px pour que le 5ème article ne s'étire pas */
-            grid-template-columns: repeat(auto-fill, minmax(300px, 350px)); 
+            display: flex; 
+            flex-wrap: wrap; /* Utilisation de flex pour un meilleur contrôle du dernier élément */
             gap: 30px; 
             justify-content: center; 
         }
@@ -100,13 +91,15 @@
             display: flex; 
             flex-direction: column; 
             transition: 0.4s; 
-            height: 100%; /* Garantit que toutes les cartes ont la même hauteur */
+            /* CORRECTION ICI : Largeur équilibrée pour tous les articles */
+            flex: 1 1 320px; 
+            max-width: 350px; 
         }
         .card:hover { transform: translateY(-5px); border-top: 4px solid var(--secondary); }
         .card h3 { font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 1.4rem; margin-bottom: 15px; }
         .card-link { color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start; margin-top: auto; }
 
-        /* --- SECTION CONTACT --- */
+        /* --- SECTIONS --- */
         section { padding: 80px 8%; border-bottom: 1px solid #eee; text-align: center; }
         .section-title { 
             font-family: 'Crimson Pro', serif; 
@@ -119,14 +112,12 @@
             padding-bottom: 5px;
         }
         .contact-link { color: var(--primary); text-decoration: none; font-weight: bold; }
-
-        /* --- FOOTER --- */
         footer { background: var(--primary); color: #fff; padding: 40px 8% 20px; text-align: center; width: 100%; }
 
-        /* --- RESPONSIVE CORRIGÉ --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) { 
-            /* Sur mobile, on repasse en colonnes fluides pour éviter les débordements */
-            .container { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+            .container { padding: 0 15px; }
+            .card { max-width: 100%; flex: 1 1 100%; } /* Prend toute la largeur proprement sur mobile */
             
             nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; } 
             .nav-links { display: flex !important; flex-direction: row !important; gap: 8px !important; width: 100% !important; overflow-x: auto; padding-bottom: 5px; }
@@ -134,7 +125,7 @@
             .blog-header h1 { font-size: 2rem; white-space: normal; }
             .section-title { font-size: 1.7rem; white-space: normal; }
         }
-        </style>
+            </style>
     
             
     <script type="application/ld+json">
