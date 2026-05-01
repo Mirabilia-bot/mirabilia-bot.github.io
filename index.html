@@ -60,7 +60,7 @@
         footer { background: var(--primary); color: #fff; padding: 60px 8% 20px; text-align: center; }
         .copy { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
 
-                        @media (max-width: 768px) { 
+                                @media (max-width: 768px) { 
             nav { 
                 flex-direction: column !important; 
                 align-items: flex-start !important; 
@@ -68,19 +68,13 @@
                 gap: 12px !important;
             } 
             
-            /* C'est ici que l'on centre tout pour corriger vos photos */
+            /* On ne change PAS le contenu interne, on centre juste le BLOC */
             .res-item, .card, .analyse-card { 
-                flex-direction: column !important; 
-                align-items: center !important; 
-                text-align: center !important; 
-                padding: 25px 15px !important;
-                border-left: none !important; 
-                border-top: 6px solid var(--primary) !important; 
-            }
-
-            /* On force la bordure rose en haut pour l'App sur mobile */
-            .res-item[style*="border-left: 6px solid #e91e63"] {
-                border-top: 6px solid #e91e63 !important;
+                display: flex !important;
+                margin-left: auto !important; 
+                margin-right: auto !important;
+                width: 95% !important; /* Pour ne pas toucher les bords de l'écran */
+                max-width: 400px !important;
             }
 
             .nav-links { 
@@ -105,17 +99,9 @@
                 border-radius: 4px;
             }
 
-            /* Correction de la taille et de l'espacement des boutons */
-            .download, .res-item button {
-                margin-top: 18px !important;
-                width: 100% !important;
-                max-width: 220px;
-                display: block;
-            }
-
             .hero-text { font-size: 1.1rem !important; transform: rotate(0deg) !important; padding: 10px 15px; }
             .hero h1 { font-size: 1.8rem; }
-                   }
+                                }
         
         
         @media (max-width: 600px) {
