@@ -15,8 +15,7 @@
     
     <link rel="icon" type="image/png" href="icon.png?v=1">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <style>
+        <style>
         :root { --primary: #00264d; --secondary: #006633; --accent: #d4af37; --light: #fdfdfd; --text: #2c3e50; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -80,31 +79,29 @@
             white-space: nowrap; 
         }
         
-        /* --- GRILLE ARTICLES --- */
-        /* --- GRILLE ARTICLES UNIFORME --- */
-/* --- GRILLE ARTICLES UNIFORME --- */
-.container { 
-    max-width: 1100px; 
-    margin: 40px auto; 
-    padding: 0 20px; 
-    display: grid; 
-    /* Ici, on remplace 1fr par 350px pour bloquer l'étirement */
-    grid-template-columns: repeat(auto-fill, 320px); 
-    gap: 30px; 
-    justify-content: center; 
-}
-.card { 
-    background: white; 
-    border-radius: 12px; 
-    padding: 25px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-    border: 1px solid #eee; 
-    display: flex; 
-    flex-direction: column; 
-    transition: 0.4s; 
-    width: 100%; /* La carte prend toute la largeur de sa colonne de 350px */
-}
+        /* --- GRILLE ARTICLES CORRIGÉE --- */
+        .container { 
+            max-width: 1100px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            display: grid; 
+            /* On fixe le maximum à 350px pour que le 5ème article ne s'étire pas */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 350px)); 
+            gap: 30px; 
+            justify-content: center; 
+        }
         
+        .card { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 25px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border: 1px solid #eee; 
+            display: flex; 
+            flex-direction: column; 
+            transition: 0.4s; 
+            height: 100%; /* Garantit que toutes les cartes ont la même hauteur */
+        }
         .card:hover { transform: translateY(-5px); border-top: 4px solid var(--secondary); }
         .card h3 { font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 1.4rem; margin-bottom: 15px; }
         .card-link { color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start; margin-top: auto; }
@@ -126,19 +123,20 @@
         /* --- FOOTER --- */
         footer { background: var(--primary); color: #fff; padding: 40px 8% 20px; text-align: center; width: 100%; }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE CORRIGÉ --- */
         @media (max-width: 768px) { 
-    /* Cette ligne force les articles à s'adapter à la largeur du téléphone */
-    .container { grid-template-columns: 1fr !important; }
-
-    nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; } 
-    .nav-links { display: flex !important; flex-direction: row !important; gap: 8px !important; width: 100% !important; overflow-x: auto; padding-bottom: 5px; }
-    .nav-links a { font-size: 0.92rem !important; font-weight: 600 !important; white-space: nowrap !important; padding: 5px 8px !important; background: #f0f4f7; border-radius: 4px; }
-    .blog-header h1 { font-size: 2rem; white-space: normal; }
-    .section-title { font-size: 1.7rem; white-space: normal; }
+            /* Sur mobile, on repasse en colonnes fluides pour éviter les débordements */
+            .container { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+            
+            nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; } 
+            .nav-links { display: flex !important; flex-direction: row !important; gap: 8px !important; width: 100% !important; overflow-x: auto; padding-bottom: 5px; }
+            .nav-links a { font-size: 0.92rem !important; font-weight: 600 !important; white-space: nowrap !important; padding: 5px 8px !important; background: #f0f4f7; border-radius: 4px; }
+            .blog-header h1 { font-size: 2rem; white-space: normal; }
+            .section-title { font-size: 1.7rem; white-space: normal; }
         }
-        
-    </style>
+        </style>
+    
+            
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
