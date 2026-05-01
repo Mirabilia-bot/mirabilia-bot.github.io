@@ -424,7 +424,7 @@
         </div>
     </div>
     
-    <button id="installApp" style="color:var(--secondary); font-weight:bold; border:1px solid var(--secondary); background:none; padding:8px 15px; border-radius:4px; cursor:pointer; font-family:'Inter',sans-serif; font-size:0.9rem;">
+    <button id="installApp" onclick="triggerInstall()" style="color:var(--secondary); font-weight:bold; border:1px solid var(--secondary); background:none; padding:8px 15px; border-radius:4px; cursor:pointer; font-family:'Inter',sans-serif; font-size:0.9rem; display:none;">
     Installer l'Application 📲
     </button>
                 </div>
@@ -512,45 +512,44 @@
 let deferredPrompt;
 const installBtn = document.getElementById('installApp');
 
-// On s'assure que le bouton est caché au départ
-if (installBtn) installBtn.style.display = 'none';
-
+// Écoute l'événement d'installation du navigateur
 window.addEventListener('beforeinstallprompt', (e) => {
-    // 1. Empêche la bannière automatique
+    // Empêche l'affichage automatique
     e.preventDefault();
-    
-    // 2. Stocke l'événement
+    // Stocke l'événement
     deferredPrompt = e;
-    
-    // 3. Affiche votre bouton personnalisé
+    // Affiche enfin votre bouton
     if (installBtn) {
         installBtn.style.display = 'inline-block';
-        
-        installBtn.addEventListener('click', () => {
-            // Cache le bouton après le clic
-            installBtn.style.display = 'none';
-            
-            // Affiche l'invite d'installation
-            deferredPrompt.prompt();
-            
-            // Log le résultat (Correction de l'apostrophe ici)
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log("L'utilisateur a accepté l'installation");
-                }
-                deferredPrompt = null;
-            });
-        });
     }
 });
 
-// Optionnel : Cacher le bouton si l'app est déjà installée
+// Fonction déclenchée au clic sur le bouton
+function triggerInstall() {
+    if (deferredPrompt) {
+        // Affiche la fenêtre d'installation
+        deferredPrompt.prompt();
+        
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log("Installation acceptée");
+                if (installBtn) installBtn.style.display = 'none';
+            }
+            deferredPrompt = null;
+        });
+    } else {
+        // Si deferredPrompt est nul, c'est que l'app est déjà installée ou le navigateur non compatible
+        alert("L'application est déjà prête ou installée sur votre appareil.");
+    }
+}
+
+// Cache le bouton si l'installation réussit
 window.addEventListener('appinstalled', () => {
     if (installBtn) installBtn.style.display = 'none';
-    deferredPrompt = null;
-    console.log('Application installée avec succès');
+    console.log('App installée');
 });
-                        </script>
+</script>
+    
     
     
 </body>
