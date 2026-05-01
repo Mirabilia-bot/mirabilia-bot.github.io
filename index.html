@@ -410,8 +410,8 @@
         </div>
     </div>
     
-    <button onclick="installApp()" class="download" style="margin-top: 20px; border-color: #e91e63; color: #e91e63; background: white; cursor: pointer; padding: 10px 25px; border-radius: 4px; font-weight: bold; font-family: inherit; width: fit-content;">
-        Ouvrir / Installer
+    <button id="installApp" style="color:var(--secondary); font-weight:bold; border:1px solid var(--secondary); background:none; padding:8px 15px; border-radius:4px; cursor:pointer; font-family:'Inter',sans-serif; font-size:0.9rem;">
+    Installer l'Application 📲
     </button>
                 </div>
         
@@ -494,6 +494,32 @@
         }
     });
     </script>
+    <script>
+let deferredPrompt;
+const installBtn = document.getElementById('installApp');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Empêche le navigateur d'afficher la bannière par défaut
+  e.preventDefault();
+  // Stocke l'événement pour l'utiliser plus tard
+  deferredPrompt = e;
+  // Affiche le bouton d'installation
+  installBtn.style.display = 'block';
+
+  installBtn.addEventListener('click', (e) => {
+    // Affiche la fenêtre d'installation
+    deferredPrompt.prompt();
+    // Attend la réponse de l'utilisateur
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('Utilisateur a accepté l'installation');
+      }
+      deferredPrompt = null;
+    });
+  });
+});
+    </script>
+    
     
 </body>
 </html>
