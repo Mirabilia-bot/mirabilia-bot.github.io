@@ -508,31 +508,49 @@
         }
     });
     </script>
-    <script>
+<script>
 let deferredPrompt;
 const installBtn = document.getElementById('installApp');
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Empêche le navigateur d'afficher la bannière par défaut
-  e.preventDefault();
-  // Stocke l'événement pour l'utiliser plus tard
-  deferredPrompt = e;
-  // Affiche le bouton d'installation
-  installBtn.style.display = 'block';
+// On s'assure que le bouton est caché au départ
+if (installBtn) installBtn.style.display = 'none';
 
-  installBtn.addEventListener('click', (e) => {
-    // Affiche la fenêtre d'installation
-    deferredPrompt.prompt();
-    // Attend la réponse de l'utilisateur
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('Utilisateur a accepté l'installation');
-      }
-      deferredPrompt = null;
-    });
-  });
+window.addEventListener('beforeinstallprompt', (e) => {
+    // 1. Empêche la bannière automatique
+    e.preventDefault();
+    
+    // 2. Stocke l'événement
+    deferredPrompt = e;
+    
+    // 3. Affiche votre bouton personnalisé
+    if (installBtn) {
+        installBtn.style.display = 'inline-block';
+        
+        installBtn.addEventListener('click', () => {
+            // Cache le bouton après le clic
+            installBtn.style.display = 'none';
+            
+            // Affiche l'invite d'installation
+            deferredPrompt.prompt();
+            
+            // Log le résultat (Correction de l'apostrophe ici)
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log("L'utilisateur a accepté l'installation");
+                }
+                deferredPrompt = null;
+            });
+        });
+    }
 });
-    </script>
+
+// Optionnel : Cacher le bouton si l'app est déjà installée
+window.addEventListener('appinstalled', () => {
+    if (installBtn) installBtn.style.display = 'none';
+    deferredPrompt = null;
+    console.log('Application installée avec succès');
+});
+                        </script>
     
     
 </body>
