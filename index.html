@@ -362,15 +362,22 @@
             </a>
         </div>
 
-                <div class="res-item" style="border-left: 6px solid #e91e63; padding: 25px; position: relative;">
-    <div style="flex-grow: 1;">
+                <div class="res-item" style="border-left: 6px solid #e91e63; padding: 25px; display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%;">
+    <div style="width: 100%; flex-grow: 1;">
         <span style="background: #fce4ec; color: #c2185b; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">PLATEFORME DIGITALE</span>
         <h4 style="margin: 10px 0 5px;">Accès à l'Application</h4>
         <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Interface de gestion et de consultation des données territoriales (PWA).</p>
         
-        <div style="background: #fff0f5; padding: 8px 12px; border-radius: 6px; font-size: 0.75rem; color: #c2185b; border: 1px dashed #c2185b; margin-top: 5px;">
+        <div style="background: #fff0f5; padding: 12px; border-radius: 6px; font-size: 0.75rem; color: #c2185b; border: 1px dashed #c2185b; margin-top: 10px; line-height: 1.4;">
             <strong>Note :</strong> L'App est déjà active. Appuyez pour l'installer sur votre écran d'accueil (Mobile/PC) ou revenir au tableau de bord.
         </div>
+    </div>
+    
+    <button onclick="installApp()" class="download" style="margin-top: 20px; border-color: #e91e63; color: #e91e63; background: white; cursor: pointer; padding: 10px 25px; border-radius: 4px; font-weight: bold; font-family: inherit; width: fit-content;">
+        Ouvrir / Installer
+    </button>
+                </div>
+        
     </div>
     
     <button onclick="installApp()" class="download" style="border-color: #e91e63; color: #e91e63; background: none; cursor: pointer; text-align: center; font-family: inherit;">
