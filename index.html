@@ -143,13 +143,20 @@
 <style>
     /* On force la grille à se comporter correctement */
     .analyses-grid {
-        display: flex;
-        flex-wrap: wrap; /* Permet de passer à la ligne proprement */
-        gap: 20px; /* Espace entre les blocs */
-        justify-content: center; /* Centre les blocs sur l'écran */
-        padding: 20px 0;
-    }
+    display: grid;
+    /* Crée des colonnes d'au moins 300px qui s'adaptent à la largeur de l'écran */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    width: 100%;
+}
 
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: white;
+}
+    
     /* On définit la taille des blocs pour le 2x2 */
     .analyse-card {
         /* On prend 50% de la largeur moins l'espace du gap */
