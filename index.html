@@ -390,11 +390,11 @@
     </div>
     </footer>
     <script>
-    // Sélectionne tous les articles de la page d'accueil
-    const articles = document.querySelectorAll('.container .card');
+    // On cible spécifiquement les cartes d'analyses de la page d'accueil
+    const articles = document.querySelectorAll('.analyse-card');
     
-    // Si vous avez plus de 3 articles, on masque les plus anciens
     articles.forEach((article, index) => {
+        // On ne garde que les 3 premiers (index 0, 1 et 2)
         if (index >= 3) {
             article.style.display = 'none';
         }
