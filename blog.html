@@ -82,17 +82,19 @@
         
         /* --- GRILLE ARTICLES --- */
         /* --- GRILLE ARTICLES UNIFORME --- */
+/* --- GRILLE ARTICLES UNIFORME --- */
 .container { 
     max-width: 1100px; 
     margin: 40px auto; 
     padding: 0 20px; 
     display: grid; 
-    /* Utilisation de auto-fill pour garder des colonnes de taille fixe */
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    /* auto-fill + largeur fixe (350px) empêche l'étirement du 5ème article */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 350px)); 
     gap: 30px; 
+    justify-content: center; /* Centre la grille dans la page */
 }
-        
-        .card { 
+
+.card { 
     background: white; 
     border-radius: 12px; 
     padding: 25px; 
@@ -101,9 +103,9 @@
     display: flex; 
     flex-direction: column; 
     transition: 0.4s; 
-    /* AJOUT ICI pour l'uniformité sur ordinateur */
-    max-width: 100%; 
-        }
+    width: 100%; /* La carte prend toute la largeur de sa colonne de 350px */
+}
+        
         .card:hover { transform: translateY(-5px); border-top: 4px solid var(--secondary); }
         .card h3 { font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 1.4rem; margin-bottom: 15px; }
         .card-link { color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start; margin-top: auto; }
@@ -211,13 +213,12 @@
     <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Diagnostic des failles structurelles et financières de la gestion des déchets solides ménagers...</p>
     <a href="article-gestion-dechets-agoe.html" class="card-link">Lire l'article</a>
             </div>
-            <div class="card">
-    <span style="color: #006a4e; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Analyse</span>
+          <div class="card">
+    <span style="color: #006a4e; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Droit & Territoire</span>
     <h3>La délimitation des communes : Entre imprécision textuelle et rigueur cartographique</h3>
     <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Analyse des enjeux juridiques et techniques de la définition des ressorts territoriaux au Togo. Comment le SIG sécurise l'action publique...</p>
     <a href="delimitation-territoriale-togo.html" class="card-link">Lire l'article</a>
-            </div>
-            
+          </div> 
             
         </div>
 
