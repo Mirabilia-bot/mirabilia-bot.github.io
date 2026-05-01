@@ -507,21 +507,19 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // Fonction déclenchée au clic sur le bouton
 function triggerInstall() {
     if (deferredPrompt) {
-        // Affiche la fenêtre d'installation
         deferredPrompt.prompt();
-        
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
-                console.log("Installation acceptée");
                 if (installBtn) installBtn.style.display = 'none';
             }
             deferredPrompt = null;
         });
     } else {
-        // Si deferredPrompt est nul, c'est que l'app est déjà installée ou le navigateur non compatible
-        alert("L'application est déjà prête ou installée sur votre appareil.");
+        // Le navigateur bloque l'auto-installation ? On guide l'utilisateur 100 fois s'il le faut.
+        alert("🛡️ Installation manuelle :\n\n1. Appuyez sur les 3 points (⋮) en haut à droite de votre navigateur.\n2. Sélectionnez 'Ajouter à l'écran d'accueil' ou 'Installer l'application'.\n\nC'est la méthode la plus rapide si le bouton automatique est bloqué par le système.");
     }
 }
+    
 
 // Cache le bouton si l'installation réussit
 window.addEventListener('appinstalled', () => {
