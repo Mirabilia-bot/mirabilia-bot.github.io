@@ -60,69 +60,67 @@
         footer { background: var(--primary); color: #fff; padding: 60px 8% 20px; text-align: center; }
         .copy { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
 
-                     @media (max-width: 768px) { 
+                      @media (max-width: 768px) { 
             nav { 
                 flex-direction: column !important; 
                 align-items: flex-start !important; 
-                padding: 15px 5% !important;
-                gap: 12px !important;
+                padding: 10px 5% !important;
             } 
-            
-            /* CENTRE LES GRILLES DANS LA PAGE */
-            .grid, .analyses-grid {
+
+            /* --- CORRECTION CENTRAGE & ALIGNEMENT --- */
+            .grid, .analyses-grid, #ressources {
                 display: flex !important;
                 flex-direction: column !important;
-                align-items: center !important; 
-                padding: 0 10px !important;
+                align-items: center !important; /* Centre les blocs sur l'écran */
+                padding: 10px !important;
                 width: 100% !important;
             }
 
-            /* DISPOSITION VERTICALE : Texte en haut, Bouton en bas */
-            .res-item, .card, .analyse-card { 
+            /* --- BLOCS ADAPTATIFS --- */
+            .card, .analyse-card, .res-item { 
+                width: 100% !important;        /* Prend toute la largeur disponible */
+                max-width: 380px !important;    /* Taille max élégante sur mobile */
+                margin: 0 auto 20px auto !important; /* Centre le bloc lui-même */
                 display: flex !important;
-                flex-direction: column !important; /* Force le bouton EN DESSOUS */
-                align-items: center !important;    /* Centre tout le contenu interne */
-                text-align: center !important;     /* Centre le texte */
-                width: 90% !important;             /* Évite de coller aux bords gauche/droite */
-                max-width: 450px !important;
-                margin: 0 auto 20px auto !important;
-                padding: 25px 20px !important;
+                flex-direction: column !important; /* Bouton EN DESSOUS impérativement */
+                align-items: center !important;    /* Contenu au centre du bloc */
+                text-align: center !important;     /* Texte centré */
+                padding: 20px !important;
                 box-sizing: border-box !important;
+                height: auto !important;
+                border-radius: 12px !important;
             }
 
-            /* AJUSTEMENT DES BOUTONS */
-            .download, .res-item button, .analyse-card a {
-                margin-top: 15px !important; /* Espace entre le texte et le bouton */
-                width: 100% !important;      /* Le bouton prend toute la largeur du bloc */
-                max-width: 250px !important; /* Mais pas trop large pour rester élégant */
-                display: block !important;
+            /* --- BOUTONS PROPRES (SOUS LE TEXTE) --- */
+            .download, .res-item button, .analyse-card a, .btn-main {
+                width: 100% !important;      /* Le bouton s'adapte à la largeur du bloc */
+                margin-top: 15px !important; /* Espace avec le texte au-dessus */
+                display: inline-block !important;
+                padding: 12px !important;
+                font-size: 0.9rem !important;
+                text-decoration: none !important;
+                flex-shrink: 0 !important;
             }
 
+            /* --- NAVIGATION FLUIDE --- */
             .nav-links { 
-                margin-top: 0 !important; 
                 display: flex !important;
-                flex-direction: row !important; 
-                flex-wrap: nowrap !important;
-                justify-content: flex-start !important;
-                gap: 15px !important; 
-                width: 100% !important;
                 overflow-x: auto; 
-                padding-bottom: 5px;
+                width: 100% !important;
+                gap: 10px !important;
+                padding-bottom: 8px;
             }
-
             .nav-links a {
-                font-size: 0.92rem !important; 
-                font-weight: 600 !important;
-                white-space: nowrap !important;
-                padding: 5px 8px !important; 
-                background: #f0f4f7; 
-                border-radius: 4px;
+                background: #f0f4f7;
+                padding: 6px 12px !important;
+                border-radius: 20px;
+                white-space: nowrap;
             }
 
-            .hero-text { font-size: 1.1rem !important; transform: rotate(0deg) !important; padding: 10px 15px; }
             .hero h1 { font-size: 1.8rem; }
-        }
-        
+            .hero-text { font-size: 1.1rem !important; transform: rotate(0deg) !important; position: relative !important; margin-top: 10px; }
+                        }
+                
         
         
         @media (max-width: 600px) {
