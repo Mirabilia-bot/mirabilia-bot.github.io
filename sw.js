@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kgm-ultimate-v1';
+const CACHE_NAME = 'kgm-expert-v1';
 const ASSETS = [
   './',
   './index.html',
@@ -9,15 +9,8 @@ const ASSETS = [
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS).catch(err => console.log("Erreur mise en cache:", err));
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(clients.claim());
 });
 
 self.addEventListener('fetch', (e) => {
