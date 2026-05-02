@@ -1,10 +1,12 @@
 const CACHE_NAME = 'kgm-expert-v2'; // On change de version pour forcer la mise à jour
 const ASSETS = [
-  './index.html',
-  './manifest.json',
-  './images/icon-192.png',
-  './images/icon-512.png'
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/images/icon-192.png',
+  '/images/icon-512.png'
 ];
+
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
