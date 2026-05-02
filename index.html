@@ -501,52 +501,38 @@
     });
     </script>
 <script>
-  // 1. Enregistrement propre du Service Worker
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').then(reg => {
-        console.log('SW prêt');
-      }).catch(err => console.log('Erreur SW:', err));
-    });
+    navigator.serviceWorker.register('sw.js');
   }
 
   let deferredPrompt;
-  const installBtn = document.getElementById('installApp');
+  const btnInstall = document.getElementById('installApp');
 
-  // 2. Écoute de l'événement magique
   window.addEventListener('beforeinstallprompt', (e) => {
-    // Empêche la barre par défaut pour laisser place à NOTRE bouton
+    // On bloque l'affichage automatique pour utiliser notre bouton KGM
     e.preventDefault();
     deferredPrompt = e;
-    
-    // Affiche le bouton KGM
-    if (installBtn) {
-      installBtn.style.display = 'inline-block';
-    }
+    if (btnInstall) btnInstall.style.display = 'inline-block';
   });
 
   function triggerInstall() {
     if (deferredPrompt) {
-      // Déclenche l'invite native qui propose les deux choix
+      // Lance l'invitation officielle du navigateur
       deferredPrompt.prompt();
-      
       deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
-          console.log('L\'utilisateur a installé l\'app');
-          installBtn.style.display = 'none';
+          if (btnInstall) btnInstall.style.display = 'none';
         }
         deferredPrompt = null;
       });
     } else {
-      // Si l'événement n'est pas encore capturé (souvent un problème de cache)
-      alert("⚙️ L'option d'installation est en cours de préparation par votre navigateur.\n\nAlternative immédiate :\nAppuyez sur les 3 points (⋮) du menu navigateur et sélectionnez 'Installer l'application'.");
+      // Message d'aide si le navigateur fait de la résistance
+      alert("📲 Pour installer l'application :\n\n1. Cliquez sur les 3 points (⋮) du menu navigateur.\n2. Sélectionnez 'Installer l'application' ou 'Ajouter à l'écran d'accueil'.");
     }
   }
 
-  // Cacher le bouton une fois installé
   window.addEventListener('appinstalled', () => {
-    if (installBtn) installBtn.style.display = 'none';
-    deferredPrompt = null;
+    if (btnInstall) btnInstall.style.display = 'none';
   });
 </script>
     
