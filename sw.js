@@ -1,6 +1,5 @@
-const CACHE_NAME = 'kgm-expert-v1';
+const CACHE_NAME = 'kgm-stable-v1';
 const ASSETS = [
-  './',
   './index.html',
   './manifest.json',
   './images/icon-192.png',
