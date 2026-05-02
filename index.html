@@ -501,59 +501,54 @@
     });
     </script>
 <script>
-let deferredPrompt;
-const installBtn = document.getElementById('installApp');
+  // 1. Enregistrement propre du Service Worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(reg => {
+        console.log('SW prêt');
+      }).catch(err => console.log('Erreur SW:', err));
+    });
+  }
 
-// Étape 1 : Capturer l'événement d'installation
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault(); // Empêche la bannière native par défaut
-    deferredPrompt = e; // On garde l'événement sous le coude
+  let deferredPrompt;
+  const installBtn = document.getElementById('installApp');
+
+  // 2. Écoute de l'événement magique
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Empêche la barre par défaut pour laisser place à NOTRE bouton
+    e.preventDefault();
+    deferredPrompt = e;
     
-    // On rend le bouton visible et interactif
+    // Affiche le bouton KGM
     if (installBtn) {
-        installBtn.style.display = 'inline-block';
-        installBtn.style.opacity = '1';
-        installBtn.innerHTML = 'Installer l\'Application 📲';
+      installBtn.style.display = 'inline-block';
     }
-    console.log('beforeinstallprompt déclenché');
-});
+  });
 
-// Étape 2 : La fonction de déclenchement au clic
-function triggerInstall() {
+  function triggerInstall() {
     if (deferredPrompt) {
-        // Déclenche l'invite du navigateur
-        deferredPrompt.prompt();
-        
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('Utilisateur a accepté l\'installation');
-                if (installBtn) installBtn.style.display = 'none';
-            } else {
-                console.log('Utilisateur a refusé l\'installation');
-            }
-            deferredPrompt = null;
-        });
-    } else {
-        // SOLUTION DE SECOURS : Si le navigateur n'a pas déclenché beforeinstallprompt
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        
-        if (isIOS) {
-            alert("🍏 Sur iOS (Safari) :\n\n1. Appuyez sur le bouton 'Partager' (le carré avec une flèche).\n2. Faites défiler et sélectionnez 'Sur l'écran d'accueil'.");
-        } else {
-            alert("🛡️ Installation manuelle :\n\n1. Appuyez sur les 3 points (⋮) de votre navigateur.\n2. Sélectionnez 'Installer l'application' ou 'Ajouter à l'écran d'accueil'.");
+      // Déclenche l'invite native qui propose les deux choix
+      deferredPrompt.prompt();
+      
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('L\'utilisateur a installé l\'app');
+          installBtn.style.display = 'none';
         }
+        deferredPrompt = null;
+      });
+    } else {
+      // Si l'événement n'est pas encore capturé (souvent un problème de cache)
+      alert("⚙️ L'option d'installation est en cours de préparation par votre navigateur.\n\nAlternative immédiate :\nAppuyez sur les 3 points (⋮) du menu navigateur et sélectionnez 'Installer l'application'.");
     }
-}
+  }
 
-// Étape 3 : Nettoyage après installation
-window.addEventListener('appinstalled', () => {
+  // Cacher le bouton une fois installé
+  window.addEventListener('appinstalled', () => {
     if (installBtn) installBtn.style.display = 'none';
     deferredPrompt = null;
-    alert("Application installée avec succès !");
-});
-    
+  });
 </script>
-    
     
     
 </body>
