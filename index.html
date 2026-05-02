@@ -504,40 +504,54 @@
 let deferredPrompt;
 const installBtn = document.getElementById('installApp');
 
-// Écoute l'événement d'installation du navigateur
+// Étape 1 : Capturer l'événement d'installation
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Empêche l'affichage automatique
-    e.preventDefault();
-    // Stocke l'événement
-    deferredPrompt = e;
-    // Affiche enfin votre bouton
+    e.preventDefault(); // Empêche la bannière native par défaut
+    deferredPrompt = e; // On garde l'événement sous le coude
+    
+    // On rend le bouton visible et interactif
     if (installBtn) {
         installBtn.style.display = 'inline-block';
+        installBtn.style.opacity = '1';
+        installBtn.innerHTML = 'Installer l\'Application 📲';
     }
+    console.log('beforeinstallprompt déclenché');
 });
 
-// Fonction déclenchée au clic sur le bouton
+// Étape 2 : La fonction de déclenchement au clic
 function triggerInstall() {
     if (deferredPrompt) {
+        // Déclenche l'invite du navigateur
         deferredPrompt.prompt();
+        
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
+                console.log('Utilisateur a accepté l\'installation');
                 if (installBtn) installBtn.style.display = 'none';
+            } else {
+                console.log('Utilisateur a refusé l\'installation');
             }
             deferredPrompt = null;
         });
     } else {
-        // Le navigateur bloque l'auto-installation ? On guide l'utilisateur 100 fois s'il le faut.
-        alert("🛡️ Installation manuelle :\n\n1. Appuyez sur les 3 points d'accès au menu (⋮) en haut ou en bas à droite de votre navigateur.\n2. Chercher et sélectionnez 'Ajouter à l'écran d'accueil' ou 'Installer l'application'.\n\nC'est la méthode la plus rapide si le bouton automatique est bloqué par le système.");
+        // SOLUTION DE SECOURS : Si le navigateur n'a pas déclenché beforeinstallprompt
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
+        if (isIOS) {
+            alert("🍏 Sur iOS (Safari) :\n\n1. Appuyez sur le bouton 'Partager' (le carré avec une flèche).\n2. Faites défiler et sélectionnez 'Sur l'écran d'accueil'.");
+        } else {
+            alert("🛡️ Installation manuelle :\n\n1. Appuyez sur les 3 points (⋮) de votre navigateur.\n2. Sélectionnez 'Installer l'application' ou 'Ajouter à l'écran d'accueil'.");
+        }
     }
 }
-    
 
-// Cache le bouton si l'installation réussit
+// Étape 3 : Nettoyage après installation
 window.addEventListener('appinstalled', () => {
     if (installBtn) installBtn.style.display = 'none';
-    console.log('App installée');
+    deferredPrompt = null;
+    alert("Application installée avec succès !");
 });
+    
 </script>
     
     
