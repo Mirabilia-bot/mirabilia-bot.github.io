@@ -51,6 +51,13 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .leaflet-popup-content { word-wrap: break-word !important; overflow-wrap: break-word !important; white-space: normal !important; }
 
+        /* Icône de pharmacie personnalisée (Croix Verte) */
+        .pharmacy-icon { 
+            background: #28a745; color: white; border: 2px solid white; border-radius: 3px;
+            display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
         /* Légende Responsive */
         .legend { background: white; padding: 8px; line-height: 18px; font-size: 11px; border: 2px solid var(--kgm-blue); border-radius: 5px; font-family: 'Times New Roman'; }
         .legend i { width: 12px; height: 12px; float: left; margin-right: 5px; }
@@ -116,7 +123,6 @@
     };
     geoControl.addTo(map);
 
-    // GESTION DE LA POSITION (Icône bleue et précision)
     map.on('locationfound', function(e) {
         L.circleMarker(e.latlng, {radius: 8, fillColor: "#007bff", color: "#fff", weight: 3, fillOpacity: 1}).addTo(map).bindPopup("Vous êtes ici").openPopup();
         L.circle(e.latlng, e.accuracy).addTo(map);
@@ -147,7 +153,15 @@
         
         pharmacyLayer = L.geoJSON(data, {
             pointToLayer: function (f, latlng) {
-                return L.circleMarker(latlng, { radius: isMobile ? 10 : 8, fillColor: "#28a745", color: "#ffffff", weight: 2, fillOpacity: 1 });
+                // Utilisation d'une icône de croix verte conventionnelle
+                var size = isMobile ? 18 : 16;
+                var icon = L.divIcon({
+                    className: 'pharmacy-icon',
+                    html: '+',
+                    iconSize: [size, size],
+                    iconAnchor: [size/2, size/2]
+                });
+                return L.marker(latlng, { icon: icon });
             },
             onEachFeature: function (f, l) {
                 var p = f.properties;
@@ -178,7 +192,7 @@
         var div = L.DomUtil.create('div', 'legend');
         div.innerHTML = "<b style='color:var(--kgm-blue)'>LÉGENDE</b><br>" +
             "<i style='background:rgba(0,38,77,0.2); border:1px solid var(--kgm-blue);'></i> Communes<br>" +
-            "<i style='background:#28a745; border-radius:50%; border:1px solid white;'></i> Pharmacies";
+            "<i style='background:#28a745; border:1px solid white; display:inline-block; text-align:center; color:white; font-style:normal; font-weight:bold; line-height:12px;'>+</i> Pharmacies";
         return div;
     };
     legend.addTo(map);
