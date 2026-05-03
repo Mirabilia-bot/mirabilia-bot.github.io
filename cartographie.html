@@ -8,12 +8,18 @@
     <style>
         :root { --kgm-blue: #00264d; --kgm-green: #2ecc71; }
         body { font-family: 'Times New Roman', serif; margin: 0; padding: 0; background: #fdfdfd; }
+        
+        /* AJUSTEMENT : Header calé (ne bouge pas au défilement) */
         header { 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             background: linear-gradient(135deg, var(--kgm-blue) 0%, #004080 100%);
             color: white; padding: 25px 15px; text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         header h1 { margin: 0; font-size: 1.6em; text-transform: uppercase; }
+        
         #map { height: 70vh; width: 100%; border-top: 4px solid var(--kgm-green); border-bottom: 4px solid var(--kgm-blue); }
         .description { padding: 20px; background: #f4f4f4; border-left: 5px solid var(--kgm-blue); margin: 10px; }
         .btn-retour { display: inline-block; padding: 12px 25px; background: var(--kgm-blue); color: white; text-decoration: none; border-radius: 50px; margin: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
@@ -28,6 +34,24 @@
             font-family: 'Times New Roman';
             font-size: 14px;
             text-shadow: 1px 1px 2px white;
+        }
+
+        /* AJUSTEMENT : Style de la légende pour qu'elle soit visible */
+        .legend {
+            background: white;
+            padding: 10px;
+            line-height: 18px;
+            color: #333;
+            border: 2px solid var(--kgm-blue);
+            border-radius: 5px;
+            font-family: 'Times New Roman';
+        }
+        .legend i {
+            width: 14px;
+            height: 14px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -48,15 +72,18 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    var map = L.map('map', { zoomControl: false }).setView([6.18, 1.20], 12);
+    // AJUSTEMENT : Vue initiale centrée sur l'ensemble du Togo
+    var map = L.map('map', { zoomControl: false }).setView([8.6195, 1.1414], 7);
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
+    // AJUSTEMENT : Fond de carte avec COULEURS (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
 
     // 1. CHARGER LES COMMUNES EN PREMIER (FOND)
     fetch('./communes.geojson').then(res => res.json()).then(data => {
         L.geoJSON(data, {
-            // AJOUT DE INTERACTIVE: FALSE POUR LIBÉRER LE CLIC
             interactive: false, 
             style: { color: "#00264d", weight: 1.5, fillOpacity: 0.03 },
             onEachFeature: function (f, l) {
@@ -66,7 +93,6 @@
             }
         }).addTo(map);
 
-        // 2. CHARGER LES PHARMACIES SEULEMENT APRÈS (DESSUS)
         return fetch('./pharmacies.geojson');
     })
     .then(res => res.json())
@@ -74,7 +100,7 @@
         L.geoJSON(data, {
             pointToLayer: function (f, latlng) {
                 return L.circleMarker(latlng, {
-                    radius: 10, // Taille augmentée pour faciliter le clic mobile
+                    radius: 10, 
                     fillColor: "#28a745", 
                     color: "#ffffff", 
                     weight: 2, 
@@ -83,23 +109,22 @@
             },
             onEachFeature: function (f, l) {
                 var p = f.properties;
-                var content = "<div class='popup-header'><h3>" + p.pharmacie_nom + "</h3></div>" +
-                    "<b>Commune :</b> " + p.commune_nom_bdd + "<br>" +
-                    "<b>Canton :</b> " + p.canton_nom_bdd + "<br>" +
-                    "<b>Secteur :</b> " + p.pharmacie_secteur + "<br>" +
-                    "<b>Ouverture :</b> " + (p.ouverture ? p.ouverture.replace(/{|}/g, "") : "N/A");
+                var content = "<div style='font-family:Times New Roman;'><h3>" + (p.pharmacie_nom || "Pharmacie") + "</h3>" +
+                    "<b>Commune :</b> " + (p.commune_nom_bdd || "N/A") + "<br>" +
+                    "<b>Canton :</b> " + (p.canton_nom_bdd || "N/A") + "<br>" +
+                    "<b>Ouverture :</b> " + (p.ouverture ? p.ouverture.replace(/{|}/g, "") : "N/A") + "</div>";
                 l.bindPopup(content);
             }
         }).addTo(map);
     });
 
-    // 3. LÉGENDE
+    // 3. LÉGENDE (Maintenue et fixée)
     var legend = L.control({position: 'bottomright'});
     legend.onAdd = function () {
         var div = L.DomUtil.create('div', 'legend');
         div.innerHTML = "<b style='color:var(--kgm-blue)'>LÉGENDE</b><br>" +
-            "<i style='background:rgba(0,38,77,0.1); border:1px solid var(--kgm-blue); border-radius:0;'></i> Collectivité<br>" +
-            "<i style='background:var(--kgm-green); border:2px solid white;'></i> Pharmacie";
+            "<i style='background:rgba(0,38,77,0.2); border:1px solid var(--kgm-blue);'></i> Collectivité<br>" +
+            "<i style='background:#28a745; border-radius:50%; border:1px solid white;'></i> Pharmacie";
         return div;
     };
     legend.addTo(map);
