@@ -3,55 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Observatoire Géospatial - KGM Expertise</title>
+    <title>Observatoire KGM - Excellence Responsive</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         :root { --kgm-blue: #00264d; --kgm-green: #2ecc71; }
-        body { font-family: 'Times New Roman', serif; margin: 0; padding: 0; background: #fdfdfd; }
+        body { font-family: 'Times New Roman', serif; margin: 0; padding: 0; background: #fdfdfd; overflow-x: hidden; }
         
-        /* AJUSTEMENT : Header calé (ne bouge pas au défilement) */
+        /* Header Fixe et Responsive */
         header { 
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
             background: linear-gradient(135deg, var(--kgm-blue) 0%, #004080 100%);
-            color: white; padding: 25px 15px; text-align: center;
+            color: white; padding: 15px; text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        header h1 { margin: 0; font-size: 1.6em; text-transform: uppercase; }
-        
+        header h1 { margin: 0; font-size: 1.4em; text-transform: uppercase; letter-spacing: 1px; }
+        header p { margin: 5px 0 0 0; font-style: italic; font-size: 0.85em; opacity: 0.9; }
+
+        /* Carte Adaptative */
         #map { height: 70vh; width: 100%; border-top: 4px solid var(--kgm-green); border-bottom: 4px solid var(--kgm-blue); }
-        .description { padding: 20px; background: #f4f4f4; border-left: 5px solid var(--kgm-blue); margin: 10px; }
-        .btn-retour { display: inline-block; padding: 12px 25px; background: var(--kgm-blue); color: white; text-decoration: none; border-radius: 50px; margin: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+        .description { padding: 15px; background: #f4f4f4; border-left: 5px solid var(--kgm-blue); margin: 10px; font-size: 0.95em; }
         
-        /* Style des étiquettes automatiques pour les communes */
-        .label-commune {
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            color: #00264d;
-            font-weight: bold;
-            font-family: 'Times New Roman';
-            font-size: 14px;
-            text-shadow: 1px 1px 2px white;
+        .btn-retour { 
+            display: inline-block; padding: 12px 20px; background: var(--kgm-blue); 
+            color: white; text-decoration: none; border-radius: 50px; 
+            margin: 15px; font-weight: bold; font-size: 0.9em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
         }
 
-        /* AJUSTEMENT : Style de la légende pour qu'elle soit visible */
-        .legend {
-            background: white;
-            padding: 10px;
-            line-height: 18px;
-            color: #333;
-            border: 2px solid var(--kgm-blue);
-            border-radius: 5px;
-            font-family: 'Times New Roman';
+        /* Étiquettes de communes adaptatives */
+        .label-commune {
+            background: rgba(255, 255, 255, 0.7); border: none; box-shadow: none;
+            color: var(--kgm-blue); font-weight: bold; font-family: 'Times New Roman';
+            font-size: 11px; text-shadow: 1px 1px 1px white; white-space: nowrap;
         }
-        .legend i {
-            width: 14px;
-            height: 14px;
-            float: left;
-            margin-right: 8px;
-            opacity: 0.8;
+
+        /* Légende Responsive */
+        .legend {
+            background: white; padding: 8px; line-height: 18px; font-size: 11px;
+            border: 2px solid var(--kgm-blue); border-radius: 5px; font-family: 'Times New Roman';
+        }
+        .legend i { width: 12px; height: 12px; float: left; margin-right: 5px; }
+
+        @media (min-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            header p { font-size: 1em; }
+            .label-commune { font-size: 13px; }
+            .legend { font-size: 13px; padding: 10px; }
         }
     </style>
 </head>
@@ -59,11 +57,11 @@
 
 <header>
     <h1>KGM EXPERTISE</h1>
-    <p style="margin:5px 0 0 0; font-style: italic;">Observatoire des Infrastructures Sanitaires</p>
+    <p>Observatoire National des Infrastructures Sanitaires</p>
 </header>
 
 <div class="description">
-    <p>Visualisation interactive : Répartition des pharmacies et limites des <strong>Collectivités territoriales</strong>.</p>
+    Visualisation : <strong>Collectivités territoriales</strong> et maillage des pharmacies (Togo).
 </div>
 
 <div id="map"></div>
@@ -72,23 +70,27 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // AJUSTEMENT : Vue initiale centrée sur l'ensemble du Togo
-    var map = L.map('map', { zoomControl: false }).setView([8.6195, 1.1414], 7);
+    // Détection de la taille d'écran pour adapter les éléments
+    var isMobile = window.innerWidth < 768;
+
+    // Initialisation centrée sur le Togo (Zoom 7 pour mobile, 7.5 pour tablette/PC)
+    var map = L.map('map', { zoomControl: false }).setView([8.6195, 1.1414], isMobile ? 6.5 : 7);
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // AJUSTEMENT : Fond de carte avec COULEURS (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
+    // Fond de carte avec COULEURS (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    // 1. CHARGER LES COMMUNES EN PREMIER (FOND)
+    // 1. COMMUNES
     fetch('./communes.geojson').then(res => res.json()).then(data => {
         L.geoJSON(data, {
             interactive: false, 
-            style: { color: "#00264d", weight: 1.5, fillOpacity: 0.03 },
+            style: { color: "#00264d", weight: 1.2, fillOpacity: 0.02 },
             onEachFeature: function (f, l) {
                 l.bindTooltip(f.properties["Noms des communes"], {
-                    permanent: true, direction: "center", className: "label-commune", opacity: 0.9
+                    permanent: true, 
+                    direction: "center", 
+                    className: "label-commune",
+                    opacity: isMobile ? 0.7 : 0.9 // Plus discret sur mobile
                 });
             }
         }).addTo(map);
@@ -100,7 +102,7 @@
         L.geoJSON(data, {
             pointToLayer: function (f, latlng) {
                 return L.circleMarker(latlng, {
-                    radius: 9, 
+                    radius: isMobile ? 10 : 8, // Plus gros sur mobile pour le clic
                     fillColor: "#28a745", 
                     color: "#ffffff", 
                     weight: 2, 
@@ -109,16 +111,19 @@
             },
             onEachFeature: function (f, l) {
                 var p = f.properties;
-                var content = "<div style='font-family:Times New Roman;'><h3>" + (p.pharmacie_nom || "Pharmacie") + "</h3>" +
+                var content = "<div style='font-family:Times New Roman; max-width:200px;'>" +
+                    "<h3 style='margin:0 0 5px 0; color:var(--kgm-blue); font-size:1.1em;'>" + (p.pharmacie_nom || "Pharmacie") + "</h3>" +
+                    "<div style='border-top:1px solid #ddd; padding-top:5px; font-size:0.9em;'>" +
                     "<b>Commune :</b> " + (p.commune_nom_bdd || "N/A") + "<br>" +
                     "<b>Canton :</b> " + (p.canton_nom_bdd || "N/A") + "<br>" +
-                    "<b>Ouverture :</b> " + (p.ouverture ? p.ouverture.replace(/{|}/g, "") : "N/A") + "</div>";
+                    "<b>Ouverture :</b> " + (p.ouverture ? p.ouverture.replace(/{|}/g, "") : "N/A") + 
+                    "</div></div>";
                 l.bindPopup(content);
             }
         }).addTo(map);
     });
 
-    // 3. LÉGENDE (Maintenue et fixée)
+    // 3. LÉGENDE
     var legend = L.control({position: 'bottomright'});
     legend.onAdd = function () {
         var div = L.DomUtil.create('div', 'legend');
@@ -128,7 +133,11 @@
         return div;
     };
     legend.addTo(map);
+
+    // Ajustement automatique si on tourne l'écran
+    window.addEventListener('resize', function() {
+        map.invalidateSize();
+    });
 </script>
-    
 </body>
 </html>
