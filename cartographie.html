@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatoire Géospatial - KGM Expertise</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { font-family: 'Times New Roman', serif; margin: 0; padding: 0; }
+        header { background: #00264d; color: white; padding: 20px; text-align: center; }
+        #map { height: 75vh; width: 100%; border-bottom: 3px solid #00264d; }
+        .description { padding: 15px; background: #f4f4f4; border-left: 5px solid #00264d; margin: 10px; }
+        .btn-retour { display: inline-block; padding: 10px 20px; background: #00264d; color: white; text-decoration: none; border-radius: 5px; margin: 20px; font-weight: bold; }
+        /* Style pour la légende */
+        .legend { background: white; padding: 10px; line-height: 18px; color: #333; border: 2px solid #00264d; border-radius: 5px; }
+        .legend i { width: 14px; height: 14px; float: left; margin-right: 8px; opacity: 0.7; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 style="margin:0;">Observatoire des Infrastructures Sanitaires</h1>
+    <p style="margin:5px 0 0 0; font-style: italic; font-size: 0.9em;">Expertise Géospatiale & Gouvernance Territoriale</p>
+</header>
+
+<div class="description">
+    <p style="margin:0;">Visualisation interactive : Répartition des pharmacies au sein des <strong>Collectivités territoriales</strong>.</p>
+</div>
+
+<div id="map"></div>
+
+<a href="index.html" class="btn-retour">← Retour à l'accueil</a>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Initialisation de la carte centrée sur Lomé/Agoè
+    var map = L.map('map').setView([6.18, 1.20], 12);
+
+    // Fond de carte clair et professionnel (CartoDB Positron)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+    }).addTo(map);
+
+    // 1. Chargement des Communes (Couche Polygonale)
+    fetch('./communes.geojson')
+        .then(res => res.json())
+        .then(data => {
+            L.geoJSON(data, {
+                style: { 
+                    color: "#00264d", 
+                    weight: 2, 
+                    fillColor: "#00264d",
+                    fillOpacity: 0.05 
+                },
+                onEachFeature: function (feature, layer) {
+                    // Utilisation du nom exact trouvé dans votre fichier
+                    var nomCommune = feature.properties["Noms des communes"] || "Non renseigné";
+                    layer.bindPopup("<div style='font-family:Times New Roman;'><b>Collectivité :</b> " + nomCommune + "</div>");
+                }
+            }).addTo(map);
+        });
+
+    // 2. Chargement des Pharmacies (Couche Ponctuelle)
+    fetch('./pharmacies.geojson')
+        .then(res => res.json())
+        .then(data => {
+            L.geoJSON(data, {
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, { 
+                        radius: 7, 
+                        fillColor: "#28a745", 
+                        color: "#fff", 
+                        weight: 1.5,
+                        fillOpacity: 1 
+                    });
+                },
+                onEachFeature: function (feature, layer) {
+                    var p = feature.properties;
+                    
+                    // Nettoyage de la chaîne "ouverture" (retrait des {} et ajout d'espaces)
+                    var horaires = p.ouverture ? p.ouverture.replace(/{|}/g, "").replace(/,/g, ", ") : "Non spécifié";
+                    
+                    var popupContent = "<div style='font-family: Times New Roman; min-width: 180px;'>" +
+                        "<h3 style='margin:0; color:#00264d; border-bottom: 1px solid #ccc;'>" + p.pharmacie_nom + "</h3>" +
+                        "<p style='margin: 5px 0;'>" +
+                        "<b>Commune :</b> " + p.commune_nom_bdd + "<br>" +
+                        "<b>Canton :</b> " + p.canton_nom_bdd + "<br>" +
+                        "<b>Secteur :</b> " + p.pharmacie_secteur + "<br>" +
+                        "<b>Ouverture :</b> <span style='font-size:0.85em;'>" + horaires + "</span>" +
+                        "</p></div>";
+                    layer.bindPopup(popupContent);
+                }
+            }).addTo(map);
+        });
+
+    // 3. Ajout de la Légende
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'legend');
+        div.innerHTML += "<b>Légende</b><br>";
+        div.innerHTML += "<i style='background: #00264d; border: 1px solid #00264d;'></i> Limite Territoriale<br>";
+        div.innerHTML += "<i style='background: #28a745; border-radius: 50%;'></i> Pharmacie";
+        return div;
+    };
+    legend.addTo(map);
+
+</script>
+</body>
+</html>
