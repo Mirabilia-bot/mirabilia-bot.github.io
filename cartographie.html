@@ -32,11 +32,31 @@
         }
 
         /* Étiquettes de communes adaptatives */
-        .label-commune {
-            background: rgba(255, 255, 255, 0.7); border: none; box-shadow: none;
-            color: var(--kgm-blue); font-weight: bold; font-family: 'Times New Roman';
-            font-size: 11px; text-shadow: 1px 1px 1px white; white-space: nowrap;
-        }
+        /* Étiquettes de communes : Auto-adaptatives et structurées */
+.label-commune {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1.5px solid var(--kgm-blue) !important;
+    border-radius: 6px !important;
+    color: var(--kgm-blue) !important;
+    font-weight: bold !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+    
+    /* Correction cruciale : Autoriser le texte à s'étaler proprement */
+    white-space: normal !important; 
+    width: auto !important;
+    max-width: 220px !important; /* Empêche la bande d'être trop longue */
+    text-align: center !important;
+    line-height: 1.4 !important;
+}
+
+/* Suppression du petit triangle par défaut qui peut gêner la lecture */
+.leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, 
+.leaflet-tooltip-left:before, .leaflet-tooltip-right:before {
+    display: none !important;
+}
+        
 
         /* Légende Responsive */
         .legend {
@@ -81,19 +101,27 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
     // 1. COMMUNES
-    fetch('./communes.geojson').then(res => res.json()).then(data => {
-        L.geoJSON(data, {
-            interactive: false, 
-            style: { color: "#00264d", weight: 1.2, fillOpacity: 0.02 },
-            onEachFeature: function (f, l) {
-                l.bindTooltip(f.properties["Noms des communes"], {
-                    permanent: true, 
-                    direction: "center", 
-                    className: "label-commune",
-                    opacity: isMobile ? 0.7 : 0.9 // Plus discret sur mobile
-                });
-            }
-        }).addTo(map);
+   // 1. COMMUNES : Avec gestion de l'espace
+fetch('./communes.geojson').then(res => res.json()).then(data => {
+    L.geoJSON(data, {
+        interactive: false, 
+        style: { color: "#00264d", weight: 1.2, fillOpacity: 0.02 },
+        onEachFeature: function (f, l) {
+            // On s'assure que le nom est bien présent avant d'afficher
+            var nomCommune = f.properties["Noms des communes"] || "Collectivité Territoriale";
+            
+            l.bindTooltip("<div>" + nomCommune + "</div>", {
+                permanent: true, 
+                direction: "center", 
+                className: "label-commune",
+                sticky: false,
+                offset: [0, 0]
+            });
+        }
+    }).addTo(map);
+    // ... reste du code pour les pharmacies
+});
+    
 
         return fetch('./pharmacies.geojson');
     })
