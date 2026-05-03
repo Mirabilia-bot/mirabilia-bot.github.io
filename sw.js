@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kgm-stable-v2';
+const CACHE_NAME = 'kgm-live-v3'; // On passe en v3
 const ASSETS = [
   './index.html',
   './manifest.json',
@@ -7,13 +7,17 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', (e) => {
+  self.skipWaiting(); // Force le nouveau SW à s'activer immédiatement
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
+// Stratégie NETWORK FIRST : On cherche sur internet, si ça échoue, on prend le cache
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+    fetch(e.request).catch(() => {
+      return caches.match(e.request);
+    })
   );
 });
