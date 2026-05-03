@@ -9,6 +9,7 @@
         :root { --kgm-blue: #00264d; --kgm-green: #2ecc71; }
         body { font-family: 'Times New Roman', serif; margin: 0; padding: 0; background: #fdfdfd; overflow-x: hidden; }
         
+        /* Header Fixe et Responsive */
         header { 
             position: sticky; top: 0; z-index: 1000;
             background: linear-gradient(135deg, var(--kgm-blue) 0%, #004080 100%);
@@ -18,6 +19,7 @@
         header h1 { margin: 0; font-size: 1.4em; text-transform: uppercase; letter-spacing: 1px; }
         header p { margin: 5px 0 0 0; font-style: italic; font-size: 0.85em; opacity: 0.9; }
 
+        /* Carte Adaptative */
         #map { height: 70vh; width: 100%; border-top: 4px solid var(--kgm-green); border-bottom: 4px solid var(--kgm-blue); }
 
         .description { padding: 15px; background: #f4f4f4; border-left: 5px solid var(--kgm-blue); margin: 10px; font-size: 0.95em; }
@@ -29,27 +31,14 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
         }
 
+        /* Étiquettes de communes adaptatives */
         .label-commune {
-            background: rgba(255, 255, 255, 0.95) !important;
-            border: 1.5px solid var(--kgm-blue) !important;
-            border-radius: 6px !important;
-            color: var(--kgm-blue) !important;
-            font-weight: bold !important;
-            padding: 8px 12px !important;
-            font-size: 13px !important;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
-            white-space: normal !important; 
-            width: auto !important;
-            max-width: 220px !important; 
-            text-align: center !important;
-            line-height: 1.4 !important;
+            background: rgba(255, 255, 255, 0.7); border: none; box-shadow: none;
+            color: var(--kgm-blue); font-weight: bold; font-family: 'Times New Roman';
+            font-size: 11px; text-shadow: 1px 1px 1px white; white-space: nowrap;
         }
 
-        .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, 
-        .leaflet-tooltip-left:before, .leaflet-tooltip-right:before {
-            display: none !important;
-        }
-
+        /* Légende Responsive */
         .legend {
             background: white; padding: 8px; line-height: 18px; font-size: 11px;
             border: 2px solid var(--kgm-blue); border-radius: 5px; font-family: 'Times New Roman';
@@ -81,24 +70,27 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+    // Détection de la taille d'écran pour adapter les éléments
     var isMobile = window.innerWidth < 768;
+
+    // Initialisation centrée sur le Togo (Zoom 7 pour mobile, 7.5 pour tablette/PC)
     var map = L.map('map', { zoomControl: false }).setView([8.6195, 1.1414], isMobile ? 6.5 : 7);
     L.control.zoom({ position: 'topright' }).addTo(map);
 
+    // Fond de carte avec COULEURS (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+    // 1. COMMUNES
     fetch('./communes.geojson').then(res => res.json()).then(data => {
         L.geoJSON(data, {
             interactive: false, 
             style: { color: "#00264d", weight: 1.2, fillOpacity: 0.02 },
             onEachFeature: function (f, l) {
-                var nomCommune = f.properties["Noms des communes"] || "Collectivité Territoriale";
-                l.bindTooltip("<div>" + nomCommune + "</div>", {
+                l.bindTooltip(f.properties["Noms des communes"], {
                     permanent: true, 
                     direction: "center", 
                     className: "label-commune",
-                    sticky: false,
-                    offset: [0, 0]
+                    opacity: isMobile ? 0.7 : 0.9 // Plus discret sur mobile
                 });
             }
         }).addTo(map);
@@ -110,7 +102,7 @@
         L.geoJSON(data, {
             pointToLayer: function (f, latlng) {
                 return L.circleMarker(latlng, {
-                    radius: isMobile ? 10 : 8, 
+                    radius: isMobile ? 10 : 8, // Plus gros sur mobile pour le clic
                     fillColor: "#28a745", 
                     color: "#ffffff", 
                     weight: 2, 
@@ -131,6 +123,7 @@
         }).addTo(map);
     });
 
+    // 3. LÉGENDE
     var legend = L.control({position: 'bottomright'});
     legend.onAdd = function () {
         var div = L.DomUtil.create('div', 'legend');
@@ -141,6 +134,7 @@
     };
     legend.addTo(map);
 
+    // Ajustement automatique si on tourne l'écran
     window.addEventListener('resize', function() {
         map.invalidateSize();
     });
