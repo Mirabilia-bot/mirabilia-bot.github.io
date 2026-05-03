@@ -1,10 +1,11 @@
-const CACHE_NAME = 'kgm-live-v3';
+const CACHE_NAME = 'kgm-live-v4';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './communes.geojson',
   './pharmacies.geojson',
+  '/cartographie.html',
   './images/icon-192.png',
   './images/icon-512.png',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
