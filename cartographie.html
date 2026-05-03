@@ -116,6 +116,12 @@
     };
     geoControl.addTo(map);
 
+    // GESTION DE LA POSITION (Icône bleue et précision)
+    map.on('locationfound', function(e) {
+        L.circleMarker(e.latlng, {radius: 8, fillColor: "#007bff", color: "#fff", weight: 3, fillOpacity: 1}).addTo(map).bindPopup("Vous êtes ici").openPopup();
+        L.circle(e.latlng, e.accuracy).addTo(map);
+    });
+
     var statsControl = L.control({position: 'topleft'});
     statsControl.onAdd = function() {
         var div = L.DomUtil.create('div', 'stats-box');
