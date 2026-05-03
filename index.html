@@ -202,7 +202,7 @@
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=3') // Pas de slash devant sw.js
+      navigator.serviceWorker.register('sw.js?v=4') // Pas de slash devant sw.js
         .then(reg => console.log('App installée !'))
         .catch(err => console.log('Erreur SW', err));
     });
@@ -355,12 +355,22 @@
         </div>
     </div>
     </section>
+  
+ <section style="margin: 50px 20px; padding: 40px 20px; background: #ffffff; border: 2px solid #00264d; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,38,77,0.15); font-family: 'Times New Roman', serif;">
+    
+    <h2 style="color: #00264d; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">
+        Intelligence Territoriale & SIG
+    </h2>
+    
+    <p style="color: #555; font-style: italic; font-size: 1.1em; max-width: 700px; margin: 0 auto 30px auto;">
+        Accédez à notre observatoire interactif pour analyser le maillage des infrastructures sanitaires et les dynamiques des collectivités territoriales.
+    </p>
 
-    <div style="text-align: center; margin: 30px;">
-    <a href="cartographie.html" style="background: #00264d; color: white; padding: 15px 25px; text-decoration: none; border-radius: 8px; font-weight: bold; font-family: 'Times New Roman';">
-        📍 CONSULTER LA CARTE DES PHARMACIES
+    <a href="cartographie.html" style="display: inline-block; background: linear-gradient(135deg, #00264d 0%, #004080 100%); color: white; padding: 18px 35px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1em; transition: 0.3s; box-shadow: 0 5px 20px rgba(0,38,77,0.4); border: 2px solid #2ecc71;">
+        📍 CONSULTER L'OBSERVATOIRE DES PHARMACIES
     </a>
-    </div>
+
+ </section>
     
 
 <section style="padding: 50px 5%; background-color: #f9f9f9; border-top: 1px solid #eee;">
@@ -525,7 +535,7 @@
     </script>
 <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=3');
+    navigator.serviceWorker.register('sw.js?v=4');
   }
 
   let deferredPrompt;
