@@ -48,61 +48,62 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([6.18, 1.20], 12);
-    
-    // Fond de carte OpenStreetMap (Coloré)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+    var map = L.map('map', { zoomControl: false }).setView([6.18, 1.20], 12);
+    L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // 1. Couche Communes : AFFICHAGE AUTOMATIQUE DU NOM
-    fetch('./communes.geojson')
-        .then(res => res.json())
-        .then(data => {
-            L.geoJSON(data, {
-                style: { color: "#00264d", weight: 2, fillOpacity: 0.05 },
-                onEachFeature: function (feature, layer) {
-                    // Affiche le nom automatiquement sans cliquer
-                    var nom = feature.properties["Noms des communes"];
-                    layer.bindTooltip(nom, {
-                        permanent: true, 
-                        direction: "center",
-                        className: "label-commune"
-                    });
-                }
-            }).addTo(map);
-        });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-    // 2. Couche Pharmacies : POINTS PLUS GRANDS ET INFOS AU CLIC
-    fetch('./pharmacies.geojson')
-        .then(res => res.json())
-        .then(data => {
-            L.geoJSON(data, {
-                pointToLayer: function (feature, latlng) {
-                    // Augmentation de la taille (radius: 12) pour une meilleure visibilité
-                    return L.circleMarker(latlng, { 
-                        radius: 12, 
-                        fillColor: "#28a745", 
-                        color: "#fff", 
-                        weight: 2, 
-                        fillOpacity: 1 
-                    });
-                },
-                onEachFeature: function (feature, layer) {
-                    var p = feature.properties;
-                    // On récupère toutes les infos comme dans votre code qui fonctionnait
-                    var popup = "<div style='font-family: Times New Roman; min-width: 180px;'>" +
-                                "<h3 style='color:#00264d; margin:0;'>" + p.pharmacie_nom + "</h3>" +
-                                "<hr>" +
-                                "<b>Commune :</b> " + p.commune_nom_bdd + "<br>" +
-                                "<b>Canton :</b> " + p.canton_nom_bdd + "<br>" +
-                                "<b>Type :</b> " + p.pharmacie_type + "<br>" +
-                                "<b>Ouverture :</b> " + p.ouverture + 
-                                "</div>";
-                    layer.bindPopup(popup);
-                }
-            }).addTo(map);
-        });
+    // 1. CHARGER LES COMMUNES EN PREMIER (FOND)
+    fetch('./communes.geojson').then(res => res.json()).then(data => {
+        L.geoJSON(data, {
+            // AJOUT DE INTERACTIVE: FALSE POUR LIBÉRER LE CLIC
+            interactive: false, 
+            style: { color: "#00264d", weight: 1.5, fillOpacity: 0.03 },
+            onEachFeature: function (f, l) {
+                l.bindTooltip(f.properties["Noms des communes"], {
+                    permanent: true, direction: "center", className: "label-commune", opacity: 0.9
+                });
+            }
+        }).addTo(map);
+
+        // 2. CHARGER LES PHARMACIES SEULEMENT APRÈS (DESSUS)
+        return fetch('./pharmacies.geojson');
+    })
+    .then(res => res.json())
+    .then(data => {
+        L.geoJSON(data, {
+            pointToLayer: function (f, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 12, // Taille augmentée pour faciliter le clic mobile
+                    fillColor: "#28a745", 
+                    color: "#ffffff", 
+                    weight: 2, 
+                    fillOpacity: 1
+                });
+            },
+            onEachFeature: function (f, l) {
+                var p = f.properties;
+                var content = "<div class='popup-header'><h3>" + p.pharmacie_nom + "</h3></div>" +
+                    "<b>Commune :</b> " + p.commune_nom_bdd + "<br>" +
+                    "<b>Canton :</b> " + p.canton_nom_bdd + "<br>" +
+                    "<b>Secteur :</b> " + p.pharmacie_secteur + "<br>" +
+                    "<b>Ouverture :</b> " + (p.ouverture ? p.ouverture.replace(/{|}/g, "") : "N/A");
+                l.bindPopup(content);
+            }
+        }).addTo(map);
+    });
+
+    // 3. LÉGENDE
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function () {
+        var div = L.DomUtil.create('div', 'legend');
+        div.innerHTML = "<b style='color:var(--kgm-blue)'>LÉGENDE</b><br>" +
+            "<i style='background:rgba(0,38,77,0.1); border:1px solid var(--kgm-blue); border-radius:0;'></i> Collectivité<br>" +
+            "<i style='background:var(--kgm-green); border:2px solid white;'></i> Pharmacie";
+        return div;
+    };
+    legend.addTo(map);
 </script>
+    
 </body>
 </html>
