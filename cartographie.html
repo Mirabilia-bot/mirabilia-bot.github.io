@@ -28,7 +28,7 @@
         }
         .ui-btn {
             background: white; color: var(--kgm-blue); border: none; padding: 10px 15px;
-            border-radius: 20px; font-weight: bold; font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border-radius: 20px; font-weight: bold; font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer;
         }
         .panel {
             position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%);
@@ -81,7 +81,7 @@
     }
 
     map.on('locationfound', function(e) {
-        L.circleMarker(e.latlng, {radius: 8, fillColor: "#007bff", color: "#fff", weight: 3, fillOpacity: 1}).addTo(map);
+        L.circleMarker(e.latlng, {radius: 8, fillColor: "#007bff", color: "#fff", weight: 3, fillOpacity: 1}).addTo(map).bindPopup("Votre position précise").openPopup();
     });
 
     var pharmacyLayer, communeLayer;
@@ -94,7 +94,6 @@
     };
     statsControl.addTo(map);
 
-    // 1. CHARGEMENT DES COMMUNES + ETIQUETTES
     fetch('./communes.geojson').then(res => res.json()).then(data => {
         communeLayer = L.geoJSON(data, {
             style: { color: "#00264d", weight: 1, fillOpacity: 0.05 },
@@ -106,48 +105,54 @@
     })
     .then(res => res.json())
     .then(data => {
-        // 2. COMPTEUR
-        document.getElementById('pharmacy-count').innerHTML = data.features.length + ' Pharmacies';
+        document.getElementById('pharmacy-count').innerHTML = data.features.length + ' Pharmacies répertoriées';
         
-        // 3. PHARMACIES + POPUPS ENRICHIES (CANTON / VILLAGE)
         pharmacyLayer = L.geoJSON(data, {
             pointToLayer: function (f, latlng) {
                 return L.marker(latlng, { icon: L.divIcon({ className: 'pharmacy-icon', html: '+', iconSize: [16, 16] }) });
             },
             onEachFeature: function (f, l) {
                 var p = f.properties;
-                l.bindPopup("<b style='color:#00264d'>" + (p.pharmacie_nom || "Pharmacie") + "</b><br>" +
-                           "<small><b>Canton:</b> " + (p.canton_nom_bdd || "N/A") + "</small><br>" +
-                           "<small><b>Village:</b> " + (p.village_quartier || p.nom_village || "N/A") + "</small>");
+                // Popup enrichie avec Canton et Village/Quartier
+                var content = "<div style='font-family:Times New Roman; min-width:150px;'>" +
+                              "<b style='color:#00264d; font-size:14px;'>" + (p.pharmacie_nom || "Pharmacie") + "</b><hr style='margin:5px 0; border:0; border-top:1px solid #eee;'>" +
+                              "<b>Canton:</b> " + (p.canton_nom_bdd || "Non spécifié") + "<br>" +
+                              "<b>Village/Quartier:</b> " + (p.village_quartier || p.nom_village || "Non spécifié") + "</div>";
+                l.bindPopup(content);
             }
         }).addTo(map);
 
-        // 4. RECHERCHE CHIRURGICALE (SANS MASQUER LES POINTS)
         document.getElementById('search-input').addEventListener('input', function(e) {
             var val = e.target.value.toLowerCase();
             
-            // On filtre les pharmacies
+            // FILTRAGE INTELLIGENT : On ne masque pas si on cherche une commune
             pharmacyLayer.eachLayer(function(layer) {
                 var nomP = layer.feature.properties.pharmacie_nom?.toLowerCase() || "";
-                var nomC = layer.feature.properties.commune_nom_bdd?.toLowerCase() || "";
-                if (nomP.includes(val) || nomC.includes(val) || val === "") {
+                var nomC = layer.feature.properties.commune_nom_bdd?.toLowerCase() || ""; // Lien avec le nom de la commune dans le geojson pharmacies
+                
+                // Si la recherche correspond à une pharmacie OU si on est en train de chercher une commune, on garde les points
+                if (nomP.includes(val) || val === "") {
                     layer.addTo(map);
                 } else {
                     map.removeLayer(layer);
                 }
             });
 
-            // On zoom sur la commune SANS vider la carte
+            // ZOOM CHIRURGICAL SUR COMMUNE SANS SUPPRIMER LES POINTS
             if (val.length > 2) {
                 communeLayer.eachLayer(function(layer) {
                     var nomCommune = layer.feature.properties["Noms des communes"]?.toLowerCase() || "";
                     if (nomCommune.includes(val)) {
                         map.fitBounds(layer.getBounds());
+                        // Forcer la réapparition des pharmacies lors du zoom commune
+                        pharmacyLayer.addTo(map); 
                     }
                 });
             }
         });
     });
+
+    window.addEventListener('resize', function() { map.invalidateSize(); });
 </script>
 </body>
 </html>
