@@ -113,42 +113,43 @@
             },
             onEachFeature: function (f, l) {
                 var p = f.properties;
-                // Popup enrichie avec Canton et Village/Quartier
-                var content = "<div style='font-family:Times New Roman; min-width:150px;'>" +
+                var content = "<div style='font-family:Times New Roman; min-width:180px;'>" +
                               "<b style='color:#00264d; font-size:14px;'>" + (p.pharmacie_nom || "Pharmacie") + "</b><hr style='margin:5px 0; border:0; border-top:1px solid #eee;'>" +
                               "<b>Canton:</b> " + (p.canton_nom_bdd || "Non spécifié") + "<br>" +
-                              "<b>Village/Quartier:</b> " + (p.village_quartier || p.nom_village || "Non spécifié") + "</div>";
+                              "<b>Village:</b> " + (p.pharmacie_type || p.pharmacie_secteur || "Non spécifié") + "</div>";
                 l.bindPopup(content);
             }
         }).addTo(map);
 
         document.getElementById('search-input').addEventListener('input', function(e) {
-            var val = e.target.value.toLowerCase();
+            var val = e.target.value.toLowerCase().trim();
             
-            // FILTRAGE INTELLIGENT : On ne masque pas si on cherche une commune
+            // Étape 1 : Vérifier si la saisie correspond à une COMMUNE
+            var isSearchingCommune = false;
+            communeLayer.eachLayer(function(layer) {
+                var nomCommune = layer.feature.properties["Noms des communes"]?.toLowerCase() || "";
+                if (val.length > 2 && nomCommune.includes(val)) {
+                    map.fitBounds(layer.getBounds());
+                    isSearchingCommune = true;
+                }
+            });
+
+            // Étape 2 : Gestion de l'affichage des pharmacies
             pharmacyLayer.eachLayer(function(layer) {
                 var nomP = layer.feature.properties.pharmacie_nom?.toLowerCase() || "";
-                var nomC = layer.feature.properties.commune_nom_bdd?.toLowerCase() || ""; // Lien avec le nom de la commune dans le geojson pharmacies
+                var nomC = layer.feature.properties.commune_nom_bdd?.toLowerCase() || "";
                 
-                // Si la recherche correspond à une pharmacie OU si on est en train de chercher une commune, on garde les points
-                if (nomP.includes(val) || val === "") {
+                // LOGIQUE CHIRURGICALE : 
+                // On affiche le point si :
+                // - La recherche est vide
+                // - OU si le texte correspond au nom de la pharmacie
+                // - OU si le texte correspond au nom de la commune (Persistance)
+                if (val === "" || nomP.includes(val) || nomC.includes(val)) {
                     layer.addTo(map);
                 } else {
                     map.removeLayer(layer);
                 }
             });
-
-            // ZOOM CHIRURGICAL SUR COMMUNE SANS SUPPRIMER LES POINTS
-            if (val.length > 2) {
-                communeLayer.eachLayer(function(layer) {
-                    var nomCommune = layer.feature.properties["Noms des communes"]?.toLowerCase() || "";
-                    if (nomCommune.includes(val)) {
-                        map.fitBounds(layer.getBounds());
-                        // Forcer la réapparition des pharmacies lors du zoom commune
-                        pharmacyLayer.addTo(map); 
-                    }
-                });
-            }
         });
     });
 
