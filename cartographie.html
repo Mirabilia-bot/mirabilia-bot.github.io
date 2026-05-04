@@ -115,8 +115,8 @@
                 var p = f.properties;
                 var content = "<div style='font-family:Times New Roman; min-width:180px;'>" +
                               "<b style='color:#00264d; font-size:14px;'>" + (p.pharmacie_nom || "Pharmacie") + "</b><hr style='margin:5px 0; border:0; border-top:1px solid #eee;'>" +
-                              "<b>Canton:</b> " + (p.canton_nom_bdd || "Non spécifié") + "<br>" +
-                              "<b>Village:</b> " + (p.pharmacie_type || p.pharmacie_secteur || "Non spécifié") + "</div>";
+                              "<b>Canton :</b> " + (p.canton_nom_bdd || "Non spécifié") + "<br>" +
+                              "<b>Type d'établissement :</b> " + (p.pharmacie_type || "Non spécifié") + "</div>";
                 l.bindPopup(content);
             }
         }).addTo(map);
@@ -139,11 +139,6 @@
                 var nomP = layer.feature.properties.pharmacie_nom?.toLowerCase() || "";
                 var nomC = layer.feature.properties.commune_nom_bdd?.toLowerCase() || "";
                 
-                // LOGIQUE CHIRURGICALE : 
-                // On affiche le point si :
-                // - La recherche est vide
-                // - OU si le texte correspond au nom de la pharmacie
-                // - OU si le texte correspond au nom de la commune (Persistance)
                 if (val === "" || nomP.includes(val) || nomC.includes(val)) {
                     layer.addTo(map);
                 } else {
