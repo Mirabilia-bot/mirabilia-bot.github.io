@@ -50,7 +50,6 @@
         .stats-box { background: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; color: var(--kgm-blue); font-size: 11px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .pharmacy-icon { background: #28a745; color: white; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         
-        /* Étiquettes des communes (Standards SIG) */
         .label-commune { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 10px; text-shadow: 1px 1px 2px white; }
 
         .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 13px; }
@@ -109,7 +108,6 @@
         document.getElementById(id).classList.toggle('active');
     }
 
-    // GESTION DE LA LOCALISATION PRÉCISE
     map.on('locationfound', function(e) {
         L.circleMarker(e.latlng, {radius: 8, fillColor: "#007bff", color: "#fff", weight: 3, fillOpacity: 1}).addTo(map).bindPopup("Votre position").openPopup();
         L.circle(e.latlng, e.accuracy, {color: '#007bff', fillOpacity: 0.1}).addTo(map);
@@ -132,7 +130,6 @@
         communeLayer = L.geoJSON(data, {
             style: { color: "#00264d", weight: 1, fillOpacity: 0.05 },
             onEachFeature: function (f, l) {
-                // RÉACTIVATION DU NOM DES COMMUNES
                 l.bindTooltip(f.properties["Noms des communes"], { permanent: true, direction: "center", className: "label-commune", opacity: 0.8 });
             }
         }).addTo(map);
@@ -140,7 +137,6 @@
     })
     .then(res => res.json())
     .then(data => {
-        // RÉACTIVATION DU COMPTEUR
         document.getElementById('pharmacy-count').innerHTML = data.features.length + ' Pharmacies répertoriées';
         
         pharmacyLayer = L.geoJSON(data, {
@@ -149,24 +145,39 @@
                 return L.marker(latlng, { icon: icon });
             },
             onEachFeature: function (f, l) {
-                l.bindPopup("<b style='color:var(--kgm-blue)'>" + (f.properties.pharmacie_nom || "Pharmacie") + "</b>");
+                var p = f.properties;
+                var content = "<div style='font-family:Times New Roman;'>" +
+                    "<b style='color:var(--kgm-blue); font-size:1.1em;'>" + (p.pharmacie_nom || "Pharmacie") + "</b><br>" +
+                    "<div style='border-top:1px solid #ddd; margin-top:5px; padding-top:5px; font-size:0.9em;'>" +
+                    "<b>Canton :</b> " + (p.canton_nom_bdd || "N/A") + "<br>" +
+                    "<b>Village/Quartier :</b> " + (p.village_quartier || p.nom_village || "N/A") + "</div></div>";
+                l.bindPopup(content);
             }
         }).addTo(map);
 
-        // RECHERCHE HYBRIDE (PHARMACIES + COMMUNES)
         document.getElementById('search-input').addEventListener('input', function(e) {
             var val = e.target.value.toLowerCase();
             
+            // FILTRE DES PHARMACIES (On garde tout visible si on cherche une commune)
             pharmacyLayer.eachLayer(function(layer) {
-                var match = layer.feature.properties.pharmacie_nom?.toLowerCase().includes(val);
-                if (match || val === "") { layer.addTo(map); } else { map.removeLayer(layer); }
+                var matchPharmacie = layer.feature.properties.pharmacie_nom?.toLowerCase().includes(val);
+                var matchCommuneAssociee = layer.feature.properties.commune_nom_bdd?.toLowerCase().includes(val);
+                
+                if (matchPharmacie || matchCommuneAssociee || val === "") { 
+                    layer.addTo(map); 
+                } else { 
+                    map.removeLayer(layer); 
+                }
             });
 
+            // NAVIGATION VERS LA COMMUNE SANS MASQUER LES POINTS
             if (val.length > 2) {
                 communeLayer.eachLayer(function(layer) {
                     var nomCommune = layer.feature.properties["Noms des communes"]?.toLowerCase();
                     if (nomCommune && nomCommune.includes(val)) {
                         map.fitBounds(layer.getBounds());
+                        // On s'assure que les pharmacies restent affichées après le zoom
+                        pharmacyLayer.addTo(map);
                     }
                 });
             }
