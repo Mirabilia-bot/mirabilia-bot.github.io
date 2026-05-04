@@ -6,7 +6,7 @@
     <title>Observatoire KGM - Final</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        :root { --kgm-blue: #00264d; --kgm-green: #2ecc71; }
+        :root { --kgm-blue: #00264d; --kgm-green: #28a745; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
         header { 
@@ -38,9 +38,14 @@
         }
         .panel.active { display: block; }
         .stats-box { background: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; color: var(--kgm-blue); font-size: 11px; }
-        .pharmacy-icon { background: #28a745; color: white; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .pharmacy-icon { background: var(--kgm-green); color: white; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .label-commune { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 10px; text-shadow: 1px 1px 2px white; }
         .btn-retour { position: absolute; top: 8px; left: 10px; z-index: 1001; color: white; text-decoration: none; font-weight: bold; }
+        
+        /* Style spécifique pour les symboles de la légende */
+        .legende-item { display: flex; align-items: center; margin-bottom: 8px; font-size: 13px; }
+        .symbol-pharmacy { width: 18px; height: 18px; background: var(--kgm-green); border: 2px solid white; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .symbol-commune { width: 18px; height: 18px; background: rgba(0,38,77,0.1); border: 1.5px solid var(--kgm-blue); margin-right: 10px; }
     </style>
 </head>
 <body>
@@ -67,8 +72,15 @@
 </div>
 
 <div id="panel-legende" class="panel">
-    <h3 style="margin:0; color:var(--kgm-blue)">Légende</h3>
-    <p style="font-size:13px;">🟢 Pharmacies<br>🟦 Limites Communes</p>
+    <h3 style="margin:0 0 10px 0; color:var(--kgm-blue)">Légende</h3>
+    <div class="legende-item">
+        <div class="symbol-pharmacy">+</div>
+        <span>Pharmacies répertoriées</span>
+    </div>
+    <div class="legende-item">
+        <div class="symbol-commune"></div>
+        <span>Limites administratives (Communes)</span>
+    </div>
 </div>
 
 <div class="ui-controls">
@@ -104,7 +116,7 @@
 
     fetch('./communes.geojson').then(res => res.json()).then(data => {
         communeLayer = L.geoJSON(data, {
-            style: { color: "#00264d", weight: 1, fillOpacity: 0.05 },
+            style: { color: "#00264d", weight: 1.5, fillOpacity: 0.05 },
             onEachFeature: function (f, l) {
                 l.bindTooltip(f.properties["Noms des communes"], { permanent: true, direction: "center", className: "label-commune" });
             }
