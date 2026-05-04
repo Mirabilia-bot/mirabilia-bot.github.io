@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         :root { --kgm-blue: #00264d; --kgm-green: #28a745; }
+        /* Box-sizing global pour éviter les calculs de largeur erronés */
         * { box-sizing: border-box; }
+        
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
+        
         header { 
             position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
             background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center;
@@ -17,13 +20,16 @@
         header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; letter-spacing: 1px; }
         header p { margin: 4px 0 0; font-size: 0.85em; font-style: italic; opacity: 0.9; }
         
+        /* Conteneur corrigé : largeur fluide avec padding de sécurité */
         .search-container { 
-            position: absolute; top: 85px; left: 50%; transform: translateX(-50%); z-index: 1000;
-            width: 90%; max-width: 400px; padding: 0 10px;
+            position: absolute; top: 85px; left: 0; right: 0; z-index: 1000;
+            width: 100%; display: flex; justify-content: center; padding: 0 15px;
         }
+        /* Input corrigé : padding réduit pour laisser place au texte sur mobile */
         #search-input { 
-            width: 100%; padding: 12px 20px; border: none; border-radius: 30px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); outline: none; font-family: 'Times New Roman'; font-size: 16px;
+            width: 100%; max-width: 400px; padding: 12px 15px; border: none; border-radius: 30px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); outline: none; font-family: 'Times New Roman'; 
+            font-size: 15px; /* Taille de police légèrement réduite pour mobile */
         }
         
         .ui-controls {
@@ -35,7 +41,6 @@
             border-radius: 25px; font-weight: bold; font-size: 13px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer;
             white-space: nowrap; transition: 0.3s;
         }
-        .ui-btn:hover { background: #f0f0f0; }
 
         .panel {
             position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%);
