@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maîtrise d’Ouvrage Communale au Togo | KGM EXPERTISE</title>
-    <p id="datetime" style="font-size: 0.85rem; color: #888;"></p>
     <meta name="description" content="Analyse de l'efficacité publique et de la MOC au Togo. Comment l'ingénierie technique sécurise les projets urbains.">
     <meta name="keywords" content="MOC Togo, Maîtrise d'ouvrage, Tône 1, Golfe 5, décentralisation, KODOMMA Gnimdou M., SIG, gestion locale">
     <meta name="author" content="KODOMMA Gnimdou M.">
@@ -30,7 +29,8 @@
     <nav><a href="blog.html" class="back-link">← Retour aux analyses</a></nav>
     <main>
         <span class="tag">Gouvernance & Droit</span>
-        <p style="color: var(--accent); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Analyse | 05 Mai 2026</p>
+        <p id="datetime" style="font-size: 0.85rem; color: #888; margin-top: 10px;"></p>
+        
         <h1>La Maîtrise d’Ouvrage Communale : Le Nouveau Défi de l'Efficacité Publique</h1>
 
         <p>Depuis la loi n°2019-006, la commune togolaise est passée d'un statut de sujet administratif à celui d'acteur économique majeur. Cependant, la <strong>Maîtrise d’Ouvrage Communale (MOC)</strong> se heurte à un paradoxe que le professeur <strong>Jean-Bernard Auby</strong> décrit comme « l'asymétrie de compétence ».</p>
@@ -43,14 +43,14 @@
         <p>Le renforcement de la MOC est au cœur des discussions avec des partenaires comme le <strong>MEDEF International</strong> et l'<strong>AFD</strong>. L'objectif est de transformer les besoins territoriaux en dossiers bancables. <strong>KGM EXPERTISE</strong> intervient ici comme un catalyseur, sécurisant juridiquement les procédures de commande publique pour éviter les éléphants blancs (Source: Togo First).</p>
 
         <h2>L'apport stratégique de KGM Expertise</h2>
-                <div style="text-align: center; margin: 35px 0;">
+        <div style="text-align: center; margin: 35px 0;">
             <img src="affiche-maitrise-ouvrage.png" 
                  alt="Sécuriser la Maîtrise d'Ouvrage Communale - KGM EXPERTISE" 
                  style="width: 100%; max-width: 750px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
             <p style="font-size: 0.8rem; color: #666; margin-top: 10px; font-style: italic;">
                 Infographie : Les piliers de la Maîtrise d'Ouvrage Communale au Togo. © KGM EXPERTISE
             </p>
-                </div>
+        </div>
         
         <p>Nous proposons une assistance à maîtrise d'ouvrage (AMO) chirurgicale, alliant audit de passation et suivi de chantier digitalisé via le SIG. Notre méthode permet de garantir la conformité géographique et technique des ouvrages, assurant ainsi la pérennité des infrastructures scolaires, sanitaires et marchandes de nos collectivités.</p>
 
@@ -58,7 +58,7 @@
             Par <strong>KODOMMA Gnimdou M.</strong>, gestionnaire des collectivités locales & Expert SIG.
         </p>
     </main>
-        <footer>
+    <footer>
         <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px;">KODOMMA Gnimdou M.</div>
         <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
             Spécialiste SIG et gestionnaire des collectivités locales | Consultant en Gouvernance Territoriale
@@ -67,11 +67,14 @@
             &copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.
         </div>
     </footer>
-<script>
-    const dateModif = new Date(document.lastModified);
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
-</script>
-    
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('datetime').textContent = "Mis à jour le " + now.toLocaleDateString('fr-FR', options);
+        }
+        updateDateTime();
+    </script>
 </body>
 </html>
