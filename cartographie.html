@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Observatoire des pharmacies - Togo</title>
+    <title>Observatoire des Pharmacies du Togo | SIG & Analyse Spatiale</title>
+    
+    <meta name="description" content="Découvrez la cartographie interactive des pharmacies au Togo par KGM Expertise. Analyse du maillage territorial, densité par commune et outils SIG pour la santé.">
+    <meta name="keywords" content="Pharmacie Togo, SIG Togo, Cartographie santé, KGM Expertise, Lomé, collectivités territoriales, géolocalisation pharmacies">
+    <meta property="og:title" content="KGM Expertise - Observatoire Spatial des Pharmacies">
+    <meta property="og:description" content="Analyse cartographique dynamique des services de santé au Togo.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         :root { --kgm-blue: #00264d; --kgm-green: #28a745; }
-        /* Box-sizing global pour éviter les calculs de largeur erronés */
         * { box-sizing: border-box; }
         
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
+        /* Correction CSS pour permettre le scroll du texte SEO */
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow-x: hidden; overflow-y: auto; font-family: 'Times New Roman', serif; background: #eee; }
+        #map { position: absolute; top: 0; height: 100vh; width: 100%; z-index: 1; }
         
         header { 
             position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
@@ -20,20 +28,18 @@
         header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; letter-spacing: 1px; }
         header p { margin: 4px 0 0; font-size: 0.85em; font-style: italic; opacity: 0.9; }
         
-        /* Conteneur corrigé : largeur fluide avec padding de sécurité */
         .search-container { 
             position: absolute; top: 85px; left: 0; right: 0; z-index: 1000;
             width: 100%; display: flex; justify-content: center; padding: 0 15px;
         }
-        /* Input corrigé : padding réduit pour laisser place au texte sur mobile */
         #search-input { 
             width: 100%; max-width: 400px; padding: 12px 15px; border: none; border-radius: 30px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.3); outline: none; font-family: 'Times New Roman'; 
-            font-size: 15px; /* Taille de police légèrement réduite pour mobile */
+            font-size: 15px;
         }
         
         .ui-controls {
-            position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
+            position: absolute; top: 85vh; left: 50%; transform: translateX(-50%);
             z-index: 1000; display: flex; gap: 10px; width: auto; justify-content: center;
         }
         .ui-btn {
@@ -58,6 +64,12 @@
         .legende-item { display: flex; align-items: center; margin-bottom: 12px; font-size: 14px; }
         .symbol-pharmacy { width: 22px; height: 22px; background: var(--kgm-green); border: 2px solid white; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; margin-right: 12px; }
         .symbol-commune { width: 22px; height: 22px; background: rgba(0,38,77,0.1); border: 2px solid var(--kgm-blue); margin-right: 12px; border-radius: 4px; }
+        
+        /* Section SEO */
+        .seo-content {
+            position: relative; margin-top: 100vh; background: white; padding: 40px 8%; z-index: 2000;
+            border-top: 5px solid var(--kgm-blue); box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -100,6 +112,14 @@
     <button class="ui-btn" onclick="togglePanel('panel-legende')">🗺️ Légende</button>
     <button class="ui-btn" onclick="map.locate({setView: true, maxZoom: 15})">📍 Position</button>
 </div>
+
+<section class="seo-content">
+    <h2 style="color:var(--kgm-blue)">Cartographie Interactive des Services de Santé au Togo</h2>
+    <p>Cet observatoire, développé par <strong>KGM Expertise</strong>, propose une visualisation dynamique du maillage pharmaceutique sur l'ensemble du territoire togolais. En utilisant des outils de <strong>Systèmes d'Information Géographique (SIG)</strong>, nous analysons la répartition spatiale des officines pour identifier les zones de forte densité et les déserts sanitaires au Togo.</p>
+    
+    <h3 style="color:var(--kgm-green)">Analyse Spatiale et Gouvernance</h3>
+    <p>L'expertise de KGM en ingénierie territoriale permet ici de transformer des données brutes en outils d'aide à la décision pour les <strong>collectivités territoriales</strong>. L'accessibilité aux médicaments est un pilier du développement local.</p>
+</section>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
