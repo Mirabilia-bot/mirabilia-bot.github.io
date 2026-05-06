@@ -15,8 +15,9 @@
         nav { background: white; padding: 1rem 8%; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; width: 100%; box-sizing: border-box; }
         main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; }
         .tag { background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-        h1 { font-family: 'Crimson Pro', serif; font-size: 2.4rem; color: var(--primary); margin: 15px 0; line-height: 1.2; }
+        h1 { font-family: 'Crimson Pro', serif; font-size: 2.4rem; color: var(--primary); margin: 15px 0; line-height: 1.2; text-align: left; hyphens: none !important; }
         h2 { font-family: 'Crimson Pro', serif; color: var(--secondary); margin-top: 35px; border-bottom: 2px solid #eee; padding-bottom: 8px; }
+        p, li { text-align: justify; hyphens: none !important; }
         .highlight-box { background: #f1f8e9; border-left: 5px solid var(--secondary); padding: 25px; margin: 30px 0; border-radius: 0 8px 8px 0; }
         footer { background: var(--primary); color: white; padding: 40px 8%; text-align: center; }
         .back-link { text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
@@ -26,7 +27,7 @@
     <nav><a href="blog.html" class="back-link">← Retour aux analyses</a></nav>
     <main>
         <span class="tag">Environnement</span>
-        <p style="color: var(--accent); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Analyse | 05 Mai 2026</p>
+        <p style="color: var(--accent); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Analyse | 06 Mai 2026</p>
         <h1>Vers la Ville Durable Togolaise : Un Impératif au-delà du Concept</h1>
 
         <p>Le Togo s'engage vers la « Ville Durable » sous l'impulsion du <strong>PNUD</strong> et de l'<strong>AFD</strong>. Selon <strong>Saskia Sassen</strong>, une ville durable est une cité capable de métaboliser ses propres déchets. Aujourd'hui, nos communes croulent sous les immondices qui bouchent les exutoires, aggravant les inondations (Source: Vert-Togo).</p>
@@ -42,9 +43,25 @@
             Par <strong>KODOMMA Gnimdou M.</strong>, gestionnaire des collectivités locales & Expert SIG.
         </p>
     </main>
+
+    <div style="font-size: 0.75rem; opacity: 0.5; text-align: center; padding: 15px 0; background: var(--bg);">
+        Dernière mise à jour : <span id="date-modif"></span>
+    </div>
+
     <footer>
-        <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold;">KODOMMA Gnimdou M.</div>
-        <p style="font-size: 0.8rem; opacity: 0.8;">&copy; KGM EXPERTISE 2026 - Togo.</p>
+        <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px;">KODOMMA Gnimdou M.</div>
+        <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
+            Spécialiste SIG et gestionnaire des collectivités locales | Consultant en Gouvernance Territoriale
+        </p>
+        <div style="margin-top: 15px; font-size: 0.7rem; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+            &copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.
+        </div>
     </footer>
+
+<script>
+    const dateModif = new Date(document.lastModified);
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
+</script>
 </body>
 </html>
