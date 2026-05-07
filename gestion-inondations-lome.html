@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inondations au Togo : Intelligence Spatiale | KGM EXPERTISE</title>
-    <meta name="description" content="Pourquoi le pompage d'urgence échoue à Lomé. L'apport du SIG dans la résilience urbaine face aux inondations récurrentes.">
-    <meta name="keywords" content="inondations Lomé, SIG Togo, ReliefWeb, ANPC, aménagement urbain, KODOMMA Gnimdou M., Bè Ahligo">
+    <meta name="description" content="Analyse intégrale des inondations au Togo par KODOMMA Gnimdou M. État des lieux, causes naturelles et anthropiques, et solutions par l'intelligence spatiale.">
+    <meta name="keywords" content="inondations Lomé, SIG Togo, ANPC, aménagement urbain, KODOMMA Gnimdou M., drainage, Togo, climat intertropical">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -15,53 +15,113 @@
         nav { background: white; padding: 1rem 8%; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; width: 100%; box-sizing: border-box; }
         main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; }
         .tag { background: #ffebee; color: #c62828; padding: 5px 15px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-        h1 { font-family: 'Crimson Pro', serif; font-size: 2.4rem; color: var(--primary); margin: 15px 0; line-height: 1.2; text-align: left; hyphens: none !important; }
-        h2 { font-family: 'Crimson Pro', serif; color: var(--secondary); margin-top: 35px; border-bottom: 2px solid #eee; padding-bottom: 8px; }
-        p, li { text-align: justify; hyphens: none !important; }
+        h1 { font-family: 'Crimson Pro', serif; font-size: 2.4rem; color: var(--primary); margin: 15px 0; line-height: 1.2; text-align: left; }
+        h2 { font-family: 'Crimson Pro', serif; color: var(--secondary); margin-top: 35px; border-bottom: 2px solid #eee; padding-bottom: 8px; font-size: 1.8rem; text-transform: uppercase; }
+        h3 { font-family: 'Crimson Pro', serif; color: var(--primary); margin-top: 25px; font-size: 1.5rem; border-left: 4px solid var(--accent); padding-left: 15px; }
+        p, li { text-align: justify; margin-bottom: 1.5rem; }
         .highlight-box { background: #fdf2f2; border-left: 5px solid var(--secondary); padding: 25px; margin: 30px 0; border-radius: 0 8px 8px 0; }
         footer { background: var(--primary); color: white; padding: 40px 8%; text-align: center; }
         .back-link { text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
+        .intro-geo { font-style: italic; color: #555; border-bottom: 1px solid #ddd; padding-bottom: 20px; margin-bottom: 30px; }
     </style>
 </head>
 <body>
     <nav><a href="blog.html" class="back-link">← Retour aux analyses</a></nav>
     <main>
-        <span class="tag">Risques & SIG</span>
-        <p style="color: var(--accent); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Analyse | 06 Mai 2026</p>
-        <h1>Inondations à Lomé : Sortir de la Fatalité par l'Intelligence Spatiale</h1>
+        <span class="tag">Analyse Spatiale & Risques</span>
+        <p style="color: var(--accent); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Étude Complète | 07 Mai 2026</p>
+        <h1>Inondations au Togo : Sortir de la Fatalité par l'Intelligence Spatiale</h1>
 
-        <p>Les rapports de <strong>ReliefWeb (mai 2024)</strong> sont sans appel : des milliers de sinistrés dans le Grand Lomé, notamment à <strong>Bè Ahligo et Léo 2000</strong>. Comme l'établit <strong>Yvette Veyret</strong> dans <em>Géographie des risques</em>, l'inondation est un risque « construit » par des choix d'aménagement défaillants.</p>
+        <div class="intro-geo">
+            Pays côtier de l’Afrique de l’Ouest, le Togo a une superficie de 56 600 km2. Il s’étire du nord au sud sur 600 km avec une largeur qui n’excède pas 120 km et est situé entre les méridiens 0°20 et 1°50 Est et les parallèles 6° et 11°10 Nord (PNAE, 2001). Il est limité à l’Ouest par le Ghana, à l’Est par le Bénin, au Nord par le Burkina Faso et possède une façade maritime de 55 km.
+        </div>
+
+        <p>Le Togo jouit d’un climat intertropical caractérisé par des températures moyennes élevées au nord et modérées au sud et des amplitudes thermiques élevées au nord et faible au sud. Le sud Togo est marqué par 4 saisons de durée très inégales : 2 saisons sèches (la grande de Novembre à Mars et la petite centrée sur le mois d’Août) et 2 saisons pluvieuses (La grande d’Avril à Juillet et la petite de Septembre à Octobre). Dans l’année, la ville de Lomé enregistre la plus faible précipitation (930 voire 760 mm/an).</p>
+
+        <p>Le Togo, surtout la majeure partie de la ville de Lomé est fortement confrontée à d’énormes défis et difficultés en saison des pluies en matière d’hydraulique urbaine et d’assainissement. Plusieurs de ses quartiers sont le plus souvent submergés par les eaux surtout avec un débordement des bassins de rétention d’eaux ainsi que le mauvais état des caniveaux causé par l’incivisme de certains citoyens indélicats qui en font leurs poubelles. Aussi faut-il ajouter que la ville de Lomé et ses environs qui sont en proie à une forte urbanisation incontrôlée faute au départ d’un schéma nationale d’urbanisme et particulièrement de plan local d’urbanisme au niveau des collectivités territoriales qui donc cause une modification des sens naturel d’écoulement des eaux de pluie vers les bassins versants.</p>
+
+        <p>Le drainage des eaux devient dès lors un véritable défi pour nos collectivités et l’Etat car cet état de chose a d’énormes conséquences sur les activités socio-économiques et sanitaires des populations lesquelles sont des acteurs essentiels dans la réussite de la décentralisation territoriale. Certaines zones aussi reconnue comme étant inondables, donc vulnérables aux pluies ou excédent pluviométriques sont habitées par des citoyens ce qui pose également un problème dans la délivrance des permis de construire car si on peut accusée chaque fois l’Etat nous sommes aussi le plus souvent victime de nos propres turpitudes.</p>
 
         <div class="highlight-box">
-            <strong>Le constat critique :</strong> La gestion actuelle repose trop souvent sur le pompage d'urgence, une réponse curative critiquée pour son inefficacité face au manque de volonté politique d'achever les réseaux de drainage structurants (Source: 27avril).
+            La problématique des inondations au Togo à l’ère de l’action curative et corrective doit succéder l’ère de l’amélioration permanente planifiée et des actions préventives trouve alors tout son sens. Cette analyse aborde la notion d’inondation (I), l’état des lieux à Lomé (II), les approches de solutions des autorités (III), le bilan des mesures (IV), les causes (V), et les outils et process pour résoudre ce problème (VI).
         </div>
 
-        <h2>Le SIG comme bouclier territorial</h2>
+        <h2>I. DE LA NOTION D’INONDATION</h2>
+        <p>L'inondation est une submersion, rapide ou lente, d'une zone habituellement hors d'eau. Cette submersion peut être temporaire, naturelle ou artificielle, d'un espace. Le risque d'inondation est la conséquence de deux composantes : l'eau qui peut sortir de son lit habituel d'écoulement et l'homme qui s'installe dans l'espace alluvial pour y implanter toutes sortes de constructions, d'équipements et d'activités.</p>
+        <p>Le terme d’inondation est fréquemment utilisé pour décrire :</p>
+        <ul>
+            <li>Le débordement d’un cours d'eau, en crue puis en décrue, sur les terrains voisins ; l'eau est répandue dans les talwegs et les dépressions topographiques;</li>
+            <li>Le ruissellement très important, soit sur des terres cultivées (inondation boueuse), soit en zone imperméable urbanisée;</li>
+            <li>Le débordement ou les conséquences de la rupture d'ouvrages artificiels hydrauliques tels que retenues d'eau, digues, canalisations provoquant une inondation soudaine;</li>
+            <li>La remontée d'une nappe phréatique;</li>
+            <li>L’envahissement temporaire par la mer d'une zone côtière lors d'une submersion marine.</li>
+        </ul>
+
+        <h2>II. ETAT DES LIEUX DU PHENOMENE DANS LA VILLE</h2>
+        <p>Les saisons de pluies ont été très pluvieuses au Togo ces dernières années. Les pluies diluviennes ont entrainé des dégâts matériels importants et des pertes en vies humaines. Elles ont été accompagnées de vents violents et ont causé des inondations dont l’ampleur varie d’une zone à une autre. La situation a été particulièrement grave dans la ville de Lomé et ses environs. Cette pluviométrie au-dessus de la normale (plus de 350mm contre une moyenne normale d’environ 200mm) est également à l’origine de crues exceptionnelles par endroit de certains lagunes, bassins et rivières à l’instar des bassins Todman ; de Ségbé ; de Léo 2000 ; de CAP Champion ; de 2 lions ; derrière aéroport ; la lagune place Bonké ; de Novissi et de ses environs ; la rivière de Zio ; etc.</p>
+        <p>Cette situation a induit des effets incalculables sur le secteur de logement. Selon l’évaluation, au total 35 578 maisons sont inondées dont 3 832 endommagées et 1 330 détruites. Dans certaines localités, nombre d’habitants vivent toujours leur quotidien dans les eaux écumantes et boueuses depuis des mois pendant que d’autres ont déserté leur domicile. Les puits à grands diamètres ne sont plus utilisables et les sanitaires (douches, WC, fosses septiques) ne sont plus opérationnels.</p>
+        <p>A partir de la grande pluie du 12 juillet 2023, nombre de localités de Lomé sont victimes d’inondation : Tokoin Novissi (pharmacie Gbézé) ; Boulevard de la Kara (rails d’Adéwi) ; Boulevard des Armées (carrefour Adjalé) ; Ahanoukopé et Place Bonké ; Hédzranawoe (derrière Hôtel El Doria) ; Tokoin Gbadago ; Atikoumé ; Légbassito ; Bè ; Adamavo ; Kagomé ; Baguida (Dévégo) ; Avépozo (Olibo-kopé) ; etc.</p>
+        <p>Il est à noter que les populations sont implantées dans les lits majeurs des cours d’eau et dans les zones marécageuses. Les mauvaises pratiques en matière d’assainissement font que les eaux usées polluent la nappe phréatique, et les déchets plastiques empêchent l’infiltration. Le rejet des déchets solides dans les ouvrages collectif entrave la bonne circulation des eaux. L’occupation anarchique des dépressions est un facteur accentuant.</p>
+        <p>Ces fortes pluies ont engendré des dégâts importants sur les infrastructures routières. Faute de canalisations, les eaux ont envahi les rues, dégradant les pistes ou emportant des ouvrages. À cela s’ajoutent l’apparition des nids de poules et le ravinement de la chaussée. Par ailleurs, les dommages causés à l’environnement sont importants : pollution sur la santé, dégradation du cadre de vie, réduction du pouvoir d’achat.</p>
+        <p>Il existe une corrélation entre la pauvreté et la vulnérabilité aux inondations. Du fait de la pauvreté, beaucoup de personnes s’installent dans des zones reconnues inondables à coût abordable. Ces personnes sont les premières affectées et exposées à des maladies comme la diarrhée, le choléra, le paludisme, la fièvre typhoïde.</p>
+
+        <h2>III. LES MESURES PRISES PAR LES AUTORITES</h2>
+        <p>Le gouvernement togolais a érigé la Réduction des Risques de Catastrophes (RRC) en priorité nationale. Cette volonté se traduit par l’élaboration du Programme National d’Investissement pour l’Environnement et les Ressources Naturelles (PNIERN) et du Plan d’Action National d’Adaptation aux Changements Climatiques (PANA) en septembre 2009. Des organes ont été mis en place : ANPC, ANASAP, ANGE.</p>
+        <p>La réaction s’est traduite par des opérations de secours d’urgence et des évaluations. En 2004, le Plan Directeur d’Assainissement (PDA) a été actualisé pour mieux drainer les bassins versants de Lomé. Ce plan a proposé l’aménagement de 24 Bassins de Rétention (BR) pour un volume de 1,35 millions de m3 d’eau à stocker et la construction de 30 km de canaux primaires.</p>
+        <p>Des ouvrages spécifiques sont en place : Tokoin Tamé (Université), Togo 2000, Lac Est, émissaire en double conduite, Todman, Atikoumé, Agbalépédovi, Avédji 1 et 2, Novissi, 2 lions, Sani Yaya, EPP 13 janvier, Bè (aéroport), EDA OB, Nukafu, Agoè Assiyéyé, Cap Champion, Ségbé, etc. Les services techniques déclenchent le pompage, la ronde des équipes d’alerte et la coordination avec les mairies.</p>
+
+        <h2>IV. LES BILANS DES MESURES PRISES</h2>
+        <p>Les résultats positifs notés sont : la réduction des risques, une gestion adaptée des situations, la construction de lacs artificiels et bassins, les systèmes de pompage, et l’orientation des constructions. Cependant, quelques manquements subsistent : débordement des bassins par moment et inefficacité ponctuelle des systèmes de pompage et drainage. Cela engendre chaque année :</p>
+        <ul>
+            <li>Pertes matérielles et en vies humaines;</li>
+            <li>Migration des populations victimes;</li>
+            <li>Ralentissement des activités économiques;</li>
+            <li>Impraticabilité des infrastructures routières;</li>
+            <li>Endommagement des infrastructures scolaires et sanitaires;</li>
+            <li>Pollution des eaux et destruction des puits;</li>
+            <li>Submersion des cultures agricoles.</li>
+        </ul>
+
         <div style="margin: 40px 0; text-align: center;">
-    <figure style="margin: 0; display: inline-block; width: 100%;">
-        <a href="images/infographie-inondations-lome-sig.png" target="_blank">
-            <img src="images/infographie-inondations-lome-sig.png" 
-                 alt="Infographie : Le SIG comme bouclier contre les inondations à Lomé" 
-                 style="width: 100%; max-width: 800px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease;"
-                 onmouseover="this.style.transform='scale(1.02)'" 
-                 onmouseout="this.style.transform='scale(1)'">
-        </a>
-        <figcaption style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">
-            Stratégie de résilience urbaine par l'intelligence spatiale (MNT & Talwegs) — © KGM EXPERTISE
-        </figcaption>
-    </figure>
+            <figure style="margin: 0; display: inline-block; width: 100%;">
+                <a href="images/infographie-inondations-lome-sig.png" target="_blank">
+                    <img src="images/infographie-inondations-lome-sig.png" alt="SIG Bouclier Inondations" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                </a>
+                <figcaption style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">
+                    Stratégie de résilience urbaine par l'intelligence spatiale (MNT & Talwegs) — © KGM EXPERTISE
+                </figcaption>
+            </figure>
         </div>
+
+        <h2>V. LES CAUSES DU PHENOMENE D’INONDATION</h2>
+        <h3>1. Facteurs naturels</h3>
+        <p>La dégradation de l’environnement et les dysfonctionnements hydrologiques participent activement. Le type de relief constitue un paramètre prépondérant. Les inondations pluviales résultent de la concentration brutale des pluies dans les bas-fonds sur les sols hydromorphes. Ces types de sols sont sensibles, se compactent et deviennent très imperméables, rendant le drainage superficiel difficile en zone de faible pente. La compaction (battance) due à l'impact des gouttes de pluie forme une croûte dense. La couverture du sol, lorsqu'elle existe, influence positivement l'infiltration en ralentissant l'écoulement.</p>
         
-        <p>Pour <strong>KGM EXPERTISE</strong>, la solution réside dans la Modélisation Numérique de Terrain (MNT). Nous aidons les communes à identifier les zones de talwegs et à imposer une police de l'urbanisme scientifique. Planifier le drainage en suivant la gravité naturelle est la seule voie pour protéger durablement les populations du Grand Lomé.</p>
+        <h3>2. Facteurs humains</h3>
+        <p>Les modes d’occupation, la mauvaise gestion et exploitation des terres, et l’exploitation des drains et marécages accroissent le rythme du phénomène. La croissance démographique, l’évolution horizontale des villes, le manque de drainage urbain et le comblement des marécages par des déchets solides pour boucher les trous des pistes augmentent le risque par débordement. Avec le développement rapide, il est fréquent de trouver des communes dont le territoire est installé en zone inondable. L’Homme s’installe dans l’espace alluvial pour y implanter constructions et activités. Si rien n’est fait, les inondations connaîtront un rythme élevé de survenance.</p>
+
+        <h2>VI. LES APPROCHES DE SOLUTIONS, LES OUTILS ET PROCESS</h2>
+        <p>Avec l’exécution des grands travaux munis de réseaux gravitaires, les apports en débits instantanés seront énormes et la capacité du système lagunaire pourra être insuffisante. Il faut des opérations urgentes et des actions à long terme :</p>
+        <ul>
+            <li>Suivi minutieux des dispositifs de secours pour évacuer les trop-pleins;</li>
+            <li>Entretien, maintenance et construction d’autres bassins et stations de relevage;</li>
+            <li>Émission en dalot des lacs et construction de digues et canaux de décharge;</li>
+            <li>Construction de réseaux de drainage dans tous les quartiers vulnérables;</li>
+            <li>Aménagement du territoire (bonne planification urbaine);</li>
+            <li>Amélioration des systèmes de pompage et leur extension;</li>
+            <li>Mise en place d’un dispositif d’alerte précoce des risques;</li>
+            <li>Bonne gestion des déchets (installation de poubelles et collecte);</li>
+            <li>Conscientisation des populations (civisme, dangers de l’inondation, achat de terrain).</li>
+        </ul>
+
+        <h2>CONCLUSION</h2>
+        <p>Les catastrophes naturelles, notamment les inondations, semblent subvenir à un rythme plus accéléré et paraissent plus dévastatrices. S’il est admis qu'elles sont incompressibles, il est impérieux d’agir sur les facteurs humains favorables à leur survenance ainsi que sur les leviers de gouvernance pour une prévention efficace des risques. Dans une approche concertée avec les populations, il reste à déterminer la stratégie de reconstruction qui répond aux préoccupations socioculturelles et identitaires mais aussi à des critères de durabilité.</p>
 
         <p style="margin-top: 40px; font-style: italic; border-top: 1px solid #ddd; padding-top: 20px;">
-            Par <strong>KODOMMA Gnimdou M.</strong>, gestionnaire des collectivités locales & Expert SIG.
+            Par <strong>KODOMMA Gnimdou M.</strong>, gestionnaire des collectivités locales & Expert SIG. <br>
+            <small>Source 1: GEOGRAPHIE REGIONALE DU TOGO : ASPECT PHYSIQUE, UL dép. de Géographie 2O23 P.6</small>
         </p>
     </main>
-
-    <div style="font-size: 0.75rem; opacity: 0.5; text-align: center; padding: 15px 0; background: var(--bg);">
-        Dernière mise à jour : <span id="date-modif"></span>
-    </div>
 
     <footer>
         <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px;">KODOMMA Gnimdou M.</div>
@@ -74,9 +134,7 @@
     </footer>
 
 <script>
-    const dateModif = new Date(document.lastModified);
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
+    document.lastModified; 
 </script>
 </body>
 </html>
