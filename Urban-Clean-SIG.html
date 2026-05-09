@@ -157,6 +157,13 @@
     };
 
     firebase.initializeApp(firebaseConfig);
+  // --- ACTIVATION DU BOUCLIER APP CHECK ---
+const appCheck = firebase.appCheck();
+appCheck.activate(
+  new firebase.appCheck.ReCaptchaEnterpriseProvider('6LdxguEsAAAAAF0_D5ENDLHtWHMJH-LhNd1Ph9Yt'),
+  true // true permet de renouveler automatiquement le jeton
+);
+  
     const db = firebase.firestore();
 
     var map = L.map('map', { zoomControl: false }).setView([6.1319, 1.2228], 13);
