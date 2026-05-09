@@ -5,22 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>URBAN-CLEAN | Spot2gether & KGM Expertise</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
   <style>
-    body { margin:0; font-family:'Segoe UI',sans-serif; background:#f4f4f4; }
-    #filters { padding:10px; background:#e8f5e9; display:flex; gap:15px; }
+    body { margin:0; font-family:'Times New Roman', serif; background:#f4f4f4; }
+    #filters { padding:10px; background:#e8f5e9; display:flex; gap:15px; flex-wrap:wrap; }
     #map { height:50vh; }
     #dashboard { height:50vh; background:white; padding:15px; box-shadow:0 -5px 15px rgba(0,0,0,0.1); overflow:auto; }
     canvas { max-height:200px; margin-top:15px; }
     #addBtn { display:block; width:90%; margin:10px auto; padding:12px; font-size:1.1em; background:#fc3d21; color:white; border:none; border-radius:8px; }
+    label { font-weight: bold; }
   </style>
 </head>
 <body>
   <div id="filters">
     <label>Quartier :
-      <select id="filterQuartier">
+      <select id="filterQuartier" onchange="applyFilters()">
         <option value="all">Tous</option>
         <option value="Kliklamé">Kliklamé</option>
         <option value="Bé">Bé</option>
@@ -28,7 +30,7 @@
       </select>
     </label>
     <label>Type :
-      <select id="filterType">
+      <select id="filterType" onchange="applyFilters()">
         <option value="all">Tous</option>
         <option value="dechets">Déchets</option>
         <option value="pollution">Pollution</option>
@@ -36,7 +38,7 @@
       </select>
     </label>
     <label>Date :
-      <input type="date" id="filterDate">
+      <input type="date" id="filterDate" onchange="applyFilters()">
     </label>
     <button onclick="demanderPosition()">📍 Me localiser</button>
   </div>
@@ -50,30 +52,23 @@
     <canvas id="chartQuartiers"></canvas>
   </div>
 
-  <!-- Modale formulaire -->
   <div id="modalForm" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;justify-content:center;align-items:center;">
     <div style="background:white;padding:20px;border-radius:10px;width:90%;max-width:400px;">
-      <h3 style="margin-top:0;color:#1b5e20;">Nouvel signalement</h3>
-      <label>Titre</label>
-      <input type="text" id="titre">
-      <label>Description</label>
-      <textarea id="desc"></textarea>
+      <h3 style="margin-top:0;color:#1b5e20;">Nouveau signalement</h3>
+      <label>Titre</label><input type="text" id="titre" style="width:100%">
+      <label>Description</label><textarea id="desc" style="width:100%"></textarea>
       <label>Quartier</label>
-      <select id="quartier">
+      <select id="quartier" style="width:100%">
         <option>Kliklamé</option><option>Bé</option><option>Tokoin</option>
       </select>
-      <label>Superficie estimée (m²)</label>
-      <input type="number" id="surface">
       <label>Type d’alerte</label>
-      <select id="type">
+      <select id="type" style="width:100%">
         <option value="dechets">Déchets</option>
         <option value="pollution">Pollution</option>
         <option value="securite">Sécurité</option>
       </select>
-      <label>Photo</label>
-      <input type="file" id="photo" accept="image/*" capture="environment">
-      <button style="margin-top:15px;padding:12px;width:100%;border:none;border-radius:8px;font-size:1.1em;background:#1b5e20;color:white;" onclick="soumettreForm()">✅ Ajouter le point</button>
-      <button style="margin-top:8px;padding:12px;width:100%;border:none;border-radius:8px;font-size:1.1em;background:#fc3d21;color:white;" onclick="fermerForm()">❌ Annuler</button>
+      <button style="margin-top:15px;padding:12px;width:100%;border:none;border-radius:8px;background:#1b5e20;color:white;" onclick="alert('Signalement ajouté !')">✅ Ajouter</button>
+      <button style="margin-top:8px;padding:12px;width:100%;border:none;border-radius:8px;background:#fc3d21;color:white;" onclick="document.getElementById('modalForm').style.display='none'">❌ Annuler</button>
     </div>
   </div>
 
@@ -81,55 +76,47 @@
   var map = L.map('map').setView([6.1319,1.2228],13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-  // Charger communes.geojson
-  fetch("communes.geojson")
-    .then(res=>res.json())
-    .then(geojson=>{
-      L.geoJSON(geojson,{style:{color:"#1b5e20",weight:2,fillOpacity:0.05}}).addTo(map);
-    });
-
-  // Icônes différenciés
   const icons = {
-    dechets: L.divIcon({html:'<i class="fas fa-trash" style="color:#fc3d21;font-size:22px"></i>'}),
-    pollution: L.divIcon({html:'<i class="fas fa-smog" style="color:#007bff;font-size:22px"></i>'}),
-    securite: L.divIcon({html:'<i class="fas fa-exclamation-triangle" style="color:#f57c00;font-size:22px"></i>'})
+    dechets: L.divIcon({className:'custom-div-icon', html:'<i class="fas fa-trash" style="color:#fc3d21;font-size:22px"></i>', iconSize:[30,42], iconAnchor:[15,42]}),
+    pollution: L.divIcon({className:'custom-div-icon', html:'<i class="fas fa-smog" style="color:#007bff;font-size:22px"></i>', iconSize:[30,42], iconAnchor:[15,42]}),
+    securite: L.divIcon({className:'custom-div-icon', html:'<i class="fas fa-exclamation-triangle" style="color:#f57c00;font-size:22px"></i>', iconSize:[30,42], iconAnchor:[15,42]})
   };
 
-  // Exemple de données
   const data = [
     {quartier:'Kliklamé',type:'dechets',desc:'Tas d’ordures',lat:6.14,lng:1.22,date:'2025-08-23'},
     {quartier:'Bé',type:'pollution',desc:'Fumée industrielle',lat:6.13,lng:1.21,date:'2025-09-02'},
     {quartier:'Tokoin',type:'securite',desc:'Décharge sauvage',lat:6.15,lng:1.23,date:'2025-09-05'}
   ];
 
-  let markerPool={};
-  let heatPoints=[];
+  let markers = L.layerGroup().addTo(map);
+  let chart1 = null, chart2 = null;
 
   function renderMap(filtered){
-    Object.values(markerPool).forEach(m=>map.removeLayer(m));
-    markerPool={};
-    heatPoints=[];
+    markers.clearLayers();
+    let heatPoints = [];
     filtered.forEach(d=>{
-      markerPool[d.desc]=L.marker([d.lat,d.lng],{icon:icons[d.type]}).addTo(map)
+      L.marker([d.lat, d.lng],{icon:icons[d.type]}).addTo(markers)
         .bindPopup(`<b>${d.desc}</b><br><small>${d.quartier} - ${d.date}</small>`);
-      heatPoints.push([d.lat,d.lng,0.5]);
+      heatPoints.push([d.lat, d.lng, 0.5]);
     });
-    L.heatLayer(heatPoints,{radius:25}).addTo(map);
   }
 
   function updateDashboard(filtered){
-    const stats=document.getElementById('stats');
-    stats.innerHTML=`<b>${filtered.length}</b> signalements`;
+    document.getElementById('stats').innerHTML = `<b>${filtered.length}</b> signalements`;
     const typeCount={}, quartierCount={};
     filtered.forEach(d=>{
       typeCount[d.type]=(typeCount[d.type]||0)+1;
       quartierCount[d.quartier]=(quartierCount[d.quartier]||0)+1;
     });
-    new Chart(document.getElementById('chartTypes'),{
+
+    if(chart1) chart1.destroy();
+    if(chart2) chart2.destroy();
+
+    chart1 = new Chart(document.getElementById('chartTypes'),{
       type:'pie',
       data:{labels:Object.keys(typeCount),datasets:[{data:Object.values(typeCount),backgroundColor:['#fc3d21','#007bff','#f57c00']}]}
     });
-    new Chart(document.getElementById('chartQuartiers'),{
+    chart2 = new Chart(document.getElementById('chartQuartiers'),{
       type:'bar',
       data:{labels:Object.keys(quartierCount),datasets:[{label:'Signalements',data:Object.values(quartierCount),backgroundColor:'#1b5e20'}]}
     });
@@ -144,9 +131,17 @@
     updateDashboard(filtered);
   }
 
-  // Localisation robuste
   function demanderPosition(){
-    if("permissions" in navigator){
-      navigator.permissions.query({name:'geolocation'}).then(res=>{
-        if(res.state==='denied'){
-          alert("Chrome bloque la localisation.
+    navigator.geolocation.getCurrentPosition(pos => {
+      map.setView([pos.coords.latitude, pos.coords.longitude], 15);
+      L.marker([pos.coords.latitude, pos.coords.longitude]).addTo(map).bindPopup("Vous êtes ici").openPopup();
+    }, () => alert("Localisation impossible"));
+  }
+
+  document.getElementById('addBtn').onclick = () => document.getElementById('modalForm').style.display='flex';
+  
+  // Initialisation
+  applyFilters();
+</script>
+</body>
+</html>
