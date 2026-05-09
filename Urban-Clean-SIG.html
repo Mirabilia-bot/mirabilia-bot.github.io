@@ -49,7 +49,6 @@
 
     .commune-label { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 11px; text-shadow: 1px 1px 2px white; pointer-events: none; }
     
-    /* Styles spécifiques Urban-Clean */
     .legend-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; }
     .legend-icon { width: 20px; text-align: center; margin-right: 10px; font-size: 18px; }
     #addBtnFloating { background: var(--kgm-red); color: white; }
@@ -64,7 +63,7 @@
 </header>
 
 <div class="search-container">
-    <input type="text" id="search-input" placeholder="Rechercher un quartier ou point...">
+    <input type="text" id="search-input" placeholder="Rechercher une commune ou un type d’alerte...">
 </div>
 
 <div id="map"></div>
@@ -95,15 +94,24 @@
     <div style="background:white;padding:20px;border-radius:15px;width:90%;max-width:380px;">
         <h3 style="margin-top:0;color:var(--kgm-blue);">Nouveau Signalement</h3>
         <label style="font-weight:bold; font-size:14px;">Quartier</label>
-        <select id="quartierSelect" style="width:100%; padding:10px; margin:5px 0 15px 0;" onchange="checkAutre(this.value)">
+        <select id="quartierSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;" onchange="checkAutre(this.value)">
             <option>Kliklamé</option><option>Bé</option><option>Tokoin</option><option value="Autres">Autres...</option>
         </select>
-        <input type="text" id="autreQuartier" placeholder="Nom du quartier" style="display:none; width:100%; padding:10px; margin-bottom:15px;">
+        <input type="text" id="autreQuartier" placeholder="Nom du quartier" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
         
-        <label style="font-weight:bold; font-size:14px;">Type d'alerte</label>
+        <label style="font-weight:bold; font-size:14px;">Description</label>
+        <textarea id="descInput" placeholder="Détails du problème..." style="width:100%; padding:10px; margin:5px 0 10px 0; font-family:serif; height:60px;"></textarea>
+
+        <div style="display:flex; gap:10px;">
+          <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Date</label><input type="date" id="dateInput" style="width:100%; padding:8px;"></div>
+          <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Heure</label><input type="time" id="heureInput" style="width:100%; padding:8px;"></div>
+        </div>
+
+        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
         <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 15px 0;">
             <option value="dechets">Déchets</option><option value="pollution">Pollution</option><option value="securite">Sécurité</option>
         </select>
+
         <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="soumettreSignalement()">✅ Valider</button>
         <button style="width:100%; padding:10px; background:#eee; color:#333; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="fermerModal()">Annuler</button>
     </div>
@@ -116,20 +124,18 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
     var data = [
-        {quartier:'Kliklamé', type:'dechets', desc:'Dépôt sauvage', lat:6.14, lng:1.22, date:'2025-05-09'},
-        {quartier:'Bé', type:'pollution', desc:'Eaux usées', lat:6.13, lng:1.21, date:'2025-05-08'}
+        {quartier:'Kliklamé', type:'dechets', desc:'Dépôt sauvage d\'ordures ménagères', lat:6.14, lng:1.22, date:'2025-05-09', heure:'10:30'},
+        {quartier:'Bé', type:'pollution', desc:'Évacuation d\'eaux usées sur la voie', lat:6.13, lng:1.21, date:'2025-05-08', heure:'14:15'}
     ];
 
     var markers = L.layerGroup().addTo(map);
     var communeLayer;
     var chart1, chart2;
 
-    // Chargement GéoJSON avec noms des communes (Chirurgical)
     fetch('./communes.geojson').then(res => res.json()).then(geojson => {
         communeLayer = L.geoJSON(geojson, {
             style: { color: "#00264d", weight: 2, fillOpacity: 0.05 },
             onEachFeature: function (f, l) {
-                // Support des deux noms de propriétés possibles
                 let nom = f.properties.nom || f.properties["Noms des communes"];
                 if(nom) l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
             }
@@ -149,22 +155,22 @@
 
         data.forEach(d => {
             L.marker([d.lat, d.lng], {icon: icons[d.type]}).addTo(markers)
-             .bindPopup(`<b>${d.quartier}</b><br>${d.desc}<br><small>${d.date}</small>`);
+             .bindPopup(`<b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i><br><small><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small>`);
             counts[d.type]++;
             qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
         });
 
-        document.getElementById('stats-text').innerText = `${data.length} signalements actifs`;
+        document.getElementById('stats-text').innerText = `${data.length} signalements enregistrés`;
         updateCharts(counts, qCounts);
     }
 
     function updateCharts(tData, qData) {
         if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
         chart1 = new Chart(document.getElementById('chartTypes'), {
-            type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:Object.values(tData), backgroundColor:['#fc3d21','#007bff','#f57c00']}]}
+            type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]}
         });
         chart2 = new Chart(document.getElementById('chartQuartiers'), {
-            type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Par Quartier', data:Object.values(qData), backgroundColor:'#1b5e20'}]}
+            type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]}
         });
     }
 
@@ -175,7 +181,11 @@
         if(!isActive) p.classList.add('active');
     }
 
-    function ouvrirModal() { document.getElementById('modalForm').style.display='flex'; }
+    function ouvrirModal() { 
+        document.getElementById('modalForm').style.display='flex';
+        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
+        document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
     function fermerModal() { document.getElementById('modalForm').style.display='none'; }
     function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
 
@@ -184,19 +194,21 @@
         if(q === 'Autres') q = document.getElementById('autreQuartier').value || 'Inconnu';
         let center = map.getCenter();
         data.push({
-            quartier: q, type: document.getElementById('typeSelect').value,
-            desc: 'Nouveau point', lat: center.lat, lng: center.lng,
-            date: new Date().toISOString().split('T')[0]
+            quartier: q, 
+            type: document.getElementById('typeSelect').value,
+            desc: document.getElementById('descInput').value || 'Pas de description', 
+            lat: center.lat, lng: center.lng,
+            date: document.getElementById('dateInput').value,
+            heure: document.getElementById('heureInput').value
         });
         refresh(); fermerModal();
     }
 
-    // Recherche (Même logique que Pharmacies)
     document.getElementById('search-input').addEventListener('input', function(e) {
         let v = e.target.value.toLowerCase();
         markers.eachLayer(l => {
-            let matches = l.getPopup().getContent().toLowerCase().includes(v);
-            if(matches) l.addTo(map); else map.removeLayer(l);
+            let content = l.getPopup().getContent().toLowerCase();
+            if(content.includes(v)) l.addTo(map); else map.removeLayer(l);
         });
     });
 
