@@ -1,143 +1,133 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>URBAN-CLEAN | SPOT2GETHER & KGM EXPERTISE</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <style>
-        :root { --primary: #1b5e20; --accent: #fc3d21; --spot-blue: #007bff; }
-        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Times New Roman', serif; overflow: hidden; background: #f4f4f4; }
-        .header { background: var(--primary); color: white; padding: 12px; text-align: center; font-weight: bold; position: relative; z-index: 1001; }
-        .ticker { background: #e8f5e9; color: var(--primary); font-size: 0.85em; padding: 5px 0; border-bottom: 1px solid #ccc; overflow: hidden; white-space: nowrap; }
-        .ticker-text { display: inline-block; animation: scroll 20s linear infinite; padding-left: 100%; }
-        @keyframes scroll { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-        #map { height: 45vh; width: 100%; background: #eee; }
-        #panel { height: 55vh; background: white; border-top: 4px solid var(--primary); padding: 15px; box-sizing: border-box; overflow-y: auto; border-radius: 20px 20px 0 0; margin-top: -20px; position: relative; z-index: 1000; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); }
-        .spot-promo { background: #f0f7ff; border: 1px solid #cce5ff; padding: 12px; border-radius: 10px; margin-bottom: 15px; font-size: 0.9em; line-height: 1.4; }
-        .spot-promo strong { color: var(--spot-blue); }
-        .btn-alert { background: var(--accent); color: white; border: none; padding: 18px; width: 100%; border-radius: 12px; font-weight: bold; font-size: 1.1em; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.2s; }
-        .btn-alert:active { transform: scale(0.98); }
-        .download-link { display: block; text-align: center; background: #333; color: white; padding: 10px; text-decoration: none; border-radius: 8px; margin-bottom: 15px; font-size: 0.9em; }
-        .data-card { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 8px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .actions { display: flex; gap: 15px; align-items: center; }
-        .fa-trash { color: #d32f2f; cursor: pointer; }
-        .fa-edit { color: #f57c00; cursor: pointer; }
-        .thumb { width: 55px; height: 55px; object-fit: cover; border-radius: 6px; margin-right: 12px; border: 1px solid #ddd; }
-        .footer-info { font-size: 0.8em; color: #666; text-align: center; margin-top: 20px; padding-bottom: 20px; border-top: 1px solid #eee; padding-top: 10px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URBAN-CLEAN | Spot2gether & KGM Expertise</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+  <style>
+    body { margin:0; font-family:'Segoe UI',sans-serif; background:#f4f4f4; }
+    #filters { padding:10px; background:#e8f5e9; display:flex; gap:15px; }
+    #map { height:50vh; }
+    #dashboard { height:50vh; background:white; padding:15px; box-shadow:0 -5px 15px rgba(0,0,0,0.1); overflow:auto; }
+    canvas { max-height:200px; margin-top:15px; }
+  </style>
 </head>
 <body>
-    <div class="header">URBAN-CLEAN : KGM EXPERTISE SIG</div>
-    <div class="ticker">
-        <div class="ticker-text">🌿 Avec SPOT2GETHER, rendons notre environnement propre et sain ! Signalez les tas d'ordures en moins de 2 minutes. Pour que nos enfants vivent en bonne santé. 🌿</div>
-    </div>
-    <div id="map"></div>
-    <div id="panel">
-        <div class="spot-promo"><strong>Marre des tas d’ordures ?</strong><br>Nous vous aidons à signaler via l'application les zones insalubres pour qu'elles soient nettoyées. La mairie reçoit l'information instantanément.</div>
-        <button class="btn-alert" onclick="demanderPosition()"><i class="fas fa-camera"></i> SIGNALER UNE INSALUBRITÉ</button>
-        <a href="https://play.google.com/store/apps/details?id=com.spot2gether" class="download-link" target="_blank"><i class="fab fa-google-play"></i> Télécharger l'application SPOT2GETHER</a>
-        <input type="file" id="photoInput" style="display:none" accept="image/*" capture="environment">
-        <div id="feed">Chargement des flux SIG...</div>
-    </div>
+  <div id="filters">
+    <label>Quartier :
+      <select id="filterQuartier">
+        <option value="all">Tous</option>
+        <option value="Kliklamé">Kliklamé</option>
+        <option value="Bé">Bé</option>
+        <option value="Tokoin">Tokoin</option>
+      </select>
+    </label>
+    <label>Type :
+      <select id="filterType">
+        <option value="all">Tous</option>
+        <option value="dechets">Déchets</option>
+        <option value="pollution">Pollution</option>
+        <option value="securite">Sécurité</option>
+      </select>
+    </label>
+    <label>Date :
+      <input type="date" id="filterDate">
+    </label>
+    <button onclick="demanderPosition()">📍 Me localiser</button>
+  </div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <div id="map"></div>
+  <div id="dashboard">
+    <h3>Tableau de bord</h3>
+    <div id="stats"></div>
+    <canvas id="chartTypes"></canvas>
+    <canvas id="chartQuartiers"></canvas>
+  </div>
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyC1jpzpQRyEAn5sP6ojhasBRwZAMt5L_p4",
-            authDomain: "urbancleanlome.firebaseapp.com",
-            projectId: "urbancleanlome",
-            appId: "1:196173923360:web:5e3d6935c95d6c96822845"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const myKey = localStorage.getItem('uc_key') || 'USER-' + Math.random().toString(36).substr(2, 5);
-        localStorage.setItem('uc_key', myKey);
+<script>
+  var map = L.map('map').setView([6.1319,1.2228],13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-        var map = L.map('map', { zoomControl: false }).setView([6.1319, 1.2228], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  // Icônes différenciés
+  const icons = {
+    dechets: L.divIcon({html:'<i class="fas fa-trash" style="color:#fc3d21;font-size:22px"></i>'}),
+    pollution: L.divIcon({html:'<i class="fas fa-smog" style="color:#007bff;font-size:22px"></i>'}),
+    securite: L.divIcon({html:'<i class="fas fa-exclamation-triangle" style="color:#f57c00;font-size:22px"></i>'})
+  };
 
-        const iconeRouge = L.divIcon({
-            html: '<i class="fas fa-map-marker-alt" style="color:#fc3d21; font-size:24px; text-shadow: 0 0 3px #fff;"></i>',
-            className: 'custom-div-icon', iconSize: [24, 24], iconAnchor: [12, 24], popupAnchor: [0, -20]
-        });
+  // Exemple de données
+  const data = [
+    {quartier:'Kliklamé',type:'dechets',desc:'Tas d’ordures',lat:6.14,lng:1.22,date:'2025-08-23'},
+    {quartier:'Bé',type:'pollution',desc:'Fumée industrielle',lat:6.13,lng:1.21,date:'2025-09-02'},
+    {quartier:'Tokoin',type:'securite',desc:'Décharge sauvage',lat:6.15,lng:1.23,date:'2025-09-05'}
+  ];
 
-        let markerPool = {};
+  let markerPool={};
+  let heatPoints=[];
 
-        db.collection("signalements").orderBy("timestamp", "desc").onSnapshot((snap) => {
-            const feed = document.getElementById('feed');
-            feed.innerHTML = "";
-            Object.values(markerPool).forEach(m => map.removeLayer(m));
-            markerPool = {};
-            snap.forEach((doc) => {
-                const d = doc.data();
-                const id = doc.id;
-                if(d.latitude && d.longitude && d.latitude !== 6.1319) {
-                    let popupContent = `<b>${d.description}</b>`;
-                    if(d.photo) popupContent += `<br><img src="${d.photo}" style="width:150px;margin-top:5px;border-radius:4px">`;
-                    markerPool[id] = L.marker([d.latitude, d.longitude], {icon: iconeRouge}).addTo(map).bindPopup(popupContent);
-                    const isMine = (d.userId === myKey);
-                    feed.innerHTML += `<div class="data-card"><div style="display:flex;align-items:center;flex:1">${d.photo ? `<img src="${d.photo}" class="thumb">` : ''}<div><strong>${d.description}</strong><br><small>${d.latitude.toFixed(4)}, ${d.longitude.toFixed(4)}</small></div></div><div class="actions">${isMine ? `<i class="fas fa-edit" onclick="editer('${id}', '${d.description}')"></i><i class="fas fa-trash" onclick="supprimer('${id}')"></i>` : ''}</div></div>`;
-                }
-            });
-        });
+  function renderMap(filtered){
+    Object.values(markerPool).forEach(m=>map.removeLayer(m));
+    markerPool={};
+    heatPoints=[];
+    filtered.forEach(d=>{
+      markerPool[d.desc]=L.marker([d.lat,d.lng],{icon:icons[d.type]}).addTo(map)
+        .bindPopup(`<b>${d.desc}</b><br><small>${d.quartier} - ${d.date}</small>`);
+      heatPoints.push([d.lat,d.lng,0.5]);
+    });
+    L.heatLayer(heatPoints,{radius:25}).addTo(map);
+  }
 
-        function demanderPosition() {
-            if ("permissions" in navigator) {
-                navigator.permissions.query({ name: 'geolocation' }).then(res => {
-                    if (res.state === 'denied') {
-                        alert("Chrome bloque la localisation. Cliquez sur le cadenas à gauche de l'URL et autorisez 'Position'.");
-                    } else { lancerSignalement(); }
-                });
-            } else { lancerSignalement(); }
+  function updateDashboard(filtered){
+    const stats=document.getElementById('stats');
+    stats.innerHTML=`<b>${filtered.length}</b> signalements`;
+    const typeCount={}, quartierCount={};
+    filtered.forEach(d=>{
+      typeCount[d.type]=(typeCount[d.type]||0)+1;
+      quartierCount[d.quartier]=(quartierCount[d.quartier]||0)+1;
+    });
+    new Chart(document.getElementById('chartTypes'),{
+      type:'pie',
+      data:{labels:Object.keys(typeCount),datasets:[{data:Object.values(typeCount),backgroundColor:['#fc3d21','#007bff','#f57c00']}]}
+    });
+    new Chart(document.getElementById('chartQuartiers'),{
+      type:'bar',
+      data:{labels:Object.keys(quartierCount),datasets:[{label:'Signalements',data:Object.values(quartierCount),backgroundColor:'#1b5e20'}]}
+    });
+  }
+
+  function applyFilters(){
+    const q=document.getElementById('filterQuartier').value;
+    const t=document.getElementById('filterType').value;
+    const d=document.getElementById('filterDate').value;
+    const filtered=data.filter(x=>(q==="all"||x.quartier===q)&&(t==="all"||x.type===t)&&(!d||x.date===d));
+    renderMap(filtered);
+    updateDashboard(filtered);
+  }
+
+  // Localisation robuste
+  function demanderPosition(){
+    if("permissions" in navigator){
+      navigator.permissions.query({name:'geolocation'}).then(res=>{
+        if(res.state==='denied'){
+          alert("Chrome bloque la localisation. Cliquez sur le cadenas à gauche de l'URL et autorisez 'Position'.");
+        } else {
+          navigator.geolocation.getCurrentPosition(p=>{
+            map.flyTo([p.coords.latitude,p.coords.longitude],16);
+          },()=>alert("Erreur GPS : Activez la localisation."),{enableHighAccuracy:true});
         }
+      });
+    }
+  }
 
-        async function lancerSignalement() {
-            const txt = prompt("Description de l'insalubrité :");
-            if(!txt) return;
-
-            const optionsGps = { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 };
-
-            navigator.geolocation.getCurrentPosition((p) => {
-                const lat = p.coords.latitude; const lng = p.coords.longitude;
-                map.flyTo([lat, lng], 17);
-                const photoInput = document.getElementById('photoInput');
-                photoInput.onchange = e => {
-                    const file = e.target.files[0];
-                    const reader = new FileReader();
-                    reader.onload = () => envoyer(txt, lat, lng, reader.result);
-                    if(file) reader.readAsDataURL(file); else envoyer(txt, lat, lng, null);
-                };
-                photoInput.click();
-            }, (err) => {
-                navigator.geolocation.getCurrentPosition((p2) => {
-                    envoyer(txt, p2.coords.latitude, p2.coords.longitude, null);
-                }, () => {
-                    alert("Erreur GPS : Veuillez activer la position sur votre téléphone et autoriser le navigateur.");
-                }, { enableHighAccuracy: false, timeout: 10000 });
-            }, optionsGps);
-        }
-
-        function envoyer(desc, lat, lng, photo) {
-            db.collection("signalements").add({
-                description: desc, latitude: lat, longitude: lng,
-                photo: photo, userId: myKey, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                L.marker([lat, lng], {icon: iconeRouge}).addTo(map).bindPopup(`<b>${desc}</b> (Signalement envoyé)`).openPopup();
-            });
-        }
-
-        window.supprimer = (id) => { if(confirm("Supprimer ce signalement ?")) db.collection("signalements").doc(id).delete(); };
-        window.editer = (id, old) => { 
-            const n = prompt("Modifier la description :", old);
-            if(n && n !== old) db.collection("signalements").doc(id).update({ description: n });
-        };
-        setTimeout(() => map.invalidateSize(), 1000);
-    </script>
+  // Initialisation
+  applyFilters();
+  document.getElementById('filterQuartier').addEventListener('change',applyFilters);
+  document.getElementById('filterType').addEventListener('change',applyFilters);
+  document.getElementById('filterDate').addEventListener('change',applyFilters);
+</script>
 </body>
-  </html>
-  
+</html>
