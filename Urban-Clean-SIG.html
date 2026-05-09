@@ -187,10 +187,10 @@
     map.on('locationfound', function(e) {
         userPos = e.latlng;
         if (userCircle) map.removeLayer(userCircle);
-        userCircle = L.circle(e.latlng, {radius: 30, color: 'blue', fillOpacity: 0.1}).addTo(map);
+        userCircle = L.circle(e.latlng, {radius: 15, color: 'blue', fillOpacity: 0.1}).addTo(map);
     });
 
-    // Activer la localisation en continu pour une précision maximale
+    // Activer la surveillance GPS haute précision
     map.locate({watch: true, enableHighAccuracy: true});
 
     function ouvrirModal() { 
@@ -205,14 +205,17 @@
         let q = document.getElementById('quartierSelect').value;
         if(q === 'Autres') q = document.getElementById('autreQuartier').value || 'Inconnu';
         
-        // Point placé à la position GPS exacte détectée, sinon au centre de la carte
-        let loc = userPos || map.getCenter();
+        // CORRECTION CHIRURGICALE : Priorité absolue au signal GPS
+        if (!userPos) {
+            alert("Localisation GPS en cours... Veuillez patienter une seconde.");
+            return;
+        }
         
         data.push({
             quartier: q, 
             type: document.getElementById('typeSelect').value,
             desc: document.getElementById('descInput').value || 'Pas de description', 
-            lat: loc.lat, lng: loc.lng,
+            lat: userPos.lat, lng: userPos.lng,
             date: document.getElementById('dateInput').value,
             heure: document.getElementById('heureInput').value
         });
