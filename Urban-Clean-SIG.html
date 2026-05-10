@@ -167,7 +167,7 @@
             style: { color: "#00264d", weight: 2, fillOpacity: 0.05 },
                         onEachFeature: (f, l) => {
                 let nom = f.properties["Noms des communes"] || f.properties.nom || f.properties.NOM;
-                if(nom) l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label", sticky: true });
+                                if(nom) l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label", sticky: true });
             }
         }).addTo(map);
 
