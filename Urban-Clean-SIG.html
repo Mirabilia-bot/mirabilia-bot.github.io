@@ -163,30 +163,25 @@
     var chart1, chart2;
 
         fetch('./communes.geojson').then(res => res.json()).then(geojson => {
-        L.geoJSON(geojson, {
-            style: { 
-                color: "#00264d", 
-                weight: 2, 
-                fillOpacity: 0.05,
-                interactive: true 
-            },
-            onEachFeature: (f, l) => {
-                // Utilisation de la clé exacte trouvée dans votre fichier
-                let nom = f.properties["Noms des communes"]; 
-                
-                if(nom) {
-                    l.bindTooltip(nom, { 
-                        permanent: false, 
-                        direction: "auto", 
-                        sticky: true, 
-                        className: "commune-label",
-                        offset: [0, -15] 
-                    });
-                }
+    L.geoJSON(geojson, {
+        style: { 
+            color: "#00264d", 
+            weight: 2, 
+            fillOpacity: 0.05,
+            interactive: true 
+        },
+        onEachFeature: (f, l) => {
+            let nom = f.properties["Noms des communes"]; 
+            if(nom) {
+                l.bindTooltip(nom, { 
+                    permanent: true,       // Affiche le nom en permanence
+                    direction: "center",   // Au centre de la commune
+                    className: "commune-label"
+                });
             }
-        }).addTo(map);
-    });
-
+        }
+    }).addTo(map);
+});
 
     auth.onAuthStateChanged((user) => {
         currentUser = user;
