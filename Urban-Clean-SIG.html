@@ -75,7 +75,7 @@
 
 <div id="auth-bar">
     <span id="userDisplay" style="color:white; display:none; margin-right:10px; font-size: 0.8em; text-shadow: 1px 1px 2px black;"></span>
-    <button id="loginBtn" class="ui-btn" onclick="connexion()">🔑 Connexion</button>
+    <button id="loginBtn" class="ui-btn" onclick="connexion()">🔑 Connexion / Inscription</button>
     <button id="logoutBtn" class="ui-btn" onclick="deconnexion()" style="display:none;">🚪 Quitter</button>
 </div>
 
@@ -135,7 +135,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const firebaseConfig = { projectId: "urban-clean-kgm", authDomain: "urban-clean-kgm.firebaseapp.com" };
+    const firebaseConfig = { 
+        projectId: "urban-clean-kgm", 
+        authDomain: "urban-clean-kgm.firebaseapp.com"
+    };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
     const auth = firebase.auth();
@@ -149,7 +152,6 @@
     var markers = L.layerGroup().addTo(map);
     var chart1, chart2;
 
-    // --- COUCHE COMMUNES ---
     fetch('./communes.geojson').then(res => res.json()).then(geojson => {
         L.geoJSON(geojson, {
             style: { color: "#00264d", weight: 2, fillOpacity: 0.05 },
@@ -158,9 +160,8 @@
                 if(nom) l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
             }
         }).addTo(map);
-    });
+    }).catch(e => console.log("GeoJSON absent localement"));
 
-    // --- AUTHENTIFICATION ---
     auth.onAuthStateChanged((user) => {
         currentUser = user;
         const loginBtn = document.getElementById('loginBtn');
@@ -184,17 +185,24 @@
     });
 
     function connexion() {
-        const email = prompt("Email professionnel :");
+        const action = confirm("Cliquez sur OK pour vous CONNECTER ou sur ANNULER pour CRÉER un compte.");
+        const email = prompt("Email :");
         const pass = prompt("Mot de passe :");
-        if(email && pass) auth.signInWithEmailAndPassword(email, pass).catch(e => alert("Erreur : " + e.message));
+        
+        if(email && pass) {
+            if(action) {
+                auth.signInWithEmailAndPassword(email, pass).catch(e => alert("Erreur : " + e.message));
+            } else {
+                auth.createUserWithEmailAndPassword(email, pass).catch(e => alert("Erreur : " + e.message));
+            }
+        }
     }
     function deconnexion() { auth.signOut(); }
 
-    // --- LOGIQUE DONNÉES ---
     db.collection('signalements').onSnapshot(snap => {
         data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         refresh();
-    });
+    }, err => console.log("Erreur Firestore (Vérifiez les règles de sécurité)"));
 
     const icons = {
         dechets: L.divIcon({ html: '<i class="fas fa-trash" style="color:var(--kgm-red); font-size:20px;"></i>', className:'c-icon' }),
@@ -212,7 +220,6 @@
             let popup = `<b>${d.quartier}</b><br>${d.desc}`;
             if(isMine) {
                 popup += `<div class="actions">
-                    <i class="fas fa-edit" style="color:var(--kgm-green)" onclick="editer('${d.id}')"></i>
                     <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimer('${d.id}')"></i>
                 </div>`;
             }
@@ -226,8 +233,12 @@
 
     function updateCharts(tData, qData) {
         if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
-        chart1 = new Chart(document.getElementById('chartTypes'), { type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
-        chart2 = new Chart(document.getElementById('chartQuartiers'), { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
+        const ctx1 = document.getElementById('chartTypes');
+        const ctx2 = document.getElementById('chartQuartiers');
+        if(ctx1 && ctx2) {
+            chart1 = new Chart(ctx1, { type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
+            chart2 = new Chart(ctx2, { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
+        }
     }
 
     map.on('locationfound', e => userPos = e.latlng);
@@ -242,11 +253,11 @@
 
     async function soumettreSignalement() {
         if(!userPos) return alert("Localisation GPS requise.");
-        document.getElementById('loadingOverlay').style.display = 'flex';
+        if(!currentUser) return alert("Veuillez vous connecter.");
         
+        document.getElementById('loadingOverlay').style.display = 'flex';
         let q = document.getElementById('quartierSelect').value;
         if(q === 'Autres') q = document.getElementById('autreQuartier').value;
-        let eid = document.getElementById('editId').value;
 
         let entry = {
             quartier: q, type: document.getElementById('typeSelect').value,
@@ -257,16 +268,21 @@
         };
 
         try {
-            if(eid) await db.collection('signalements').doc(eid).update(entry);
-            else await db.collection('signalements').add(entry);
+            await db.collection('signalements').add(entry);
             fermerModal();
-        } catch(e) { alert("Erreur."); }
+        } catch(e) { alert("Erreur : " + e.message); }
         document.getElementById('loadingOverlay').style.display = 'none';
     }
 
     async function supprimer(id) { if(confirm("Supprimer ?")) await db.collection('signalements').doc(id).delete(); }
+    
     function togglePanel(id) {
-        document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active'));
+        const p = document.getElementById(id);
+        if(p) {
+            const active = p.classList.contains('active');
+            document.querySelectorAll('.panel').forEach(el => el.classList.remove('active'));
+            if(!active) p.classList.add('active');
+        }
     }
 </script>
 </body>
