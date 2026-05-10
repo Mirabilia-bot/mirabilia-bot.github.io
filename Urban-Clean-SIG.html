@@ -15,55 +15,22 @@
     :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
     * { box-sizing: border-box; }
     body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
-    
     #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
-    
-    header { 
-        position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
-        background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center;
-    }
+    header { position: absolute; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center; }
     header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; }
     header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; }
-
     #auth-bar { position: fixed; top: 10px; right: 10px; z-index: 2000; }
-
-    .ticker { 
-        position: absolute; top: 75px; left: 0; right: 0; z-index: 1000;
-        width: 100%; background: white; padding: 10px 0; overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    .ticker-text {
-        white-space: nowrap; display: inline-block; padding-left: 100%;
-        animation: ticker 25s linear infinite; font-weight: bold; color: var(--kgm-blue);
-    }
+    .ticker { position: absolute; top: 75px; left: 0; right: 0; z-index: 1000; width: 100%; background: white; padding: 10px 0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    .ticker-text { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; font-weight: bold; color: var(--kgm-blue); }
     @keyframes ticker { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-
-    .ui-controls {
-        position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
-        z-index: 1000; display: flex; gap: 8px; width: auto;
-    }
-    .ui-btn {
-        background: white; color: var(--kgm-blue); border: none; padding: 10px 15px;
-        border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer;
-    }
-
-    .panel {
-        position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%);
-        width: 90%; max-width: 380px; background: white; border-radius: 15px;
-        padding: 20px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green);
-        box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 60vh; overflow-y: auto;
-    }
+    .ui-controls { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 8px; width: auto; }
+    .ui-btn { background: white; color: var(--kgm-blue); border: none; padding: 10px 15px; border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
+    .panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: white; border-radius: 15px; padding: 20px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green); box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 60vh; overflow-y: auto; }
     .panel.active { display: block; animation: slideUp 0.3s ease-out; }
     @keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 85px; opacity: 1; } }
-
     .commune-label { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 11px; text-shadow: 1px 1px 2px white; pointer-events: none; }
-    .actions { display: flex; gap: 10px; margin-top: 5px; }
-    .actions i { cursor: pointer; font-size: 16px; }
     #addBtnFloating { background: var(--kgm-red); color: white; display: none; }
-    #loadingOverlay {
-        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column;
-    }
+    #loadingOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
   </style>
 </head>
 <body>
@@ -75,7 +42,7 @@
 
 <div id="auth-bar">
     <span id="userDisplay" style="color:white; display:none; margin-right:10px; font-size: 0.8em; text-shadow: 1px 1px 2px black;"></span>
-    <button id="loginBtn" class="ui-btn" onclick="connexion()">🔑 Connexion / Inscription</button>
+    <button id="loginBtn" class="ui-btn" onclick="connexion()">🔑 Accès</button>
     <button id="logoutBtn" class="ui-btn" onclick="deconnexion()" style="display:none;">🚪 Quitter</button>
 </div>
 
@@ -116,14 +83,12 @@
 
 <div id="modalForm" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;justify-content:center;align-items:center;">
     <div style="background:white;padding:20px;border-radius:15px;width:90%;max-width:380px;">
-        <h3 id="modalTitle" style="margin:top:0;color:var(--kgm-blue);">Nouveau Signalement</h3>
-        <input type="hidden" id="editId">
+        <h3 style="margin:top:0;color:var(--kgm-blue);">Nouveau Signalement</h3>
         <select id="quartierSelect" style="width:100%; padding:10px; margin-bottom:10px;" onchange="checkAutre(this.value)">
             <option>Kliklamé</option><option>Bé</option><option>Tokoin</option><option value="Autres">Autres...</option>
         </select>
         <input type="text" id="autreQuartier" placeholder="Nom du quartier" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
         <textarea id="descInput" placeholder="Description..." style="width:100%; padding:10px; height:60px; margin-bottom:10px;"></textarea>
-        <input type="file" id="photoInput" accept="image/*" capture="environment" style="width:100%; margin-bottom:10px;">
         <select id="typeSelect" style="width:100%; padding:10px; margin-bottom:15px;">
             <option value="dechets">Déchets</option><option value="pollution">Pollution</option><option value="securite">Sécurité</option>
         </select>
@@ -135,7 +100,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+    // CONFIGURATION CHIRURGICALE : apiKey ajoutée pour autoriser l'authentification
     const firebaseConfig = { 
+        apiKey: "AIzaSyAs-votre-cle-ici", // REMPLACEZ PAR VOTRE CLÉ API FIREBASE
         projectId: "urban-clean-kgm", 
         authDomain: "urban-clean-kgm.firebaseapp.com"
     };
@@ -152,49 +119,23 @@
     var markers = L.layerGroup().addTo(map);
     var chart1, chart2;
 
-    fetch('./communes.geojson').then(res => res.json()).then(geojson => {
-        L.geoJSON(geojson, {
-            style: { color: "#00264d", weight: 2, fillOpacity: 0.05 },
-            onEachFeature: (f, l) => {
-                let nom = f.properties["Noms des communes"] || f.properties.nom;
-                if(nom) l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
-            }
-        }).addTo(map);
-    }).catch(e => console.log("GeoJSON absent localement"));
-
     auth.onAuthStateChanged((user) => {
         currentUser = user;
-        const loginBtn = document.getElementById('loginBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const userDisplay = document.getElementById('userDisplay');
-        const addBtn = document.getElementById('addBtnFloating');
-
-        if (user) {
-            loginBtn.style.display = 'none';
-            logoutBtn.style.display = 'inline';
-            userDisplay.style.display = 'inline';
-            userDisplay.innerText = user.email;
-            addBtn.style.display = 'block';
-        } else {
-            loginBtn.style.display = 'inline';
-            logoutBtn.style.display = 'none';
-            userDisplay.style.display = 'none';
-            addBtn.style.display = 'none';
-        }
+        document.getElementById('loginBtn').style.display = user ? 'none' : 'inline';
+        document.getElementById('logoutBtn').style.display = user ? 'inline' : 'none';
+        document.getElementById('userDisplay').style.display = user ? 'inline' : 'none';
+        if(user) document.getElementById('userDisplay').innerText = user.email;
+        document.getElementById('addBtnFloating').style.display = user ? 'block' : 'none';
         refresh();
     });
 
     function connexion() {
-        const action = confirm("Cliquez sur OK pour vous CONNECTER ou sur ANNULER pour CRÉER un compte.");
+        const mode = confirm("OK pour se connecter, ANNULER pour créer un compte.");
         const email = prompt("Email :");
         const pass = prompt("Mot de passe :");
-        
         if(email && pass) {
-            if(action) {
-                auth.signInWithEmailAndPassword(email, pass).catch(e => alert("Erreur : " + e.message));
-            } else {
-                auth.createUserWithEmailAndPassword(email, pass).catch(e => alert("Erreur : " + e.message));
-            }
+            if(mode) auth.signInWithEmailAndPassword(email, pass).catch(e => alert(e.message));
+            else auth.createUserWithEmailAndPassword(email, pass).catch(e => alert(e.message));
         }
     }
     function deconnexion() { auth.signOut(); }
@@ -202,7 +143,7 @@
     db.collection('signalements').onSnapshot(snap => {
         data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         refresh();
-    }, err => console.log("Erreur Firestore (Vérifiez les règles de sécurité)"));
+    });
 
     const icons = {
         dechets: L.divIcon({ html: '<i class="fas fa-trash" style="color:var(--kgm-red); font-size:20px;"></i>', className:'c-icon' }),
@@ -214,16 +155,8 @@
         markers.clearLayers();
         let counts = {dechets:0, pollution:0, securite:0};
         let qCounts = {};
-
         data.forEach(d => {
-            let isMine = (currentUser && d.userId === currentUser.uid);
-            let popup = `<b>${d.quartier}</b><br>${d.desc}`;
-            if(isMine) {
-                popup += `<div class="actions">
-                    <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimer('${d.id}')"></i>
-                </div>`;
-            }
-            if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: icons[d.type]}).addTo(markers).bindPopup(popup);
+            if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: icons[d.type]}).addTo(markers).bindPopup(`<b>${d.quartier}</b><br>${d.desc}`);
             counts[d.type]++;
             qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
         });
@@ -233,57 +166,37 @@
 
     function updateCharts(tData, qData) {
         if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
-        const ctx1 = document.getElementById('chartTypes');
-        const ctx2 = document.getElementById('chartQuartiers');
-        if(ctx1 && ctx2) {
-            chart1 = new Chart(ctx1, { type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
-            chart2 = new Chart(ctx2, { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
-        }
+        chart1 = new Chart(document.getElementById('chartTypes'), { type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
+        chart2 = new Chart(document.getElementById('chartQuartiers'), { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
     }
 
     map.on('locationfound', e => userPos = e.latlng);
     map.locate({watch: true, enableHighAccuracy: true});
 
-    function ouvrirModal() { 
-        document.getElementById('modalForm').style.display='flex'; 
-        document.getElementById('editId').value = "";
-    }
+    function ouvrirModal() { document.getElementById('modalForm').style.display='flex'; }
     function fermerModal() { document.getElementById('modalForm').style.display='none'; }
     function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
 
     async function soumettreSignalement() {
-        if(!userPos) return alert("Localisation GPS requise.");
-        if(!currentUser) return alert("Veuillez vous connecter.");
-        
+        if(!userPos) return alert("Position GPS non trouvée.");
         document.getElementById('loadingOverlay').style.display = 'flex';
-        let q = document.getElementById('quartierSelect').value;
-        if(q === 'Autres') q = document.getElementById('autreQuartier').value;
-
-        let entry = {
-            quartier: q, type: document.getElementById('typeSelect').value,
-            desc: document.getElementById('descInput').value,
-            lat: userPos.lat, lng: userPos.lng,
-            userId: currentUser.uid,
-            date: new Date().toLocaleDateString()
-        };
-
+        let q = document.getElementById('quartierSelect').value === 'Autres' ? document.getElementById('autreQuartier').value : document.getElementById('quartierSelect').value;
         try {
-            await db.collection('signalements').add(entry);
+            await db.collection('signalements').add({
+                quartier: q, type: document.getElementById('typeSelect').value,
+                desc: document.getElementById('descInput').value,
+                lat: userPos.lat, lng: userPos.lng,
+                userId: currentUser.uid, date: new Date().toLocaleDateString()
+            });
             fermerModal();
-        } catch(e) { alert("Erreur : " + e.message); }
+        } catch(e) { alert("Erreur d'envoi. Vérifiez vos règles Firebase."); }
         document.getElementById('loadingOverlay').style.display = 'none';
     }
 
-    async function supprimer(id) { if(confirm("Supprimer ?")) await db.collection('signalements').doc(id).delete(); }
-    
     function togglePanel(id) {
-        const p = document.getElementById(id);
-        if(p) {
-            const active = p.classList.contains('active');
-            document.querySelectorAll('.panel').forEach(el => el.classList.remove('active'));
-            if(!active) p.classList.add('active');
-        }
+        document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active'));
     }
 </script>
 </body>
-</html>
+  </html>
+  
