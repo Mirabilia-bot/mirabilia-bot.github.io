@@ -1,318 +1,350 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>URBAN-CLEAN | KGM Expertise</title>
-<link rel="stylesheet" href="[https://unpkg.com/leaflet@1.9.4/dist/leaflet.css](https://unpkg.com/leaflet@1.9.4/dist/leaflet.css)"/>
-<link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css)"/>
-<script src="[https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js](https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js)"></script>
-<script src="[https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js](https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js)"></script>
-<script src="[https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js](https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js)"></script>
-<style>
-:root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
-* { box-sizing: border-box; }
-body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
-header { position: absolute; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center; min-height: 70px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; width: 70%; }
-header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; width: 70%; }
-#auth-bar { position: fixed; top: 10px; right: 10px; z-index: 2000; display: flex; align-items: center; gap: 5px; }
-#userDisplay { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-@media (max-width: 600px) {
-header h1 { font-size: 0.9em; width: 60%; margin-left: -40px; }
-header p { font-size: 0.7em; width: 60%; margin-left: -40px; }
-.ui-btn { padding: 8px 12px; font-size: 11px; }
-}
-.ticker { position: absolute; top: 75px; left: 0; right: 0; z-index: 1000; width: 100%; background: white; padding: 10px 0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-.ticker-text { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; font-weight: bold; color: var(--kgm-blue); }
-@keyframes ticker { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-.ui-controls { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 8px; width: auto; }
-.ui-btn { background: white; color: var(--kgm-blue); border: none; padding: 10px 15px; border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
-.panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: white; border-radius: 15px; padding: 20px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green); box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 60vh; overflow-y: auto; }
-.panel.active { display: block; animation: slideUp 0.3s ease-out; }
-@keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 85px; opacity: 1; } }
-.commune-label { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 15px; text-shadow: 2px 2px 4px white; pointer-events: none; }
-#addBtnFloating { background: var(--kgm-red); color: white; display: none; }
-#loadingOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
-.legend-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; }
-.legend-icon { width: 20px; text-align: center; margin-right: 10px; font-size: 18px; }
-.actions { display: flex; gap: 10px; margin-top: 5px; }
-.actions i { cursor: pointer; font-size: 16px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URBAN-CLEAN | KGM Expertise</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+
+  <style>
+    :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
+    * { box-sizing: border-box; }
+    body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
+    
+    header { position: absolute; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center; min-height: 70px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; width: 70%; }
+    header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; width: 70%; }
+    
+    #auth-bar { position: fixed; top: 10px; right: 10px; z-index: 2000; display: flex; align-items: center; gap: 5px; }
+    #userDisplay { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    @media (max-width: 600px) {
+        header h1 { font-size: 0.9em; width: 60%; margin-left: -40px; }
+        header p { font-size: 0.7em; width: 60%; margin-left: -40px; }
+        .ui-btn { padding: 8px 12px; font-size: 11px; }
+    }
+
+    .ticker { position: absolute; top: 75px; left: 0; right: 0; z-index: 1000; width: 100%; background: white; padding: 10px 0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    .ticker-text { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; font-weight: bold; color: var(--kgm-blue); }
+    @keyframes ticker { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+    .ui-controls { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 8px; width: auto; }
+    .ui-btn { background: white; color: var(--kgm-blue); border: none; padding: 10px 15px; border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
+    .panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: white; border-radius: 15px; padding: 20px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green); box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 60vh; overflow-y: auto; }
+    .panel.active { display: block; animation: slideUp 0.3s ease-out; }
+    @keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 85px; opacity: 1; } }
+    .commune-label { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 15px; text-shadow: 2px 2px 4px white; pointer-events: none; }
+    #addBtnFloating { background: var(--kgm-red); color: white; display: none; }
+    #loadingOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
+    .legend-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; }
+    .legend-icon { width: 20px; text-align: center; margin-right: 10px; font-size: 18px; }
+    .actions { display: flex; gap: 10px; margin-top: 5px; }
+    .actions i { cursor: pointer; font-size: 16px; }
+  </style>
 </head>
 <body>
+
 <div id="loadingOverlay">
-<i class="fas fa-spinner fa-spin fa-3x" style="color:var(--kgm-blue)"></i>
-<p style="font-weight:bold; margin-top:10px;">Synchronisation KGM Cloud...</p>
+    <i class="fas fa-spinner fa-spin fa-3x" style="color:var(--kgm-blue)"></i>
+    <p style="font-weight:bold; margin-top:10px;">Synchronisation KGM Cloud...</p>
 </div>
+
 <div id="auth-bar">
-<span id="userDisplay" style="color:white; display:none; font-size: 0.7em; text-shadow: 1px 1px 2px black;"></span>
-<button id="loginBtn" class="ui-btn" onclick="ouvrirAuth()">🔑 Accès</button>
-<button id="logoutBtn" class="ui-btn" onclick="deconnexion()" style="display:none;">🚪 Quitter</button>
+    <span id="userDisplay" style="color:white; display:none; font-size: 0.7em; text-shadow: 1px 1px 2px black;"></span>
+    <button id="loginBtn" class="ui-btn" onclick="ouvrirAuth()">🔑 Accès</button>
+    <button id="logoutBtn" class="ui-btn" onclick="deconnexion()" style="display:none;">🚪 Quitter</button>
 </div>
+
 <header>
-<h1>URBAN-CLEAN | KGM EXPERTISE</h1>
-<p>Signaler et analyser la salubrité urbaine en temps réel</p>
+    <h1>URBAN-CLEAN | KGM EXPERTISE</h1>
+    <p>Signaler et analyser la salubrité urbaine en temps réel</p>
 </header>
+
 <div class="ticker">
-<div class="ticker-text">🌿 <strong>Marre des tas d’ordures ?</strong> Nous vous aidons à signaler via le portail les zones insalubres pour qu'elles soient nettoyées. La mairie reçoit l'information après l'alerte. Avec URBAN-CLEAN DE KGM Expertise, rendons notre environnement propre et sain ! Signalez les tas d'ordures et autres nuisances en moins de 2 minutes. Pour un environnement sain où tous vivent en bonne santé. 🌿</div>
+    <div class="ticker-text">🌿 <strong>Marre des tas d’ordures ?</strong> Nous vous aidons à signaler via le portail les zones insalubres pour qu'elles soient nettoyées. La mairie reçoit l'information après l'alerte. Avec URBAN-CLEAN DE KGM Expertise, rendons notre environnement propre et sain ! Signalez les tas d'ordures et autres nuisances en moins de 2 minutes. Pour un environnement sain où tous vivent en bonne santé. 🌿</div>
 </div>
+
 <div id="map"></div>
+
 <div id="panel-analyse" class="panel">
-<h3 style="margin:0 0 10px 0; color:var(--kgm-blue)">Statistiques du Territoire</h3>
-<div id="stats-text" style="font-weight:bold; margin-bottom:10px;"></div>
-<canvas id="chartTypes"></canvas>
-<canvas id="chartQuartiers"></canvas>
+    <h3 style="margin:0 0 10px 0; color:var(--kgm-blue)">Statistiques du Territoire</h3>
+    <div id="stats-text" style="font-weight:bold; margin-bottom:10px;"></div>
+    <canvas id="chartTypes"></canvas>
+    <canvas id="chartQuartiers"></canvas>
 </div>
+
 <div id="panel-legende" class="panel">
-<h3 style="margin:0 0 15px 0; color:var(--kgm-blue)">Légende</h3>
-<div class="legend-item"><i class="fas fa-trash legend-icon" style="color:var(--kgm-red)"></i><span>Déchets solides</span></div>
-<div class="legend-item"><i class="fas fa-smog legend-icon" style="color:#007bff"></i><span>Pollution</span></div>
-<div class="legend-item"><i class="fas fa-exclamation-triangle legend-icon" style="color:#f57c00"></i><span>Sécurité / Risque</span></div>
-<div class="legend-item"><i class="fas fa-info-circle legend-icon" style="color:#6c757d"></i><span>Autres</span></div>
-<div class="legend-item"><div style="width:20px; height:10px; border:2px solid var(--kgm-blue); margin-right:10px;"></div><span>Limites Communales</span></div>
+    <h3 style="margin:0 0 15px 0; color:var(--kgm-blue)">Légende</h3>
+    <div class="legend-item"><i class="fas fa-trash legend-icon" style="color:var(--kgm-red)"></i><span>Déchets solides</span></div>
+    <div class="legend-item"><i class="fas fa-smog legend-icon" style="color:#007bff"></i><span>Pollution</span></div>
+    <div class="legend-item"><i class="fas fa-exclamation-triangle legend-icon" style="color:#f57c00"></i><span>Sécurité / Risque</span></div>
+   <div class="legend-item"><i class="fas fa-info-circle legend-icon" style="color:#6c757d"></i><span>Autres</span></div>
+    <div class="legend-item"><div style="width:20px; height:10px; border:2px solid var(--kgm-blue); margin-right:10px;"></div><span>Limites Communales</span></div>
 </div>
+
 <div class="ui-controls">
-<button class="ui-btn" id="addBtnFloating" onclick="ouvrirModal()">➕ Signaler</button>
-<button class="ui-btn" onclick="togglePanel('panel-analyse')">📊 Analyse</button>
-<button class="ui-btn" onclick="togglePanel('panel-legende')">🗺️ Légende</button>
-<button class="ui-btn" onclick="map.locate({enableHighAccuracy: true})">📍 Position</button>
+    <button class="ui-btn" id="addBtnFloating" onclick="ouvrirModal()">➕ Signaler</button>
+    <button class="ui-btn" onclick="togglePanel('panel-analyse')">📊 Analyse</button>
+    <button class="ui-btn" onclick="togglePanel('panel-legende')">🗺️ Légende</button>
+    <button class="ui-btn" onclick="map.locate({enableHighAccuracy: true})">📍 Position</button>
 </div>
+
 <div id="authModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:3000;justify-content:center;align-items:center;">
-<div style="background:white;padding:25px;border-radius:15px;width:90%;max-width:350px;text-align:center;">
-<h3 style="color:var(--kgm-blue);margin-top:0;">Espace KGM Expertise</h3>
-<p style="font-size:0.9em;margin-bottom:20px;">Veuillez choisir une option pour continuer</p>
-<button class="ui-btn" style="width:100%;background:var(--kgm-blue);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('login')">Se Connecter</button>
-<button class="ui-btn" style="width:100%;background:var(--kgm-green);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('signup')">S'inscrire (Nouveau Compte)</button>
-<button style="background:none;border:none;color:var(--kgm-red);cursor:pointer;text-decoration:underline;display:block;margin:5px auto;" onclick="recupererPass()">Mot de passe oublié ?</button>
-<button style="background:none;border:none;color:#666;cursor:pointer;text-decoration:underline;margin-top:10px;" onclick="fermerAuth()">Annuler</button>
+    <div style="background:white;padding:25px;border-radius:15px;width:90%;max-width:350px;text-align:center;">
+        <h3 style="color:var(--kgm-blue);margin-top:0;">Espace KGM Expertise</h3>
+        <p style="font-size:0.9em;margin-bottom:20px;">Veuillez choisir une option pour continuer</p>
+        <button class="ui-btn" style="width:100%;background:var(--kgm-blue);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('login')">Se Connecter</button>
+        <button class="ui-btn" style="width:100%;background:var(--kgm-green);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('signup')">S'inscrire (Nouveau Compte)</button>
+        <button style="background:none;border:none;color:var(--kgm-red);cursor:pointer;text-decoration:underline;display:block;margin:5px auto;" onclick="recupererPass()">Mot de passe oublié ?</button>
+        <button style="background:none;border:none;color:#666;cursor:pointer;text-decoration:underline;margin-top:10px;" onclick="fermerAuth()">Annuler</button>
+    </div>
 </div>
-</div>
+
 <div id="modalForm" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;justify-content:center;align-items:center;">
-<div style="background:white;padding:20px;border-radius:15px;width:90%;max-width:380px;">
-<h3 id="modalTitle" style="margin-top:0;color:var(--kgm-blue);">Nouveau Signalement</h3>
-<input type="hidden" id="editId">
-<label style="font-weight:bold; font-size:14px;">Quartier</label>
-<select id="quartierSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;" onchange="checkAutre(this.value)">
-<option>Kliklamé</option><option>Bè</option><option>Tokoin</option><option value="Autres">Autres...</option>
-</select>
-<input type="text" id="autreQuartier" placeholder="Nom du quartier" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
-<label style="font-weight:bold; font-size:14px;">Description</label>
-<textarea id="descInput" placeholder="Détails du problème..." style="width:100%; padding:10px; margin:5px 0 10px 0; font-family:serif; height:60px;"></textarea>
-<div style="display:flex; gap:10px;">
-<div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Date</label><input type="date" id="dateInput" style="width:100%; padding:8px;"></div>
-<div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Heure</label><input type="time" id="heureInput" style="width:100%; padding:8px;"></div>
+    <div style="background:white;padding:20px;border-radius:15px;width:90%;max-width:380px;">
+        <h3 id="modalTitle" style="margin-top:0;color:var(--kgm-blue);">Nouveau Signalement</h3>
+        <input type="hidden" id="editId">
+        <label style="font-weight:bold; font-size:14px;">Quartier</label>
+        <select id="quartierSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;" onchange="checkAutre(this.value)">
+            <option>Kliklamé</option><option>Bè</option><option>Tokoin</option><option value="Autres">Autres...</option>
+        </select>
+        <input type="text" id="autreQuartier" placeholder="Nom du quartier" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
+        
+        <label style="font-weight:bold; font-size:14px;">Description</label>
+        <textarea id="descInput" placeholder="Détails du problème..." style="width:100%; padding:10px; margin:5px 0 10px 0; font-family:serif; height:60px;"></textarea>
+
+        <div style="display:flex; gap:10px;">
+          <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Date</label><input type="date" id="dateInput" style="width:100%; padding:8px;"></div>
+          <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Heure</label><input type="time" id="heureInput" style="width:100%; padding:8px;"></div>
+        </div>
+
+        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;"><i class="fas fa-camera"></i> Prendre une photo</label>
+        <input type="file" id="photoInput" accept="image/*" capture="environment" style="width:100%; margin:5px 0 10px 0;">
+
+        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
+        <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 15px 0;">
+            <option value="dechets">Déchets</option><option value="pollution">Pollution</option><option value="securite">Sécurité</option><option value="Autres">Autres...</option>
+        </select>
+
+        <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="soumettreSignalement()">✅ Valider</button>
+        <button style="width:100%; padding:10px; background:#eee; color:#333; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="fermerModal()">Annuler</button>
+    </div>
 </div>
-<label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;"><i class="fas fa-camera"></i> Prendre une photo</label>
-<input type="file" id="photoInput" accept="image/*" capture="environment" style="width:100%; margin:5px 0 10px 0;">
-<label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
-<select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 15px 0;">
-<option value="dechets">Déchets</option><option value="pollution">Pollution</option><option value="securite">Sécurité</option><option value="Autres">Autres...</option>
-</select>
-<button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="soumettreSignalement()">✅ Valider</button>
-<button style="width:100%; padding:10px; background:#eee; color:#333; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="fermerModal()">Annuler</button>
-</div>
-</div>
-<script src="[https://cdn.jsdelivr.net/npm/chart.js](https://cdn.jsdelivr.net/npm/chart.js)"></script>
-<script src="[https://unpkg.com/leaflet@1.9.4/dist/leaflet.js](https://unpkg.com/leaflet@1.9.4/dist/leaflet.js)"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const firebaseConfig = {
-apiKey: "AIzaSyAsA9pypTsCogmSq_OdDXr5KPAgVi4ncm4",
-authDomain: "urban-clean-kgm.firebaseapp.com",
-projectId: "urban-clean-kgm",
-storageBucket: "urban-clean-kgm.firebasestorage.app",
-messagingSenderId: "880121878460",
-appId: "1:880121878460:web:49378c29d489da2b2f7db9",
-measurementId: "G-4YC8E4B96X"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-var map = L.map('map', { zoomControl: false }).setView([6.1319, 1.2228], 13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-var currentUser = null;
-var userPos = null;
-var userCircle = null;
-var data = [];
-var markers = L.layerGroup().addTo(map);
-var chart1, chart2;
-fetch('./communes.geojson').then(res => res.json()).then(geojson => {
-L.geoJSON(geojson, {
-style: {
-color: "#00264d",
-weight: 2,
-fillOpacity: 0.05,
-interactive: true
-},
-onEachFeature: (f, l) => {
-let nom = f.properties["Noms des communes"];
-if(nom) {
-l.bindTooltip(nom, {
-permanent: true,       // Affiche le nom en permanence
-direction: "center",   // Au centre de la commune
-className: "commune-label"
-});
-}
-}
-}).addTo(map);
-});
-auth.onAuthStateChanged((user) => {
-currentUser = user;
-document.getElementById('loginBtn').style.display = user ? 'none' : 'inline';
-document.getElementById('logoutBtn').style.display = user ? 'inline' : 'none';
-document.getElementById('userDisplay').style.display = user ? 'inline' : 'none';
-if(user) document.getElementById('userDisplay').innerText = user.email;
-document.getElementById('addBtnFloating').style.display = user ? 'block' : 'none';
-refresh();
-});
-function ouvrirAuth() { document.getElementById('authModal').style.display = 'flex'; }
-function fermerAuth() { document.getElementById('authModal').style.display = 'none'; }
-function gererAuth(type) {
-const email = prompt("Veuillez saisir votre email :");
-const pass = prompt("Veuillez saisir votre mot de passe :");
-if(email && pass) {
-if(type === 'login') {
-auth.signInWithEmailAndPassword(email, pass)
-.then(() => fermerAuth())
-.catch(e => alert("Erreur : " + e.message));
-} else {
-auth.createUserWithEmailAndPassword(email, pass)
-.then(() => { alert("Compte KGM créé avec succès !"); fermerAuth(); })
-.catch(e => alert("Erreur lors de la création : " + e.message));
-}
-}
-}
-function recupererPass() {
-const email = prompt("Entrez votre email pour recevoir le lien de réinitialisation :");
-if(email) {
-auth.sendPasswordResetEmail(email)
-.then(() => alert("Email envoyé ! Vérifiez votre boîte de réception."))
-.catch(e => alert("Erreur : " + e.message));
-}
-}
-function deconnexion() { auth.signOut(); }
-db.collection('signalements').onSnapshot(snap => {
-data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-refresh();
-});
-const icons = {
-dechets: L.divIcon({ html: '<i class="fas fa-trash" style="color:var(--kgm-red); font-size:20px;"></i>', className:'c-icon' }),
-pollution: L.divIcon({ html: '<i class="fas fa-smog" style="color:#007bff; font-size:20px;"></i>', className:'c-icon' }),
-securite: L.divIcon({ html: '<i class="fas fa-exclamation-triangle" style="color:#f57c00; font-size:20px;"></i>', className:'c-icon' }),
-Autres: L.divIcon({ html: '<i class="fas fa-info-circle" style="color:#6c757d; font-size:20px;"></i>', className:'c-icon' })
-};
-function refresh() {
-markers.clearLayers();
-let counts = {dechets:0, pollution:0, securite:0, Autres:0};
-let qCounts = {};
-data.forEach(d => {
-let popupContent = <b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i>;
-if(d.photo) popupContent += <br><img src="${d.photo}" style="width:150px;margin-top:5px;border-radius:4px">;
-popupContent += <br><small><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small>;
-if(currentUser && d.userId === currentUser.uid) {
-popupContent += <div class="actions"> <i class="fas fa-edit" style="color:var(--kgm-green)" onclick="editerDoc('${d.id}')"></i> <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimerDoc('${d.id}')"></i> </div>;
-}
-if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: icons[d.type] || icons.Autres}).addTo(markers).bindPopup(popupContent);
-counts[d.type] = (counts[d.type] || 0) + 1;
-qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
-});
-document.getElementById('stats-text').innerText = ${data.length} signalements enregistrés;
-updateCharts(counts, qCounts);
-}
-function supprimerDoc(id) {
-if(confirm("Supprimer définitivement ce signalement ?")) {
-db.collection('signalements').doc(id).delete();
-}
-}
-function editerDoc(id) {
-const d = data.find(item => item.id === id);
-if(!d) return;
-document.getElementById('modalTitle').innerText = "Modifier le Signalement";
-document.getElementById('editId').value = id;
-document.getElementById('quartierSelect').value = d.quartier;
-document.getElementById('descInput').value = d.desc;
-document.getElementById('dateInput').value = d.date;
-document.getElementById('heureInput').value = d.heure;
-document.getElementById('typeSelect').value = d.type;
-document.getElementById('modalForm').style.display = 'flex';
-map.closePopup();
-}
-function updateCharts(tData, qData) {
-if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
-const ctx1 = document.getElementById('chartTypes');
-const ctx2 = document.getElementById('chartQuartiers');
-if(ctx1 && ctx2) {
-chart1 = new Chart(ctx1, { type:'pie', data:{labels:['Déchets','Pollution','Sécurité','Autres'], datasets:[{data:[tData.dechets || 0, tData.pollution || 0, tData.securite || 0, tData.Autres || 0], backgroundColor:['#fc3d21','#007bff','#f57c00','#6c757d']}]} });
-chart2 = new Chart(ctx2, { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
-}
-}
-map.on('locationfound', e => {
-userPos = e.latlng;
-if (userCircle) map.removeLayer(userCircle);
-userCircle = L.circle(e.latlng, {
-radius: 10,
-color: '#007bff',
-fillColor: '#007bff',
-fillOpacity: 0.5
-}).addTo(map);
-map.flyTo(e.latlng, 16, { animate: true, duration: 1.5 });
-});
-map.on('locationerror', e => {
-alert("Position introuvable. Vérifiez que le GPS est actif et que vous êtes en HTTPS.");
-});
-function ouvrirModal() {
-document.getElementById('modalTitle').innerText = "Nouveau Signalement";
-document.getElementById('editId').value = "";
-document.getElementById('modalForm').style.display='flex';
-document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
-document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-document.getElementById('descInput').value = "";
-}
-function fermerModal() { document.getElementById('modalForm').style.display='none'; }
-function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
-async function soumettreSignalement() {
-let editId = document.getElementById('editId').value;
-if(!userPos && !editId) return alert("Position GPS non trouvée. Veuillez autoriser la localisation.");
-document.getElementById('loadingOverlay').style.display = 'flex';
-let q = document.getElementById('quartierSelect').value === 'Autres' ? document.getElementById('autreQuartier').value : document.getElementById('quartierSelect').value;
-const photoFile = document.getElementById('photoInput').files[0];
-let photoBase64 = null;
-if(photoFile) {
-const reader = new FileReader();
-photoBase64 = await new Promise(resolve => {
-reader.onload = e => resolve(e.target.result);
-reader.readAsDataURL(photoFile);
-});
-} else if (editId) {
-photoBase64 = data.find(item => item.id === editId).photo;
-}
-const signalementData = {
-quartier: q, type: document.getElementById('typeSelect').value,
-desc: document.getElementById('descInput').value,
-date: document.getElementById('dateInput').value,
-heure: document.getElementById('heureInput').value,
-photo: photoBase64,
-userId: currentUser.uid
-};
-if(!editId) {
-signalementData.lat = userPos.lat;
-signalementData.lng = userPos.lng;
-}
-try {
-if(editId) {
-await db.collection('signalements').doc(editId).update(signalementData);
-} else {
-await db.collection('signalements').add(signalementData);
-}
-fermerModal();
-if(!editId) map.flyTo([userPos.lat, userPos.lng], 16);
-} catch(e) { alert("Erreur d'envoi. Vérifiez la connexion."); }
-document.getElementById('loadingOverlay').style.display = 'none';
-}
-function togglePanel(id) {
-document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active'));
-}
+    const firebaseConfig = {
+      apiKey: "AIzaSyAsA9pypTsCogmSq_OdDXr5KPAgVi4ncm4",
+      authDomain: "urban-clean-kgm.firebaseapp.com",
+      projectId: "urban-clean-kgm",
+      storageBucket: "urban-clean-kgm.firebasestorage.app",
+      messagingSenderId: "880121878460",
+      appId: "1:880121878460:web:49378c29d489da2b2f7db9",
+      measurementId: "G-4YC8E4B96X"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+    var map = L.map('map', { zoomControl: false }).setView([6.1319, 1.2228], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    var currentUser = null;
+    var userPos = null;
+    var userCircle = null;
+    var data = [];
+    var markers = L.layerGroup().addTo(map);
+    var chart1, chart2;
+
+    fetch('./communes.geojson').then(res => res.json()).then(geojson => {
+        L.geoJSON(geojson, {
+            style: { color: "#00264d", weight: 2, fillOpacity: 0.05, interactive: true },
+            onEachFeature: (f, l) => {
+                let nom = f.properties["Noms des communes"]; 
+                if(nom) {
+                    l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
+                }
+            }
+        }).addTo(map);
+    });
+
+    auth.onAuthStateChanged((user) => {
+        currentUser = user;
+        document.getElementById('loginBtn').style.display = user ? 'none' : 'inline';
+        document.getElementById('logoutBtn').style.display = user ? 'inline' : 'none';
+        document.getElementById('userDisplay').style.display = user ? 'inline' : 'none';
+        if(user) document.getElementById('userDisplay').innerText = user.email;
+        document.getElementById('addBtnFloating').style.display = user ? 'block' : 'none';
+        refresh();
+    });
+
+    function ouvrirAuth() { document.getElementById('authModal').style.display = 'flex'; }
+    function fermerAuth() { document.getElementById('authModal').style.display = 'none'; }
+
+    function gererAuth(type) {
+        const email = prompt("Veuillez saisir votre email :");
+        const pass = prompt("Veuillez saisir votre mot de passe :");
+        if(email && pass) {
+            if(type === 'login') {
+                auth.signInWithEmailAndPassword(email, pass).then(() => fermerAuth()).catch(e => alert("Erreur : " + e.message));
+            } else {
+                auth.createUserWithEmailAndPassword(email, pass).then(() => { alert("Compte KGM créé avec succès !"); fermerAuth(); }).catch(e => alert("Erreur lors de la création : " + e.message));
+            }
+        }
+    }
+
+    function recupererPass() {
+        const email = prompt("Entrez votre email pour recevoir le lien de réinitialisation :");
+        if(email) {
+            auth.sendPasswordResetEmail(email).then(() => alert("Email envoyé ! Vérifiez votre boîte de réception.")).catch(e => alert("Erreur : " + e.message));
+        }
+    }
+
+    function deconnexion() { auth.signOut(); }
+
+    db.collection('signalements').onSnapshot(snap => {
+        data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        refresh();
+    });
+
+    const icons = {
+        dechets: L.divIcon({ html: '<i class="fas fa-trash" style="color:var(--kgm-red); font-size:20px;"></i>', className:'c-icon' }),
+        pollution: L.divIcon({ html: '<i class="fas fa-smog" style="color:#007bff; font-size:20px;"></i>', className:'c-icon' }),
+        securite: L.divIcon({ html: '<i class="fas fa-exclamation-triangle" style="color:#f57c00; font-size:20px;"></i>', className:'c-icon' }),
+        Autres: L.divIcon({ html: '<i class="fas fa-info-circle" style="color:#6c757d; font-size:20px;"></i>', className:'c-icon' })
+    };
+
+    function refresh() {
+        markers.clearLayers();
+        let counts = {dechets:0, pollution:0, securite:0, Autres:0};
+        let qCounts = {};
+        data.forEach(d => {
+            let popupContent = `<b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i>`;
+            if(d.photo) popupContent += `<br><img src="${d.photo}" style="width:150px;margin-top:5px;border-radius:4px">`;
+            popupContent += `<br><small><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small>`;
+            
+            if(currentUser && d.userId === currentUser.uid) {
+                popupContent += `<div class="actions">
+                    <i class="fas fa-edit" style="color:var(--kgm-green)" onclick="editerDoc('${d.id}')"></i>
+                    <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimerDoc('${d.id}')"></i>
+                </div>`;
+            }
+
+            if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: icons[d.type] || icons.Autres}).addTo(markers).bindPopup(popupContent);
+            counts[d.type] = (counts[d.type] || 0) + 1;
+            qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
+        });
+        document.getElementById('stats-text').innerText = `${data.length} signalements enregistrés`;
+        updateCharts(counts, qCounts);
+    }
+
+    function supprimerDoc(id) {
+        if(confirm("Supprimer définitivement ce signalement ?")) {
+            db.collection('signalements').doc(id).delete();
+        }
+    }
+
+    function editerDoc(id) {
+        const d = data.find(item => item.id === id);
+        if(!d) return;
+        document.getElementById('modalTitle').innerText = "Modifier le Signalement";
+        document.getElementById('editId').value = id;
+        document.getElementById('quartierSelect').value = d.quartier;
+        document.getElementById('descInput').value = d.desc;
+        document.getElementById('dateInput').value = d.date;
+        document.getElementById('heureInput').value = d.heure;
+        document.getElementById('typeSelect').value = d.type;
+        document.getElementById('modalForm').style.display = 'flex';
+        map.closePopup();
+    }
+
+    function updateCharts(tData, qData) {
+        if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
+        const ctx1 = document.getElementById('chartTypes');
+        const ctx2 = document.getElementById('chartQuartiers');
+        if(ctx1 && ctx2) {
+            chart1 = new Chart(ctx1, { type:'pie', data:{labels:['Déchets','Pollution','Sécurité','Autres'], datasets:[{data:[tData.dechets || 0, tData.pollution || 0, tData.securite || 0, tData.Autres || 0], backgroundColor:['#fc3d21','#007bff','#f57c00','#6c757d']}]} });
+            chart2 = new Chart(ctx2, { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
+        }
+    }
+
+    map.on('locationfound', e => {
+        userPos = e.latlng;
+        if (userCircle) map.removeLayer(userCircle);
+        userCircle = L.circle(e.latlng, { radius: 10, color: '#007bff', fillColor: '#007bff', fillOpacity: 0.5 }).addTo(map);
+        map.flyTo(e.latlng, 16, { animate: true, duration: 1.5 });
+    });
+
+    map.on('locationerror', e => {
+        alert("Position introuvable. Vérifiez que le GPS est actif et que vous êtes en HTTPS.");
+    });
+
+    function ouvrirModal() { 
+        document.getElementById('modalTitle').innerText = "Nouveau Signalement";
+        document.getElementById('editId').value = "";
+        document.getElementById('modalForm').style.display='flex';
+        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
+        document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        document.getElementById('descInput').value = "";
+    }
+    function fermerModal() { document.getElementById('modalForm').style.display='none'; }
+    function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
+
+    async function soumettreSignalement() {
+        let editId = document.getElementById('editId').value;
+        if(!userPos && !editId) return alert("Position GPS non trouvée. Veuillez autoriser la localisation.");
+        
+        document.getElementById('loadingOverlay').style.display = 'flex';
+        let q = document.getElementById('quartierSelect').value === 'Autres' ? document.getElementById('autreQuartier').value : document.getElementById('quartierSelect').value;
+        
+        const photoFile = document.getElementById('photoInput').files[0];
+        let photoBase64 = null;
+        if(photoFile) {
+            const reader = new FileReader();
+            photoBase64 = await new Promise(resolve => {
+                reader.onload = e => resolve(e.target.result);
+                reader.readAsDataURL(photoFile);
+            });
+        } else if (editId) {
+            photoBase64 = data.find(item => item.id === editId).photo;
+        }
+
+        const signalementData = {
+            quartier: q, type: document.getElementById('typeSelect').value,
+            desc: document.getElementById('descInput').value,
+            date: document.getElementById('dateInput').value,
+            heure: document.getElementById('heureInput').value,
+            photo: photoBase64,
+            userId: currentUser.uid
+        };
+
+        if(!editId) {
+            signalementData.lat = userPos.lat;
+            signalementData.lng = userPos.lng;
+        }
+
+         try {
+            if(editId) {
+                await db.collection('signalements').doc(editId).update(signalementData);
+            } else {
+                await db.collection('signalements').add(signalementData);
+            }
+            fermerModal();
+            if(!editId) map.flyTo([userPos.lat, userPos.lng], 16);
+        } catch(e) { alert("Erreur d'envoi. Vérifiez la connexion."); }
+        document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    function togglePanel(id) {
+        document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active'));
+    }
 </script>
 </body>
 </html>
