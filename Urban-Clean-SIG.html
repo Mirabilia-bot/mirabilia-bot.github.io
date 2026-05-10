@@ -256,7 +256,7 @@
         }
     }
 
-    function editerDoc(id) {
+        function editerDoc(id) {
         const d = data.find(item => item.id === id);
         if(!d) return;
         document.getElementById('modalTitle').innerText = "Modifier le Signalement";
@@ -266,11 +266,24 @@
         document.getElementById('dateInput').value = d.date;
         document.getElementById('heureInput').value = d.heure;
         document.getElementById('typeSelect').value = d.type;
-        checkAutre(d.quartier);
-        checkAutreType(d.type);
+
+        // --- AJOUT CHIRURGICAL ICI ---
+        if (document.getElementById('quartierSelect').value !== d.quartier) {
+            document.getElementById('quartierSelect').value = "Autres";
+            document.getElementById('autreQuartier').value = d.quartier;
+        }
+        if (document.getElementById('typeSelect').value !== d.type) {
+            document.getElementById('typeSelect').value = "Autres";
+            document.getElementById('autreType').value = d.type;
+        }
+        checkAutre(document.getElementById('quartierSelect').value);
+        checkAutreType(document.getElementById('typeSelect').value);
+        // ------------------------------
+
         document.getElementById('modalForm').style.display = 'flex';
         map.closePopup();
-    }
+        }
+  
 
     function updateCharts(tData, qData) {
         if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
