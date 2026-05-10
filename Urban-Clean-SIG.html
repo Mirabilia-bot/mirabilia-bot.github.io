@@ -100,12 +100,17 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // CONFIGURATION CHIRURGICALE : apiKey ajoutée pour autoriser l'authentification
-    const firebaseConfig = { 
-        apiKey: "AIzaSyAs-votre-cle-ici", // REMPLACEZ PAR VOTRE CLÉ API FIREBASE
-        projectId: "urban-clean-kgm", 
-        authDomain: "urban-clean-kgm.firebaseapp.com"
+    // CONFIGURATION CHIRURGICALE : Vos clés réelles injectées
+    const firebaseConfig = {
+      apiKey: "AIzaSyAsA9pypTsCogmSq_OdDXr5KPAgVi4ncm4",
+      authDomain: "urban-clean-kgm.firebaseapp.com",
+      projectId: "urban-clean-kgm",
+      storageBucket: "urban-clean-kgm.firebasestorage.app",
+      messagingSenderId: "880121878460",
+      appId: "1:880121878460:web:49378c29d489da2b2f7db9",
+      measurementId: "G-4YC8E4B96X"
     };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
     const auth = firebase.auth();
@@ -118,6 +123,17 @@
     var data = [];
     var markers = L.layerGroup().addTo(map);
     var chart1, chart2;
+
+    // RÉTABLISSEMENT DE LA COUCHE COMMUNES
+    fetch('./communes.geojson').then(res => res.json()).then(geojson => {
+        L.geoJSON(geojson, {
+            style: { color: "#00264d", weight: 2, fillOpacity: 0.05 },
+            onEachFeature: (f, l) => {
+                let nom = f.properties["Noms des communes"] || f.properties.nom;
+                if(nom) l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
+            }
+        }).addTo(map);
+    }).catch(e => console.error("Fichier communes.geojson introuvable"));
 
     auth.onAuthStateChanged((user) => {
         currentUser = user;
@@ -166,8 +182,12 @@
 
     function updateCharts(tData, qData) {
         if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
-        chart1 = new Chart(document.getElementById('chartTypes'), { type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
-        chart2 = new Chart(document.getElementById('chartQuartiers'), { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
+        const ctx1 = document.getElementById('chartTypes');
+        const ctx2 = document.getElementById('chartQuartiers');
+        if(ctx1 && ctx2) {
+            chart1 = new Chart(ctx1, { type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
+            chart2 = new Chart(ctx2, { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
+        }
     }
 
     map.on('locationfound', e => userPos = e.latlng);
@@ -198,5 +218,4 @@
     }
 </script>
 </body>
-  </html>
-  
+</html>
