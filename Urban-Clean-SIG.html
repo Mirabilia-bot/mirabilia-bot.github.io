@@ -127,13 +127,13 @@
         <input type="file" id="photoInput" accept="image/*" capture="environment" style="width:100%; margin:5px 0 10px 0;">
 
         <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
-<select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;" onchange="checkAutreType(this.value)">
-    <option value="dechets">Déchets</option>
-    <option value="pollution">Pollution</option>
-    <option value="securite">Sécurité</option>
-    <option value="Autres">Autres...</option>
-</select>
-<input type="text" id="autreType" placeholder="Précisez le type d'alerte" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
+        <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;" onchange="checkAutreType(this.value)">
+            <option value="dechets">Déchets</option>
+            <option value="pollution">Pollution</option>
+            <option value="securite">Sécurité</option>
+            <option value="Autres">Autres...</option>
+        </select>
+        <input type="text" id="autreType" placeholder="Précisez le type d'alerte" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
 
 
         <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="soumettreSignalement()">✅ Valider</button>
@@ -266,6 +266,8 @@
         document.getElementById('dateInput').value = d.date;
         document.getElementById('heureInput').value = d.heure;
         document.getElementById('typeSelect').value = d.type;
+        checkAutre(d.quartier);
+        checkAutreType(d.type);
         document.getElementById('modalForm').style.display = 'flex';
         map.closePopup();
     }
@@ -301,6 +303,7 @@
     }
     function fermerModal() { document.getElementById('modalForm').style.display='none'; }
     function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
+    function checkAutreType(v) { document.getElementById('autreType').style.display = (v==='Autres'?'block':'none'); }
 
     async function soumettreSignalement() {
         let editId = document.getElementById('editId').value;
@@ -308,6 +311,7 @@
         
         document.getElementById('loadingOverlay').style.display = 'flex';
         let q = document.getElementById('quartierSelect').value === 'Autres' ? document.getElementById('autreQuartier').value : document.getElementById('quartierSelect').value;
+        let t = document.getElementById('typeSelect').value === 'Autres' ? document.getElementById('autreType').value : document.getElementById('typeSelect').value;
         
         const photoFile = document.getElementById('photoInput').files[0];
         let photoBase64 = null;
@@ -322,7 +326,8 @@
         }
 
         const signalementData = {
-            quartier: q, type: document.getElementById('typeSelect').value,
+            quartier: q, 
+            type: t,
             desc: document.getElementById('descInput').value,
             date: document.getElementById('dateInput').value,
             heure: document.getElementById('heureInput').value,
