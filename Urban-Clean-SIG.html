@@ -165,11 +165,12 @@
     fetch('./communes.geojson').then(res => res.json()).then(geojson => {
         L.geoJSON(geojson, {
             style: { color: "#00264d", weight: 2, fillOpacity: 0.05 },
-            onEachFeature: (f, l) => {
+                        onEachFeature: (f, l) => {
                 let nom = f.properties["Noms des communes"] || f.properties.nom || f.properties.NOM;
                 if(nom) l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label", sticky: true });
-
+            }
         }).addTo(map);
+
     });
 
     auth.onAuthStateChanged((user) => {
