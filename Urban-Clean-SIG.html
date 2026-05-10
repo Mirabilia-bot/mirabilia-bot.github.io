@@ -66,7 +66,7 @@
 </header>
 
 <div class="ticker">
-    <div class="ticker-text">🌿 <strong>Marre des tas d’ordures ?</strong> Nous vous aidons à signaler via l'application les zones insalubres pour qu'elles soient nettoyées. La mairie reçoit l'information instantanément. Avec URBAN-CLEAN DE KGM Expertise, rendons notre environnement propre et sain ! Signalez les tas d'ordures et autres nuisances en moins de 2 minutes. Pour que nos enfants vivent en bonne santé. 🌿</div>
+    <div class="ticker-text">🌿 <strong>Marre des tas d’ordures ?</strong> Nous vous aidons à signaler via le portail les zones insalubres pour qu'elles soient nettoyées. La mairie reçoit l'information après l'alerte. Avec URBAN-CLEAN DE KGM Expertise, rendons notre environnement propre et sain ! Signalez les tas d'ordures et autres nuisances en moins de 2 minutes. Pour un environnement sain où tous vivent en bonne santé. 🌿</div>
 </div>
 
 <div id="map"></div>
@@ -83,6 +83,7 @@
     <div class="legend-item"><i class="fas fa-trash legend-icon" style="color:var(--kgm-red)"></i><span>Déchets solides</span></div>
     <div class="legend-item"><i class="fas fa-smog legend-icon" style="color:#007bff"></i><span>Pollution</span></div>
     <div class="legend-item"><i class="fas fa-exclamation-triangle legend-icon" style="color:#f57c00"></i><span>Sécurité / Risque</span></div>
+   <div class="legend-item"><i class="fas fa-info-circle legend-icon" style="color:#6c757d"></i><span>Autres</span></div>
     <div class="legend-item"><div style="width:20px; height:10px; border:2px solid var(--kgm-blue); margin-right:10px;"></div><span>Limites Communales</span></div>
 </div>
 
@@ -96,7 +97,7 @@
 
 <div id="authModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:3000;justify-content:center;align-items:center;">
     <div style="background:white;padding:25px;border-radius:15px;width:90%;max-width:350px;text-align:center;">
-        <h3 style="color:var(--kgm-blue);margin-top:0;">Espace Membre KGM</h3>
+        <h3 style="color:var(--kgm-blue);margin-top:0;">Espace KGM Expertise</h3>
         <p style="font-size:0.9em;margin-bottom:20px;">Veuillez choisir une option pour continuer</p>
         <button class="ui-btn" style="width:100%;background:var(--kgm-blue);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('login')">Se Connecter</button>
         <button class="ui-btn" style="width:100%;background:var(--kgm-green);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('signup')">S'inscrire (Nouveau Compte)</button>
@@ -128,7 +129,7 @@
 
         <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
         <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 15px 0;">
-            <option value="dechets">Déchets</option><option value="pollution">Pollution</option><option value="securite">Sécurité</option>
+            <option value="dechets">Déchets</option><option value="pollution">Pollution</option><option value="securite">Sécurité</option><option value="Autres">Autres...</option>
         </select>
 
         <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="soumettreSignalement()">✅ Valider</button>
@@ -237,7 +238,7 @@
 
     function refresh() {
         markers.clearLayers();
-        let counts = {dechets:0, pollution:0, securite:0};
+        let counts = {dechets:0, pollution:0, securite:0, autres:0};
         let qCounts = {};
         data.forEach(d => {
             let popupContent = `<b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i>`;
@@ -284,7 +285,7 @@
         const ctx1 = document.getElementById('chartTypes');
         const ctx2 = document.getElementById('chartQuartiers');
         if(ctx1 && ctx2) {
-            chart1 = new Chart(ctx1, { type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
+            chart1 = new Chart(ctx1, { type:'pie', data:{labels:['Déchets','Pollution','Sécurité','Autres'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite, tData.autres], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
             chart2 = new Chart(ctx2, { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
         }
     }
