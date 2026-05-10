@@ -9,6 +9,7 @@
   
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 
   <style>
     :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
@@ -24,23 +25,18 @@
     header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; }
     header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; }
 
+    #auth-bar { position: fixed; top: 10px; right: 10px; z-index: 2000; }
+
     .ticker { 
         position: absolute; top: 75px; left: 0; right: 0; z-index: 1000;
         width: 100%; background: white; padding: 10px 0; overflow: hidden;
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
     .ticker-text {
-        white-space: nowrap;
-        display: inline-block;
-        padding-left: 100%;
-        animation: ticker 25s linear infinite;
-        font-weight: bold;
-        color: var(--kgm-blue);
+        white-space: nowrap; display: inline-block; padding-left: 100%;
+        animation: ticker 25s linear infinite; font-weight: bold; color: var(--kgm-blue);
     }
-    @keyframes ticker {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(-100%, 0); }
-    }
+    @keyframes ticker { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
     .ui-controls {
         position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
@@ -61,14 +57,9 @@
     @keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 85px; opacity: 1; } }
 
     .commune-label { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 11px; text-shadow: 1px 1px 2px white; pointer-events: none; }
-    
-    .legend-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; }
-    .legend-icon { width: 20px; text-align: center; margin-right: 10px; font-size: 18px; }
     .actions { display: flex; gap: 10px; margin-top: 5px; }
     .actions i { cursor: pointer; font-size: 16px; }
-    #addBtnFloating { background: var(--kgm-red); color: white; }
-    canvas { max-height: 180px; margin-top: 10px; }
-
+    #addBtnFloating { background: var(--kgm-red); color: white; display: none; }
     #loadingOverlay {
         display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column;
@@ -79,7 +70,13 @@
 
 <div id="loadingOverlay">
     <i class="fas fa-spinner fa-spin fa-3x" style="color:var(--kgm-blue)"></i>
-    <p style="font-weight:bold; margin-top:10px;">Synchronisation avec KGM Cloud...</p>
+    <p style="font-weight:bold; margin-top:10px;">Synchronisation KGM Cloud...</p>
+</div>
+
+<div id="auth-bar">
+    <span id="userDisplay" style="color:white; display:none; margin-right:10px; font-size: 0.8em; text-shadow: 1px 1px 2px black;"></span>
+    <button id="loginBtn" class="ui-btn" onclick="connexion()">🔑 Connexion</button>
+    <button id="logoutBtn" class="ui-btn" onclick="deconnexion()" style="display:none;">🚪 Quitter</button>
 </div>
 
 <header>
@@ -88,7 +85,7 @@
 </header>
 
 <div class="ticker">
-    <div class="ticker-text">🌿 <strong>Marre des tas d’ordures ?</strong> Nous vous aidons à signaler via l'application les zones insalubres pour qu'elles soient nettoyées. La mairie reçoit l'information instantanément. Avec URBAN-CLEAN DE KGM Expertise, rendons notre environnement propre et sain ! Signalez les tas d'ordures et autres nuisances en moins de 2 minutes. Pour que nos enfants vivent en bonne santé. 🌿</div>
+    <div class="ticker-text">🌿 <strong>Marre des tas d’ordures ?</strong> Signalez les zones insalubres pour un environnement propre et sain avec URBAN-CLEAN de KGM Expertise. 🌿</div>
 </div>
 
 <div id="map"></div>
@@ -102,10 +99,12 @@
 
 <div id="panel-legende" class="panel">
     <h3 style="margin:0 0 15px 0; color:var(--kgm-blue)">Légende</h3>
-    <div class="legend-item"><i class="fas fa-trash legend-icon" style="color:var(--kgm-red)"></i><span>Déchets solides</span></div>
-    <div class="legend-item"><i class="fas fa-smog legend-icon" style="color:#007bff"></i><span>Pollution</span></div>
-    <div class="legend-item"><i class="fas fa-exclamation-triangle legend-icon" style="color:#f57c00"></i><span>Sécurité / Risque</span></div>
-    <div class="legend-item"><div style="width:20px; height:10px; border:2px solid var(--kgm-blue); margin-right:10px;"></div><span>Limites Communales</span></div>
+    <div style="font-size:14px;">
+        <p><i class="fas fa-trash" style="color:var(--kgm-red)"></i> Déchets</p>
+        <p><i class="fas fa-smog" style="color:#007bff"></i> Pollution</p>
+        <p><i class="fas fa-exclamation-triangle" style="color:#f57c00"></i> Sécurité</p>
+        <p><span style="border:2px solid var(--kgm-blue); padding:0 5px;"></span> Limites Communales</p>
+    </div>
 </div>
 
 <div class="ui-controls">
@@ -117,74 +116,83 @@
 
 <div id="modalForm" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;justify-content:center;align-items:center;">
     <div style="background:white;padding:20px;border-radius:15px;width:90%;max-width:380px;">
-        <h3 id="modalTitle" style="margin-top:0;color:var(--kgm-blue);">Nouveau Signalement</h3>
+        <h3 id="modalTitle" style="margin:top:0;color:var(--kgm-blue);">Nouveau Signalement</h3>
         <input type="hidden" id="editId">
-        <label style="font-weight:bold; font-size:14px;">Quartier</label>
-        <select id="quartierSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;" onchange="checkAutre(this.value)">
+        <select id="quartierSelect" style="width:100%; padding:10px; margin-bottom:10px;" onchange="checkAutre(this.value)">
             <option>Kliklamé</option><option>Bé</option><option>Tokoin</option><option value="Autres">Autres...</option>
         </select>
         <input type="text" id="autreQuartier" placeholder="Nom du quartier" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
-        
-        <label style="font-weight:bold; font-size:14px;">Description</label>
-        <textarea id="descInput" placeholder="Détails du problème..." style="width:100%; padding:10px; margin:5px 0 10px 0; font-family:serif; height:60px;"></textarea>
-
-        <div style="display:flex; gap:10px;">
-          <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Date</label><input type="date" id="dateInput" style="width:100%; padding:8px;"></div>
-          <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Heure</label><input type="time" id="heureInput" style="width:100%; padding:8px;"></div>
-        </div>
-
-        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;"><i class="fas fa-camera"></i> Prendre une photo</label>
-        <input type="file" id="photoInput" accept="image/*" capture="environment" style="width:100%; margin:5px 0 10px 0;">
-
-        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
-        <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 15px 0;">
+        <textarea id="descInput" placeholder="Description..." style="width:100%; padding:10px; height:60px; margin-bottom:10px;"></textarea>
+        <input type="file" id="photoInput" accept="image/*" capture="environment" style="width:100%; margin-bottom:10px;">
+        <select id="typeSelect" style="width:100%; padding:10px; margin-bottom:15px;">
             <option value="dechets">Déchets</option><option value="pollution">Pollution</option><option value="securite">Sécurité</option>
         </select>
-
-        <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="preparerSoumission()">✅ Valider</button>
-        <button style="width:100%; padding:10px; background:#eee; color:#333; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="fermerModal()">Annuler</button>
+        <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold;" onclick="soumettreSignalement()">✅ Valider</button>
+        <button style="width:100%; padding:10px; background:#eee; margin-top:8px; border:none; border-radius:8px; width:100%;" onclick="fermerModal()">Annuler</button>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // --- CONFIGURATION FIREBASE ---
-    const firebaseConfig = {
-      projectId: "urban-clean-kgm",
-      authDomain: "urban-clean-kgm.firebaseapp.com"
-    };
-
+    const firebaseConfig = { projectId: "urban-clean-kgm", authDomain: "urban-clean-kgm.firebaseapp.com" };
     firebase.initializeApp(firebaseConfig);
-  
     const db = firebase.firestore();
+    const auth = firebase.auth();
 
     var map = L.map('map', { zoomControl: false }).setView([6.1319, 1.2228], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    var userKey = localStorage.getItem('uc_user_key') || 'USER-' + Math.random().toString(36).substr(2, 9);
-    localStorage.setItem('uc_user_key', userKey);
-
+    var currentUser = null;
     var userPos = null;
-    var userCircle = null;
     var data = [];
-
     var markers = L.layerGroup().addTo(map);
-    var communeLayer;
     var chart1, chart2;
 
+    // --- COUCHE COMMUNES ---
     fetch('./communes.geojson').then(res => res.json()).then(geojson => {
-        communeLayer = L.geoJSON(geojson, {
+        L.geoJSON(geojson, {
             style: { color: "#00264d", weight: 2, fillOpacity: 0.05 },
-            onEachFeature: function (f, l) {
+            onEachFeature: (f, l) => {
                 let nom = f.properties["Noms des communes"] || f.properties.nom;
                 if(nom) l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
             }
         }).addTo(map);
     });
 
-    db.collection('signalements').onSnapshot((snapshot) => {
-        data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // --- AUTHENTIFICATION ---
+    auth.onAuthStateChanged((user) => {
+        currentUser = user;
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userDisplay = document.getElementById('userDisplay');
+        const addBtn = document.getElementById('addBtnFloating');
+
+        if (user) {
+            loginBtn.style.display = 'none';
+            logoutBtn.style.display = 'inline';
+            userDisplay.style.display = 'inline';
+            userDisplay.innerText = user.email;
+            addBtn.style.display = 'block';
+        } else {
+            loginBtn.style.display = 'inline';
+            logoutBtn.style.display = 'none';
+            userDisplay.style.display = 'none';
+            addBtn.style.display = 'none';
+        }
+        refresh();
+    });
+
+    function connexion() {
+        const email = prompt("Email professionnel :");
+        const pass = prompt("Mot de passe :");
+        if(email && pass) auth.signInWithEmailAndPassword(email, pass).catch(e => alert("Erreur : " + e.message));
+    }
+    function deconnexion() { auth.signOut(); }
+
+    // --- LOGIQUE DONNÉES ---
+    db.collection('signalements').onSnapshot(snap => {
+        data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         refresh();
     });
 
@@ -199,25 +207,20 @@
         let counts = {dechets:0, pollution:0, securite:0};
         let qCounts = {};
 
-        data.forEach((d) => {
-            let isMine = (d.userId === userKey);
-            let popupContent = `<b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i>`;
-            if(d.photo) popupContent += `<br><img src="${d.photo}" style="width:150px;margin-top:5px;border-radius:4px">`;
-            popupContent += `<br><small><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small>`;
-            
+        data.forEach(d => {
+            let isMine = (currentUser && d.userId === currentUser.uid);
+            let popup = `<b>${d.quartier}</b><br>${d.desc}`;
             if(isMine) {
-                popupContent += `<div class="actions">
+                popup += `<div class="actions">
                     <i class="fas fa-edit" style="color:var(--kgm-green)" onclick="editer('${d.id}')"></i>
                     <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimer('${d.id}')"></i>
                 </div>`;
             }
-
-            if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: icons[d.type]}).addTo(markers).bindPopup(popupContent);
+            if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: icons[d.type]}).addTo(markers).bindPopup(popup);
             counts[d.type]++;
             qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
         });
-
-        document.getElementById('stats-text').innerText = `${data.length} signalements enregistrés`;
+        document.getElementById('stats-text').innerText = `${data.length} signalements`;
         updateCharts(counts, qCounts);
     }
 
@@ -227,93 +230,43 @@
         chart2 = new Chart(document.getElementById('chartQuartiers'), { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
     }
 
-    function togglePanel(id) {
-        const p = document.getElementById(id);
-        const isActive = p.classList.contains('active');
-        document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
-        if(!isActive) p.classList.add('active');
-    }
-
-    map.on('locationfound', (e) => {
-        userPos = e.latlng;
-        if (userCircle) map.removeLayer(userCircle);
-        userCircle = L.circle(e.latlng, {radius: 15, color: 'blue', fillOpacity: 0.1}).addTo(map);
-    });
+    map.on('locationfound', e => userPos = e.latlng);
     map.locate({watch: true, enableHighAccuracy: true});
 
     function ouvrirModal() { 
-        document.getElementById('modalTitle').innerText = "Nouveau Signalement";
+        document.getElementById('modalForm').style.display='flex'; 
         document.getElementById('editId').value = "";
-        document.getElementById('modalForm').style.display='flex';
-        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
-        document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        document.getElementById('descInput').value = "";
-        document.getElementById('photoInput').value = "";
     }
-
-    function editer(id) {
-        const d = data.find(x => x.id === id);
-        document.getElementById('modalTitle').innerText = "Modifier le Signalement";
-        document.getElementById('editId').value = id;
-        document.getElementById('quartierSelect').value = d.quartier;
-        document.getElementById('descInput').value = d.desc;
-        document.getElementById('dateInput').value = d.date;
-        document.getElementById('heureInput').value = d.heure;
-        document.getElementById('typeSelect').value = d.type;
-        document.getElementById('modalForm').style.display='flex';
-        map.closePopup();
-    }
-
-    async function supprimer(id) {
-        if(confirm("Supprimer définitivement ce signalement ?")) await db.collection('signalements').doc(id).delete();
-    }
-
     function fermerModal() { document.getElementById('modalForm').style.display='none'; }
     function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
 
-    async function preparerSoumission() {
-        soumettreSignalement();
-    }
-
     async function soumettreSignalement() {
-        let q = document.getElementById('quartierSelect').value;
-        if(q === 'Autres') q = document.getElementById('autreQuartier').value || 'Inconnu';
-        let editId = document.getElementById('editId').value;
-        
-        if (!userPos && editId === "") return alert("GPS en cours...");
-        
+        if(!userPos) return alert("Localisation GPS requise.");
         document.getElementById('loadingOverlay').style.display = 'flex';
-        const file = document.getElementById('photoInput').files[0];
+        
+        let q = document.getElementById('quartierSelect').value;
+        if(q === 'Autres') q = document.getElementById('autreQuartier').value;
+        let eid = document.getElementById('editId').value;
 
-        const envoyerAData = async (photoBase64 = null) => {
-            const entry = {
-                quartier: q, type: document.getElementById('typeSelect').value,
-                desc: document.getElementById('descInput').value || 'Pas de description',
-                lat: editId !== "" ? data.find(x => x.id === editId).lat : userPos.lat,
-                lng: editId !== "" ? data.find(x => x.id === editId).lng : userPos.lng,
-                date: document.getElementById('dateInput').value,
-                heure: document.getElementById('heureInput').value,
-                photo: photoBase64 || (editId !== "" ? data.find(x => x.id === editId).photo : null),
-                userId: userKey
-            };
-
-            try {
-                if(editId !== "") await db.collection('signalements').doc(editId).update(entry);
-                else await db.collection('signalements').add(entry);
-                
-                fermerModal();
-                map.flyTo([entry.lat, entry.lng], 17, { animate: true, duration: 2 });
-            } catch(e) { alert("Erreur de synchronisation."); }
-            document.getElementById('loadingOverlay').style.display = 'none';
+        let entry = {
+            quartier: q, type: document.getElementById('typeSelect').value,
+            desc: document.getElementById('descInput').value,
+            lat: userPos.lat, lng: userPos.lng,
+            userId: currentUser.uid,
+            date: new Date().toLocaleDateString()
         };
 
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => envoyerAData(reader.result);
-            reader.readAsDataURL(file);
-        } else {
-            envoyerAData();
-        }
+        try {
+            if(eid) await db.collection('signalements').doc(eid).update(entry);
+            else await db.collection('signalements').add(entry);
+            fermerModal();
+        } catch(e) { alert("Erreur."); }
+        document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    async function supprimer(id) { if(confirm("Supprimer ?")) await db.collection('signalements').doc(id).delete(); }
+    function togglePanel(id) {
+        document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active'));
     }
 </script>
 </body>
