@@ -14,19 +14,65 @@
     :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
     * { box-sizing: border-box; }
     body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
+    
     #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
-    header { position: absolute; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center; }
+    
+    header { 
+        position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+        background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center;
+    }
     header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; }
     header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; }
-    .ticker { position: absolute; top: 75px; left: 0; right: 0; z-index: 1000; width: 100%; background: white; padding: 10px 0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-    .ticker-text { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; font-weight: bold; color: var(--kgm-blue); }
-    @keyframes ticker { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-    .ui-controls { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 8px; width: auto; }
-    .ui-btn { background: white; color: var(--kgm-blue); border: none; padding: 10px 15px; border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
-    .panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: white; border-radius: 15px; padding: 20px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green); box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 60vh; overflow-y: auto; }
+
+    .ticker { 
+        position: absolute; top: 75px; left: 0; right: 0; z-index: 1000;
+        width: 100%; background: white; padding: 10px 0; overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .ticker-text {
+        white-space: nowrap;
+        display: inline-block;
+        padding-left: 100%;
+        animation: ticker 25s linear infinite;
+        font-weight: bold;
+        color: var(--kgm-blue);
+    }
+    @keyframes ticker {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(-100%, 0); }
+    }
+
+    .ui-controls {
+        position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
+        z-index: 1000; display: flex; gap: 8px; width: auto;
+    }
+    .ui-btn {
+        background: white; color: var(--kgm-blue); border: none; padding: 10px 15px;
+        border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer;
+    }
+
+    .panel {
+        position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%);
+        width: 90%; max-width: 380px; background: white; border-radius: 15px;
+        padding: 20px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green);
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 60vh; overflow-y: auto;
+    }
     .panel.active { display: block; animation: slideUp 0.3s ease-out; }
     @keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 85px; opacity: 1; } }
-    #loadingOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
+
+    .commune-label { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 11px; text-shadow: 1px 1px 2px white; pointer-events: none; }
+    
+    .legend-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; }
+    .legend-icon { width: 20px; text-align: center; margin-right: 10px; font-size: 18px; }
+    .actions { display: flex; gap: 10px; margin-top: 5px; }
+    .actions i { cursor: pointer; font-size: 16px; }
+    #addBtnFloating { background: var(--kgm-red); color: white; }
+    canvas { max-height: 180px; margin-top: 10px; }
+
+    #loadingOverlay {
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column;
+    }
   </style>
 </head>
 <body>
@@ -42,21 +88,30 @@
 </header>
 
 <div class="ticker">
-    <div class="ticker-text">🌿 Signalez les zones insalubres pour qu'elles soient nettoyées. Avec URBAN-CLEAN de KGM Expertise, rendons notre environnement propre et sain ! 🌿</div>
+    <div class="ticker-text">🌿 <strong>Marre des tas d’ordures ?</strong> Nous vous aidons à signaler via l'application les zones insalubres pour qu'elles soient nettoyées. La mairie reçoit l'information instantanément. Avec URBAN-CLEAN DE KGM Expertise, rendons notre environnement propre et sain ! Signalez les tas d'ordures et autres nuisances en moins de 2 minutes. Pour que nos enfants vivent en bonne santé. 🌿</div>
 </div>
 
 <div id="map"></div>
 
 <div id="panel-analyse" class="panel">
-    <h3 style="margin:0 0 10px 0; color:var(--kgm-blue)">Statistiques</h3>
+    <h3 style="margin:0 0 10px 0; color:var(--kgm-blue)">Statistiques du Territoire</h3>
     <div id="stats-text" style="font-weight:bold; margin-bottom:10px;"></div>
     <canvas id="chartTypes"></canvas>
     <canvas id="chartQuartiers"></canvas>
 </div>
 
+<div id="panel-legende" class="panel">
+    <h3 style="margin:0 0 15px 0; color:var(--kgm-blue)">Légende</h3>
+    <div class="legend-item"><i class="fas fa-trash legend-icon" style="color:var(--kgm-red)"></i><span>Déchets solides</span></div>
+    <div class="legend-item"><i class="fas fa-smog legend-icon" style="color:#007bff"></i><span>Pollution</span></div>
+    <div class="legend-item"><i class="fas fa-exclamation-triangle legend-icon" style="color:#f57c00"></i><span>Sécurité / Risque</span></div>
+    <div class="legend-item"><div style="width:20px; height:10px; border:2px solid var(--kgm-blue); margin-right:10px;"></div><span>Limites Communales</span></div>
+</div>
+
 <div class="ui-controls">
-    <button class="ui-btn" style="background:var(--kgm-red);color:white;" onclick="ouvrirModal()">➕ Signaler</button>
+    <button class="ui-btn" id="addBtnFloating" onclick="ouvrirModal()">➕ Signaler</button>
     <button class="ui-btn" onclick="togglePanel('panel-analyse')">📊 Analyse</button>
+    <button class="ui-btn" onclick="togglePanel('panel-legende')">🗺️ Légende</button>
     <button class="ui-btn" onclick="map.locate({setView: true, maxZoom: 15})">📍 Position</button>
 </div>
 
@@ -64,23 +119,44 @@
     <div style="background:white;padding:20px;border-radius:15px;width:90%;max-width:380px;">
         <h3 id="modalTitle" style="margin-top:0;color:var(--kgm-blue);">Nouveau Signalement</h3>
         <input type="hidden" id="editId">
-        <select id="quartierSelect" style="width:100%; padding:10px; margin-bottom:10px;">
-            <option>Kliklamé</option><option>Bé</option><option>Tokoin</option>
+        <label style="font-weight:bold; font-size:14px;">Quartier</label>
+        <select id="quartierSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;" onchange="checkAutre(this.value)">
+            <option>Kliklamé</option><option>Bé</option><option>Tokoin</option><option value="Autres">Autres...</option>
         </select>
-        <textarea id="descInput" placeholder="Description..." style="width:100%; padding:10px; margin-bottom:10px; height:60px;"></textarea>
-        <select id="typeSelect" style="width:100%; padding:10px; margin-bottom:15px;">
+        <input type="text" id="autreQuartier" placeholder="Nom du quartier" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
+        
+        <label style="font-weight:bold; font-size:14px;">Description</label>
+        <textarea id="descInput" placeholder="Détails du problème..." style="width:100%; padding:10px; margin:5px 0 10px 0; font-family:serif; height:60px;"></textarea>
+
+        <div style="display:flex; gap:10px;">
+          <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Date</label><input type="date" id="dateInput" style="width:100%; padding:8px;"></div>
+          <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Heure</label><input type="time" id="heureInput" style="width:100%; padding:8px;"></div>
+        </div>
+
+        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;"><i class="fas fa-camera"></i> Prendre une photo</label>
+        <input type="file" id="photoInput" accept="image/*" capture="environment" style="width:100%; margin:5px 0 10px 0;">
+
+        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
+        <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 15px 0;">
             <option value="dechets">Déchets</option><option value="pollution">Pollution</option><option value="securite">Sécurité</option>
         </select>
-        <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold;" onclick="soumettreSignalement()">✅ Valider</button>
-        <button style="width:100%; padding:10px; background:#eee; margin-top:8px; border:none; border-radius:8px;" onclick="fermerModal()">Annuler</button>
+
+        <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="preparerSoumission()">✅ Valider</button>
+        <button style="width:100%; padding:10px; background:#eee; color:#333; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="fermerModal()">Annuler</button>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const firebaseConfig = { projectId: "urban-clean-kgm", authDomain: "urban-clean-kgm.firebaseapp.com" };
+    // --- CONFIGURATION FIREBASE ---
+    const firebaseConfig = {
+      projectId: "urban-clean-kgm",
+      authDomain: "urban-clean-kgm.firebaseapp.com"
+    };
+
     firebase.initializeApp(firebaseConfig);
+  
     const db = firebase.firestore();
 
     var map = L.map('map', { zoomControl: false }).setView([6.1319, 1.2228], 13);
@@ -88,43 +164,145 @@
 
     var userKey = localStorage.getItem('uc_user_key') || 'USER-' + Math.random().toString(36).substr(2, 9);
     localStorage.setItem('uc_user_key', userKey);
+
     var userPos = null;
+    var userCircle = null;
+    var data = [];
+
     var markers = L.layerGroup().addTo(map);
+    var chart1, chart2;
 
     db.collection('signalements').onSnapshot((snapshot) => {
-        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        markers.clearLayers();
-        data.forEach(d => {
-            if(d.lat && d.lng) L.marker([d.lat, d.lng]).addTo(markers).bindPopup(`<b>${d.quartier}</b><br>${d.desc}`);
-        });
-        document.getElementById('stats-text').innerText = `${data.length} signalements`;
-    }, (error) => {
-        console.log("Erreur de lecture : Vérifiez vos règles Firestore.");
+        data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        refresh();
     });
 
-    map.on('locationfound', (e) => { userPos = e.latlng; });
+    const icons = {
+        dechets: L.divIcon({ html: '<i class="fas fa-trash" style="color:var(--kgm-red); font-size:20px;"></i>', className:'c-icon' }),
+        pollution: L.divIcon({ html: '<i class="fas fa-smog" style="color:#007bff; font-size:20px;"></i>', className:'c-icon' }),
+        securite: L.divIcon({ html: '<i class="fas fa-exclamation-triangle" style="color:#f57c00; font-size:20px;"></i>', className:'c-icon' })
+    };
+
+    function refresh() {
+        markers.clearLayers();
+        let counts = {dechets:0, pollution:0, securite:0};
+        let qCounts = {};
+
+        data.forEach((d) => {
+            let isMine = (d.userId === userKey);
+            let popupContent = `<b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i>`;
+            if(d.photo) popupContent += `<br><img src="${d.photo}" style="width:150px;margin-top:5px;border-radius:4px">`;
+            popupContent += `<br><small><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small>`;
+            
+            if(isMine) {
+                popupContent += `<div class="actions">
+                    <i class="fas fa-edit" style="color:var(--kgm-green)" onclick="editer('${d.id}')"></i>
+                    <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimer('${d.id}')"></i>
+                </div>`;
+            }
+
+            if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: icons[d.type]}).addTo(markers).bindPopup(popupContent);
+            counts[d.type]++;
+            qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
+        });
+
+        document.getElementById('stats-text').innerText = `${data.length} signalements enregistrés`;
+        updateCharts(counts, qCounts);
+    }
+
+    function updateCharts(tData, qData) {
+        if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
+        chart1 = new Chart(document.getElementById('chartTypes'), { type:'pie', data:{labels:['Déchets','Pollution','Sécurité'], datasets:[{data:[tData.dechets, tData.pollution, tData.securite], backgroundColor:['#fc3d21','#007bff','#f57c00']}]} });
+        chart2 = new Chart(document.getElementById('chartQuartiers'), { type:'bar', data:{labels:Object.keys(qData), datasets:[{label:'Signalements', data:Object.values(qData), backgroundColor:'#1b5e20'}]} });
+    }
+
+    function togglePanel(id) {
+        const p = document.getElementById(id);
+        const isActive = p.classList.contains('active');
+        document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
+        if(!isActive) p.classList.add('active');
+    }
+
+    map.on('locationfound', (e) => {
+        userPos = e.latlng;
+        if (userCircle) map.removeLayer(userCircle);
+        userCircle = L.circle(e.latlng, {radius: 15, color: 'blue', fillOpacity: 0.1}).addTo(map);
+    });
     map.locate({watch: true, enableHighAccuracy: true});
 
-    function ouvrirModal() { document.getElementById('modalForm').style.display='flex'; }
+    function ouvrirModal() { 
+        document.getElementById('modalTitle').innerText = "Nouveau Signalement";
+        document.getElementById('editId').value = "";
+        document.getElementById('modalForm').style.display='flex';
+        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
+        document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        document.getElementById('descInput').value = "";
+        document.getElementById('photoInput').value = "";
+    }
+
+    function editer(id) {
+        const d = data.find(x => x.id === id);
+        document.getElementById('modalTitle').innerText = "Modifier le Signalement";
+        document.getElementById('editId').value = id;
+        document.getElementById('quartierSelect').value = d.quartier;
+        document.getElementById('descInput').value = d.desc;
+        document.getElementById('dateInput').value = d.date;
+        document.getElementById('heureInput').value = d.heure;
+        document.getElementById('typeSelect').value = d.type;
+        document.getElementById('modalForm').style.display='flex';
+        map.closePopup();
+    }
+
+    async function supprimer(id) {
+        if(confirm("Supprimer définitivement ce signalement ?")) await db.collection('signalements').doc(id).delete();
+    }
+
     function fermerModal() { document.getElementById('modalForm').style.display='none'; }
-    function togglePanel(id) { document.getElementById(id).classList.toggle('active'); }
+    function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
+
+    async function preparerSoumission() {
+        soumettreSignalement();
+    }
 
     async function soumettreSignalement() {
-        if (!userPos) return alert("Attente du signal GPS...");
+        let q = document.getElementById('quartierSelect').value;
+        if(q === 'Autres') q = document.getElementById('autreQuartier').value || 'Inconnu';
+        let editId = document.getElementById('editId').value;
+        
+        if (!userPos && editId === "") return alert("GPS en cours...");
+        
         document.getElementById('loadingOverlay').style.display = 'flex';
-        const entry = {
-            quartier: document.getElementById('quartierSelect').value,
-            type: document.getElementById('typeSelect').value,
-            desc: document.getElementById('descInput').value,
-            lat: userPos.lat, lng: userPos.lng,
-            date: new Date().toISOString().split('T')[0],
-            userId: userKey
+        const file = document.getElementById('photoInput').files[0];
+
+        const envoyerAData = async (photoBase64 = null) => {
+            const entry = {
+                quartier: q, type: document.getElementById('typeSelect').value,
+                desc: document.getElementById('descInput').value || 'Pas de description',
+                lat: editId !== "" ? data.find(x => x.id === editId).lat : userPos.lat,
+                lng: editId !== "" ? data.find(x => x.id === editId).lng : userPos.lng,
+                date: document.getElementById('dateInput').value,
+                heure: document.getElementById('heureInput').value,
+                photo: photoBase64 || (editId !== "" ? data.find(x => x.id === editId).photo : null),
+                userId: userKey
+            };
+
+            try {
+                if(editId !== "") await db.collection('signalements').doc(editId).update(entry);
+                else await db.collection('signalements').add(entry);
+                
+                fermerModal();
+                map.flyTo([entry.lat, entry.lng], 17, { animate: true, duration: 2 });
+            } catch(e) { alert("Erreur de synchronisation."); }
+            document.getElementById('loadingOverlay').style.display = 'none';
         };
-        try {
-            await db.collection('signalements').add(entry);
-            fermerModal();
-        } catch(e) { alert("Erreur d'envoi."); }
-        document.getElementById('loadingOverlay').style.display = 'none';
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => envoyerAData(reader.result);
+            reader.readAsDataURL(file);
+        } else {
+            envoyerAData();
+        }
     }
 </script>
 </body>
