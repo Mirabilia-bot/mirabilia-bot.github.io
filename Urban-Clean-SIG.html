@@ -171,20 +171,18 @@
         interactive: true // Assurez-vous que les polygones capturent la souris
     },
     onEachFeature: (f, l) => {
-        let nom = f.properties["Noms des communes"] || f.properties.nom || f.properties.NOM;
-        if(nom) {
-                    if(nom) {
-            l.bindTooltip(nom, { 
-                permanent: false,   // L'étiquette apparaît au survol
-                direction: "auto", 
-                sticky: true,       // Elle suit le mouvement de la souris
-                className: "commune-label",
-                offset: [0, -15]    // Décale l'étiquette légèrement au-dessus du curseur
-            });
-        }
-
-        }
+    let nom = f.properties["Noms des communes"] || f.properties.nom || f.properties.NOM;
+    if(nom) {
+        l.bindTooltip(nom, { 
+            permanent: false, 
+            direction: "auto", 
+            sticky: true, 
+            className: "commune-label",
+            offset: [0, -15] 
+        });
     }
+}
+
 }).addTo(map);
               
     });
