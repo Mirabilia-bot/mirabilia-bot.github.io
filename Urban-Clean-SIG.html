@@ -291,7 +291,6 @@
                 else await db.collection('signalements').add(entry);
                 
                 fermerModal();
-                map.flyTo([entry.lat, entry.lng], 17, { animate: true, duration: 2 });
             } catch(e) { alert("Erreur de synchronisation."); }
             document.getElementById('loadingOverlay').style.display = 'none';
         };
