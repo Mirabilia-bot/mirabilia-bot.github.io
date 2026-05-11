@@ -80,10 +80,31 @@
     .actions { display: flex; gap: 10px; margin-top: 5px; }
     .actions i { cursor: pointer; font-size: 16px; }
     .leaflet-popup-content { margin: 10px; line-height: 1.4; }
+      #homeBtn {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 2500;
+        background: white;
+        color: var(--kgm-blue);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2em;
+    }
+    #homeBtn:hover { background: #f0f0f0; }
+    
   </style>
 </head>
 <body>
-
+<button id="homeBtn" onclick="window.location.reload()" title="Retour à l'accueil"><i class="fas fa-arrow-left"></i></button>
+  
 <div id="loadingOverlay">
     <i class="fas fa-spinner fa-spin fa-3x" style="color:var(--kgm-blue)"></i>
     <p style="font-weight:bold; margin-top:10px;">Synchronisation KGM Cloud...</p>
