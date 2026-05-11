@@ -32,13 +32,27 @@
     header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; width: 70%; }
     
     #auth-bar { position: fixed; top: 10px; right: 10px; z-index: 2000; display: flex; align-items: center; gap: 5px; }
-    #userDisplay { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        #userDisplay { 
+        font-weight: bold;
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8em;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
     @media (max-width: 600px) {
         header h1 { font-size: 0.9em; width: 60%; margin-left: -40px; }
         header p { font-size: 0.7em; width: 60%; margin-left: -40px; }
         .ui-btn { padding: 8px 12px; font-size: 11px; }
+        #userDisplay { display: none !important; } /* Cache le mail sur mobile */
     }
+
 
     .ticker { position: absolute; top: 75px; left: 0; right: 0; z-index: 1000; width: 100%; background: white; padding: 10px 0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
     .ticker-text { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 30s linear infinite; font-weight: bold; color: var(--kgm-blue); }
@@ -244,8 +258,9 @@
         document.getElementById('loginBtn').style.display = user ? 'none' : 'inline';
         document.getElementById('logoutBtn').style.display = user ? 'inline' : 'none';
         document.getElementById('userDisplay').style.display = user ? 'inline' : 'none';
-        if(user) document.getElementById('userDisplay').innerText = user.email;
-        document.getElementById('addBtnFloating').style.display = user ? 'block' : 'none';
+        if(user) document.getElementById('userDisplay').innerHTML = '<i class="fas fa-user-circle"></i> Connecté';
+
+      document.getElementById('addBtnFloating').style.display = user ? 'block' : 'none';
         refresh();
     });
 
