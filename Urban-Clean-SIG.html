@@ -14,76 +14,59 @@
   <style>
     :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
     * { box-sizing: border-box; }
-    body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
-    #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
     
-    header { position: absolute; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center; min-height: 70px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; width: 70%; }
-    header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; width: 70%; }
-    
-    #auth-bar { position: fixed; top: 10px; right: 10px; z-index: 2000; display: flex; align-items: center; gap: 5px; }
-    #userDisplay { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-    @media (max-width: 600px) {
-        header h1 { font-size: 0.9em; width: 60%; margin-left: -40px; }
-        header p { font-size: 0.7em; width: 60%; margin-left: -40px; }
-        .ui-btn { padding: 8px 12px; font-size: 11px; }
+    /* FIX CHIRURGICAL : On force le corps de la page à ne pas défiler */
+    body, html { 
+        margin: 0; padding: 0; 
+        height: 100vh; width: 100vw; 
+        overflow: hidden; 
+        font-family: 'Times New Roman', serif; 
     }
 
-    .ticker { position: absolute; top: 75px; left: 0; right: 0; z-index: 1000; width: 100%; background: white; padding: 10px 0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-    .ticker-text { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 40s linear infinite; font-weight: bold; color: var(--kgm-blue); }
-    @keyframes ticker { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-    .ui-controls { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 8px; width: auto; }
-    .ui-btn { background: white; color: var(--kgm-blue); border: none; padding: 10px 15px; border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
-    .panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: white; border-radius: 15px; padding: 20px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green); box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 60vh; overflow-y: auto; }
-    .panel.active { display: block; animation: slideUp 0.3s ease-out; }
-    @keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 85px; opacity: 1; } }
-    .commune-label { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 15px; text-shadow: 2px 2px 4px white; pointer-events: none; }
-    #addBtnFloating { background: var(--kgm-red); color: white; display: none; }
-    #loadingOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
-    .legend-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; }
-    .legend-icon { width: 20px; text-align: center; margin-right: 10px; font-size: 18px; }
-    .actions { display: flex; gap: 10px; margin-top: 5px; }
-    .actions i { cursor: pointer; font-size: 16px; }
+    /* La carte doit être en position ABSOLUTE pour rester fixe derrière */
+    #map { 
+        position: absolute; 
+        top: 0; left: 0; 
+        width: 100%; height: 100%; 
+        z-index: 1; 
+    }
+    
+    header { 
+        position: absolute; top: 0; left: 0; right: 0; 
+        z-index: 1000; background: rgba(0,38,77,0.9); 
+        color: white; padding: 10px; text-align: center; 
+    }
 
-    /* Ajustements pour ordinateurs (écrans larges) */
+    .ticker { 
+        position: absolute; top: 75px; left: 0; right: 0; 
+        z-index: 1000; background: white; 
+    }
+
+    /* Ajustement des panneaux pour qu'ils flottent sur la carte */
+    .panel { 
+        position: absolute; 
+        bottom: 100px; left: 50%; 
+        transform: translateX(-50%); 
+        z-index: 1001; 
+        background: white; 
+        border-radius: 15px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    /* VERSION ORDINATEUR : On stabilise tout */
     @media (min-width: 1024px) {
-    /* On agrandit les panneaux pour qu'ils soient lisibles sur PC */
-    .panel {
-        width: 500px !important; 
-        max-width: 600px !important;
-        padding: 35px !important;
-        bottom: 120px !important;
-        font-size: 1.2em !important; /* Texte plus grand pour le confort */
+        .panel { 
+            width: 450px !important; 
+            bottom: 110px !important; 
+        }
+        #modalForm > div { 
+            width: 500px !important; 
+            padding: 30px !important; 
+        }
+        header h1 { font-size: 2em; }
     }
+</style>
 
-    /* On agrandit la boîte de signalement (le modal) */
-    #modalForm > div {
-        max-width: 600px !important;
-        padding: 40px !important;
-        border-radius: 20px !important;
-    }
-
-    /* On agrandit les champs de saisie pour qu'ils ne soient pas minuscules */
-    input, select, textarea {
-        font-size: 16px !important;
-        padding: 12px !important;
-    }
-
-    /* On rend les boutons de contrôle plus imposants */
-    .ui-btn {
-        padding: 15px 30px !important;
-        font-size: 15px !important;
-        border-radius: 30px !important;
-    }
-
-    /* Le titre devient plus majestueux */
-    header h1 {
-        font-size: 2.2em !important;
-    }
-}
-
-  </style>
 </head>
 <body>
 
