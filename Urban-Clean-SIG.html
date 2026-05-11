@@ -14,8 +14,8 @@
   <style>
     :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
     * { box-sizing: border-box; }
-    body, html { margin: 0; padding: 0; height: 100vh; width: 100vw; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
-    #map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
     
     header { position: absolute; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center; min-height: 70px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; width: 70%; }
@@ -23,10 +23,6 @@
     
     #auth-bar { position: fixed; top: 10px; right: 10px; z-index: 2000; display: flex; align-items: center; gap: 5px; }
     #userDisplay { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-    .leaflet-popup-content-wrapper { border-radius: 8px; padding: 5px; }
-    .leaflet-popup-content { margin: 8px; line-height: 1.4; }
-    .popup-img { width: 100%; max-height: 150px; object-fit: cover; border-radius: 5px; margin-top: 8px; display: block; }
 
     @media (max-width: 600px) {
         header h1 { font-size: 0.9em; width: 60%; margin-left: -40px; }
@@ -37,29 +33,20 @@
     .ticker { position: absolute; top: 75px; left: 0; right: 0; z-index: 1000; width: 100%; background: white; padding: 10px 0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
     .ticker-text { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 30s linear infinite; font-weight: bold; color: var(--kgm-blue); }
     @keyframes ticker { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-    
     .ui-controls { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 8px; width: auto; }
     .ui-btn { background: white; color: var(--kgm-blue); border: none; padding: 10px 15px; border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
-    
-    .panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 380px; background: white; border-radius: 15px; padding: 15px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green); box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 70vh; overflow-y: auto; }
+    .panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: white; border-radius: 15px; padding: 15px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green); box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 70vh; overflow-y: auto; }
     .panel.active { display: block; animation: slideUp 0.3s ease-out; }
     @keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 85px; opacity: 1; } }
-    
-    .chart-container { position: relative; height: 180px; width: 100%; margin-bottom: 20px; }
-    
+    .chart-container { position: relative; height: 220px; width: 100%; margin-bottom: 20px; }
     .commune-label { background: transparent; border: none; box-shadow: none; color: var(--kgm-blue); font-weight: bold; font-size: 15px; text-shadow: 2px 2px 4px white; pointer-events: none; }
     #addBtnFloating { background: var(--kgm-red); color: white; display: none; }
     #loadingOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
     .legend-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; }
     .legend-icon { width: 20px; text-align: center; margin-right: 10px; font-size: 18px; }
-    .actions { display: flex; gap: 15px; margin-top: 10px; border-top: 1px solid #eee; padding-top: 8px; }
-    .actions i { cursor: pointer; font-size: 18px; }
-
-    @media (min-width: 1024px) {
-        .panel { width: 450px !important; max-width: 500px !important; bottom: 100px !important; padding: 30px !important; }
-        .ui-btn { padding: 12px 25px !important; font-size: 14px !important; }
-        header h1 { font-size: 2em !important; }
-    }
+    .actions { display: flex; gap: 10px; margin-top: 5px; }
+    .actions i { cursor: pointer; font-size: 16px; }
+    .leaflet-popup-content { margin: 10px; line-height: 1.4; }
   </style>
 </head>
 <body>
@@ -89,16 +76,8 @@
 <div id="panel-analyse" class="panel">
     <h3 style="margin:0 0 10px 0; color:var(--kgm-blue); text-align:center;">Analyses Statistiques</h3>
     <div id="stats-text" style="font-weight:bold; margin-bottom:15px; text-align:center; color: var(--kgm-green);"></div>
-    
-    <p style="font-size:0.9em; font-weight:bold; margin-bottom:5px;">Répartition par Type</p>
-    <div class="chart-container">
-        <canvas id="chartTypes"></canvas>
-    </div>
-    
-    <p style="font-size:0.9em; font-weight:bold; margin:15px 0 5px 0;">Top Quartiers</p>
-    <div class="chart-container">
-        <canvas id="chartQuartiers"></canvas>
-    </div>
+    <div class="chart-container"><canvas id="chartTypes"></canvas></div>
+    <div class="chart-container"><canvas id="chartQuartiers"></canvas></div>
 </div>
 
 <div id="panel-legende" class="panel">
@@ -106,8 +85,8 @@
     <div class="legend-item"><i class="fas fa-trash legend-icon" style="color:var(--kgm-red)"></i><span>Déchets solides</span></div>
     <div class="legend-item"><i class="fas fa-smog legend-icon" style="color:#007bff"></i><span>Pollution</span></div>
     <div class="legend-item"><i class="fas fa-exclamation-triangle legend-icon" style="color:#f57c00"></i><span>Sécurité / Risque</span></div>
-    <div class="legend-item"><i class="fas fa-info-circle legend-icon" style="color:#6c757d"></i><span>Autres</span></div>
-    <div class="legend-item"><div style="width:20px; height:10px; border:2px solid var(--kgm-blue); margin-right:10px;"></div><span>Limites Collectivités territoriales</span></div>
+   <div class="legend-item"><i class="fas fa-info-circle legend-icon" style="color:#6c757d"></i><span>Autres</span></div>
+    <div class="legend-item"><div style="width:20px; height:10px; border:2px solid var(--kgm-blue); margin-right:10px;"></div><span>Limites Communales</span></div>
 </div>
 
 <div class="ui-controls">
@@ -120,8 +99,10 @@
 <div id="authModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:3000;justify-content:center;align-items:center;">
     <div style="background:white;padding:25px;border-radius:15px;width:90%;max-width:350px;text-align:center;">
         <h3 style="color:var(--kgm-blue);margin-top:0;">Espace KGM Expertise</h3>
+        <p style="font-size:0.9em;margin-bottom:20px;">Veuillez choisir une option pour continuer</p>
         <button class="ui-btn" style="width:100%;background:var(--kgm-blue);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('login')">Se Connecter</button>
-        <button class="ui-btn" style="width:100%;background:var(--kgm-green);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('signup')">S'inscrire</button>
+        <button class="ui-btn" style="width:100%;background:var(--kgm-green);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('signup')">S'inscrire (Nouveau Compte)</button>
+        <button style="background:none;border:none;color:var(--kgm-red);cursor:pointer;text-decoration:underline;display:block;margin:5px auto;" onclick="recupererPass()">Mot de passe oublié ?</button>
         <button style="background:none;border:none;color:#666;cursor:pointer;text-decoration:underline;margin-top:10px;" onclick="fermerAuth()">Annuler</button>
     </div>
 </div>
@@ -144,11 +125,13 @@
           <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Heure</label><input type="time" id="heureInput" style="width:100%; padding:8px;"></div>
         </div>
 
-        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;"><i class="fas fa-camera"></i> Photo</label>
-        <div style="display:flex; gap:5px; align-items:center; margin:5px 0 10px 0;">
-            <input type="file" id="photoInput" accept="image/*" capture="environment" style="flex:1;">
-            <button type="button" onclick="effacerPhotoSelectionnee()" style="background:var(--kgm-red); color:white; border:none; border-radius:5px; padding:5px 10px;"><i class="fas fa-times"></i></button>
-        </div>
+        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;"><i class="fas fa-camera"></i> Prendre une photo</label>
+<div style="display:flex; gap:5px; align-items:center; margin:5px 0 10px 0;">
+    <input type="file" id="photoInput" accept="image/*" capture="environment" style="flex:1;">
+    <button type="button" onclick="effacerPhotoSelectionnee()" style="background:var(--kgm-red); color:white; border:none; border-radius:5px; padding:5px 10px; cursor:pointer;" title="Supprimer la photo choisie">
+        <i class="fas fa-times"></i>
+    </button>
+</div>
 
         <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
         <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;" onchange="checkAutreType(this.value)">
@@ -157,7 +140,8 @@
             <option value="securite">Sécurité</option>
             <option value="Autres">Autres...</option>
         </select>
-        <input type="text" id="autreType" placeholder="Précisez" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
+        <input type="text" id="autreType" placeholder="Précisez le type d'alerte" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
+
 
         <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="soumettreSignalement()">✅ Valider</button>
         <button style="width:100%; padding:10px; background:#eee; color:#333; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="fermerModal()">Annuler</button>
@@ -187,9 +171,22 @@
 
     var currentUser = null;
     var userPos = null;
+    var userCircle = null;
     var data = [];
     var markers = L.layerGroup().addTo(map);
     var chart1, chart2;
+
+    fetch('./communes.geojson').then(res => res.json()).then(geojson => {
+        L.geoJSON(geojson, {
+            style: { color: "#00264d", weight: 2, fillOpacity: 0.05, interactive: true },
+            onEachFeature: (f, l) => {
+                let nom = f.properties["Noms des communes"]; 
+                if(nom) {
+                    l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
+                }
+            }
+        }).addTo(map);
+    });
 
     auth.onAuthStateChanged((user) => {
         currentUser = user;
@@ -200,6 +197,34 @@
         document.getElementById('addBtnFloating').style.display = user ? 'block' : 'none';
         refresh();
     });
+
+    function ouvrirAuth() { document.getElementById('authModal').style.display = 'flex'; }
+    function fermerAuth() { document.getElementById('authModal').style.display = 'none'; }
+
+    function gererAuth(type) {
+        const email = prompt("Veuillez saisir votre email :");
+        const pass = prompt("Veuillez saisir votre mot de passe :");
+        if(email && pass) {
+            if(type === 'login') {
+                auth.signInWithEmailAndPassword(email, pass).then(() => fermerAuth()).catch(e => alert("Erreur : " + e.message));
+            } else {
+                auth.createUserWithEmailAndPassword(email, pass).then(() => { alert("Compte KGM créé avec succès !"); fermerAuth(); }).catch(e => alert("Erreur lors de la création : " + e.message));
+            }
+        }
+    }
+
+    function recupererPass() {
+        const email = prompt("Entrez votre email pour recevoir le lien de réinitialisation :");
+        if(email) {
+            auth.sendPasswordResetEmail(email).then(() => alert("Email envoyé ! Vérifiez votre boîte de réception.")).catch(e => alert("Erreur : " + e.message));
+        }
+    }
+
+    function deconnexion() { 
+    if(confirm("Êtes-vous sûr de vouloir vous déconnecter d'URBAN-CLEAN ?")) {
+        auth.signOut(); 
+    }
+}
 
     db.collection('signalements').onSnapshot(snap => {
         data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -217,11 +242,10 @@
         markers.clearLayers();
         let counts = {dechets:0, pollution:0, securite:0, Autres:0};
         let qCounts = {};
-        
         data.forEach(d => {
-            let popupContent = `<div style="min-width:180px;"><b style="color:var(--kgm-blue); font-size:1.1em;">${d.quartier}</b><br><p style="margin:5px 0;">${d.desc}</p>`;
-            if(d.photo) popupContent += `<img src="${d.photo}" class="popup-img">`;
-            popupContent += `<div style="margin-top:8px; font-size:0.8em; color:#666;"><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</div>`;
+            let popupContent = `<div style="min-width:180px;"><b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i>`;
+            if(d.photo) popupContent += `<br><img src="${d.photo}" style="width:100%;max-height:150px;object-fit:cover;margin-top:5px;border-radius:4px">`;
+            popupContent += `<br><small><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small></div>`;
             
             if(currentUser && d.userId === currentUser.uid) {
                 popupContent += `<div class="actions">
@@ -229,94 +253,169 @@
                     <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimerDoc('${d.id}')"></i>
                 </div>`;
             }
-            popupContent += `</div>`;
 
             if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: icons[d.type] || icons.Autres}).addTo(markers).bindPopup(popupContent);
-            
-            let typeNormalise = (d.type === 'Autres' || d.type === 'autres') ? 'Autres' : d.type;
-            counts[typeNormalise] = (counts[typeNormalise] || 0) + 1;
+            counts[d.type] = (counts[d.type] || 0) + 1;
             qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
         });
         document.getElementById('stats-text').innerText = `${data.length} signalements enregistrés`;
         updateCharts(counts, qCounts);
     }
 
+    function supprimerDoc(id) {
+        if(confirm("Supprimer définitivement ce signalement ?")) {
+            db.collection('signalements').doc(id).delete();
+        }
+    }
+
+    function editerDoc(id) {
+        const d = data.find(item => item.id === id);
+        if(!d) return;
+        document.getElementById('modalTitle').innerText = "Modifier le Signalement";
+        document.getElementById('editId').value = id;
+        document.getElementById('quartierSelect').value = d.quartier;
+        document.getElementById('descInput').value = d.desc;
+        document.getElementById('dateInput').value = d.date;
+        document.getElementById('heureInput').value = d.heure;
+        document.getElementById('typeSelect').value = d.type;
+
+        if (document.getElementById('quartierSelect').value !== d.quartier) {
+            document.getElementById('quartierSelect').value = "Autres";
+            document.getElementById('autreQuartier').value = d.quartier;
+        }
+        if (document.getElementById('typeSelect').value !== d.type) {
+            document.getElementById('typeSelect').value = "Autres";
+            document.getElementById('autreType').value = d.type;
+        }
+        checkAutre(document.getElementById('quartierSelect').value);
+        checkAutreType(document.getElementById('typeSelect').value);
+
+        document.getElementById('modalForm').style.display = 'flex';
+        map.closePopup();
+    }
+  
+
     function updateCharts(tData, qData) {
         if(chart1) chart1.destroy(); if(chart2) chart2.destroy();
         const ctx1 = document.getElementById('chartTypes').getContext('2d');
         const ctx2 = document.getElementById('chartQuartiers').getContext('2d');
-        
-        chart1 = new Chart(ctx1, { 
-            type:'pie', 
-            data:{
-                labels:['Déchets','Pollution','Sécurité','Autres'], 
-                datasets:[{
-                    data:[tData.dechets || 0, tData.pollution || 0, tData.securite || 0, tData.Autres || 0], 
-                    backgroundColor:['#fc3d21','#007bff','#f57c00','#6c757d'],
-                    borderWidth: 1
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } } }
-        });
+        if(ctx1 && ctx2) {
+            chart1 = new Chart(ctx1, { type:'pie', data:{labels:['Déchets','Pollution','Sécurité','Autres'], datasets:[{data:[tData.dechets || 0, tData.pollution || 0, tData.securite || 0, tData.Autres || 0], backgroundColor:['#fc3d21','#007bff','#f57c00','#6c757d']}]}, options: { responsive: true, maintainAspectRatio: false } });
+            chart2 = new Chart(ctx2, { type:'bar', data:{labels:Object.keys(qData).slice(0,5), datasets:[{label:'Signalements', data:Object.values(qData).slice(0,5), backgroundColor:'#1b5e20'}]}, options: { responsive: true, maintainAspectRatio: false } });
+        }
+    }
 
-        chart2 = new Chart(ctx2, { 
-            type:'bar', 
-            data:{ labels:Object.keys(qData).slice(0,5), datasets:[{ label:'Volume', data:Object.values(qData).slice(0,5), backgroundColor:'#1b5e20' }] },
-            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+    map.on('locationfound', e => {
+        userPos = e.latlng;
+        if (userCircle) map.removeLayer(userCircle);
+        userCircle = L.circle(e.latlng, { radius: 10, color: '#007bff', fillColor: '#007bff', fillOpacity: 0.5 }).addTo(map);
+        map.flyTo(e.latlng, 16, { animate: true, duration: 1.9 });
+    });
+
+    map.on('locationerror', e => {
+        alert("Position introuvable. Vérifiez que le GPS est actif.");
+    });
+
+    function ouvrirModal() { 
+        map.locate({enableHighAccuracy: true});
+        document.getElementById('modalTitle').innerText = "Nouveau Signalement";
+        document.getElementById('editId').value = "";
+        document.getElementById('modalForm').style.display='flex';
+        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
+        document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        document.getElementById('descInput').value = "";
+    }
+    function fermerModal() { document.getElementById('modalForm').style.display='none'; }
+    function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
+    function checkAutreType(v) { document.getElementById('autreType').style.display = (v==='Autres'?'block':'none'); }
+
+    async function compresserImage(file) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 1200;
+                    let width = img.width;
+                    let height = img.height;
+                    if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    canvas.toBlob((blob) => { resolve(blob); }, 'image/jpeg', 0.7);
+                };
+            };
         });
+    }
+
+    async function soumettreSignalement() {
+        let editId = document.getElementById('editId').value;
+        if(!userPos && !editId) return alert("Position GPS non trouvée. Veuillez autoriser la localisation.");
+        
+        document.getElementById('loadingOverlay').style.display = 'flex';
+        let q = document.getElementById('quartierSelect').value === 'Autres' ? document.getElementById('autreQuartier').value : document.getElementById('quartierSelect').value;
+        let t = document.getElementById('typeSelect').value === 'Autres' ? document.getElementById('autreType').value : document.getElementById('typeSelect').value;
+        
+        const photoFile = document.getElementById('photoInput').files[0];
+        let photoUrl = null;
+
+        try {
+            if(photoFile) {
+                const blob = await compresserImage(photoFile);
+                let formData = new FormData();
+                formData.append("image", blob);
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                    method: "POST",
+                    body: formData
+                });
+                const imgData = await res.json();
+                photoUrl = imgData.data.url;
+            } else if (editId) {
+                const doc = data.find(item => item.id === editId);
+                photoUrl = doc ? doc.photo : null;
+            }
+
+            const signalementData = {
+                quartier: q, 
+                type: t,
+                desc: document.getElementById('descInput').value,
+                date: document.getElementById('dateInput').value,
+                heure: document.getElementById('heureInput').value,
+                photo: photoUrl,
+                userId: currentUser.uid
+            };
+
+            if(!editId) {
+                signalementData.lat = userPos.lat;
+                signalementData.lng = userPos.lng;
+            }
+
+            if(editId) {
+                await db.collection('signalements').doc(editId).update(signalementData);
+            } else {
+                await db.collection('signalements').add(signalementData);
+            }
+            fermerModal();
+            if(!editId) map.flyTo([userPos.lat, userPos.lng], 16);
+            document.getElementById('photoInput').value = "";
+        } catch(e) { 
+            console.error(e);
+            alert("Erreur lors de l'envoi."); 
+        }
+        document.getElementById('loadingOverlay').style.display = 'none';
     }
 
     function togglePanel(id) {
         document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active'));
     }
-
-    function ouvrirAuth() { document.getElementById('authModal').style.display = 'flex'; }
-    function fermerAuth() { document.getElementById('authModal').style.display = 'none'; }
-    
-    function ouvrirModal() { 
-        map.locate({enableHighAccuracy: true});
-        document.getElementById('modalForm').style.display='flex'; 
-        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0]; 
-        document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); 
-    }
-    
-    function fermerModal() { document.getElementById('modalForm').style.display='none'; }
-    function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
-    function checkAutreType(v) { document.getElementById('autreType').style.display = (v==='Autres'?'block':'none'); }
-    function effacerPhotoSelectionnee() { document.getElementById('photoInput').value = ""; }
-
-    async function soumettreSignalement() {
-        if(!userPos && !document.getElementById('editId').value) return alert("Position GPS en cours de chargement ou désactivée. Veuillez patienter ou autoriser le GPS.");
-        document.getElementById('loadingOverlay').style.display = 'flex';
-        let q = document.getElementById('quartierSelect').value === 'Autres' ? document.getElementById('autreQuartier').value : document.getElementById('quartierSelect').value;
-        let t = document.getElementById('typeSelect').value === 'Autres' ? document.getElementById('autreType').value : document.getElementById('typeSelect').value;
-        
-        try {
-            const photoFile = document.getElementById('photoInput').files[0];
-            let photoUrl = null;
-            if(photoFile) {
-                let formData = new FormData();
-                formData.append("image", photoFile);
-                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
-                const imgData = await res.json();
-                photoUrl = imgData.data.url;
-            }
-
-            const payload = { quartier: q, type: t, desc: document.getElementById('descInput').value, date: document.getElementById('dateInput').value, heure: document.getElementById('heureInput').value, photo: photoUrl || "", userId: currentUser.uid };
-            if(!document.getElementById('editId').value) { payload.lat = userPos.lat; payload.lng = userPos.lng; await db.collection('signalements').add(payload); }
-            else { await db.collection('signalements').doc(document.getElementById('editId').value).update(payload); }
-            
-            fermerModal();
-        } catch(e) { alert("Erreur d'envoi."); }
-        document.getElementById('loadingOverlay').style.display = 'none';
-    }
-
-    map.on('locationfound', e => { userPos = e.latlng; L.circle(e.latlng, { radius: 10, color: '#007bff' }).addTo(map); map.flyTo(e.latlng, 16); });
-    map.on('locationerror', e => { alert("Erreur GPS : " + e.message); });
-    
-    function gererAuth(mode) { const e = prompt("Email:"); const p = prompt("Pass:"); if(e && p) { if(mode==='login') auth.signInWithEmailAndPassword(e,p); else auth.createUserWithEmailAndPassword(e,p); fermerAuth(); } }
-    function deconnexion() { if(confirm("Quitter?")) auth.signOut(); }
-    function supprimerDoc(id) { if(confirm("Supprimer?")) db.collection('signalements').doc(id).delete(); }
+  function effacerPhotoSelectionnee() {
+    document.getElementById('photoInput').value = ""; 
+  }
+  
 </script>
 </body>
 </html>
