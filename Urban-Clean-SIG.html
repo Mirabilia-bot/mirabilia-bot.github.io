@@ -239,6 +239,14 @@
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
+    // Activation chirurgicale de la persistance locale pour la rapidité
+    db.settings({ cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED });
+    db.enablePersistence().catch((err) => {
+        if (err.code == 'failed-precondition') console.warn("Plusieurs onglets ouverts");
+        else if (err.code == 'unimplemented') console.warn("Navigateur non compatible");
+    });
+
     const auth = firebase.auth();
     const IMGBB_API_KEY = "875aae76099064e2af713abc4a051601";
 
@@ -476,7 +484,7 @@
             console.error(e);
             alert("Erreur lors de l'envoi."); 
         }
-        document.getElementById('loadingOverlay').style.none = 'none';
+        document.getElementById('loadingOverlay').style.display = 'none';
     }
 
     function togglePanel(id) {
