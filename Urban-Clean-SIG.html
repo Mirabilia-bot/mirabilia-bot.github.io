@@ -33,7 +33,7 @@
     
     #auth-bar { position: fixed; top: 15px; right: 15px; z-index: 2000; display: flex; align-items: center; gap: 10px; }
     
-    .auth-actions { display: flex; gap: 8px; align-items: center; }
+    .auth-actions { display: flex; gap: 5px; align-items: center; }
 
     @media (max-width: 600px) {
         header h1 { font-size: 0.9em; width: 60%; margin-left: -40px; }
@@ -41,19 +41,6 @@
         .ui-btn { padding: 8px 10px; font-size: 10px; }
         #auth-bar { top: 10px; right: 10px; gap: 5px; flex-direction: column; align-items: flex-end; }
         .auth-actions { flex-direction: row; }
-    }
-
-    /* CORRECTIF CHIRURGICAL : RANGEMENT COTE A COTE SUR ORDINATEUR UNIQUEMENT */
-    @media (min-width: 1024px) {
-        #panel-analyse.active { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 20px; 
-            max-width: 850px; 
-            width: 80%;
-        }
-        #panel-analyse h3, #stats-text { grid-column: span 2; }
-        .chart-container { margin-bottom: 0; }
     }
 
     .ticker { position: absolute; top: 75px; left: 0; right: 0; z-index: 1000; width: 100%; background: white; padding: 10px 0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
@@ -97,7 +84,7 @@
 <div id="auth-bar">
     <button id="loginBtn" class="ui-btn" onclick="ouvrirAuth()">🔑 Accès</button>
     <div class="auth-actions">
-        <button id="delAccBtn" class="ui-btn" onclick="supprimerCompte()" style="display:none; background:var(--kgm-red); color:white; border-radius:50%; width:38px; height:38px; display:none; justify-content:center; align-items:center; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" title="Supprimer mon compte"><i class="fas fa-user-slash"></i></button>
+        <button id="delAccBtn" class="ui-btn" onclick="supprimerCompte()" style="display:none; background:var(--kgm-red); color:white; border-radius:50%; width:35px; height:35px; padding:0; justify-content:center; align-items:center;" title="Supprimer mon compte"><i class="fas fa-user-times"></i></button>
         <button id="logoutBtn" class="ui-btn" onclick="deconnexion()" style="display:none;">🚪 Quitter</button>
     </div>
 </div>
@@ -262,6 +249,16 @@
         }
     }
 
+    /* CORRECTIF CHIRURGICAL : FONCTION MOT DE PASSE OUBLIÉ */
+    function recupererPass() {
+        const email = prompt("Entrez votre email pour recevoir le lien de réinitialisation :");
+        if(email) {
+            auth.sendPasswordResetEmail(email).then(() => {
+                alert("Lien envoyé ! Vérifiez votre boîte de réception et vos spams.");
+            }).catch(e => alert("Erreur : " + e.message));
+        }
+    }
+
     function deconnexion() { if(confirm("Se déconnecter ?")) { auth.signOut(); } }
 
     function supprimerCompte() {
@@ -384,7 +381,7 @@
                 const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
                 const imgData = await res.json(); photoUrl = imgData.data.url;
             }
-            const signalementData = { quartier: q, type: document.getElementById('typeSelect').value, desc: document.getElementById('descInput').value, date: document.getElementById('dateInput').value, heure: document.getElementById('heureInput').value, photo: photoUrl || (editId ? data.find(i=>i.id===editId).photo : null), userId: currentUser.uid };
+            const signalementData = { quartier: q, type: document.getElementById('typeSelect').value, desc: document.getElementById('descInput').value, date: document.getElementById('dateInput').value, heure: document.getElementById('heureInput').value, photo: photoUrl || (editId ? data.find(item=>item.id===editId).photo : null), userId: currentUser.uid };
             if(!editId) { signalementData.lat = userPos.lat; signalementData.lng = userPos.lng; await db.collection('signalements').add(signalementData); }
             else { await db.collection('signalements').doc(editId).update(signalementData); }
             fermerModal();
