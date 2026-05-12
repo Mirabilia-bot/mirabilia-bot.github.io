@@ -33,12 +33,12 @@
     
     #auth-bar { 
     position: fixed; 
-    top: 15px; /* Aligné sur le bouton Home */
+    top: 15px; 
     right: 15px; 
     z-index: 2000; 
     display: flex; 
     align-items: center; 
-    gap: 10px; /* Plus d'espace entre les éléments */
+    gap: 10px; 
 }
 
     #userDisplay { 
@@ -59,7 +59,7 @@
         header h1 { font-size: 0.9em; width: 60%; margin-left: -40px; }
         header p { font-size: 0.7em; width: 60%; margin-left: -40px; }
         .ui-btn { padding: 8px 12px; font-size: 11px; }
-        #userDisplay { display: none !important; } /* Cache le mail sur mobile */
+        #userDisplay { display: none !important; }
     }
 
 
@@ -124,10 +124,29 @@
     #homeBtn:hover { background: #f0f0f0; }
     .popup-img { cursor: zoom-in; transition: transform 0.2s; }
     .popup-img:hover { transform: scale(1.02); }
+
+    /* Style des Notifications Flash */
+    #flash-msg {
+        position: fixed;
+        top: 85px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5000;
+        background: var(--kgm-green);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        display: none;
+        animation: fadeInDown 0.5s;
+    }
+    @keyframes fadeInDown { from { opacity: 0; top: 50px; } to { opacity: 1; top: 85px; } }
     
   </style>
 </head>
 <body>
+<div id="flash-msg"></div>
 <button id="homeBtn" onclick="window.location.href='https://mirabilia-bot.github.io/index.html'" title="Retour à l'accueil"><i class="fas fa-arrow-left"></i></button>
   
 <div id="loadingOverlay">
@@ -240,7 +259,6 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Activation chirurgicale de la persistance locale pour la rapidité
     db.settings({ cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED });
     db.enablePersistence().catch((err) => {
         if (err.code == 'failed-precondition') console.warn("Plusieurs onglets ouverts");
@@ -283,6 +301,13 @@
         refresh();
     });
 
+    function showFlash(msg) {
+        const f = document.getElementById('flash-msg');
+        f.innerText = msg;
+        f.style.display = 'block';
+        setTimeout(() => { f.style.display = 'none'; }, 3000);
+    }
+
     function ouvrirAuth() { document.getElementById('authModal').style.display = 'flex'; }
     function fermerAuth() { document.getElementById('authModal').style.display = 'none'; }
 
@@ -291,9 +316,15 @@
         const pass = prompt("Veuillez saisir votre mot de passe :");
         if(email && pass) {
             if(type === 'login') {
-                auth.signInWithEmailAndPassword(email, pass).then(() => fermerAuth()).catch(e => alert("Erreur : " + e.message));
+                auth.signInWithEmailAndPassword(email, pass).then(() => { 
+                    fermerAuth();
+                    showFlash("✅ Vous êtes connecté");
+                }).catch(e => alert("Erreur : " + e.message));
             } else {
-                auth.createUserWithEmailAndPassword(email, pass).then(() => { alert("Compte KGM créé avec succès !"); fermerAuth(); }).catch(e => alert("Erreur lors de la création : " + e.message));
+                auth.createUserWithEmailAndPassword(email, pass).then(() => { 
+                    showFlash("🎉 Compte créé avec succès !"); 
+                    fermerAuth(); 
+                }).catch(e => alert("Erreur lors de la création : " + e.message));
             }
         }
     }
