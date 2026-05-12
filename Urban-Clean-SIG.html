@@ -200,6 +200,7 @@
         <button class="ui-btn" style="width:100%;background:var(--kgm-blue);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('login')">Se Connecter</button>
         <button class="ui-btn" style="width:100%;background:var(--kgm-green);color:white;margin-bottom:10px;padding:12px;" onclick="gererAuth('signup')">S'inscrire (Nouveau Compte)</button>
         <button style="background:none;border:none;color:var(--kgm-red);cursor:pointer;text-decoration:underline;display:block;margin:5px auto;" onclick="recupererPass()">Mot de passe oublié ? (Vérifiez vos spams)</button>
+        <button style="background:none;border:none;color:var(--kgm-red);cursor:pointer;text-decoration:underline;margin-top:10px;display:block;width:100%;" onclick="supprimerCompte()">Supprimer mon compte</button>
         <button style="background:none;border:none;color:#666;cursor:pointer;text-decoration:underline;margin-top:10px;" onclick="fermerAuth()">Annuler</button>
     </div>
 </div>
@@ -516,7 +517,7 @@
             console.error(e);
             alert("Erreur lors de l'envoi."); 
         }
-        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('loadingOverlay').style.none = 'none';
     }
 
     function togglePanel(id) {
@@ -524,6 +525,27 @@
     }
   function effacerPhotoSelectionnee() {
     document.getElementById('photoInput').value = ""; 
+  }
+
+  function supprimerCompte() {
+    const user = auth.currentUser;
+    if (user) {
+        if (confirm("ATTENTION : Cette action est irréversible. Toutes vos données URBAN-CLEAN seront perdues. Voulez-vous vraiment supprimer votre compte ?")) {
+            user.delete().then(() => {
+                alert("Compte supprimé avec succès.");
+                window.location.reload();
+            }).catch((error) => {
+                if (error.code === 'auth/requires-recent-login') {
+                    alert("Pour des raisons de sécurité, vous devez vous reconnecter avant de supprimer votre compte.");
+                    auth.signOut();
+                } else {
+                    alert("Erreur : " + error.message);
+                }
+            });
+        }
+    } else {
+        alert("Vous devez être connecté pour supprimer un compte.");
+    }
   }
   
 </script>
