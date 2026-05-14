@@ -198,7 +198,6 @@
     const auth = firebase.auth();
     const IMGBB_API_KEY = "875aae76099064e2af713abc4a051601";
 
-    /* CORRECTIF CHIRURGICAL : OPTIMISATION DU ZOOM */
     var map = L.map('map', { zoomControl: false, attributionControl: false, maxZoom: 22 }).setView([6.1319, 1.2228], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 22, maxNativeZoom: 19 }).addTo(map);
 
@@ -299,7 +298,7 @@
         securite: L.divIcon({ html: '<i class="fas fa-exclamation-triangle" style="color:#f57c00; font-size:20px;"></i>', className:'c-icon' })
     };
 
-    function refresh() {
+        function refresh() {
         markers.clearLayers();
         let counts = {dechets:0, pollution:0, securite:0};
         let qCounts = {};
@@ -348,11 +347,12 @@
         }
     }
 
-    /* CORRECTIF CHIRURGICAL : NIVEAU DE ZOOM LORS DE LA LOCALISATION */
+    /* CORRECTIF CHIRURGICAL : POSITION AVEC POPUP REFERMABLE */
     map.on('locationfound', e => {
         userPos = e.latlng;
         if (userCircle) map.removeLayer(userCircle);
         userCircle = L.circle(e.latlng, { radius: 10, color: '#007bff', fillColor: '#007bff', fillOpacity: 0.5 }).addTo(map);
+        userCircle.bindPopup("<b style='color:var(--kgm-blue)'>Ma position actuelle</b><br><small>Précision GPS optimisée</small>", { closeButton: true, autoClose: true }).openPopup();
         map.flyTo(e.latlng, 18);
     });
 
