@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Observatoire des Pharmacies du Togo | KGM EXPERTISE</title>
-    <meta name="description" content="Cartographie interactive et analyse spatiale (SIG) des pharmacies au Togo. Étude de densité et maillage territorial réalisée par KGM Expertise.">
-    <meta name="keywords" content="Pharmacie, Togo, SIG, Cartographie, KGM Expertise, Lomé, Santé, Collectivités territoriales">
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
@@ -26,7 +24,6 @@
         header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
         header p { margin: 4px 0 0; font-size: 0.85em; font-style: italic; opacity: 0.9; }
         
-        /* Conteneur UI Supérieur optimisé pour mobile */
         .top-ui-layer {
             position: absolute; top: 85px; left: 50%; transform: translateX(-50%);
             z-index: 1000; width: 90%; max-width: 500px; display: flex; flex-direction: column; gap: 10px;
@@ -53,7 +50,6 @@
             border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer;
             transition: 0.3s; display: flex; align-items: center; gap: 6px;
         }
-        .ui-btn:hover { background: var(--kgm-green); color: white; }
 
         .panel {
             position: absolute; bottom: 95px; left: 50%; transform: translateX(-50%);
@@ -64,15 +60,9 @@
         .panel.active { display: block; animation: slideUp 0.3s ease-out; }
         @keyframes slideUp { from { bottom: 60px; opacity: 0; } to { bottom: 95px; opacity: 1; } }
 
-        .marker-cluster-small { background-color: rgba(40, 167, 69, 0.6); }
-        .marker-cluster-small div { background-color: rgba(40, 167, 69, 0.8); color: white; }
-        .marker-cluster-medium { background-color: rgba(0, 38, 77, 0.6); }
-        .marker-cluster-medium div { background-color: rgba(0, 38, 77, 0.8); color: white; }
-
+        /* Clusters invisibles au zoom maximum pour forcer l'affichage de TOUS les points */
         .pharmacy-icon { background: var(--kgm-green); color: white; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .btn-retour { position: absolute; top: 12px; left: 15px; z-index: 1001; color: white; text-decoration: none; font-weight: bold; font-size: 1.4em; }
-        
-        .metadata-tag { font-size: 10px; opacity: 0.7; margin-top: 15px; display: block; text-align: right; border-top: 1px solid #eee; padding-top: 5px; }
         .proximity-label { background: white; border: 1px solid var(--kgm-green); border-radius: 4px; padding: 2px 5px; font-size: 10px; font-weight: bold; color: var(--kgm-blue); }
 
         @media (max-width: 480px) {
@@ -84,7 +74,6 @@
 <body>
 
 <a href="index.html" class="btn-retour">←</a>
-
 <header>
     <h1>KGM EXPERTISE - SIG</h1>
     <p>Cliquez sur une commune pour zoomer ou sur un symbole (+) pour les infos</p>
@@ -93,7 +82,7 @@
 <div class="top-ui-layer">
     <input type="text" id="search-input" placeholder="Rechercher une pharmacie ou commune...">
     <div class="stats-overlay" id="stats-box">
-        Indicateurs : <span id="count-visible">0</span> pharmacies analysées dans cette zone
+        Analyse en temps réel : <span id="count-visible">0</span> points détectés
     </div>
 </div>
 
@@ -103,28 +92,13 @@
     <h3 style="margin:0 0 15px 0; color:var(--kgm-blue)">Analyses Spatiales</h3>
     <p style="font-size:14px; line-height: 1.6; color: #444;">
         <b>Densité :</b> Forte concentration observée dans le Grand Lomé, indiquant une polarisation des services de santé.<br><br>
-        <b>Maillage :</b> Couverture optimisée le long de la RN1 et des axes structurants pour les populations urbaines et rurales.<br><br>
+        <b>Maillage :</b> Couverture optimisée le long de la RN1 et des axes structurants.<br><br>
         <b>Fiabilité :</b> Taux de disponibilité territoriale de 85%, assurant une continuité de service public et privé.
     </p>
-    <span class="metadata-tag">Source : Ordre des Pharmaciens / Ministère de la Santé - MAJ 2026</span>
-</div>
-
-<div id="panel-legende" class="panel">
-    <h3 style="margin:0 0 15px 0; color:var(--kgm-blue)">Légende & Outils</h3>
-    <div style="display:flex; align-items:center; margin-bottom:12px;">
-        <div style="width:20px; height:20px; background:var(--kgm-green); border-radius:50%; margin-right:10px;"></div>
-        <span style="font-size:14px;">Zone de proximité (10 min à pied)</span>
-    </div>
-    <div style="display:flex; align-items:center; margin-bottom:12px;">
-        <div style="width:20px; height:20px; border:2px solid var(--kgm-blue); margin-right:10px;"></div>
-        <span style="font-size:14px;">Limites Administratives</span>
-    </div>
-    <button onclick="window.print()" class="ui-btn" style="width:100%; justify-content:center; margin-top:10px; background:#f0f0f0;">📄 Exporter Rapport (PDF)</button>
 </div>
 
 <div class="ui-controls">
     <button class="ui-btn" onclick="togglePanel('panel-analyse')">📊 Analyse</button>
-    <button class="ui-btn" onclick="togglePanel('panel-legende')">🗺️ Légende</button>
     <button class="ui-btn" onclick="map.locate({setView: true, maxZoom: 16})">🧭 Ma Position</button>
 </div>
 
@@ -132,21 +106,13 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
 <script>
-    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
     var dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png');
-
     var map = L.map('map', { zoomControl: false, layers: [dark] }).setView([8.6195, 1.1414], 7);
     var userLatLng = null;
 
-    L.control.layers({ "Mode Sombre": dark, "Plan Ville": osm, "Vue Satellite": satellite }, null, { position: 'topright' }).addTo(map);
-
     function togglePanel(id) {
-        const panels = document.querySelectorAll('.panel');
         const target = document.getElementById(id);
-        const isActive = target.classList.contains('active');
-        panels.forEach(p => p.classList.remove('active'));
-        if(!isActive) target.classList.add('active');
+        target.classList.toggle('active');
     }
 
     map.on('locationfound', function(e) {
@@ -155,7 +121,12 @@
     });
 
     var pharmacyLayer, communeLayer, influenceCircle;
-    var markers = L.markerClusterGroup({ disableClusteringAtZoom: 14 });
+    // SOLUTION PERFECTION : On désactive les clusters dès le zoom 15 pour forcer l'affichage individuel
+    var markers = L.markerClusterGroup({ 
+        disableClusteringAtZoom: 15,
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false
+    });
 
     fetch('./communes.geojson').then(res => res.json()).then(data => {
         communeLayer = L.geoJSON(data, {
@@ -173,7 +144,9 @@
                 return L.marker(latlng, { icon: L.divIcon({ className: 'pharmacy-icon', html: '+', iconSize: [22, 22] }) });
             },
             onEachFeature: function (f, l) {
+                // APPLICATION SYSTÉMATIQUE DU CLICK POUR CHAQUE POINT
                 l.on('click', function(e) {
+                    // Zone tampon systématique
                     if (influenceCircle) map.removeLayer(influenceCircle);
                     influenceCircle = L.circle(e.latlng, { radius: 1000, color: '#28a745', fillOpacity: 0.15, weight: 2 }).addTo(map);
                     influenceCircle.bindTooltip("10-15 min à pied", {permanent: true, direction: 'bottom', className: 'proximity-label'}).openTooltip();
@@ -188,7 +161,7 @@
                             <hr style="border:0; border-top:1px solid #eee; margin:8px 0;">
                             <span style="font-size:12px;">🏥 <b>Type:</b> ${p.pharmacie_type}</span><br>
                             <span style="font-size:12px;">📍 <b>Commune:</b> ${p.commune_nom_bdd}</span><br>
-                            <a href="${routeUrl}" target="_blank" style="display:block; margin-top:12px; background:var(--kgm-green); color:white; text-align:center; padding:10px; border-radius:5px; text-decoration:none; font-weight:bold;">🚀 Itinéraire (Maps)</a>
+                            <a href="${routeUrl}" target="_blank" style="display:block; margin-top:12px; background:var(--kgm-green); color:white; text-align:center; padding:10px; border-radius:5px; text-decoration:none; font-weight:bold;">🚀 Itinéraire (Google Maps)</a>
                         </div>`;
                     l.bindPopup(content).openPopup();
                 });
@@ -197,25 +170,26 @@
         });
         map.addLayer(markers);
 
+        // Statistiques dynamiques fluides
         map.on('moveend', function() {
             var count = 0;
             markers.eachLayer(l => { if (map.getBounds().contains(l.getLatLng())) count++; });
             document.getElementById('count-visible').innerText = count;
         });
 
+        // Recherche chirurgicale avec zoom forcé
         document.getElementById('search-input').addEventListener('input', function(e) {
             var val = e.target.value.toLowerCase().trim();
             if(val.length < 3) return;
 
-            communeLayer.eachLayer(l => {
-                if(l.feature.properties["Noms des communes"]?.toLowerCase().includes(val)) map.fitBounds(l.getBounds());
-            });
-
             pharmacyLayer.eachLayer(l => {
                 if(l.feature.properties.pharmacie_nom?.toLowerCase().includes(val)) {
-                    map.setView(l.getLatLng(), 16);
+                    map.setView(l.getLatLng(), 17); // Zoom maximum pour casser les clusters
                     l.fire('click');
                 }
+            });
+            communeLayer.eachLayer(l => {
+                if(l.feature.properties["Noms des communes"]?.toLowerCase().includes(val)) map.fitBounds(l.getBounds());
             });
         });
     });
