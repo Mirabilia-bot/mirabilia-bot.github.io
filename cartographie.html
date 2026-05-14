@@ -60,10 +60,8 @@
         .panel.active { display: block; animation: slideUp 0.3s ease-out; }
         @keyframes slideUp { from { bottom: 60px; opacity: 0; } to { bottom: 95px; opacity: 1; } }
 
-        /* Clusters invisibles au zoom maximum pour forcer l'affichage de TOUS les points */
         .pharmacy-icon { background: var(--kgm-green); color: white; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .btn-retour { position: absolute; top: 12px; left: 15px; z-index: 1001; color: white; text-decoration: none; font-weight: bold; font-size: 1.4em; }
-        .proximity-label { background: white; border: 1px solid var(--kgm-green); border-radius: 4px; padding: 2px 5px; font-size: 10px; font-weight: bold; color: var(--kgm-blue); }
 
         @media (max-width: 480px) {
             header h1 { font-size: 0.9em; }
@@ -121,7 +119,6 @@
     });
 
     var pharmacyLayer, communeLayer, influenceCircle;
-    // Perfection : Spiderfy forcé pour les points superposés
     var markers = L.markerClusterGroup({ 
         disableClusteringAtZoom: 16,
         spiderfyOnMaxZoom: true,
@@ -147,14 +144,12 @@
             onEachFeature: function (f, l) {
                 l.on('click', function(e) {
                     if (influenceCircle) map.removeLayer(influenceCircle);
-                    influenceCircle = L.circle(e.latlng, { radius: 1000, color: '#28a745', fillOpacity: 0.15, weight: 2 }).addTo(map);
-                    influenceCircle.bindTooltip("10-15 min à pied", {permanent: true, direction: 'bottom', className: 'proximity-label'}).openTooltip();
+                    influenceCircle = L.circle(e.latlng, { radius: 1000, color: '#28a745', fillOpacity: 0.1, weight: 1, dashArray: '5, 10' }).addTo(map);
                     
                     var p = f.properties;
                     var dest = e.latlng.lat + "," + e.latlng.lng;
-                    // API Officielle Google Maps pour itinéraire parfait
                     var routeUrl = userLatLng ? 
-                        `https://www.google.com/maps/dir/?api=1&origin=${userLatLng.lat},${userLatLng.lng}&destination=${dest}&travelmode=driving` : 
+                        `https://www.google.com/maps/dir/?api=1&origin=${userLatLng.lat},${userLatLng.lng}&destination=${dest}` : 
                         `https://www.google.com/maps/search/?api=1&query=${dest}`;
 
                     var content = `
@@ -188,7 +183,6 @@
                     l.fire('click');
                 }
             });
-            // Correction chirurgicale du nom de la propriété commune
             communeLayer.eachLayer(l => {
                 var cName = l.feature.properties.commune_nom_bdd || l.feature.properties.nom || "";
                 if(cName.toLowerCase().includes(val)) map.fitBounds(l.getBounds());
@@ -197,6 +191,5 @@
     });
     window.addEventListener('resize', function() { map.invalidateSize(); });
 </script>
-
 </body>
 </html>
