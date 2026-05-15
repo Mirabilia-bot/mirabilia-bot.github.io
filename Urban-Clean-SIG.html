@@ -352,7 +352,7 @@
         userPos = e.latlng;
         userAccuracy = e.accuracy;
         if (userCircle) map.removeLayer(userCircle);
-        userCircle = L.circle(e.latlng, { radius: e.accuracy, color: e.accuracy < 20 ? '#1b5e20' : '#fc3d21', fillColor: e.accuracy < 20 ? '#1b5e20' : '#fc3d21', fillOpacity: 0.2 }).addTo(map);
+        userCircle = L.circle(e.latlng, { radius: e.accuracy, color: e.accuracy < 15 ? '#1b5e20' : '#fc3d21', fillColor: e.accuracy < 15 ? '#1b5e20' : '#fc3d21', fillOpacity: 0.2 }).addTo(map);
         userCircle.bindPopup(`<b>Position actuelle</b><br>Précision : ±${Math.round(e.accuracy)}m`, { closeButton: true }).openPopup();
         if(e.accuracy < 25) map.flyTo(e.latlng, 18);
     });
@@ -390,7 +390,7 @@
     async function soumettreSignalement() {
         let editId = document.getElementById('editId').value;
         if(!userPos && !editId) return alert("Localisation en cours... Patientez.");
-        if(userAccuracy > 30 && !editId) return alert(`Précision insuffisante (${Math.round(userAccuracy)}m). Déplacez-vous à découvert.`);
+        if(userAccuracy > 20 && !editId) return alert(`Précision insuffisante (${Math.round(userAccuracy)}m). Déplacez-vous à découvert.`);
         document.getElementById('loadingOverlay').style.display = 'flex';
         let q = document.getElementById('quartierSelect').value === 'Autres' ? document.getElementById('autreQuartier').value : document.getElementById('quartierSelect').value;
         const photoFile = document.getElementById('photoInput').files[0];
