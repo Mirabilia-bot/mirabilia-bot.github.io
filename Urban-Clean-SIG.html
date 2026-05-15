@@ -128,7 +128,7 @@
     <button class="ui-btn" id="addBtnFloating" onclick="ouvrirModal()">➕ Signaler</button>
     <button class="ui-btn" onclick="togglePanel('panel-analyse')">📊 Analyse</button>
     <button class="ui-btn" onclick="togglePanel('panel-legende')">🗺️ Légende</button>
-    <button class="ui-btn" onclick="map.locate({enableHighAccuracy: true, watch: true, maximumAge: 0, timeout: 15000})">📍 Position</button>
+    <button class="ui-btn" onclick="map.locate({enableHighAccuracy: true, setView: true, maxZoom: 18, maximumAge: 3000})">📍 Position</button>
 </div>
 
 <div id="authModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:3000;justify-content:center;align-items:center;">
@@ -349,17 +349,15 @@
     }
 
     map.on('locationfound', e => {
-        if(e.accuracy > 30) return;
         userPos = e.latlng;
         userAccuracy = e.accuracy;
         if (userCircle) map.removeLayer(userCircle);
-        userCircle = L.circle(e.latlng, { radius: e.accuracy, color: e.accuracy < 20 ? '#1b5e20' : '#fc3d21', fillColor: e.accuracy < 20 ? '#1b5e20' : '#fc3d21', fillOpacity: 0.2 }).addTo(map);
+        userCircle = L.circle(e.latlng, { radius: e.accuracy, color: e.accuracy < 30 ? '#1b5e20' : '#fc3d21', fillColor: e.accuracy < 30 ? '#1b5e20' : '#fc3d21', fillOpacity: 0.2 }).addTo(map);
         userCircle.bindPopup(`<b>Position actuelle</b><br>Précision : ±${Math.round(e.accuracy)}m`, { closeButton: true }).openPopup();
-        if(e.accuracy < 25) map.flyTo(e.latlng, 18);
     });
 
    function ouvrirModal() { 
-        map.locate({enableHighAccuracy: true, watch: true, maximumAge: 0, timeout: 15000});
+        map.locate({enableHighAccuracy: true, setView: true, maxZoom: 18, maximumAge: 3000});
         document.getElementById('editId').value = "";
         document.getElementById('modalForm').style.display='flex';
         document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
