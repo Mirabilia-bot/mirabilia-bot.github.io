@@ -201,25 +201,12 @@
     var map = L.map('map', { zoomControl: false, attributionControl: false, maxZoom: 22 }).setView([6.1319, 1.2228], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 22, maxNativeZoom: 19 }).addTo(map);
 
-    /* CORRECTIF CHIRURGICAL : REGLAGE ANCRAGE ICONES PAR DEFAUT */
-    delete L.Icon.Default.prototype._getIconUrl;
-    L.Icon.Default.mergeOptions({
-        iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    });
-
     var currentUser = null;
     var userPos = null;
     var userCircle = null;
     var data = [];
     var markers = L.layerGroup().addTo(map);
     var chart1, chart2;
-    var dragMarker = null;
 
     fetch('./communes.geojson').then(res => res.json()).then(geojson => {
         L.geoJSON(geojson, {
@@ -360,22 +347,12 @@
         }
     }
 
-    /* CORRECTIF CHIRURGICAL : POSITION AVEC MARQUEUR DÉPLACABLE */
+    /* CORRECTIF CHIRURGICAL : POSITION AVEC POPUP REFERMABLE */
     map.on('locationfound', e => {
         userPos = e.latlng;
         if (userCircle) map.removeLayer(userCircle);
-        if (dragMarker) map.removeLayer(dragMarker);
-        
-        userCircle = L.circle(e.latlng, { radius: 10, color: '#007bff', fillColor: '#007bff', fillOpacity: 0.2 }).addTo(map);
-        
-        dragMarker = L.marker(e.latlng, { draggable: true }).addTo(map);
-        dragMarker.bindPopup("<b style='color:var(--kgm-blue)'>Ajustez la position</b><br>Maintenez et glissez le point sur le lieu exact.", { closeButton: false }).openPopup();
-        
-        dragMarker.on('dragend', function(event) {
-            userPos = event.target.getLatLng();
-            dragMarker.getPopup().setContent("<b style='color:var(--kgm-green)'>Position ajustée ✅</b>").openOn(map);
-        });
-
+        userCircle = L.circle(e.latlng, { radius: 10, color: '#007bff', fillColor: '#007bff', fillOpacity: 0.5 }).addTo(map);
+        userCircle.bindPopup("<b style='color:var(--kgm-blue)'>Ma position actuelle</b><br><small>Précision GPS optimisée</small>", { closeButton: true, autoClose: true }).openPopup();
         map.flyTo(e.latlng, 18);
     });
 
@@ -426,7 +403,6 @@
             const signalementData = { quartier: q, type: document.getElementById('typeSelect').value, desc: document.getElementById('descInput').value, date: document.getElementById('dateInput').value, heure: document.getElementById('heureInput').value, photo: photoUrl || (editId ? data.find(item=>item.id===editId).photo : null), userId: currentUser.uid };
             if(!editId) { signalementData.lat = userPos.lat; signalementData.lng = userPos.lng; await db.collection('signalements').add(signalementData); }
             else { await db.collection('signalements').doc(editId).update(signalementData); }
-            if (dragMarker) map.removeLayer(dragMarker);
             fermerModal();
         } catch(e) { alert("Erreur d'envoi."); }
         document.getElementById('loadingOverlay').style.display = 'none';
