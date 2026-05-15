@@ -98,8 +98,8 @@
 <script>
     const map = L.map('map', { zoomControl: false, tap: false }).setView([8.6195, 1.1414], 7);
     
-    // RESTAURATION CHIRURGICALE DES COULEURS OPENSTREETMAP
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // Correction chirurgicale : Utilisation du fond de carte OSM Original (Clair)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
