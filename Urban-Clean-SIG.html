@@ -413,12 +413,16 @@ En enregistrant ces deux modifications, la carte forcera le navigateur de Facebo
     });
 
     const getDynamicIcon = (type, status) => {
-    const colors = { attente: '#6c757d', cours: '#fd7e14', resolu: '#28a745' };
-    const bg = colors[status] || '#6c757d';
+    const statusColors = { attente: '#6c757d', cours: '#fd7e14', resolu: '#28a745' };
+    const typeColors = { dechets: '#fc3d21', pollution: '#007bff', securite: '#f57c00' };
+    
+    const bg = statusColors[status] || '#6c757d';
+    const iconColor = typeColors[type] || '#fc3d21';
+    
     const htmlIcons = {
-        dechets: `<div style="background:${bg}; padding:6px; border-radius:50%; display:inline-flex; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-trash" style="color:white; font-size:14px;"></i></div>`,
-        pollution: `<div style="background:${bg}; padding:6px; border-radius:50%; display:inline-flex; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-smog" style="color:white; font-size:14px;"></i></div>`,
-        securite: `<div style="background:${bg}; padding:6px; border-radius:50%; display:inline-flex; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-exclamation-triangle" style="color:white; font-size:14px;"></i></div>`
+        dechets: `<div style="background:${bg}; padding:6px; border-radius:50%; display:inline-flex; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-trash" style="color:${iconColor}; font-size:14px;"></i></div>`,
+        pollution: `<div style="background:${bg}; padding:6px; border-radius:50%; display:inline-flex; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-smog" style="color:${iconColor}; font-size:14px;"></i></div>`,
+        securite: `<div style="background:${bg}; padding:6px; border-radius:50%; display:inline-flex; border:2px solid white; box-shadow:0 2px 5px rgba(0,0,0,0.3);"><i class="fas fa-exclamation-triangle" style="color:${iconColor}; font-size:14px;"></i></div>`
     };
     return L.divIcon({ html: htmlIcons[type] || htmlIcons.dechets, className: 'c-icon', iconSize: [30, 30], iconAnchor: [15, 15] });
 };
