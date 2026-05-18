@@ -301,7 +301,7 @@ En enregistrant ces deux modifications, la carte forcera le navigateur de Facebo
     const auth = firebase.auth();
     const IMGBB_API_KEY = "875aae76099064e2af713abc4a051601";
 
-    var map = L.map('map', { zoomControl: false, attributionControl: false, maxZoom: 22 }).setView([6.1319, 1.2228], 13);
+        var map = L.map('map', { zoomControl: false, attributionControl: false, maxZoom: 22 }).setView([6.1319, 1.2228], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 22, maxNativeZoom: 19 }).addTo(map);
 
     var currentUser = null;
@@ -309,8 +309,17 @@ En enregistrant ces deux modifications, la carte forcera le navigateur de Facebo
     var userCircle = null;
     var data = [];
     var currentFilterStatus = "tous"; // Variable de suivi globale pour les filtres
-    var markers = L.layerGroup().addTo(map);
+    
+    // REMPLACEMENT EFFECTUÉ ICI
+    var markers = L.markerClusterGroup({
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false,
+        zoomToBoundsOnClick: true
+    });
+    map.addLayer(markers);
+    
     var chart1, chart2;
+
 
     // DEFINITION ULTRA-FIABLE ET SECURISEE DES ROLES GESTIONNAIRES (MAIRIE / ADMIN KGM EXPERTISE)
     const ADMIN_EMAILS = ["mirabiliagnimdou@gmail.com", "kgmexpertise@gmail.com"];
