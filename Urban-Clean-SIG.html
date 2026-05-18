@@ -37,7 +37,7 @@
     
     #auth-bar { position: fixed; top: 15px; right: 15px; z-index: 2000; display: flex; align-items: center; gap: 10px; }
     
-    #side-menu { position: fixed; top: 0; right: -250px; width: 250px; height: 100%; background: var(--kgm-blue); z-index: 4000; transition: 0.3s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.3); }
+    #side-menu { position: fixed; top: 0; right: -250px; width: 250px; height: 100%; background: var(--kgm-blue); z-index: 4000; transition: 0.3s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.3); overflow-y: auto; }
     #side-menu.active { right: 0; }
     .menu-item { padding: 15px 25px; color: white; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: bold; }
     .menu-item:hover { background: rgba(255,255,255,0.1); }
@@ -80,6 +80,15 @@
     .popup-img:hover { transform: scale(1.02); }
     #flash-msg { position: fixed; top: 85px; left: 50%; transform: translateX(-50%); z-index: 5000; background: var(--kgm-green); color: white; padding: 10px 20px; border-radius: 50px; font-weight: bold; box-shadow: 0 12px 30px rgba(0,0,0,0.22); display: none; animation: fadeInDown 0.5s; backdrop-filter: blur(12px); }
     @keyframes fadeInDown { from { opacity: 0; top: 50px; } to { opacity: 1; top: 85px; } }
+
+    /* STYLES AJOUTÉS POUR LES OPTIONS DE SUIVI DANS LE MENU */
+    .menu-section-title { padding: 10px 25px 5px 25px; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px; }
+    .menu-filter-select { width: 80%; margin: 5px 10%; padding: 8px; border-radius: 5px; border: none; background: rgba(255,255,255,0.15); color: white; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: bold; outline: none; cursor: pointer; }
+    .menu-filter-select option { background: var(--kgm-blue); color: white; }
+    .status-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; color: white; margin-top: 4px; }
+    .status-badge.attente { background: #6c757d; }
+    .status-badge.cours { background: #fd7e14; }
+    .status-badge.resolu { background: #28a745; }
   </style>
 </head>
 <body>
@@ -99,6 +108,17 @@
 <div id="overlay-menu" onclick="toggleSideMenu()"></div>
 <div id="side-menu">
     <i class="fas fa-times menu-close" onclick="toggleSideMenu()"></i>
+    
+    <div class="menu-section-title">Suivi de la Signalisation</div>
+    <div style="padding: 0 25px; color: white; font-size: 12px; margin-bottom: 5px; font-weight: 500;">Filtrer par statut :</div>
+    <select id="filterStatusSelect" class="menu-filter-select" onchange="filtrerStatutSurCarte(this.value)">
+        <option value="tous">🌍 Tous les signalements</option>
+        <option value="attente">⏳ En attente / Signalés</option>
+        <option value="cours">⚙️ Pris en charge / En cours</option>
+        <option value="resolu">✅ Résolus / Clôturés</option>
+        <option value="mes_signalements">👤 Mes signalements</option>
+    </select>
+    
     <div class="menu-item" onclick="deconnexion()"><i class="fas fa-sign-out-alt"></i> Quitter</div>
     <div class="menu-item" onclick="supprimerCompte()" style="color:#ff4d4d;"><i class="fas fa-user-slash"></i> Supprimer le compte</div>
 </div>
@@ -127,6 +147,11 @@
     <div class="legend-item"><i class="fas fa-smog legend-icon" style="color:#007bff"></i><span>Pollution</span></div>
     <div class="legend-item"><i class="fas fa-exclamation-triangle legend-icon" style="color:#f57c00"></i><span>Sécurité / Risque</span></div>
     <div class="legend-item"><div style="width:20px; height:10px; border:2px solid var(--kgm-blue); margin-right:10px;"></div><span>Limites Communales</span></div>
+    
+    <div class="menu-section-title" style="border:none; padding-left:0; color:var(--kgm-blue); margin-top:10px; font-size:12px;">Statuts de traitement</div>
+    <div class="legend-item"><i class="fas fa-circle legend-icon" style="color:#6c757d"></i><span>En attente / Signalé</span></div>
+    <div class="legend-item"><i class="fas fa-circle legend-icon" style="color:#fd7e14"></i><span>Pris en charge / En cours</span></div>
+    <div class="legend-item"><i class="fas fa-circle legend-icon" style="color:#28a745"></i><span>Résolu / Clôturé</span></div>
 </div>
 
 <div class="ui-controls">
@@ -173,12 +198,24 @@
     </button>
 </div>
 
-        <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
-        <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;">
-            <option value="dechets">Déchets</option>
-            <option value="pollution">Pollution</option>
-            <option value="securite">Sécurité</option>
-        </select>
+        <div style="display:flex; gap:10px;">
+          <div style="flex:1;">
+            <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Type d'alerte</label>
+            <select id="typeSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;">
+                <option value="dechets">Déchets</option>
+                <option value="pollution">Pollution</option>
+                <option value="securite">Sécurité</option>
+            </select>
+          </div>
+          <div style="flex:1;">
+            <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;">Statut Suivi</label>
+            <select id="statusSelect" style="width:100%; padding:10px; margin:5px 0 10px 0;">
+                <option value="attente">⏳ En attente</option>
+                <option value="cours">⚙️ En cours</option>
+                <option value="resolu">✅ Résolu</option>
+            </select>
+          </div>
+        </div>
 
         <button style="width:100%; padding:12px; background:var(--kgm-green); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="soumettreSignalement()">✅ Valider</button>
         <button style="width:100%; padding:10px; background:#eee; color:#333; border:none; border-radius:8px; margin-top:8px; cursor:pointer;" onclick="fermerModal()">Annuler</button>
@@ -210,6 +247,7 @@
     var userPos = null;
     var userCircle = null;
     var data = [];
+    var currentFilterStatus = "tous"; // Variable de suivi globale pour les filtres
     var markers = L.layerGroup().addTo(map);
     var chart1, chart2;
 
@@ -303,7 +341,7 @@
     function supprimerCompte() {
         const user = auth.currentUser;
         if (user && confirm("ATTENTION : Action irréversible. Supprimer votre compte ?")) {
-            user.delete().then(() => { alert("Compte supprimé."); window.location.reload(); }).catch((e) => {
+            user.delete().then(() => { alert("Compte deleted."); window.location.reload(); }).catch((e) => {
                 if (e.code === 'auth/requires-recent-login') { alert("Reconnectez-vous avant cette action."); auth.signOut(); }
             });
         }
@@ -320,14 +358,40 @@
         securite: L.divIcon({ html: '<i class="fas fa-exclamation-triangle" style="color:#f57c00; font-size:20px;"></i>', className:'c-icon' })
     };
 
+    /* FONCTION DE FILTRAGE ASSOCIEE AU SELECT DU MENU */
+    function filtrerStatutSurCarte(statut) {
+        currentFilterStatus = statut;
+        refresh();
+    }
+
     function refresh() {
         markers.clearLayers();
         let counts = {dechets:0, pollution:0, securite:0};
         let qCounts = {};
+        
+        // Dictionnaire des labels de statuts pour injection claire dans la popup
+        const statusLabels = {
+            "attente": "<span class='status-badge attente'>⏳ En attente</span>",
+            "cours": "<span class='status-badge cours'>⚙️ En cours</span>",
+            "resolu": "<span class='status-badge resolu'>✅ Résolu</span>"
+        };
+
         data.forEach(d => {
-            let popupContent = `<div style="min-width:180px;"><b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i>`;
+            // Initialisation rétrocompatible du statut s'il n'existe pas en BDD
+            let itemStatus = d.status || "attente";
+
+            // Application chirurgicale du filtre dynamique sélectionné
+            if (currentFilterStatus !== "tous") {
+                if (currentFilterStatus === "mes_signalements") {
+                    if (!currentUser || d.userId !== currentUser.uid) return;
+                } else if (itemStatus !== currentFilterStatus) {
+                    return;
+                }
+            }
+
+            let popupContent = `<div style="min-width:180px;"><b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i><br>Suivi : ${statusLabels[itemStatus] || statusLabels['attente']}`;
             if(d.photo) popupContent += `<br><img src="${d.photo}" class="popup-img" style="width:100%;max-height:150px;object-fit:cover;margin-top:5px;border-radius:4px" onclick="window.open('${d.photo}', '_blank')">`;
-            popupContent += `<br><small><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small></div>`;
+            popupContent += `<br><small style="margin-top:5px; display:block;"><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small></div>`;
           if(currentUser && d.userId === currentUser.uid) {
                 popupContent += `<div class="popup-actions">
                     <i class="fas fa-edit" style="color:var(--kgm-green)" onclick="editerDoc('${d.id}')"></i>
@@ -338,7 +402,7 @@
             if(counts.hasOwnProperty(d.type)) counts[d.type]++;
             qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
         });
-        document.getElementById('stats-text').innerText = `${data.length} signalements enregistrés`;
+        document.getElementById('stats-text').innerText = `${data.length} signalements correspondants`;
         updateCharts(counts, qCounts);
     }
 
@@ -354,6 +418,7 @@
         document.getElementById('dateInput').value = d.date;
         document.getElementById('heureInput').value = d.heure;
         document.getElementById('typeSelect').value = d.type;
+        document.getElementById('statusSelect').value = d.status || "attente"; // Chargement du statut en mode édition
         document.getElementById('modalForm').style.display = 'flex';
         map.closePopup();
     }
@@ -384,6 +449,7 @@
         document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
         document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         document.getElementById('descInput').value = "";
+        document.getElementById('statusSelect').value = "attente"; // Valeur par défaut lors de la création d'un signalement
     }
     function fermerModal() { document.getElementById('modalForm').style.display='none'; }
     function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
@@ -421,7 +487,19 @@
                 const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
                 const imgData = await res.json(); photoUrl = imgData.data.url;
             }
-            const signalementData = { quartier: q, type: document.getElementById('typeSelect').value, desc: document.getElementById('descInput').value, date: document.getElementById('dateInput').value, heure: document.getElementById('heureInput').value, photo: photoUrl || (editId ? data.find(item=>item.id===editId).photo : null), userId: currentUser.uid };
+            
+            // Inclusion chirurgicale de la propriété status dans l'objet de persistance Firestore
+            const signalementData = { 
+                quartier: q, 
+                type: document.getElementById('typeSelect').value, 
+                desc: document.getElementById('descInput').value, 
+                date: document.getElementById('dateInput').value, 
+                heure: document.getElementById('heureInput').value, 
+                status: document.getElementById('statusSelect').value,
+                photo: photoUrl || (editId ? data.find(item=>item.id===editId).photo : null), 
+                userId: currentUser.uid 
+            };
+            
             if(!editId) { signalementData.lat = userPos.lat; signalementData.lng = userPos.lng; await db.collection('signalements').add(signalementData); }
             else { await db.collection('signalements').doc(editId).update(signalementData); }
             fermerModal();
