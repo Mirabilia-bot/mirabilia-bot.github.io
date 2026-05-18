@@ -17,6 +17,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
   
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
@@ -24,12 +28,12 @@
   <style>
     :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
     * { box-sizing: border-box; }
-    body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Times New Roman', serif; background: #eee; }
+    body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: 'Montserrat', sans-serif; background: #eee; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1; }
     
-    header { position: absolute; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,38,77,0.9); color: white; padding: 10px; text-align: center; min-height: 70px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; width: 70%; }
-    header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.9; width: 70%; }
+    header { position: absolute; top: 0; left: 0; right: 0; z-index: 1000; background: linear-gradient(135deg, rgba(0,38,77,0.96), rgba(0,38,77,0.88)); backdrop-filter: blur(14px); color: white; padding: 10px; text-align: center; min-height: 70px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.22); }
+    header h1 { margin: 0; font-size: 1.1em; text-transform: uppercase; width: 70%; font-weight: 800; letter-spacing: 1px; }
+    header p { margin: 4px 0 0; font-size: 0.8em; opacity: 0.95; width: 70%; }
     
     #auth-bar { position: fixed; top: 15px; right: 15px; z-index: 2000; display: flex; align-items: center; gap: 10px; }
     
@@ -53,9 +57,10 @@
     @keyframes ticker { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
     
     .ui-controls { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 8px; width: auto; }
-    .ui-btn { background: white; color: var(--kgm-blue); border: none; padding: 10px 15px; border-radius: 25px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
+    .ui-btn { background: white; color: var(--kgm-blue); border: 1px solid rgba(255,255,255,0.3); padding: 10px 15px; border-radius: 25px; font-weight: 700; font-size: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.18); cursor: pointer; transition: all 0.28s ease; backdrop-filter: blur(10px); }
+    .ui-btn:hover { transform: translateY(-2px); }
     
-    .panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 380px; background: white; border-radius: 15px; padding: 15px; display: none; z-index: 1001; border-top: 6px solid var(--kgm-green); box-shadow: 0 -5px 20px rgba(0,0,0,0.2); max-height: 55vh; overflow-y: auto; }
+    .panel { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 380px; background: white; border-radius: 24px; padding: 15px; display: none; z-index: 1001; border-top: 7px solid var(--kgm-green); box-shadow: 0 20px 45px rgba(0,0,0,0.18); max-height: 55vh; overflow-y: auto; backdrop-filter: blur(16px); }
     .panel.active { display: block; animation: slideUp 0.3s ease-out; }
     @keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 85px; opacity: 1; } }
     
@@ -73,7 +78,7 @@
     #homeBtn:hover { background: #f0f0f0; }
     .popup-img { cursor: zoom-in; transition: transform 0.2s; }
     .popup-img:hover { transform: scale(1.02); }
-    #flash-msg { position: fixed; top: 85px; left: 50%; transform: translateX(-50%); z-index: 5000; background: var(--kgm-green); color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: none; animation: fadeInDown 0.5s; }
+    #flash-msg { position: fixed; top: 85px; left: 50%; transform: translateX(-50%); z-index: 5000; background: var(--kgm-green); color: white; padding: 10px 20px; border-radius: 50px; font-weight: bold; box-shadow: 0 12px 30px rgba(0,0,0,0.22); display: none; animation: fadeInDown 0.5s; backdrop-filter: blur(12px); }
     @keyframes fadeInDown { from { opacity: 0; top: 50px; } to { opacity: 1; top: 85px; } }
   </style>
 </head>
@@ -104,7 +109,7 @@
 </header>
 
 <div class="ticker">
-    <div class="ticker-text">🌿 <strong>Stop à l’insalubrité !</strong> Devenez acteur de la propreté de votre quartier en signalant les zones critiques via notre portail. Vos alertes sont transmises instantanément à la mairie pour une intervention rapide. Avec URBAN-CLEAN de KGM Expertise, quelques minutes suffisent pour protéger notre santé et assainir notre cadre de vie. Ensemble, rendons nos communes exemplaires ! Source de données géospatiales : Géoportail Togo et Openstreetmap 🌿</div>
+    <div class="ticker-text">🌿 <strong>Stop à l’insalubrité !</strong> Devenez actor de la propreté de votre quartier en signalant les zones critiques via notre portail. Vos alertes sont transmises instantanément à la mairie pour une intervention rapide. Avec URBAN-CLEAN de KGM Expertise, quelques minutes suffisent pour protéger notre santé et assainir notre cadre de vie. Ensemble, rendons nos communes exemplaires ! Source de données géospatiales : Géoportail Togo et Openstreetmap 🌿</div>
 </div>
   
 <div id="map"></div>
@@ -153,7 +158,7 @@
         <input type="text" id="autreQuartier" placeholder="Nom du quartier" style="display:none; width:100%; padding:10px; margin-bottom:10px;">
         
         <label style="font-weight:bold; font-size:14px;">Description</label>
-        <textarea id="descInput" placeholder="Détails du problème..." style="width:100%; padding:10px; margin:5px 0 10px 0; font-family:serif; height:60px;"></textarea>
+        <textarea id="descInput" placeholder="Détails du problème..." style="width:100%; padding:10px; margin:5px 0 10px 0; font-family: 'Montserrat', sans-serif; height:60px;"></textarea>
 
         <div style="display:flex; gap:10px;">
           <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Date</label><input type="date" id="dateInput" style="width:100%; padding:8px;"></div>
@@ -315,7 +320,7 @@
         securite: L.divIcon({ html: '<i class="fas fa-exclamation-triangle" style="color:#f57c00; font-size:20px;"></i>', className:'c-icon' })
     };
 
-        function refresh() {
+    function refresh() {
         markers.clearLayers();
         let counts = {dechets:0, pollution:0, securite:0};
         let qCounts = {};
@@ -427,7 +432,19 @@
     function togglePanel(id) { document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active')); }
     function effacerPhotoSelectionnee() { document.getElementById('photoInput').value = ""; }
 
+    /* MICRO INTERACTIONS PREMIUM */
+    document.querySelectorAll('.ui-btn').forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            btn.style.transition = 'all 0.25s ease';
+        });
+    });
+
     window.addEventListener('load', () => {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        requestAnimationFrame(() => {
+            document.body.style.opacity = '1';
+        });
         map.invalidateSize();
     });
 </script>
