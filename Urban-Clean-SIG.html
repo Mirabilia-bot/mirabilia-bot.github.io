@@ -208,30 +208,38 @@
     var markers = L.layerGroup().addTo(map);
     var chart1, chart2;
 
-    fetch('./communes.geojson').then(res => res.json()).then(geojson => {
-        L.geoJSON(geojson, {
-            style: { color: "#00264d", weight: 2, fillOpacity: 0.05, interactive: true },
-            onEachFeature: (f, l) => {
-                let nom = f.properties["Noms des communes"]; 
-                if(nom) {
-                    l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
+    fetch('./communes.geojson')
+        .then(res => {
+            if (!res.ok) throw new Error("Erreur");
+            return res.json();
+        })
+        .then(geojson => {
+            let boundary = L.geoJSON(geojson, {
+                style: { color: "#00264d", weight: 2, fillOpacity: 0.05, interactive: true },
+                onEachFeature: (f, l) => {
+                    let nom = f.properties["Noms des communes"]; 
+                    if(nom) {
+                        l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
+                    }
                 }
-            }
-        }).addTo(map);
-    });
+            }).addTo(map);
 
-        auth.onAuthStateChanged((user) => {
-        // Le compte n'est considéré comme actif que si l'e-mail est vérifié
+            if (boundary && boundary.getBounds().isValid()) {
+                map.fitBounds(boundary.getBounds(), { padding: [20, 20], maxZoom: 14 });
+            }
+        })
+        .catch(err => console.error(err));
+
+    auth.onAuthStateChanged((user) => {
         if (user && user.emailVerified) {
             currentUser = user;
             document.getElementById('loginBtn').style.display = 'none';
             document.getElementById('menuBtn').style.display = 'inline';
             document.getElementById('addBtnFloating').style.display = 'block';
         } else {
-            // Si l'utilisateur est connecté mais n'a pas validé son mail
             if (user && !user.emailVerified) {
                 showFlash("⚠️ Compte inactif : Veuillez valider le lien envoyé par e-mail.");
-                auth.signOut(); // Déconnexion automatique pour forcer la validation
+                auth.signOut();
             }
             currentUser = null;
             document.getElementById('loginBtn').style.display = 'inline';
@@ -311,7 +319,7 @@
         securite: L.divIcon({ html: '<i class="fas fa-exclamation-triangle" style="color:#f57c00; font-size:20px;"></i>', className:'c-icon' })
     };
 
-        function refresh() {
+    function refresh() {
         markers.clearLayers();
         let counts = {dechets:0, pollution:0, securite:0};
         let qCounts = {};
@@ -319,8 +327,7 @@
             let popupContent = `<div style="min-width:180px;"><b style="color:var(--kgm-blue)">${d.quartier}</b><br><i>${d.desc}</i>`;
             if(d.photo) popupContent += `<br><img src="${d.photo}" class="popup-img" style="width:100%;max-height:150px;object-fit:cover;margin-top:5px;border-radius:4px" onclick="window.open('${d.photo}', '_blank')">`;
             popupContent += `<br><small><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small></div>`;
-            
-            if(currentUser && d.userId === currentUser.uid) {
+          if(currentUser && d.userId === currentUser.uid) {
                 popupContent += `<div class="popup-actions">
                     <i class="fas fa-edit" style="color:var(--kgm-green)" onclick="editerDoc('${d.id}')"></i>
                     <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimerDoc('${d.id}')"></i>
