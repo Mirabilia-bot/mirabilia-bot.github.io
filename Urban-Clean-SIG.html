@@ -106,15 +106,15 @@
         .ui-controls { bottom: 25px; left: 50%; transform: translateX(-50%); }
         @keyframes slideUp { from { bottom: 0px; opacity: 0; } to { bottom: 25px; opacity: 1; } }
     }
-        /* --- BLOC POUR LE NAVIGATEUR FACEBOOK --- */
+        /* --- BLOC CHIRURGICAL POUR LE NAVIGATEUR FACEBOOK --- */
         #map {
-            touch-action: manipulation;
+            touch-action: none !important;
             -webkit-tap-highlight-color: transparent;
         }
 
         .leaflet-container {
             cursor: grab;
-            touch-action: pan-x pan-y;
+            touch-action: pan-x pan-y !important;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -560,8 +560,8 @@
         map.flyTo(e.latlng, 18);
     });
 
-    map.on('locationerror', () => {
-        showFlash("⚠️ Localisation refusée ou indisponible. Vérifiez les permissions GPS.");
+    map.on('locationerror', (e) => {
+        showFlash("⚠️ Localisation indisponible (code " + e.code + "). Vérifiez les permissions GPS.");
     });
 
    function ouvrirModal() { 
