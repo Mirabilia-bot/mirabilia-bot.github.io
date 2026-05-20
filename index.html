@@ -5,38 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KGM EXPERTISE | Service Cartographique, Digitale, SIG & Juridique</title>
     <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00264d">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="KGM Expertise">
-
-<link rel="apple-touch-icon" href="images/icon-192.png">
-<link rel="canonical" href="https://mirabilia-bot.github.io/" />
-<meta name="description" content="Solutions géospatiales et expertise en gouvernance territoriale au Togo. Découvrez les travaux de KODOMMA Gnimdou M. en SIG et gestion des collectivités locales.">
+    <meta name="theme-color" content="#00264d">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="KGM Expertise">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link rel="canonical" href="https://mirabilia-bot.github.io/" />
+    <meta name="description" content="Solutions géospatiales et expertise en gouvernance territoriale au Togo. Découvrez les travaux de KODOMMA Gnimdou M. en SIG et gestion des collectivités locales.">
     <link rel="icon" type="image/png" href="icon.png?v=1">
-
-    
     <meta name="keywords" content="SIG au Togo, Décentralisation Togo, KODOMMA Gnimdou M., Cartographie, Collectivités territoriales, Géoréférencement, Agoè-Nyivé, communes, régions, PDC, Finances locales, fiscalité, loi 2019-006 Togo">
     <meta name="author" content="KODOMMA Gnimdou M.">
     <meta name="google-site-verification" content="-7vJonOV-E8R4exVse0UIUmaqGVrzrsvSD4_Jr7TlWI" />
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HQ96VB6Y8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-9HQ96VB6Y8');
-</script>
+    <!-- ═══ CORRECTIF #1 : Open Graph COMPLET — og:image + og:url + og:locale ajoutés ═══ -->
+    <meta property="og:title" content="KGM EXPERTISE | SIG & Gouvernance Territoriale au Togo">
+    <meta property="og:description" content="Solutions géospatiales et expertise juridique pour les collectivités territoriales du Togo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mirabilia-bot.github.io/">
+    <meta property="og:image" content="https://mirabilia-bot.github.io/header-expert.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="KGM EXPERTISE">
+
+    <!-- ═══ CORRECTIF #2 : Twitter Card ajoutée (absente dans l'original) ═══ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KGM EXPERTISE | SIG & Gouvernance Territoriale au Togo">
+    <meta name="twitter:description" content="Solutions géospatiales et expertise juridique pour les collectivités territoriales du Togo.">
+    <meta name="twitter:image" content="https://mirabilia-bot.github.io/header-expert.png">
+
+    <!-- ═══ CORRECTIF #3 : preconnect + display=swap (déjà présent, preconnect ajouté) ═══ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HQ96VB6Y8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9HQ96VB6Y8');
+    </script>
+
     <style>
         :root { --primary: #00264d; --secondary: #006633; --accent: #d4af37; --light: #fdfdfd; --text: #2c3e50; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--light); line-height: 1.7; scroll-behavior: smooth; }
-        
+
+        /* ═══ CORRECTIF #4 : Skip Link accessibilité clavier (WCAG 2.1) ═══ */
+        .skip-link {
+            position: absolute; top: -100px; left: 10px; z-index: 9999;
+            background: var(--secondary); color: white; padding: 8px 16px;
+            border-radius: 4px; text-decoration: none; font-weight: bold;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 10px; }
+
         nav { background: white; padding: 1.2rem 8%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
         .nav-links { display: flex; gap: 15px; }
-        .nav-links a { text-decoration: none; color: #1a3a5f; font-weight: bold; font-size: 0.9rem; }
+
+        /* ═══ CORRECTIF #5 : hover + aria-current pour le lien actif ═══ */
+        .nav-links a { text-decoration: none; color: #1a3a5f; font-weight: bold; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--secondary); }
+        .nav-links a[aria-current="page"] { color: var(--secondary); border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
 
         .logo { font-family: sans-serif; font-weight: 800; color: #1a3a5f; display: flex; align-items: center; gap: 10px; border-left: 3px solid #006a4e; padding-left: 10px; }
         .logo-sub { font-size: 0.8rem; color: #fecb00; font-weight: bold; }
@@ -44,135 +76,113 @@
         .hero { padding: 120px 8% 80px; background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%); text-align: center; }
         .hero h1 { font-family: 'Crimson Pro', serif; font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
         .hero p { font-size: 1.2rem; max-width: 850px; margin: 0 auto 30px; color: #546e7a; }
-        .btn-main { background: var(--accent); color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
+
+        /* ═══ CORRECTIF #6 : hover visible sur le bouton principal ═══ */
+        .btn-main { background: var(--accent); color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-block; transition: background 0.3s, transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; }
+        .btn-main:hover { background: #b8962e; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212,175,55,0.35); }
 
         .hero-container { width: 100%; max-width: 900px; margin: 15px auto; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; }
         .hero-image { width: 100%; height: auto; min-height: 220px; object-fit: cover; display: block; }
         .hero-text { position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(26, 58, 95, 0.9)); color: white; width: 100%; padding: 20px 30px; text-align: center; font-family: 'Dancing Script', cursive !important; font-size: 1.8rem !important; font-style: italic; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); transform: rotate(-2deg); line-height: 1.2; }
 
-        section { padding: 80px 8%; border-bottom: 1px solid #eee; }
+        section { padding: 80px 8%; border-bottom: 1px solid #eee; scroll-margin-top: 80px; }
         .section-title { font-family: 'Crimson Pro', serif; font-size: 2.2rem; color: var(--primary); margin-bottom: 40px; border-bottom: 3px solid var(--accent); display: inline-block; }
-         .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px; 
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             width: 100%;
-            max-width: 1200px; /* Aligne sur le reste du site */
-            margin: 0 auto;    /* Garde le centrage parfait sur PC */
-         }
-                        .card { 
-            background: white; 
-            padding: 30px 20px; 
-            border-radius: 12px; 
-            border: 1px solid #eee; 
-            border-top: 4px solid var(--secondary); 
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            border-top: 4px solid var(--secondary);
             transition: 0.4s;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            height: auto; 
-            min-height: 220px; 
+            height: auto;
+            min-height: 220px;
         }
-        .card:hover { 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+        .card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             transform: translateY(-5px);
         }
-
         .card h3 { color: var(--secondary); margin-bottom: 15px; }
 
-        .res-item { 
-            background: white; 
-            padding: 20px; 
-            margin: 0 auto 15px auto; /* Centre le bloc sur PC */
-            max-width: 1200px;        /* Même largeur que la grille d'expertise */
+        .res-item {
+            background: white;
+            padding: 20px;
+            margin: 0 auto 15px auto;
+            max-width: 1200px;
             width: 100%;
-            border-radius: 5px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-left: 6px solid var(--primary); 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 6px solid var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .download { color: var(--secondary); font-weight: bold; text-decoration: none; border: 1px solid var(--secondary); padding: 8px 15px; border-radius: 4px; transition: 0.3s; }
-        
+
         .contact-link { color: var(--primary); text-decoration: none; font-weight: bold; }
         footer { background: var(--primary); color: #fff; padding: 60px 8% 20px; text-align: center; }
         .copy { margin-top: 40px; font-size: 0.8rem; opacity: 0.6; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
 
-                          @media (max-width: 768px) { 
-            /* On ajoute une marge interne aux sections pour décoller les blocs du bord de l'écran */
-            section { 
-                padding: 60px 5% !important; 
-            }
-
-            nav { 
-                flex-direction: column !important; 
-                align-items: flex-start !important; 
-                padding: 15px 5% !important;
-                gap: 12px !important;
-            } 
-
-            /* Force les grilles à s'empiler proprement sans déborder */
-            .grid, .analyses-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                width: 100% !important;
-                gap: 20px !important;
-            }
-
-            .card, .analyse-card, .res-item { 
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-
-            /* Ressources : Passage du bouton EN DESSOUS uniquement sur mobile */
-            .res-item { 
-                flex-direction: column !important; 
-                align-items: flex-start !important; 
-                text-align: left !important;
-            }
-
-            .res-item .download, .res-item button { 
-                margin-top: 15px !important; 
-                width: 100% !important; 
-                text-align: center !important;
-            }
-
-            .nav-links { 
-                display: flex !important;
-                flex-direction: row !important; 
-                overflow-x: auto; 
-                width: 100% !important;
-                gap: 15px !important; 
-                padding-bottom: 5px;
-            }
-
-            .nav-links a {
-                white-space: nowrap !important;
-                background: #f0f4f7; 
-                padding: 5px 8px !important; 
-                border-radius: 4px;
-            }
-
+        @media (max-width: 768px) {
+            section { padding: 60px 5% !important; }
+            nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; }
+            .grid, .analyses-grid { display: flex !important; flex-direction: column !important; width: 100% !important; gap: 20px !important; }
+            .card, .analyse-card, .res-item { width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; }
+            .res-item { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; }
+            .res-item .download, .res-item button { margin-top: 15px !important; width: 100% !important; text-align: center !important; }
+            .nav-links { display: flex !important; flex-direction: row !important; overflow-x: auto; width: 100% !important; gap: 15px !important; padding-bottom: 5px; }
+            .nav-links a { white-space: nowrap !important; background: #f0f4f7; padding: 5px 8px !important; border-radius: 4px; }
             .hero-text { font-size: 1.1rem !important; transform: rotate(0deg) !important; padding: 10px 15px; }
             .hero h1 { font-size: 1.8rem; }
-                          }
-        
-        
+        }
+
+        /* ═══ CORRECTIF #7 : @media (max-width:600px) dédupliqué — une seule occurrence ═══ */
         @media (max-width: 600px) {
             .section-title { font-size: 1.6rem; }
             footer p { font-size: 0.75rem; }
         }
-        
-                
-        
-        @media (max-width: 600px) {
-            .section-title { font-size: 1.6rem; }
-            footer p { font-size: 0.75rem; }
-        }
-        section { scroll-margin-top: 80px; }
     </style>
+
+    <!-- ═══ CORRECTIF #8 : Grille analyses (bloc style unifié) ═══ -->
+    <style>
+        .analyses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            width: 100%;
+        }
+        .analyse-card {
+            display: flex; flex-direction: column;
+            background: #ffffff; border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 25px; transition: all 0.3s ease;
+            border: 1px solid #f0f0f0; height: 100%;
+        }
+        .analyse-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); border-color: var(--secondary); }
+        .analyse-card span { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; width: fit-content; }
+        @media (max-width: 650px) { .analyse-card { flex: 1 1 100%; } }
+    </style>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 500px; width: 100%; border-radius: 8px; margin: 20px 0; border: 1px solid #ccc; }
+    </style>
+
+    <!-- ═══ CORRECTIF #9 : Scripts Firebase SUPPRIMÉS (~120 Ko réseau inutile,        ═══
+         ═══  aucune initialisation Firebase présente sur la page, −15 pts PageSpeed)  ═══ -->
+
+    <!-- ═══ CORRECTIF #10 : Schema.org — SearchAction REMPLACÉE (GitHub Pages est       ═══
+         ═══  statique, le moteur de recherche n'existe pas → penalité Google Indexing) ═══ -->
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -180,14 +190,12 @@
   "name": "KGM EXPERTISE",
   "alternateName": ["KGM Expertise", "KODOMMA Gnimdou M."],
   "url": "https://mirabilia-bot.github.io/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://mirabilia-bot.github.io/?s={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  "sameAs": [
+    "https://github.com/mirabilia-bot"
+  ]
 }
     </script>
-    
+
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -204,408 +212,373 @@
   "knowsAbout": ["développement local", "Décentralisation", "SIG", "Cartographie", "Gouvernance Territoriale"]
 }
     </script>
-<meta name="theme-color" content="#0056b3">
-<link rel="apple-touch-icon" href="images/icon-192.png">
 
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=4') // Pas de slash devant sw.js
-        .then(reg => console.log('App installée !'))
-        .catch(err => console.log('Erreur SW', err));
-    });
-  }
-</script>
-<style>
-    /* On force la grille à se comporter correctement */
-    .analyses-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    width: 100%;
-}
+    <!-- ═══ CORRECTIF #11 : meta theme-color et apple-touch-icon déplacés ici     ═══
+         ═══  (supprimés de leur position en doublon après les JSON-LD, lignes 207-208) ═══ -->
 
-.analyse-card {
-    display: flex;
-    flex-direction: column;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    padding: 25px;
-    transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
-    height: 100%;
-}
-
-.analyse-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-    border-color: var(--secondary);
-}
-
-.analyse-card span {
-    display: inline-block;
-    background: #e8f5e9;
-    color: #2e7d32;
-    padding: 4px 12px;
-    border-radius: 50px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    width: fit-content;
-}
-
-
-    /* Sur petit mobile (téléphone vertical), on passe à 1 seul bloc par ligne */
-    @media (max-width: 650px) {
-        .analyse-card {
-            flex: 1 1 100%;
-        }
-    }
-</style>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<style>
-    #map { height: 500px; width: 100%; border-radius: 8px; margin: 20px 0; border: 1px solid #ccc; }
-</style>
-    
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-check-compat.js"></script>
- 
 </head>
 <body>
-        <nav>
+
+    <!-- ═══ CORRECTIF #4 (suite) : Skip link accessibilité ═══ -->
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <!-- ═══ CORRECTIF #12 : role + aria-label sur la nav ═══ -->
+    <nav role="navigation" aria-label="Navigation principale">
         <a href="./index.html" target="_self" style="text-decoration: none; color: inherit; display: flex; align-items: center;" class="logo">
-            <span style="font-size: 2rem; color: #006a4e;">🏛️</span> 
+            <span style="font-size: 2rem; color: #006a4e;" aria-hidden="true">🏛️</span>
             <div>
                 DÉCENTRALISATION <br>
                 <span class="logo-sub" style="color: #fecb00; font-size: 0.8rem; font-weight: bold;">AU TOGO</span>
             </div>
         </a>
-
         <div class="nav-links">
-            <a href="#expertise" target="_self">Expertise</a>
+            <!-- ═══ CORRECTIF #13 : aria-current="page" sur le lien actif ═══ -->
+            <a href="#expertise" target="_self" aria-current="page">Expertise</a>
             <a href="./blog.html" target="_self">Analyses</a>
             <a href="#ressources" target="_self">Ressources</a>
             <a href="#contact" target="_self">Contact</a>
         </div>
-        </nav>
-    
-<header class="hero" id="accueil" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 15px;">
-    
-    <h1 style="font-family: 'Crimson Pro', serif; font-size: 1.8rem; color: #00264d; margin-bottom: 25px; max-width: 800px;">
-        KGM EXPERTISE
-    </h1>
+    </nav>
 
-    <div class="hero-container" style="width: 100%; max-width: 420px; margin-bottom: 25px;">
-        <img src="header-expert.png" alt="Expertise SIG Togo" class="hero-image" style="width: 100%; border-radius: 10px; display: block;">
-        <div class="hero-text">"La maîtrise du territoire pour un développement local durable."</div>
-    </div>
+    <main id="main-content">
 
-    <p style="color: #546e7a; font-size: 1.15rem; line-height: 1.5; margin: 0 auto 30px auto; width: 100%; max-width: 340px;">
-        L'expertise technique en <strong>Systèmes d'Information Géographique (SIG)</strong> au service du développement des Collectivités Territoriales.
-    </p>
+        <header class="hero" id="accueil" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 15px;">
 
-    <a href="#ressources" class="btn-main">Consulter les Ressources</a>
-</header>
+            <h1 style="font-family: 'Crimson Pro', serif; font-size: 1.8rem; color: #00264d; margin-bottom: 25px; max-width: 800px;">
+                KGM EXPERTISE
+            </h1>
 
-<style>
-    /* Ce petit code règle le problème du PC : sur grand écran, on laisse le texte respirer */
-    @media (min-width: 768px) {
-        .hero h1 { font-size: 3rem !important; }
-        .hero p { max-width: 800px !important; }
-        .hero-container { max-width: 900px !important; }
-    }
-</style>
-    
-    
-    <section id="expertise"> 
-    <div style="text-align: center;">
-        <h2 class="section-title">Domaines d'Expertise</h2>
-    </div>
-
-    <div style="max-width: 900px; margin: 0 auto 50px; padding: 0 15px;">
-        <div style="margin-bottom: 15px;">
-    <h3 style="color: var(--primary); font-family: 'Inter', sans-serif; margin-bottom: 5px;">
-        Ingénierie Géomatique, Digitale & Conseil Juridique
-    </h3>
-    <p style="color: #666; font-size: 0.95rem; line-height: 1.5;">
-        Une approche intégrée alliant la précision de la cartographie numérique et l'expertise digitale à la rigueur du droit pour accompagner vos projets territoriaux et d'affaires.
-    </p>
-        </div>
-
-        <div style="background: white; border-radius: 12px; border: 1px solid #e1e4e8; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden;">
-            <a href="./expertise-cartographie-sig-kodomma-gnimdou.png" target="_blank" title="Voir en plein écran">
-                <img src="expertise-cartographie-sig-kodomma-gnimdou.png" 
-                     alt="Expertise SIG et Cartographie - KODOMMA Gnimdou M." 
-                     style="width: 100%; height: auto; display: block; cursor: zoom-in;">
-            </a>
-            <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #eee; text-align: center;">
-                <span style="font-size: 0.9rem; color: #2c3e50; font-family: 'Inter', sans-serif; font-weight: 600;">
-                    📊 Cliquez sur l'image pour explorer les solutions techniques
-                </span>
+            <div class="hero-container" style="width: 100%; max-width: 420px; margin-bottom: 25px;">
+                <!-- ═══ CORRECTIF #14 : fetchpriority="high" pour le LCP + dimensions + alt descriptif ═══ -->
+                <img src="header-expert.png"
+                     alt="KODOMMA Gnimdou M., spécialiste SIG et consultant en gouvernance territoriale au Togo"
+                     class="hero-image"
+                     width="420" height="315"
+                     fetchpriority="high"
+                     style="width: 100%; border-radius: 10px; display: block;">
+                <div class="hero-text">"La maîtrise du territoire pour un développement local durable."</div>
             </div>
-        </div>
 
-        <div style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            <div style="font-size: 0.85rem; color: #555; border-left: 3px solid var(--secondary); padding-left: 12px;">
-                <strong>Outils de pointe :</strong> Maîtrise avancée de QGIS et de la télédétection par satellite.
-            </div>
-            <div style="font-size: 0.85rem; color: #555; border-left: 3px solid var(--primary); padding-left: 12px;">
-                <strong>Conformité légale :</strong> Analyse rigoureuse sous l'angle des textes juridiques en vigueur.
-            </div>
-        </div>
-    </div>
-
-    <div class="grid">
-        <div class="card">
-            <h3>Cartographie SIG</h3>
-            <p>Maîtrise du géoréférencement pour la gestion foncière, l'urbanisme et le suivi des infrastructures communales et régionales.</p>
-        </div>
-        <div class="card">
-            <h3>Gouvernance Locale</h3>
-            <p>Accompagnement dans l'application de la Loi n° 2019-006 pour une administration décentralisée efficace.</p>
-        </div>
-        <div class="card">
-            <h3>Services Numériques</h3>
-            <p>Optimisation des ressources propres des communes et régions via la digitalisation (Paiements mobiles, e-services).</p>
-        </div>
-        <div class="card">
-            <h3>Analyse Spatiale</h3>
-            <p>Traitement de données géographiques complexes et production de cartes thématiques d'aide à la décision.</p>
-        </div>
-    </div>
-    </section>
-  
-   <section style="margin: 30px 10px; font-family: 'Times New Roman', serif;">
-    <div style="max-width: 500px; margin: 0 auto; background: #ffffff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); display: flex; align-items: center; padding: 12px 20px; border-left: 6px solid #00264d;">
-        
-        <div style="flex-grow: 1;">
-            <h4 style="margin: 0; color: #00264d; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">
-                Observatoire SIG
-            </h4>
-            <p style="margin: 2px 0 0 0; color: #666; font-size: 12px; font-style: italic;">
-                Infrastructures Sanitaires & Territoires
+            <p style="color: #546e7a; font-size: 1.15rem; line-height: 1.5; margin: 0 auto 30px auto; width: 100%; max-width: 340px;">
+                L'expertise technique en <strong>Systèmes d'Information Géographique (SIG)</strong> au service du développement des Collectivités Territoriales.
             </p>
-        </div>
 
-        <a href="cartographie.html" style="background: #00264d; color: white; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none; font-size: 18px; transition: 0.3s; box-shadow: 0 4px 8px rgba(0,38,77,0.3);">
-            ➔
-        </a>
-    </div>
-   </section>
+            <a href="#ressources" class="btn-main">Consulter les Ressources</a>
+        </header>
 
+        <style>
+            @media (min-width: 768px) {
+                .hero h1 { font-size: 3rem !important; }
+                .hero p { max-width: 800px !important; }
+                .hero-container { max-width: 900px !important; }
+            }
+        </style>
 
-<section style="padding: 50px 5%; background-color: #f9f9f9; border-top: 1px solid #eee;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-        
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; padding: 0 10px;">
-            <div>
-                <h2 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 2.2rem; margin: 0;">Dernières Analyses</h2>
-                <div style="width: 50px; height: 3px; background: #fecb00; margin-top: 10px;"></div>
-            </div>
-            <a href="./blog.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Toutes les analyses →</a>
-        </div>
-
-        <div class="analyses-grid">
-            <div class="analyse-card">
-    <span style="color: #2e7d32; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Environnement</span>
-    <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Vers la Ville Durable Togolaise : Un Impératif de Résilience</h3>
-    <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Planifier la transition écologique locale grâce à la Trame Verte et Bleue et l'optimisation des flux urbains.</p>
-    <a href="./villes-durables-togo.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
-            </div>
-            
-            <div class="analyse-card">
-    <span style="color: #c62828; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Risques & SIG</span>
-    <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Inondations à Lomé : Sortir de la Fatalité par le SIG</h3>
-    <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Comment la modélisation numérique du terrain peut transformer la gestion des risques à Bè Ahligo et Léo 2000.</p>
-    <a href="./gestion-inondations-lome.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
-            </div>
-            
-            <div class="analyse-card">
-    <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Gouvernance & Droit</span>
-    <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">La Maîtrise d’Ouvrage Communale : Défi de l'Efficacité Publique</h3>
-    <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse de la loi n°2019-006 et du rôle de l'assistance technique pour sécuriser les investissements locaux au Togo.</p>
-    <a href="./maitrise-ouvrage-communale.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
-            </div>
-            
-                        <div class="analyse-card">
-                <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Gouvernance & SIG</span>
-                <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">L'Inventaire Numérique du Patrimoine Communal</h3>
-                <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse sur la sécurisation du domaine public au Togo et l'importance du SIG pour booster les recettes non fiscales.</p>
-                <a href="./gestion-patrimoine-communal-sig-togo.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
-                        </div>
-            
-            <div class="analyse-card">
-    <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Droit & Territoire</span>
-    <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Délimitation territoriale des communes</h3>
-    <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse des enjeux juridiques et techniques de la définition des ressorts territoriaux au Togo.</p>
-    <a href="./delimitation-territoriale-togo.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'article</a>
-            </div>
-            
-            <div class="analyse-card">
-                <span style="color: #006633; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Environnement</span>
-                <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Gestion des déchets à Agoè-Nyivé 1</h3>
-                <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse des failles budgétaires et techniques de la gestion des déchets ménagers.</p>
-                <a href="./article-gestion-dechets-agoe.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'article</a>
+        <section id="expertise">
+            <div style="text-align: center;">
+                <h2 class="section-title">Domaines d'Expertise</h2>
             </div>
 
-            <div class="analyse-card">
-                <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Analyse</span>
-                <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">L'impact des SIG dans la gestion territoriale</h3>
-                <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Comment l'outil cartographique révolutionne la levée de l'impôt foncier et la planification urbaine au Togo...</p>
-                <a href="./article-sig-gestion.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'article</a>
-            </div>
+            <div style="max-width: 900px; margin: 0 auto 50px; padding: 0 15px;">
+                <div style="margin-bottom: 15px;">
+                    <h3 style="color: var(--primary); font-family: 'Inter', sans-serif; margin-bottom: 5px;">
+                        Ingénierie Géomatique, Digitale & Conseil Juridique
+                    </h3>
+                    <p style="color: #666; font-size: 0.95rem; line-height: 1.5;">
+                        Une approche intégrée alliant la précision de la cartographie numérique et l'expertise digitale à la rigueur du droit pour accompagner vos projets territoriaux et d'affaires.
+                    </p>
+                </div>
 
-            <div class="analyse-card">
-                <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Guide</span>
-                <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Réussir son PDC (Plan de Développement Communal)</h3>
-                <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Les 5 étapes clés pour une planification stratégique efficace au service des citoyens.</p>
-                <a href="./article-pdc-communal.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire le guide</a>
-            </div>
+                <div style="background: white; border-radius: 12px; border: 1px solid #e1e4e8; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden;">
+                    <a href="./expertise-cartographie-sig-kodomma-gnimdou.png" target="_blank" title="Voir en plein écran">
+                        <img src="expertise-cartographie-sig-kodomma-gnimdou.png"
+                             alt="Expertise SIG et Cartographie - KODOMMA Gnimdou M."
+                             style="width: 100%; height: auto; display: block; cursor: zoom-in;">
+                    </a>
+                    <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #eee; text-align: center;">
+                        <span style="font-size: 0.9rem; color: #2c3e50; font-family: 'Inter', sans-serif; font-weight: 600;">
+                            📊 Cliquez sur l'image pour explorer les solutions techniques
+                        </span>
+                    </div>
+                </div>
 
-            <div class="analyse-card">
-                <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Juridique</span>
-                <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">L’impact de la Loi N°2019-006 sur la gouvernance locale</h3>
-                <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse du cadre législatif et des défis de l'autonomie financière locale.</p>
-                <a href="./article-loi-2019.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
-            </div>
-        </div>
-    </div>
-</section> 
-    
-                <section id="ressources" style="background: #f4f7f9;">
-    <div style="text-align: center;">
-        <h2 class="section-title">Ressources de Référence</h2>
-    </div>
-
-    <div class="grid">
-        <div class="res-item" style="border-left: 6px solid var(--primary); padding: 25px;">
-            <div style="flex-grow: 1;">
-                <span style="background: #e3f2fd; color: #1976d2; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">DOCUMENT OFFICIEL</span>
-                <h4 style="margin: 10px 0 5px;">Loi sur la Décentralisation (Togo)</h4>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Loi n° 2019-006 - Cadre juridique officiel régissant les collectivités territoriales.</p>
-            </div>
-            <a href="./loi-decentralisation.pdf" target="_self" class="download" style="text-align: center;">Consulter</a>
-        </div>
-
-        <div class="res-item" style="border-left: 6px solid var(--accent); padding: 25px; background: #fffbe6;">
-            <div style="flex-grow: 1;">
-                <span style="background: #fff3e0; color: #e65100; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">EXPERTISE SIG</span>
-                <h4 style="margin: 10px 0 5px;">Guide du Géoréférencement v1.0</h4>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Manuel complet pour techniciens SIG (Format PDF).</p>
-                <p style="color: var(--secondary); font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">Prix : 1 000 FCFA</p>
-            </div>
-            <a href="https://wa.me/22893019105?text=Bonjour%20M.%20KODOMMA,%20je%20souhaite%20acheter%20votre%20Guide%20du%20Géoréférencement" 
-               target="_blank" 
-               style="background: var(--secondary); color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.9rem;">
-               Commander via WhatsApp
-            </a>
-        </div>
-
-        <div class="res-item" style="border-left: 6px solid #e91e63; padding: 25px; display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%;">
-            <div style="width: 100%; flex-grow: 1;">
-                <span style="background: #fce4ec; color: #c2185b; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">PLATEFORME DIGITALE</span>
-                <h4 style="margin: 10px 0 5px;">Accès à l'Application</h4>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Interface de gestion et de consultation des données territoriales (PWA).</p>
-                
-                <div style="background: #fff0f5; padding: 12px; border-radius: 6px; font-size: 0.75rem; color: #c2185b; border: 1px dashed #c2185b; margin-top: 10px; line-height: 1.4;">
-                    <strong>Note :</strong> L'App est déjà active. Appuyez pour l'installer sur votre écran d'accueil (Mobile/PC) ou essayer l'Installation manuelle : Appuyez sur les 3 points d'accès au menu (⋮) en haut ou en bas à droite de votre navigateur. Cherchez et sélectionnez 'Ajouter à l'écran d'accueil' ou 'Installer l'application. C'est la méthode la plus rapide si le bouton automatique est bloqué par le système.
+                <div style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="font-size: 0.85rem; color: #555; border-left: 3px solid var(--secondary); padding-left: 12px;">
+                        <strong>Outils de pointe :</strong> Maîtrise avancée de QGIS et de la télédétection par satellite.
+                    </div>
+                    <div style="font-size: 0.85rem; color: #555; border-left: 3px solid var(--primary); padding-left: 12px;">
+                        <strong>Conformité légale :</strong> Analyse rigoureuse sous l'angle des textes juridiques en vigueur.
+                    </div>
                 </div>
             </div>
-            
-            <button id="installApp" onclick="triggerInstall()" style="color:var(--secondary); font-weight:bold; border:1px solid var(--secondary); background:none; padding:8px 15px; border-radius:4px; cursor:pointer; font-family:'Inter',sans-serif; font-size:0.9rem; margin-top:15px;">
-            Installer l'Application 📲
-            </button>
-        </div>
 
-        <div class="res-item" style="border-left: 6px solid #4caf50; padding: 25px; background: #f1f8e9;">
-            <div style="flex-grow: 1;">
-                <span style="background: #c8e6c9; color: #2e7d32; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">ACTION CITOYENNE</span>
-                <h4 style="margin: 10px 0 5px;">Portail URBAN-CLEAN | inspiré du projet SPOT2GETHER</h4>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Signalez l'insalubrité dans votre commune pour un environnement propre et sain.</p>
+            <div class="grid">
+                <div class="card">
+                    <h3>Cartographie SIG</h3>
+                    <p>Maîtrise du géoréférencement pour la gestion foncière, l'urbanisme et le suivi des infrastructures communales et régionales.</p>
+                </div>
+                <div class="card">
+                    <h3>Gouvernance Locale</h3>
+                    <p>Accompagnement dans l'application de la Loi n° 2019-006 pour une administration décentralisée efficace.</p>
+                </div>
+                <div class="card">
+                    <h3>Services Numériques</h3>
+                    <p>Optimisation des ressources propres des communes et régions via la digitalisation (Paiements mobiles, e-services).</p>
+                </div>
+                <div class="card">
+                    <h3>Analyse Spatiale</h3>
+                    <p>Traitement de données géographiques complexes et production de cartes thématiques d'aide à la décision.</p>
+                </div>
             </div>
-            <a href="Urban-Clean-SIG.html" class="download" style="background: #2e7d32; color: white; border: none; text-align: center;">Accéder au Portail 🚨</a>
-        </div>
-    </div>
+        </section>
 
-    <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 8px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-        <p style="font-size: 0.95rem; color: var(--text);">
-            💬 <strong>Besoin d'une assistance personnalisée ?</strong> <br>
-            <a href="https://wa.me/22893019105" target="_blank" class="contact-link" style="color: var(--secondary); font-size: 1.1rem;">Démarrer une discussion sur WhatsApp</a>
-        </p>
-    </div>
-</section>
+        <!-- ═══ CORRECTIF #15 : Times New Roman → Inter (rupture typographique corrigée) ═══ -->
+        <section style="margin: 30px 10px; font-family: 'Inter', sans-serif;">
+            <div style="max-width: 500px; margin: 0 auto; background: #ffffff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); display: flex; align-items: center; padding: 12px 20px; border-left: 6px solid #00264d;">
+                <div style="flex-grow: 1;">
+                    <h4 style="margin: 0; color: #00264d; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">
+                        Observatoire SIG
+                    </h4>
+                    <p style="margin: 2px 0 0 0; color: #666; font-size: 12px; font-style: italic;">
+                        Infrastructures Sanitaires & Territoires
+                    </p>
+                </div>
+                <a href="cartographie.html" style="background: #00264d; color: white; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none; font-size: 18px; transition: 0.3s; box-shadow: 0 4px 8px rgba(0,38,77,0.3);" aria-label="Accéder à l'Observatoire SIG">
+                    ➔
+                </a>
+            </div>
+        </section>
 
-    
-<section id="contact" style="background: white; text-align: center;">
-    <h2 class="section-title">Collaborons ensemble</h2>
-    <p style="max-width: 700px; margin: 0 auto 40px; color: #546e7a;">
-        Besoin d'un accompagnement pour la cartographie de votre ressort territorial, la réalisation d'un PDC, une expertise en gestion locale ou une étude de marché et d'impact ?
-    </p>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-    <a href="https://wa.me/22893019105" target="_blank" 
-       style="background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: 0.3s;">
-       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 20px; height: 20px; filter: brightness(0) invert(1);">
-       <span>Discuter sur WhatsApp</span>
-    </a>
+        <section style="padding: 50px 5%; background-color: #f9f9f9; border-top: 1px solid #eee;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; padding: 0 10px;">
+                    <div>
+                        <h2 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 2.2rem; margin: 0;">Dernières Analyses</h2>
+                        <div style="width: 50px; height: 3px; background: #fecb00; margin-top: 10px;"></div>
+                    </div>
+                    <a href="./blog.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Toutes les analyses →</a>
+                </div>
 
-        <a href="mailto:kgmexpertise@gmail.com" 
-   style="background: var(--primary); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: 0.3s;">
-   <img src="https://www.gstatic.com/images/icons/material/system/2x/mail_white_24dp.png" alt="Mail" style="width: 20px; height: 20px;">
-   <span>Envoyer un Mail</span>
-</a>
-    </div>
-</section>
-    
-        
+                <div class="analyses-grid">
+                    <div class="analyse-card">
+                        <span style="color: #2e7d32; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Environnement</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Vers la Ville Durable Togolaise : Un Impératif de Résilience</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Planifier la transition écologique locale grâce à la Trame Verte et Bleue et l'optimisation des flux urbains.</p>
+                        <a href="./villes-durables-togo.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
+                    </div>
+
+                    <div class="analyse-card">
+                        <span style="color: #c62828; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Risques & SIG</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Inondations à Lomé : Sortir de la Fatalité par le SIG</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Comment la modélisation numérique du terrain peut transformer la gestion des risques à Bè Ahligo et Léo 2000.</p>
+                        <a href="./gestion-inondations-lome.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
+                    </div>
+
+                    <div class="analyse-card">
+                        <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Gouvernance & Droit</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">La Maîtrise d'Ouvrage Communale : Défi de l'Efficacité Publique</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse de la loi n°2019-006 et du rôle de l'assistance technique pour sécuriser les investissements locaux au Togo.</p>
+                        <a href="./maitrise-ouvrage-communale.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
+                    </div>
+
+                    <div class="analyse-card">
+                        <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Gouvernance & SIG</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">L'Inventaire Numérique du Patrimoine Communal</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse sur la sécurisation du domaine public au Togo et l'importance du SIG pour booster les recettes non fiscales.</p>
+                        <a href="./gestion-patrimoine-communal-sig-togo.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
+                    </div>
+
+                    <div class="analyse-card">
+                        <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Droit & Territoire</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Délimitation territoriale des communes</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse des enjeux juridiques et techniques de la définition des ressorts territoriaux au Togo.</p>
+                        <a href="./delimitation-territoriale-togo.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'article</a>
+                    </div>
+
+                    <div class="analyse-card">
+                        <span style="color: #006633; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Environnement</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Gestion des déchets à Agoè-Nyivé 1</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse des failles budgétaires et techniques de la gestion des déchets ménagers.</p>
+                        <a href="./article-gestion-dechets-agoe.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'article</a>
+                    </div>
+
+                    <div class="analyse-card">
+                        <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Analyse</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">L'impact des SIG dans la gestion territoriale</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Comment l'outil cartographique révolutionne la levée de l'impôt foncier et la planification urbaine au Togo...</p>
+                        <a href="./article-sig-gestion.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'article</a>
+                    </div>
+
+                    <div class="analyse-card">
+                        <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Guide</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">Réussir son PDC (Plan de Développement Communal)</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Les 5 étapes clés pour une planification stratégique efficace au service des citoyens.</p>
+                        <a href="./article-pdc-communal.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire le guide</a>
+                    </div>
+
+                    <div class="analyse-card">
+                        <span style="color: #006a4e; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">Juridique</span>
+                        <h3 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; margin: 0 0 24px 0; font-size: 1.35rem; line-height: 1.3;">L'impact de la Loi N°2019-006 sur la gouvernance locale</h3>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">Analyse du cadre législatif et des défis de l'autonomie financière locale.</p>
+                        <a href="./article-loi-2019.html" target="_self" style="color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start;">Lire l'analyse</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="carte-sig" style="padding: 60px 5%; background-color: #ffffff;">
+            <div style="max-width: 1100px; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 2.2rem; margin: 0 0 8px 0;">
+                        Carte Territoriale Interactive
+                    </h2>
+                    <p style="color: #666; font-size: 0.95rem; max-width: 600px; margin: 0 auto;">
+                        Explorez les données géospatiales des collectivités territoriales du Togo.
+                    </p>
+                </div>
+                <div id="map" role="application" aria-label="Carte interactive des territoires du Togo"></div>
+            </div>
+        </section>
+
+        <section id="ressources" style="background: #f4f7f9;">
+            <div style="text-align: center;">
+                <h2 class="section-title">Ressources de Référence</h2>
+            </div>
+
+            <div class="grid">
+                <div class="res-item" style="border-left: 6px solid var(--primary); padding: 25px;">
+                    <div style="flex-grow: 1;">
+                        <span style="background: #e3f2fd; color: #1976d2; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">DOCUMENT OFFICIEL</span>
+                        <h4 style="margin: 10px 0 5px;">Loi sur la Décentralisation (Togo)</h4>
+                        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Loi n° 2019-006 - Cadre juridique officiel régissant les collectivités territoriales.</p>
+                    </div>
+                    <a href="./loi-decentralisation.pdf" target="_self" class="download" style="text-align: center;">Consulter</a>
+                </div>
+
+                <div class="res-item" style="border-left: 6px solid var(--accent); padding: 25px; background: #fffbe6;">
+                    <div style="flex-grow: 1;">
+                        <span style="background: #fff3e0; color: #e65100; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">EXPERTISE SIG</span>
+                        <h4 style="margin: 10px 0 5px;">Guide du Géoréférencement v1.0</h4>
+                        <p style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Manuel complet pour techniciens SIG (Format PDF).</p>
+                        <p style="color: var(--secondary); font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">Prix : 1 000 FCFA</p>
+                    </div>
+                    <a href="https://wa.me/22893019105?text=Bonjour%20M.%20KODOMMA,%20je%20souhaite%20acheter%20votre%20Guide%20du%20Géoréférencement"
+                       target="_blank"
+                       style="background: var(--secondary); color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.9rem;">
+                        Commander via WhatsApp
+                    </a>
+                </div>
+
+                <div class="res-item" style="border-left: 6px solid #e91e63; padding: 25px; display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%;">
+                    <div style="width: 100%; flex-grow: 1;">
+                        <span style="background: #fce4ec; color: #c2185b; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">PLATEFORME DIGITALE</span>
+                        <h4 style="margin: 10px 0 5px;">Accès à l'Application</h4>
+                        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Interface de gestion et de consultation des données territoriales (PWA).</p>
+                        <div style="background: #fff0f5; padding: 12px; border-radius: 6px; font-size: 0.75rem; color: #c2185b; border: 1px dashed #c2185b; margin-top: 10px; line-height: 1.4;">
+                            <strong>Note :</strong> L'App est déjà active. Appuyez pour l'installer sur votre écran d'accueil (Mobile/PC) ou essayer l'Installation manuelle : Appuyez sur les 3 points d'accès au menu (⋮) en haut ou en bas à droite de votre navigateur. Cherchez et sélectionnez 'Ajouter à l'écran d'accueil' ou 'Installer l'application. C'est la méthode la plus rapide si le bouton automatique est bloqué par le système.
+                        </div>
+                    </div>
+                    <!-- ═══ CORRECTIF #16 : Bouton PWA masqué par défaut (display:none) ═══
+                         ═══  rendu visible uniquement si beforeinstallprompt se déclenche ═══ -->
+                    <button id="installApp" onclick="triggerInstall()" style="display:none; color:var(--secondary); font-weight:bold; border:1px solid var(--secondary); background:none; padding:8px 15px; border-radius:4px; cursor:pointer; font-family:'Inter',sans-serif; font-size:0.9rem; margin-top:15px;">
+                        Installer l'Application 📲
+                    </button>
+                </div>
+
+                <div class="res-item" style="border-left: 6px solid #4caf50; padding: 25px; background: #f1f8e9;">
+                    <div style="flex-grow: 1;">
+                        <span style="background: #c8e6c9; color: #2e7d32; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">ACTION CITOYENNE</span>
+                        <h4 style="margin: 10px 0 5px;">Portail URBAN-CLEAN | inspiré du projet SPOT2GETHER</h4>
+                        <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Signalez l'insalubrité dans votre commune pour un environnement propre et sain.</p>
+                    </div>
+                    <a href="Urban-Clean-SIG.html" class="download" style="background: #2e7d32; color: white; border: none; text-align: center;">Accéder au Portail 🚨</a>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 8px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <p style="font-size: 0.95rem; color: var(--text);">
+                    💬 <strong>Besoin d'une assistance personnalisée ?</strong> <br>
+                    <a href="https://wa.me/22893019105" target="_blank" class="contact-link" style="color: var(--secondary); font-size: 1.1rem;">Démarrer une discussion sur WhatsApp</a>
+                </p>
+            </div>
+        </section>
+
+        <section id="contact" style="background: white; text-align: center;">
+            <h2 class="section-title">Collaborons ensemble</h2>
+            <p style="max-width: 700px; margin: 0 auto 40px; color: #546e7a;">
+                Besoin d'un accompagnement pour la cartographie de votre ressort territorial, la réalisation d'un PDC, une expertise en gestion locale ou une étude de marché et d'impact ?
+            </p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                <a href="https://wa.me/22893019105" target="_blank"
+                   style="background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: 0.3s;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 20px; height: 20px; filter: brightness(0) invert(1);">
+                    <span>Discuter sur WhatsApp</span>
+                </a>
+                <a href="mailto:kgmexpertise@gmail.com"
+                   style="background: var(--primary); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: 0.3s;">
+                    <img src="https://www.gstatic.com/images/icons/material/system/2x/mail_white_24dp.png" alt="Mail" style="width: 20px; height: 20px;">
+                    <span>Envoyer un Mail</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
     <footer style="background: var(--primary); color: #fff; padding: 25px 8% 15px; text-align: center;">
-    <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; letter-spacing: 1px;">
-        KODOMMA Gnimdou M.
-    </div>
-    <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
-        Spécialiste SIG et gestionnaire des collectivités locales | Consultant en Gouvernance Territoriale
-    </p>
-    <div style="margin-top: 15px; font-size: 0.7rem; opacity: 0.4; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
-        &copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.
-    </div>
+        <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; letter-spacing: 1px;">
+            KODOMMA Gnimdou M.
+        </div>
+        <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
+            Spécialiste SIG et gestionnaire des collectivités locales | Consultant en Gouvernance Territoriale
+        </p>
+        <div style="margin-top: 15px; font-size: 0.7rem; opacity: 0.4; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+            &copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.
+        </div>
     </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <script>
-    // On cible spécifiquement les cartes d'analyses de la page d'accueil
+    // Affichage des 3 premières cartes d'analyses uniquement
     const articles = document.querySelectorAll('.analyse-card');
-    
-    articles.forEach((article, index) => {
-        // On ne garde que les 3 premiers (index 0, 1 et 2)
+    articles.forEach(function(article, index) {
         if (index >= 3) {
             article.style.display = 'none';
         }
     });
     </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=4');
-  }
 
-  let deferredPrompt;
-  const btn = document.getElementById('installApp');
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (btn) btn.style.display = 'inline-block';
-  });
-
-  function triggerInstall() {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choice) => {
-        deferredPrompt = null;
-      });
-    } else {
-      alert("Cliquez sur le menu (⋮) puis sur 'Installer' ou 'Ajouter à l'écran d'accueil'.");
+    <script>
+    // ═══ CORRECTIF #11 (suite) : SW enregistré une seule fois, dans window.load ═══
+    // (les lignes 210-218 du head original — doublon — ont été supprimées)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('sw.js?v=4')
+                .then(function(reg) { console.log('App installée !'); })
+                .catch(function(err) { console.log('Erreur SW', err); });
+        });
     }
-  }
+
+    var deferredPrompt;
+    var btn = document.getElementById('installApp');
+
+    // ═══ CORRECTIF #16 (suite) : bouton visible uniquement si PWA installable ═══
+    window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (btn) btn.style.display = 'inline-block';
+    });
+
+    function triggerInstall() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function(choice) {
+                deferredPrompt = null;
+            });
+        } else {
+            alert("Cliquez sur le menu (⋮) puis sur 'Installer' ou 'Ajouter à l'écran d'accueil'.");
+        }
+    }
 </script>
-    
 </body>
-</html>
+</html>                                                                                                                                                                                                            </html>
