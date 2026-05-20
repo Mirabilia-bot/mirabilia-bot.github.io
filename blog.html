@@ -6,105 +6,170 @@
     <title>Analyses & Perspectives pour le développement durable</title>
     <link rel="canonical" href="https://mirabilia-bot.github.io/blog.html" />
     <meta name="description" content="Centre d'analyses et de ressources sur la gouvernance locale au Togo. Études de cas sur les SIG, la gestion des déchets à Agoè-Nyivé 1 et le cadre juridique de la décentralisation.">
-<meta name="keywords" content="Analyses décentralisation Togo, SIG et territoire, KODOMMA Gnimdou M., gouvernance locale, ressources collectivités territoriales, ressources financières des communes au Togo, cartographie Togo, gestion communale, PDC, planification locale au Togo">
-<meta name="author" content="KODOMMA Gnimdou M.">
+    <meta name="keywords" content="Analyses décentralisation Togo, SIG et territoire, KODOMMA Gnimdou M., gouvernance locale, ressources collectivités territoriales, ressources financières des communes au Togo, cartographie Togo, gestion communale, PDC, planification locale au Togo">
+    <meta name="author" content="KODOMMA Gnimdou M.">
 
-<meta property="og:title" content="Analyses & Ressources | Décentralisation et SIG au Togo">
-<meta property="og:description" content="Expertise technique et juridique pour le développement des collectivités territoriales au Togo.">
-<meta property="og:type" content="website">
-    
+    <!-- ═══ CORRECTIF #1 : Open Graph COMPLET — og:image + og:url + og:locale ajoutés ═══ -->
+    <meta property="og:title" content="Analyses & Ressources | Décentralisation et SIG au Togo">
+    <meta property="og:description" content="Expertise technique et juridique pour le développement des collectivités territoriales au Togo.">
+    <meta property="og:type" content="blog">
+    <meta property="og:url" content="https://mirabilia-bot.github.io/blog.html">
+    <meta property="og:image" content="https://mirabilia-bot.github.io/header-expert.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="KGM EXPERTISE">
+
+    <!-- ═══ CORRECTIF #2 : Twitter Card ajoutée (absente dans l'original) ═══ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Analyses & Ressources | Décentralisation et SIG au Togo">
+    <meta name="twitter:description" content="Expertise technique et juridique pour les collectivités territoriales du Togo.">
+    <meta name="twitter:image" content="https://mirabilia-bot.github.io/header-expert.png">
+
     <link rel="icon" type="image/png" href="icon.png?v=1">
+
+    <!-- ═══ CORRECTIF #3 : preconnect + display=swap pour éliminer FOIT / CLS ═══ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-        
-            <style>
+
+    <style>
         :root { --primary: #00264d; --secondary: #006633; --accent: #d4af37; --light: #fdfdfd; --text: #2c3e50; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         html, body { height: 100%; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            color: var(--text); background: var(--light); 
-            line-height: 1.7; padding-top: 85px; 
-            display: flex; flex-direction: column; 
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text); background: var(--light);
+            line-height: 1.7; padding-top: 85px;
+            display: flex; flex-direction: column;
         }
         main { flex: 1; }
 
-        nav { 
-            background: white; padding: 1.2rem 8%; 
-            display: flex; justify-content: space-between; align-items: center; 
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: fixed; 
-            top: 0; left: 0; width: 100%; z-index: 2000; 
+        /* ═══ CORRECTIF #4 : Skip Link accessibilité clavier (WCAG 2.1) ═══ */
+        .skip-link {
+            position: absolute; top: -100px; left: 10px; z-index: 9999;
+            background: var(--secondary); color: white; padding: 8px 16px;
+            border-radius: 4px; text-decoration: none; font-weight: bold;
+            transition: top 0.2s;
         }
-        .logo { 
-            font-family: sans-serif; font-weight: 800; color: #1a3a5f; 
-            display: flex; align-items: center; gap: 10px; 
-            border-left: 3px solid #006a4e; padding-left: 10px; text-decoration: none; 
+        .skip-link:focus { top: 10px; }
+
+        nav {
+            background: white; padding: 1.2rem 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: fixed;
+            top: 0; left: 0; width: 100%; z-index: 2000;
+        }
+        .logo {
+            font-family: sans-serif; font-weight: 800; color: #1a3a5f;
+            display: flex; align-items: center; gap: 10px;
+            border-left: 3px solid #006a4e; padding-left: 10px; text-decoration: none;
         }
         .logo-sub { font-size: 0.8rem; color: #fecb00; font-weight: bold; }
         .nav-links { display: flex; gap: 15px; }
-        .nav-links a { text-decoration: none; color: #1a3a5f; font-weight: bold; font-size: 0.9rem; }
+
+        /* ═══ CORRECTIF #5 : transition hover + style aria-current pour lien actif ═══ */
+        .nav-links a { text-decoration: none; color: #1a3a5f; font-weight: bold; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--secondary); }
+        .nav-links a[aria-current="page"] { color: var(--secondary); border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
 
         .blog-header { background: #1a3a5f; color: white; padding: 60px 20px; text-align: center; }
         .blog-header h1 { font-family: 'Crimson Pro', serif; font-size: 2.8rem; margin-bottom: 10px; white-space: nowrap; }
-        
+
         /* SYSTÈME DE FILTRAGE */
-        .filter-container { text-align: center; margin: 30px 0; padding: 0 20px; }
+        .filter-container { text-align: center; margin: 30px 0 8px; padding: 0 20px; }
         .filter-btn {
             background: white; border: 1px solid #ddd; padding: 8px 18px; margin: 5px; border-radius: 50px;
             cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: 0.3s; color: var(--primary);
         }
         .filter-btn.active, .filter-btn:hover { background: var(--secondary); color: white; border-color: var(--secondary); }
 
-        .container { 
-            max-width: 1100px; 
-            margin: 0 auto 40px; 
-            padding: 0 20px; 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 30px; 
-            justify-content: center; 
+        /* ═══ CORRECTIF #6 : Compteur de résultats accessible (aria-live) ═══ */
+        .filter-count {
+            text-align: center; font-size: 0.8rem; color: #888;
+            margin: 0 0 22px; font-style: italic; min-height: 1.2em;
         }
-        
-        .card { 
-            background: white; border-radius: 12px; padding: 25px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; 
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .card {
+            background: white; border-radius: 12px; padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee;
             border-top: 5px solid var(--secondary);
-            display: flex; flex-direction: column; transition: 0.4s ease; 
+            display: flex; flex-direction: column;
+            /* ═══ CORRECTIF #7 : opacity dans la transition pour filtrage animé ═══ */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.3s ease;
             height: 100%;
         }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        
+
+        /* ═══ CORRECTIF #8 : classe .hidden pour le filtrage — remplace display:none inline ═══ */
+        .card.hidden { display: none; }
+
         /* BADGES DE CATÉGORIE */
         .category-badge {
             display: inline-block; background: #e8f5e9; color: #2e7d32;
             padding: 4px 12px; border-radius: 50px; font-size: 0.7rem;
-            font-weight: 800; text-transform: uppercase; margin-bottom: 15px; width: fit-content;
+            font-weight: 800; text-transform: uppercase; width: fit-content;
         }
+
+        /* ═══ CORRECTIF #9 : métadonnées de carte (temps de lecture) ═══ */
+        .card-meta {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 15px; flex-wrap: wrap;
+        }
+        .read-time { font-size: 0.75rem; color: #999; }
 
         .card h3 { font-family: 'Crimson Pro', serif; color: #1a3a5f; font-size: 1.4rem; margin-bottom: 15px; }
-        .card-link { color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start; margin-top: auto; }
+        .card-link { color: #006a4e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #fecb00; align-self: flex-start; margin-top: auto; transition: color 0.2s; }
+        .card-link:hover { color: #004d32; }
 
         section { padding: 80px 8%; border-bottom: 1px solid #eee; text-align: center; }
-        .section-title { 
-            font-family: 'Crimson Pro', serif; font-size: 2.2rem; 
-            color: var(--primary); margin-bottom: 40px; 
-            border-bottom: 3px solid var(--accent); display: inline-block; 
+        .section-title {
+            font-family: 'Crimson Pro', serif; font-size: 2.2rem;
+            color: var(--primary); margin-bottom: 40px;
+            border-bottom: 3px solid var(--accent); display: inline-block;
             white-space: nowrap; padding-bottom: 5px;
         }
-        .contact-link { color: var(--primary); text-decoration: none; font-weight: bold; }
+        .contact-link { color: var(--primary); text-decoration: none; font-weight: bold; transition: color 0.2s; }
+        .contact-link:hover { color: var(--secondary); }
         footer { background: var(--primary); color: #fff; padding: 40px 8% 20px; text-align: center; width: 100%; }
 
-        @media (max-width: 768px) { 
+        /* ═══ CORRECTIF #10 : Bouton retour en haut ═══ */
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1500;
+            background: var(--secondary); color: white; border: none;
+            width: 44px; height: 44px; border-radius: 50%;
+            font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
+        #back-to-top.visible { opacity: 1; pointer-events: auto; }
+        #back-to-top:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+        @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
-            nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; } 
+            nav { flex-direction: column !important; align-items: flex-start !important; padding: 15px 5% !important; gap: 12px !important; }
             .nav-links { display: flex !important; flex-direction: row !important; gap: 8px !important; width: 100% !important; overflow-x: auto; padding-bottom: 5px; }
             .nav-links a { font-size: 0.92rem !important; font-weight: 600 !important; white-space: nowrap !important; padding: 5px 8px !important; background: #f0f4f7; border-radius: 4px; }
             .blog-header h1 { font-size: 2rem; white-space: normal; }
             .section-title { font-size: 1.7rem; white-space: normal; }
+            #back-to-top { bottom: 20px; right: 20px; }
         }
-            </style>
-    
-            
+    </style>
+
+    <!-- ═══ CORRECTIF #11 : Schema.org — image + adresse ajoutées ═══ -->
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -112,28 +177,46 @@
   "name": "Blog de KODOMMA Gnimdou M.",
   "description": "Analyses juridiques et techniques sur la décentralisation et le développement territorial au Togo.",
   "url": "https://mirabilia-bot.github.io/blog.html",
+  "image": "https://mirabilia-bot.github.io/header-expert.png",
   "publisher": {
     "@type": "Person",
-    "name": "KODOMMA Gnimdou M."
+    "name": "KODOMMA Gnimdou M.",
+    "jobTitle": "Spécialiste SIG & Consultant en Gouvernance Territoriale",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lomé",
+      "addressCountry": "TG"
+    }
   }
 }
     </script>
-   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0056b3">
-<link rel="apple-touch-icon" href="images/icon-192.png">
 
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-  }
-</script>
-    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0056b3">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+
+    <!-- ═══ CORRECTIF #12 : SW enregistré dans window.load + chemin relatif cohérent ═══ -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('sw.js?v=4');
+        });
+      }
+    </script>
+
 </head>
 <body>
 
-    <nav>
+    <!-- ═══ CORRECTIF #4 (suite) : Skip link ═══ -->
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <!-- ═══ CORRECTIF #10 (suite) : Bouton retour en haut ═══ -->
+    <button id="back-to-top" aria-label="Retour en haut de page" title="Retour en haut">↑</button>
+
+    <!-- ═══ CORRECTIF #13 : role + aria-label sur la nav ═══ -->
+    <nav role="navigation" aria-label="Navigation principale">
         <a href="index.html" class="logo">
-            <span style="font-size: 2rem; color: #006a4e;">🏛️</span> 
+            <span style="font-size: 2rem; color: #006a4e;" aria-hidden="true">🏛️</span>
             <div>
                 DÉCENTRALISATION <br>
                 <span class="logo-sub">AU TOGO</span>
@@ -142,103 +225,155 @@
         <div class="nav-links">
             <a href="index.html">Accueil</a>
             <a href="index.html#expertise">Expertise</a>
-            <a href="blog.html">Analyses</a>
+            <!-- ═══ CORRECTIF #14 : aria-current="page" sur le lien de la page active ═══ -->
+            <a href="blog.html" aria-current="page">Analyses</a>
             <a href="index.html#ressources">Ressources</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
-    
-    <main>
+
+    <main id="main-content">
         <header class="blog-header">
             <h1>Analyses & Perspectives</h1>
             <p>Analyses territoriales et guide pratique sur la gouvernance et le développement des territoires.</p>
         </header>
 
-        <div class="filter-container">
-            <button class="filter-btn active" onclick="filterAnalyses('all')">Tous</button>
-            <button class="filter-btn" onclick="filterAnalyses('JURIDIQUE')">Droit & Juridique</button>
-            <button class="filter-btn" onclick="filterAnalyses('SIG')">SIG & Cartographie</button>
-            <button class="filter-btn" onclick="filterAnalyses('ENVIRONNEMENT')">Environnement</button>
+        <!-- ═══ CORRECTIF #15 : role="group" + aria-label sur le groupe de filtres ═══ -->
+        <div class="filter-container" role="group" aria-label="Filtrer les analyses par catégorie">
+            <!-- ═══ CORRECTIF #16 : event passé en paramètre (fin de la variable globale implicite) ═══ -->
+            <!-- ═══ CORRECTIF #17 : aria-pressed pour indiquer l'état aux lecteurs d'écran ═══  -->
+            <button class="filter-btn active" onclick="filterAnalyses(event, 'all')" aria-pressed="true">Tous</button>
+            <button class="filter-btn" onclick="filterAnalyses(event, 'JURIDIQUE')" aria-pressed="false">Droit & Juridique</button>
+            <button class="filter-btn" onclick="filterAnalyses(event, 'SIG')" aria-pressed="false">SIG & Cartographie</button>
+            <button class="filter-btn" onclick="filterAnalyses(event, 'ENVIRONNEMENT')" aria-pressed="false">Environnement</button>
         </div>
 
-        <div class="container">
-            <div class="card">
-                <span class="category-badge">Analyse</span>
+        <!-- ═══ CORRECTIF #6 (suite) : aria-live pour annoncer le nombre de résultats ═══ -->
+        <div class="filter-count" role="status" aria-live="polite" id="filter-count">10 analyses disponibles</div>
+
+        <!-- ═══ CORRECTIF #18 : data-category sur chaque carte — filtrage robuste ═══ -->
+        <!-- (remplace la lecture fragile du texte du badge)                          -->
+        <div class="container" id="cards-container">
+
+            <div class="card" data-category="SIG">
+                <div class="card-meta">
+                    <span class="category-badge">Analyse</span>
+                    <!-- ═══ CORRECTIF #9 (suite) : temps de lecture ═══ -->
+                    <span class="read-time">⏱ 8 min de lecture</span>
+                </div>
                 <h3>L'impact des SIG dans la gestion territoriale</h3>
                 <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Comment l'outil cartographique révolutionne la levée de l'impôt foncier et la planification urbaine au Togo...</p>
-                <a href="article-sig-gestion.html" class="card-link">Lire l'article</a>
+                <!-- ═══ CORRECTIF #19 : aria-label descriptif sur chaque lien (WCAG 2.1) ═══ -->
+                <a href="article-sig-gestion.html" class="card-link" aria-label="Lire l'article : L'impact des SIG dans la gestion territoriale">Lire l'article</a>
             </div>
 
-            <div class="card">
-                <span class="category-badge">Guide</span>
+            <div class="card" data-category="JURIDIQUE">
+                <div class="card-meta">
+                    <span class="category-badge">Guide</span>
+                    <span class="read-time">⏱ 10 min de lecture</span>
+                </div>
                 <h3>Réussir son PDC (Plan de Développement Communal)</h3>
                 <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Les 5 étapes clés pour une planification stratégique efficace au service des citoyens.</p>
-                <a href="article-pdc-communal.html" class="card-link">Lire le guide</a>
+                <a href="article-pdc-communal.html" class="card-link" aria-label="Lire le guide : Réussir son PDC (Plan de Développement Communal)">Lire le guide</a>
             </div>
 
-            <div class="card">
-                <span class="category-badge">Juridique</span>
-                <h3>L’impact de la Loi n° 2019-006 sur la gouvernance locale</h3>
+            <div class="card" data-category="JURIDIQUE">
+                <div class="card-meta">
+                    <span class="category-badge">Juridique</span>
+                    <span class="read-time">⏱ 12 min de lecture</span>
+                </div>
+                <h3>L'impact de la Loi n° 2019-006 sur la gouvernance locale</h3>
                 <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Analyse approfondie du nouveau cadre législatif et des défis de l'autonomie financière des collectivités locales.</p>
-                <a href="article-loi-2019.html" class="card-link">Lire l'analyse</a>
+                <a href="article-loi-2019.html" class="card-link" aria-label="Lire l'analyse : L'impact de la Loi n° 2019-006 sur la gouvernance locale">Lire l'analyse</a>
             </div>
-            <div class="card">
-    <span class="category-badge">Environnement</span>
-    <h3>Gestion des déchets à Agoè-Nyivé 1 : Défis et Perspectives</h3>
-    <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Diagnostic des failles structurelles et financières de la gestion des déchets solides ménagers...</p>
-    <a href="article-gestion-dechets-agoe.html" class="card-link">Lire l'article</a>
+
+            <div class="card" data-category="ENVIRONNEMENT">
+                <div class="card-meta">
+                    <span class="category-badge">Environnement</span>
+                    <span class="read-time">⏱ 9 min de lecture</span>
+                </div>
+                <h3>Gestion des déchets à Agoè-Nyivé 1 : Défis et Perspectives</h3>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Diagnostic des failles structurelles et financières de la gestion des déchets solides ménagers...</p>
+                <a href="article-gestion-dechets-agoe.html" class="card-link" aria-label="Lire l'article : Gestion des déchets à Agoè-Nyivé 1">Lire l'article</a>
             </div>
-          <div class="card">
-    <span class="category-badge">Droit & Territoire</span>
-    <h3>La délimitation des communes : Entre imprécision textuelle et rigueur cartographique</h3>
-    <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Analyse des enjeux juridiques et techniques de la définition des ressorts territoriaux au Togo. Comment le SIG sécurise l'action publique...</p>
-    <a href="delimitation-territoriale-togo.html" class="card-link">Lire l'article</a>
-          </div> 
-                        <div class="card">
-                <span class="category-badge">Gouvernance & SIG</span>
+
+            <!-- data-category="JURIDIQUE SIG" : cette carte apparaît dans les deux filtres -->
+            <div class="card" data-category="JURIDIQUE SIG">
+                <div class="card-meta">
+                    <span class="category-badge">Droit & Territoire</span>
+                    <span class="read-time">⏱ 11 min de lecture</span>
+                </div>
+                <h3>La délimitation des communes : Entre imprécision textuelle et rigueur cartographique</h3>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Analyse des enjeux juridiques et techniques de la définition des ressorts territoriaux au Togo. Comment le SIG sécurise l'action publique...</p>
+                <a href="delimitation-territoriale-togo.html" class="card-link" aria-label="Lire l'article : La délimitation des communes">Lire l'article</a>
+            </div>
+
+            <!-- data-category="SIG JURIDIQUE" : apparaît dans SIG et Juridique -->
+            <div class="card" data-category="SIG JURIDIQUE">
+                <div class="card-meta">
+                    <span class="category-badge">Gouvernance & SIG</span>
+                    <span class="read-time">⏱ 8 min de lecture</span>
+                </div>
                 <h3>L'Inventaire Numérique du Patrimoine : Levier Oublié de la Décentralisation</h3>
                 <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Analyse sur la sécurisation du domaine public au Togo. Pourquoi le SIG est la clé d'une souveraineté financière locale.</p>
-                <a href="gestion-patrimoine-communal-sig-togo.html" class="card-link">Lire l'article</a>
-                        </div>
-
-            <div class="card">
-    <span class="category-badge">Gouvernance & Droit</span>
-    <h3>La Maîtrise d’Ouvrage Communale au Togo</h3>
-    <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Analyse critique sur le transfert de compétences et l'impératif de performance pour les nouveaux exécutifs locaux...</p>
-    <a href="maitrise-ouvrage-communale.html" class="card-link">Lire l'analyse</a>
-            </div>
-          <div class="card">
-    <span class="category-badge">Risques & SIG</span>
-    <h3>Inondations à Lomé : Sortir de la fatalité</h3>
-    <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Comment l'intelligence spatiale et le SIG peuvent remplacer le pompage d'urgence pour une résilience durable...</p>
-    <a href="gestion-inondations-lome.html" class="card-link">Lire l'article</a>
-          </div>
-            <div class="card">
-    <span class="category-badge">Environnement</span>
-    <h3>Vers la Ville Durable Togolaise</h3>
-    <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Réconcilier croissance urbaine et équilibre écologique : les défis de la transition verte au Togo...</p>
-    <a href="villes-durables-togo.html" class="card-link">Lire l'analyse</a>
+                <a href="gestion-patrimoine-communal-sig-togo.html" class="card-link" aria-label="Lire l'article : L'Inventaire Numérique du Patrimoine Communal">Lire l'article</a>
             </div>
 
-            <div class="card">
-    <span class="category-badge">Gouvernance & Droit</span>
-    <h3>Le Budget Participatif au Togo</h3>
-    <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Le Budget Participatif comme levier de refondation de l'action publique locale, adossé à la Loi n°2019-006...</p>
-    <a href="budget-participatif-togo-kgm.html" class="card-link">Lire l'analyse</a>
+            <div class="card" data-category="JURIDIQUE">
+                <div class="card-meta">
+                    <span class="category-badge">Gouvernance & Droit</span>
+                    <span class="read-time">⏱ 10 min de lecture</span>
+                </div>
+                <h3>La Maîtrise d'Ouvrage Communale au Togo</h3>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Analyse critique sur le transfert de compétences et l'impératif de performance pour les nouveaux exécutifs locaux...</p>
+                <a href="maitrise-ouvrage-communale.html" class="card-link" aria-label="Lire l'analyse : La Maîtrise d'Ouvrage Communale au Togo">Lire l'analyse</a>
             </div>
-            
+
+            <!-- data-category="SIG ENVIRONNEMENT" : apparaît dans SIG et Environnement -->
+            <div class="card" data-category="SIG ENVIRONNEMENT">
+                <div class="card-meta">
+                    <span class="category-badge">Risques & SIG</span>
+                    <span class="read-time">⏱ 7 min de lecture</span>
+                </div>
+                <h3>Inondations à Lomé : Sortir de la fatalité</h3>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Comment l'intelligence spatiale et le SIG peuvent remplacer le pompage d'urgence pour une résilience durable...</p>
+                <a href="gestion-inondations-lome.html" class="card-link" aria-label="Lire l'article : Inondations à Lomé, sortir de la fatalité">Lire l'article</a>
+            </div>
+
+            <div class="card" data-category="ENVIRONNEMENT">
+                <div class="card-meta">
+                    <span class="category-badge">Environnement</span>
+                    <span class="read-time">⏱ 9 min de lecture</span>
+                </div>
+                <h3>Vers la Ville Durable Togolaise</h3>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Réconcilier croissance urbaine et équilibre écologique : les défis de la transition verte au Togo...</p>
+                <a href="villes-durables-togo.html" class="card-link" aria-label="Lire l'analyse : Vers la Ville Durable Togolaise">Lire l'analyse</a>
+            </div>
+
+            <div class="card" data-category="JURIDIQUE">
+                <div class="card-meta">
+                    <span class="category-badge">Gouvernance & Droit</span>
+                    <span class="read-time">⏱ 11 min de lecture</span>
+                </div>
+                <h3>Le Budget Participatif au Togo</h3>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Le Budget Participatif comme levier de refondation de l'action publique locale, adossé à la Loi n°2019-006...</p>
+                <a href="budget-participatif-togo-kgm.html" class="card-link" aria-label="Lire l'analyse : Le Budget Participatif au Togo">Lire l'analyse</a>
+            </div>
+
         </div>
 
-        <section id="contact"> 
+        <!-- ═══ CORRECTIF #20 : email ajouté dans la section contact (absent dans l'original) ═══ -->
+        <section id="contact">
             <h2 class="section-title">Contact & Consultance</h2>
             <div class="contact-info">
                 <p>📍 <strong>Localisation :</strong> Lomé, Togo</p>
                 <p>📞 <strong>Téléphone :</strong> <a href="tel:+22893019105" class="contact-link">+228 93 01 91 05</a></p>
                 <p>💬 <strong>WhatsApp :</strong> <a href="https://wa.me/22893019105" class="contact-link">Démarrer une discussion</a></p>
+                <p>✉️ <strong>Email :</strong> <a href="mailto:kgmexpertise@gmail.com" class="contact-link">kgmexpertise@gmail.com</a></p>
             </div>
         </section>
     </main>
-    
+
     <footer>
         <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px;">KODOMMA Gnimdou M.</div>
         <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
@@ -250,20 +385,57 @@
     </footer>
 
     <script>
-    function filterAnalyses(category) {
-        const cards = document.querySelectorAll('.card');
-        const buttons = document.querySelectorAll('.filter-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-        cards.forEach(card => {
-            const badgeText = card.querySelector('.category-badge').innerText.toUpperCase();
-            if (category === 'all' || badgeText.includes(category)) {
-                card.style.display = "flex";
-            } else {
-                card.style.display = "none";
-            }
+    /**
+     * ═══════════════════════════════════════════════════════════════
+     *  CORRECTIF #16 + #17 + #18 + #6 — filterAnalyses REÉCRITE
+     * ═══════════════════════════════════════════════════════════════
+     *  Correctif A : `event` passé en paramètre → plus de variable globale implicite
+     *                (bug en mode strict, comportement non standardisé)
+     *  Correctif B : filtrage sur data-category → robuste (l'original lisait
+     *                le texte du badge : "Droit & Territoire" était invisible
+     *                pour le filtre "JURIDIQUE")
+     *  Correctif C : aria-pressed mis à jour sur chaque bouton
+     *  Correctif D : compteur de résultats mis à jour et annoncé via aria-live
+     */
+    function filterAnalyses(event, category) {
+        var cards   = document.querySelectorAll('.card');
+        var buttons = document.querySelectorAll('.filter-btn');
+        var countEl = document.getElementById('filter-count');
+
+        // Réinitialiser tous les boutons
+        buttons.forEach(function(btn) {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
         });
+        event.currentTarget.classList.add('active');
+        event.currentTarget.setAttribute('aria-pressed', 'true');
+
+        // Filtrage sur data-category (fiable et multi-catégorie)
+        var count = 0;
+        cards.forEach(function(card) {
+            var cats    = (card.getAttribute('data-category') || '').toUpperCase();
+            var visible = (category === 'all') || cats.includes(category);
+            card.classList.toggle('hidden', !visible);
+            if (visible) count++;
+        });
+
+        // Mise à jour du compteur accessible
+        if (category === 'all') {
+            countEl.textContent = count + ' analyses disponibles';
+        } else {
+            countEl.textContent = count + ' analyse' + (count > 1 ? 's' : '') + ' trouvée' + (count > 1 ? 's' : '');
+        }
     }
+
+    // ═══ CORRECTIF #10 (suite) : Bouton retour en haut ═══
+    var backBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', function() {
+        backBtn.classList.toggle('visible', window.scrollY > 300);
+    });
+    backBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
     </script>
+
 </body>
 </html>
