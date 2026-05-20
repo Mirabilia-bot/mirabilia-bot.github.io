@@ -84,9 +84,10 @@ body {
     color: white; 
     padding: 40px 20px; 
     text-align: center; 
-    width: 100%;
-    margin-top: auto; 
+    width: 100%; 
+    box-sizing: border-box; /* Force les marges à rester à l'intérieur des 100% */
 }
+
 
         .back-link { text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
     </style>
@@ -310,26 +311,27 @@ body {
             <strong>À propos de l'auteur :</strong> KODOMMA Gnimdou M. est spécialiste SIG et consultant en gouvernance territoriale et développement local. Ses travaux portent sur l'intersection entre planification spatiale, fiscalité locale et stratégies d'attractivité des collectivités territoriales en Afrique subsaharienne.<br><br>
             <strong>Sources de référence :</strong> Kotler P., Haider D., Rein I. (1993), <em>Marketing Places</em>, Free Press — Loi n° 2019-006 du 26 juin 2019 portant organisation des collectivités territoriales au Togo — Banque mondiale, Rapport Doing Business 2020 — Plan de Développement Communal d'Atakpamé 2021-2025 — Programme Evala, Ministère de la Culture du Togo — Urban Land Institute, Innovative City Award 2013 (Medellín) — Conseil de la Région Souss-Massa, Rapport d'attractivité 2022.
         </p>
-    </main>
-
-    <div style="font-size: 0.75rem; opacity: 0.5; text-align: center; padding: 15px 0; background: var(--bg);">
-        Dernière mise à jour : <span id="date-modif"></span>
+    </main> <div style="font-size: 0.75rem; opacity: 0.5; text-align: center; padding: 15px 0; background: var(--bg); width: 100%;">
+        Dernière mise à jour : <span id="date-modif-span"></span>
     </div>
 
     <footer>
-        <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px;">KODOMMA Gnimdou M.</div>
+        <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; word-break: normal;">
+            KGM EXPERTISE | Cartographie et Sig (Systèmes d'information géographique) et Gouvernance territoriale
+        </div>
         <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
-            Spécialiste SIG et gestionnaire des collectivités locales | Consultant en Gouvernance Territoriale
+            <a href="https://mirabilia-bot.github.io" style="color: white; text-decoration: none;">mirabilia-bot.github.io</a>
         </p>
         <div style="margin-top: 15px; font-size: 0.7rem; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
             &copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.
         </div>
     </footer>
 
-<script>
-    const dateModif = new Date(document.lastModified);
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
-</script>
+    <script>
+        const dateModif = new Date(document.lastModified);
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        document.getElementById('date-modif-span').textContent = dateModif.toLocaleDateString('fr-FR', options);
+    </script>
+
 </body>
 </html>
