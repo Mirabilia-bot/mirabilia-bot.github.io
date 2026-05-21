@@ -70,6 +70,94 @@ main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; 
 
 
         .back-link { text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
+    /* --- SECTION HAUTE TECHNOLOGIE : LECTEURS VIDÉOS --- */
+.video-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.video-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(5px);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(10, 37, 64, 0.1);
+    border-color: var(--secondary);
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+}
+
+/* Ratio horizontal 16:9 pour le paysage (Mairies, Tourisme) */
+.video-wrapper.landscape {
+    padding-top: 56.25%; 
+}
+
+/* Ratio vertical 9:16 optimisé pour les formats Shorts/TikTok */
+.video-wrapper.portrait {
+    padding-top: 177.77%; 
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-meta {
+    margin-top: 14px;
+}
+
+.video-meta h4 {
+    margin: 0 0 6px 0;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.25rem;
+    color: var(--primary);
+}
+
+.video-meta p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    line-height: 1.4;
+}
+
+.video-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.badge-fb { background: rgba(24, 119, 242, 0.1); color: #1877f2; }
+.badge-tk { background: rgba(0, 0, 0, 0.08); color: #000000; }
+        
     </style>
 </head>
 <body>
@@ -86,6 +174,22 @@ main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; 
 
         <p>Le marketing territorial reste, au Togo, l'un des concepts les mieux compris par les chercheurs et les moins pratiqués par les acteurs institutionnels. Pourtant, à l'heure où la Loi n° 2019-006 du 26 juin 2019 portant décentralisation et libertés locales redistribue les compétences de l'État vers les communes et les régions, la question de savoir comment un territoire se positionne, se différencie et se vend au sens stratégique du terme n'est plus un luxe académique. C'est une urgence de gouvernance. Les ressources propres des communes demeurent structurellement faibles, les investissements privés se concentrent sur Lomé et quelques corridors économiques, et l'exode rural vers la capitale continue de vider des localités entières de leur substance productive. Face à ce diagnostic, le marketing territorial offre une grille de lecture nouvelle et des outils concrets pour inverser ces dynamiques.</p>
 
+                <div style="margin: 30px 0; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center;">
+            <div class="video-card" style="max-width: 340px; width: 100%;">
+                <span class="video-badge badge-tk">TikTok • Togolais228</span>
+                <div class="video-wrapper portrait">
+                    <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                        <source src="videos/lome-hub.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de cette vidéo.
+                    </video>
+                </div>
+                <div class="video-meta">
+                    <h4>Lomé — Le Hub Logistique</h4>
+                    <p>Aperçu immersif de la capitale, vitrine de la modernisation infrastructurelle et portuaire du Togo.</p>
+                </div>
+            </div>
+                </div>
+        
         <img src="images/marketing-territorial-togo.png" alt="Marketing territorial dans les collectivités togolaises" class="article-img">
 
         <h2>1. Ce que le marketing territorial signifie réellement</h2>
@@ -134,6 +238,59 @@ main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; 
         <p>Aneho, ancienne capitale coloniale du Togo allemand, dispose d'un patrimoine architectural et historique qui fait d'elle une ville à fort potentiel touristique culturel. Ses maisons de commerce du XIXe siècle, son cimetière brésilien, sa position sur la lagune et sa proximité avec la frontière béninoise en font un lieu à forte charge identitaire. Pourtant, la ville reste peu visitée, peu connue et quasiment absente des circuits touristiques officiels.</p>
         <p>La commune d'Aneho dispose là d'un argument de différenciation puissant que le marketing territorial pourrait exploiter : l'<em>authenticité historique</em>, un actif rare dans un contexte régional où le tourisme de masse tend à l'uniformisation. Il s'agit d'un positionnement de niche, précieux et défendable, qui ne nécessite pas des investissements massifs mais une narration cohérente, une mise en scène patrimoniale et une coopération avec les opérateurs de tourisme durable.</p>
 
+        <section style="margin: 45px 0; width: 100%; box-sizing: border-box; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 30px;">
+    <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 8px; text-align: center;">
+        Vitrine des Territoires : Dynamiques Audiovisuelles Régionales
+    </h3>
+    <p style="font-size: 0.9rem; opacity: 0.8; text-align: center; max-width: 700px; margin: 0 auto 30px auto; line-height: 1.5;">
+        Illustrations concrètes des stratégies d'attractivité, de la valorisation du patrimoine et du développement local à travers les productions numériques des collectivités.
+    </p>
+
+    <div class="video-showcase-grid">
+        
+        <div class="video-card">
+            <span class="video-badge badge-fb">Facebook • Les merveilles de mon pays (2025)</span>
+            <div class="video-wrapper landscape">
+                <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    <source src="videos/atakpame-agro.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="video-meta">
+                <h4>Atakpamé — L'Agro-industrie</h4>
+                <p>Focus sur la transformation agricole et les spécificités écotouristiques de la région des Plateaux.</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <span class="video-badge badge-fb">Facebook • Commune des Lacs 1 (2026)</span>
+            <div class="video-wrapper landscape">
+                <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    <source src="videos/aneho-patrimoine.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="video-meta">
+                <h4>Aného — Patrimoine & Histoire</h4>
+                <p>Mise en valeur institutionnelle de l'économie bleue, de la culture et du rayonnement de la cité tricentenaire.</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <span class="video-badge badge-fb">Facebook • Visit Kara-Togo (2026)</span>
+            <div class="video-wrapper landscape">
+                <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    <source src="videos/kara-culture.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="video-meta">
+                <h4>Kara — Culture & Logistique</h4>
+                <p>Valorisation des facteurs d'attractivité du Nord, alliant l'industrie culturelle (Evala) et la position de carrefour d'échanges.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+        
         <h2>4. Benchmarking international : ce que font les meilleurs</h2>
         <p>L'examen des pratiques internationales de marketing territorial n'a pas pour objet de reproduire mécaniquement des modèles étrangers dans le contexte togolais. Il s'agit d'extraire des principes transposables, des séquences d'action éprouvées et des erreurs à éviter. Quatre cas méritent une attention particulière.</p>
 
