@@ -44,19 +44,24 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// 3. Stratégie Hybride : Network First avec mise en cache dynamique
+// 3. Stratégie Hybride : Network First avec fallback vers offline.html
 self.addEventListener('fetch', (e) => {
-  // Ignorer les requêtes externes (CDN comme Leaflet)
-  if (e.request.url.startsWith('http')) {
-    e.respondWith(
-      fetch(e.request)
-        .then((response) => {
-          // Cloner et mettre en cache les ressources réussies
-          const resClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, resClone));
-          return response;
-        })
-        .catch(() => caches.match(e.request))
-    );
-  }
+  e.respondWith(
+    fetch(e.request)
+      .then((response) => {
+        const resClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(e.request, resClone));
+        return response;
+      })
+      .catch(async () => {
+        // Essayer de trouver la page dans le cache
+        const cachedResponse = await caches.match(e.request);
+        if (cachedResponse) return cachedResponse;
+        
+        // Si ce n'est pas dans le cache, on renvoie la page de secours
+        if (e.request.headers.get('accept').includes('text/html')) {
+          return caches.match('./offline.html');
+        }
+      })
+  );
 });
