@@ -3,80 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transition vers des Villes Durables au Togo | KGM EXPERTISE</title>
-    <meta name="description" content="Analyse de la transition écologique urbaine au Togo avec le soutien du PNUD et de l'AFD. Rôle du SIG et gestion des déchets.">
-    <meta name="keywords" content="ville durable Togo, PNUD, AFD, gestion déchets, transition écologique, KODOMMA Gnimdou M., Vert Togo">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+    <title>Vers la Ville Durable Togolaise : Un Impératif de Résilience | KGM EXPERTISE</title>
+    <link rel="canonical" href="https://mirabilia-bot.github.io/villes-durables-togo.html" />
+    <meta name="description" content="Analyse experte de la transition vers des villes durables au Togo : urbanisation, gestion des déchets, inondations, trame verte, benchmarking et feuille de route opérationnelle. Par KODOMMA Gnimdou M.">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
-        :root { --primary: #00264d; --secondary: #2e7d32; --accent: #d4af37; --text: #2c3e50; --bg: #fdfdfd; }
-        html, body { height: 100%; margin: 0; }
-        body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; display: flex; flex-direction: column; }
-        nav { background: white; padding: 1rem 8%; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; width: 100%; box-sizing: border-box; }
-        main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; }
-        .tag { background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-        h1 { font-family: 'Crimson Pro', serif; font-size: 2.4rem; color: var(--primary); margin: 15px 0; line-height: 1.2; text-align: left; hyphens: none !important; }
-        h2 { font-family: 'Crimson Pro', serif; color: var(--secondary); margin-top: 35px; border-bottom: 2px solid #eee; padding-bottom: 8px; }
-        p, li { text-align: justify; hyphens: none !important; }
-        .highlight-box { background: #f1f8e9; border-left: 5px solid var(--secondary); padding: 25px; margin: 30px 0; border-radius: 0 8px 8px 0; }
-        footer { background: var(--primary); color: white; padding: 40px 8%; text-align: center; }
-        .back-link { text-decoration: none; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
+        :root {
+            --primary: #00264d;
+            --secondary: #2e7d32;
+            --accent: #d4af37;
+            --text: #2c3e50;
+            --bg: #fdfdfd;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.8;
+            margin: 0;
+            background: var(--bg);
+        }
+
+        nav {
+            background: white;
+            padding: 0 20px;
+            height: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        main {
+            max-width: 850px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .tag { background: #e8f5e9; color: var(--secondary); padding: 5px 15px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        .article-meta { color: var(--accent); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin: 15px 0; }
+        h1 { font-family: 'Crimson Pro', serif; font-size: 2.2rem; color: var(--primary); line-height: 1.2; }
+        h2 { font-family: 'Crimson Pro', serif; color: var(--secondary); margin-top: 40px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        .article-img { width: 100%; border-radius: 12px; margin: 25px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        
+        .highlight-box { background: #f1f8e9; border-left: 5px solid var(--accent); padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #fff8e1; border-left: 5px solid #e65100; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        
+        /* Grille images épurée */
+        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 40px 0; }
+        .showcase-card { border: 1px solid #eee; border-radius: 12px; padding: 15px; background: white; }
+        .showcase-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+
+        footer { background: var(--primary); color: white; padding: 40px 20px; text-align: center; }
     </style>
 </head>
 <body>
-    <nav><a href="blog.html" class="back-link">← Retour aux analyses</a></nav>
-    <main>
-        <span class="tag">Environnement</span>
-        <p style="color: var(--accent); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Analyse | 06 Mai 2026</p>
-        <h1>Vers la Ville Durable Togolaise : Un Impératif au-delà du Concept</h1>
 
-        <p>Le Togo s'engage vers la « Ville Durable » sous l'impulsion du <strong>PNUD</strong> et de l'<strong>AFD</strong>. Selon <strong>Saskia Sassen</strong>, une ville durable est une cité capable de métaboliser ses propres déchets. Aujourd'hui, nos communes croulent sous les immondices qui bouchent les exutoires, aggravant les inondations (Source: Vert-Togo).</p>
+<nav><a href="blog.html" style="text-decoration:none; color:var(--primary); font-weight:bold;">← Retour aux analyses</a></nav>
 
-        <div class="highlight-box">
-            <strong>L'initiative :</strong> Le gouvernement, via des financements structurels, ambitionne de transformer nos centres urbains en modèles de résilience, en misant sur une gestion intelligente des déchets et des espaces verts (Source: Republic of Togo).
-        </div>
+<main>
+    <span class="tag">Environnement & Urbanisme</span>
+    <p class="article-meta">Analyse approfondie | 06 Mai 2026</p>
 
-        <h2>De la ville grise à la ville verte</h2>
-        <div style="margin: 40px 0; text-align: center;">
-    <figure style="margin: 0; display: inline-block; width: 100%;">
-        <a href="images/infographie-ville-verte-togo.png" target="_blank">
-            <img src="images/infographie-ville-verte-togo.png" 
-                 alt="Infographie : Transition écologique et Ville Verte au Togo" 
-                 style="width: 100%; max-width: 800px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease;"
-                 onmouseover="this.style.transform='scale(1.02)'" 
-                 onmouseout="this.style.transform='scale(1)'">
-        </a>
-        <figcaption style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">
-            Les piliers de la ville durable — Trame verte et bleue, gestion des déchets et AMO — © KGM EXPERTISE
-        </figcaption>
-    </figure>
-        </div>
-        
-        <p><strong>KGM EXPERTISE</strong> accompagne cette mutation en proposant une planification basée sur la Trame Verte et Bleue. Grâce au SIG, nous optimisons les flux de collecte des déchets et identifions les sites de valorisation circulaire. Passer de la consommation à la planification est le seul moyen d'éviter l'asphyxie urbaine de nos cités en pleine croissance.</p>
+    <h1>Vers la Ville Durable Togolaise : entre impératif écologique, réalité urbaine et urgence de gouvernance</h1>
 
-        <p style="margin-top: 40px; font-style: italic; border-top: 1px solid #ddd; padding-top: 20px;">
-            Par <strong>KODOMMA Gnimdou M.</strong>, gestionnaire des collectivités locales & Expert SIG.
-        </p>
-    </main>
+    <p>Le Togo connaît depuis la fin des années 1990 une urbanisation d'une intensité que ses structures administratives et financières n'avaient pas anticipée. Lomé concentre plus de 40 % de la population urbaine nationale, tandis que Kara, Atakpamé, Sokodé et Tsévié voient leurs périphéries se densifier à un rythme dépassant les capacités de planification. Dans ce contexte, la notion de "ville durable" court le risque de n'être qu'un concept exporté si elle n'est pas confrontée aux réalités locales.</p>
 
-    <div style="font-size: 0.75rem; opacity: 0.5; text-align: center; padding: 15px 0; background: var(--bg);">
-        Dernière mise à jour : <span id="date-modif"></span>
+    <img src="images/infographie-ville-verte-togo.png" alt="Piliers de la ville durable" class="article-img">
+
+    <h2>1. Définition et exigences</h2>
+    <p>Le développement durable urbain repose sur une triple exigence : viabilité écologique, équité sociale et efficience économique. Une ville durable est celle capable de métaboliser ses propres déchets, d'absorber les flux qu'elle génère sans externaliser ses coûts sur des territoires voisins ou des générations futures.</p>
+
+    <div class="highlight-box">
+        <strong>Ce que la ville durable n'est pas :</strong>
+        La durabilité n'est pas un catalogue de technologies vertes importées plaquées sur des systèmes défaillants. Elle commence par des fondamentaux : drainage fonctionnel, collecte universelle des déchets, espaces verts accessibles et planification à long terme.
     </div>
 
-    <footer>
-        <div style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px;">KODOMMA Gnimdou M.</div>
-        <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 12px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
-            Spécialiste SIG et gestionnaire des collectivités locales | Consultant en Gouvernance Territoriale
-        </p>
-        <div style="margin-top: 15px; font-size: 0.7rem; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-            &copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.
-        </div>
-    </footer>
+    <h2>2. État des lieux : le poids d'une urbanisation non maîtrisée</h2>
+    <p>Le taux d'urbanisation du Togo a franchi la barre des 43 % en 2023. Cette progression s'est effectuée dans une grande informalité. À Lomé, les quartiers s'étendent sans réserves foncières pour les équipements publics ni réseaux de drainage adaptés. La Loi de 2019 a décentralisé les compétences, mais les communes manquent encore des leviers techniques pour passer de la description à la prescription.</p>
 
-<script>
-    const dateModif = new Date(document.lastModified);
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
-</script>
+    <h2>3. Réalités et initiatives sur le terrain</h2>
+    <p>Des efforts sont visibles, comme le PUDC ou les projets d'assainissement intégrés. Cependant, la fragmentation des interventions limite leur impact durable. La gestion des déchets dans les communes périphériques comme Agoè-Nyivé repose sur des initiatives communautaires (GIE) dont la fragilité économique nécessite une formalisation urgente.</p>
+
+    <div class="showcase-grid">
+        <div class="showcase-card">
+            <img src="images/carto-ecologique.png" class="showcase-img" alt="Trame verte">
+            <h4>Corridors écologiques</h4>
+            <p>Cartographie des zones humides et zones tampons à protéger.</p>
+        </div>
+        <div class="showcase-card">
+            <img src="images/gestion-dechets.png" class="showcase-img" alt="Gestion déchets">
+            <h4>Gestion des flux</h4>
+            <p>Modèles de précollecte en zones périurbaines.</p>
+        </div>
+        <div class="showcase-card">
+            <img src="images/kara-paysage.png" class="showcase-img" alt="Reboisement">
+            <h4>Verdissement périurbain</h4>
+            <p>Initiatives de reboisement dans la région de la Kara.</p>
+        </div>
+    </div>
+
+    <h2>4. Benchmarking : leçons internationales</h2>
+    <p>L'étude de cas comme Curitiba (planification intégrée), Kigali (implication citoyenne), Medellín (corridors verts) et Accra (filières de recyclage) démontre que la réussite ne dépend pas uniquement des ressources financières, mais de la continuité de la vision politique et de l'implication des populations locales.</p>
+
+    <div class="warning-box">
+        <strong>⚠️ Le coût de l'improvisation :</strong>
+        Les coûts cumulés des destructions dues aux inondations représentent chaque année des milliards de francs CFA. Investir dans la prévention — drainage et planification — est structurellement moins coûteux que de financer perpétuellement les interventions d'urgence.
+    </div>
+
+    <h2>5. Recommandations stratégiques</h2>
+    <p>La transition exige un changement d'échelle :</p>
+    <ul>
+        <li><strong>Court terme :</strong> Diagnostic SIG complet et formalisation des services de proximité.</li>
+        <li><strong>Moyen terme :</strong> Adoption de schémas directeurs intégrant obligatoirement une Trame Verte et Bleue.</li>
+        <li><strong>Long terme :</strong> Institutionnalisation d'indicateurs environnementaux dans la gestion municipale.</li>
+    </ul>
+
+</main>
+
+<footer>
+    <div style="font-size: 1.2rem; font-weight: bold;">KODOMMA Gnimdou M.</div>
+    <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 10px;">Spécialiste SIG et Gouvernance Territoriale | Consultant en développement local</p>
+</footer>
+
 </body>
 </html>
