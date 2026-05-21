@@ -33,13 +33,16 @@
         }
         
         body { 
-            font-family: 'Inter', sans-serif; 
-            color: var(--text); 
-            line-height: 1.8; 
-            display: flex; 
-            flex-direction: column; 
-            overflow-x: hidden; /* Empêche tout défilement horizontal parasite */
-        }
+    font-family: 'Inter', sans-serif; 
+    color: var(--text); 
+    line-height: 1.8; 
+    display: flex; 
+    flex-direction: column; 
+    overflow-x: hidden; /* Empêche tout défilement horizontal parasite */
+    scroll-behavior: smooth; /* Rend le défilement plus fluide */
+    position: relative;    
+    -webkit-overflow-scrolling: touch;      /* Force le navigateur à ancrer le scroll ici */
+}
 
         /* BARRE DE NAVIGATION FIGÉE ET IMPERMÉABLE */
         nav { 
