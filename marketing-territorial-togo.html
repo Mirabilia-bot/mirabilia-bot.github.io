@@ -515,7 +515,11 @@
         &copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.
     </div>
     </footer>
-
+<script>
+        const dateModif = new Date(document.lastModified);
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
+</script>
     <script>
 (function() {
     const video = document.querySelector('video');
