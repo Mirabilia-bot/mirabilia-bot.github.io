@@ -96,69 +96,194 @@ main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; 
 .video-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 40px rgba(10, 37, 64, 0.1);
-    border-color: var(--secondary);
-}
-
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 12px;
-    background: #000;
-}
-
-/* Ratio horizontal 16:9 pour le paysage (Mairies, Tourisme) */
-.video-wrapper.landscape {
-    padding-top: 56.25%; 
-}
-
-/* Ratio vertical 9:16 optimisé pour les formats Shorts/TikTok */
-.video-wrapper.portrait {
-    padding-top: 177.77%; 
-}
-
-.video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.video-meta {
-    margin-top: 14px;
-}
-
-.video-meta h4 {
-    margin: 0 0 6px 0;
-    font-family: 'Crimson Pro', serif;
-    font-size: 1.25rem;
-    color: var(--primary);
-}
-
-.video-meta p {
-    margin: 0;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    line-height: 1.4;
-}
-
-.video-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
-.badge-fb { background: rgba(24, 119, 242, 0.1); color: #1877f2; }
-.badge-tk { background: rgba(0, 0, 0, 0.08); color: #000000; }
+    <style>
+        :root { --primary: #00264d; --secondary: #006a4e; --accent: #d4af37; --text: #2c3e50; --bg: #fdfdfd; }
         
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        html, body { 
+            height: 100%; 
+            margin: 0; 
+            padding: 0;
+            background: var(--bg);
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: var(--text); 
+            line-height: 1.8; 
+            display: flex; 
+            flex-direction: column; 
+            overflow-x: hidden; /* Empêche tout défilement horizontal parasite */
+        }
+
+        /* BARRE DE NAVIGATION FIGÉE ET IMPERMÉABLE */
+        nav { 
+            background: white; 
+            padding: 0 20px; 
+            height: 60px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 10000; 
+            display: flex;
+            align-items: center;
+        }
+
+        .back-link { 
+            text-decoration: none; 
+            color: var(--primary); 
+            font-weight: bold; 
+            font-size: 0.9rem; 
+        }
+
+        /* ADAPTATION DES MARGES DE L'ARTICLE */
+        main { 
+            flex: 1; 
+            max-width: 850px; 
+            margin: 90px auto 40px auto; /* 90px en haut pour laisser la barre fixe visible sans masquer le texte */
+            padding: 0 20px; /* Assure une marge de sécurité propre de 20px à gauche et à droite sur mobile */
+            width: 100%; 
+        }
+
+        .tag { background: #e8f5e9; color: var(--secondary); padding: 5px 15px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        
+        h1 { 
+            font-family: 'Crimson Pro', serif; 
+            font-size: 2.2rem; 
+            color: var(--primary); 
+            margin: 15px 0; 
+            line-height: 1.2; 
+            text-align: left; 
+            hyphens: none !important;
+            word-break: normal;
+        }
+        
+        .article-img { 
+            width: 100%; 
+            height: auto;
+            border-radius: 12px; 
+            margin: 25px 0; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+        
+        h2 { font-family: 'Crimson Pro', serif; color: var(--secondary); margin-top: 35px; border-bottom: 2px solid #eee; padding-bottom: 8px; hyphens: none !important; }
+        h3 { font-family: 'Crimson Pro', serif; color: var(--primary); margin-top: 25px; font-size: 1.3rem; hyphens: none !important; }
+        
+        p, li, td, th { 
+            text-align: justify; 
+            hyphens: none !important; 
+            word-break: normal !important; 
+            overflow-wrap: break-word !important;
+        }
+
+        .highlight-box { background: #f4f7f9; border-left: 5px solid var(--accent); padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.9rem; display: block; overflow-x: auto; } /* overflow-x empêche le tableau de casser la marge mobile */
+        th { background: var(--primary); color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+        tr:nth-child(even) td { background: #fdfdfd; }
+        
+        blockquote { font-family: 'Crimson Pro', serif; font-size: 1.3rem; color: var(--secondary); border-left: 5px solid var(--accent); padding: 15px 20px; margin: 25px 0; font-style: italic; background: #f4f7f9; }
+        
+        .note { font-size: 0.8rem; opacity: 0.7; border-top: 1px solid #eee; padding-top: 15px; margin-top: 30px; }
+        
+        footer { background: var(--primary); color: white; padding: 40px 20px; text-align: center; width: 100%; }
+
+        /* GRILLE ET IMAGE-CARDS HARMONISÉES */
+        .video-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        .video-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(10, 37, 64, 0.1);
+            border-color: var(--secondary);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .video-wrapper.landscape {
+            padding-top: 56.25%; 
+        }
+
+        .video-wrapper video, .video-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+
+        .video-meta {
+            margin-top: 12px;
+        }
+
+        .video-meta h4 {
+            margin: 0 0 4px 0;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+        }
+
+        .video-meta p {
+            margin: 0;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            line-height: 1.4;
+        }
+
+        .video-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            width: fit-content;
+        }
+        .badge-fb { background: rgba(24, 119, 242, 0.1); color: #1877f2; }
+        .badge-tk { background: rgba(0, 0, 0, 0.06); color: #000000; }
+
+        /* AJUSTEMENTS POUR ÉCRANS MOBILES CRITIQUES */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.75rem; }
+            nav { padding: 0 15px; }
+            main { margin-top: 80px; padding: 0 15px; }
+            .video-showcase-grid { grid-template-columns: 1fr; gap: 15px; }
+        }
     </style>
+
 </head>
 <body>
 
@@ -174,8 +299,9 @@ main { flex: 1; max-width: 850px; margin: 80px auto 40px auto; padding: 0 20px; 
 
         <p>Le marketing territorial reste, au Togo, l'un des concepts les mieux compris par les chercheurs et les moins pratiqués par les acteurs institutionnels. Pourtant, à l'heure où la Loi n° 2019-006 du 26 juin 2019 portant décentralisation et libertés locales redistribue les compétences de l'État vers les communes et les régions, la question de savoir comment un territoire se positionne, se différencie et se vend au sens stratégique du terme n'est plus un luxe académique. C'est une urgence de gouvernance. Les ressources propres des communes demeurent structurellement faibles, les investissements privés se concentrent sur Lomé et quelques corridors économiques, et l'exode rural vers la capitale continue de vider des localités entières de leur substance productive. Face à ce diagnostic, le marketing territorial offre une grille de lecture nouvelle et des outils concrets pour inverser ces dynamiques.</p>
 
-                <div style="margin: 30px 0; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center;">
-                                    <div class="video-showcase-grid" style="margin: 30px 0;">
+    
+            <div class="video-showcase-grid" style="margin: 30px 0;">
+                                        
             <div class="video-card">
                 <span class="video-badge" style="background: #111; color: #fff;">Vue Aérienne • Lomé Moderne</span>
                 <div class="video-wrapper landscape">
