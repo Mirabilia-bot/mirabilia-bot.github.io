@@ -517,38 +517,38 @@
     </footer>
 
     <script>
-        const dateModif = new Date(document.lastModified);
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-        document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
-    </script>
-        <script>
 (function() {
-    let scrollPos = 0;
     const video = document.querySelector('video');
-
     if (!video) return;
 
-    // Capture la position AVANT le passage en plein écran
-    video.addEventListener('webkitbeginfullscreen', () => {
-        scrollPos = window.scrollY;
-    }, false);
+    // Fonction qui fige ou libère le scroll
+    function toggleScrollLock(lock) {
+        if (lock) {
+            // Mémorise la position et bloque le défilement
+            const scrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+        } else {
+            // Libère le défilement et restaure la position
+            const scrollY = document.body.style.top.replace('-', '').replace('px', '');
+            document.body.style.position = '';
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0'));
+        }
+    }
 
-    // Retour au point mémorisé lors de la fermeture
-    video.addEventListener('webkitendfullscreen', () => {
-        window.scrollTo(0, scrollPos);
-    }, false);
+    // Écouteurs pour le passage en plein écran
+    video.addEventListener('webkitbeginfullscreen', () => toggleScrollLock(true));
+    video.addEventListener('webkitendfullscreen', () => toggleScrollLock(false));
 
-    // Support pour les autres navigateurs (Android/Chrome)
     document.addEventListener('fullscreenchange', () => {
         if (document.fullscreenElement) {
-            scrollPos = window.scrollY;
+            toggleScrollLock(true);
         } else {
-            // Un délai infime suffit, inutile de désactiver le scroll-behavior
-            setTimeout(() => {
-                window.scrollTo(0, scrollPos);
-            }, 100);
+            toggleScrollLock(false);
         }
-    }, false);
+    });
 })();
 </script>
  
