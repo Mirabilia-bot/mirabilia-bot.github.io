@@ -1,7 +1,17 @@
+# Blocage des bots inutiles (Scrapers gourmands qui ralentissent le site)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Autorisation pour les moteurs de recherche et réseaux sociaux
 User-agent: *
 Allow: /
+# Disallow: /admin/  <-- Ajoutez ceci si vous avez une partie privée
 
-User-agent: facebookexternalhit
-Allow: /
-
+# Sitemap dédié
 Sitemap: https://mirabilia-bot.github.io/sitemap.xml
