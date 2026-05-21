@@ -517,5 +517,40 @@
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
         document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
     </script>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.querySelector('.video-wrapper video');
+            let lastScrollPosition = 0;
+
+            if (video) {
+                // Dès que la vidéo s'apprête à passer en plein écran
+                video.addEventListener('webkitbeginfullscreen', () => {
+                    lastScrollPosition = window.scrollY;
+                });
+                
+                video.addEventListener('fullscreenchange', () => {
+                    if (document.fullscreenElement) {
+                        lastScrollPosition = window.scrollY;
+                    }
+                });
+
+                // Dès que la vidéo quitte le plein écran
+                video.addEventListener('webkitendfullscreen', () => {
+                    setTimeout(() => {
+                        window.scrollTo({ top: lastScrollPosition, behavior: 'auto' });
+                    }, 50);
+                });
+
+                document.addEventListener('fullscreenchange', () => {
+                    if (!document.fullscreenElement) {
+                        setTimeout(() => {
+                            window.scrollTo({ top: lastScrollPosition, behavior: 'auto' });
+                        }, 50);
+                    }
+                });
+            }
+        });
+        </script>
+    
 </body>
 </html>
