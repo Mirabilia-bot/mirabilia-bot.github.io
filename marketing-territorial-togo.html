@@ -522,38 +522,73 @@
         document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
     </script>
         <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.querySelector('.video-wrapper video');
-            let lastScrollPosition = 0;
+document.addEventListener('DOMContentLoaded', function () {
 
-            if (video) {
-                // Dès que la vidéo s'apprête à passer en plein écran
-                video.addEventListener('webkitbeginfullscreen', () => {
-                    lastScrollPosition = window.scrollY;
-                });
-                
-                video.addEventListener('fullscreenchange', () => {
-                    if (document.fullscreenElement) {
-                        lastScrollPosition = window.scrollY;
-                    }
-                });
+    var savedScrollY = 0;
 
-                // Dès que la vidéo quitte le plein écran
-                video.addEventListener('webkitendfullscreen', () => {
-                    setTimeout(() => {
-                        window.scrollTo({ top: lastScrollPosition, behavior: 'auto' });
-                    }, 50);
-                });
+    /* Mémorise la position au moment où la vidéo entre en plein écran */
+    function saveScroll() {
+        savedScrollY = window.scrollY || window.pageYOffset;
+    }
 
-                document.addEventListener('fullscreenchange', () => {
-                    if (!document.fullscreenElement) {
-                        setTimeout(() => {
-                            window.scrollTo({ top: lastScrollPosition, behavior: 'auto' });
-                        }, 50);
-                    }
-                });
+    /* Restaure la position en désactivant scroll-behavior:smooth le temps du retour */
+    function restoreScroll() {
+        document.documentElement.style.scrollBehavior = 'auto';
+        document.body.style.scrollBehavior = 'auto';
+        window.scrollTo(0, savedScrollY);
+        setTimeout(function () {
+            document.documentElement.style.scrollBehavior = '';
+            document.body.style.scrollBehavior = '';
+        }, 100);
+    }
+
+    /* ── Correctif #1 : querySelectorAll → toutes les vidéos de la page ── */
+    var videos = document.querySelectorAll('video');
+
+    videos.forEach(function (video) {
+
+        /* iOS / Safari — événements webkit natifs sur l'élément vidéo */
+        video.addEventListener('webkitbeginfullscreen', saveScroll);
+        video.addEventListener('webkitendfullscreen', function () {
+            setTimeout(restoreScroll, 100);
+        });
+
+        /* Chrome / Firefox / Edge — fullscreenchange sur l'élément */
+        video.addEventListener('fullscreenchange', function () {
+            if (document.fullscreenElement === video) {
+                saveScroll();
+            } else {
+                setTimeout(restoreScroll, 100);
             }
         });
+    });
+
+    /* ── Correctif #2 : fullscreenchange sur document (couvre tous navigateurs) ── */
+    document.addEventListener('fullscreenchange', function () {
+        if (document.fullscreenElement) {
+            saveScroll();
+        } else {
+            setTimeout(restoreScroll, 100);
+        }
+    });
+
+    /* ── Correctif #3 : webkitfullscreenchange sur document (Safari desktop) ── */
+    document.addEventListener('webkitfullscreenchange', function () {
+        if (document.webkitFullscreenElement) {
+            saveScroll();
+        } else {
+            setTimeout(restoreScroll, 100);
+        }
+    });
+
+    /* ── Correctif #4 : visibilitychange — bug iOS Safari retour à zéro ── */
+    document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible' && savedScrollY > 0) {
+            setTimeout(restoreScroll, 150);
+        }
+    });
+
+});
         </script>
     
 </body>
