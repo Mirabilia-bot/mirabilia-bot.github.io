@@ -522,74 +522,35 @@
         document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
     </script>
         <script>
-document.addEventListener('DOMContentLoaded', function () {
+(function() {
+    let scrollPos = 0;
+    const video = document.querySelector('video');
 
-    var savedScrollY = 0;
+    if (!video) return;
 
-    /* Mémorise la position au moment où la vidéo entre en plein écran */
-    function saveScroll() {
-        savedScrollY = window.scrollY || window.pageYOffset;
-    }
+    // Capture la position AVANT le passage en plein écran
+    video.addEventListener('webkitbeginfullscreen', () => {
+        scrollPos = window.scrollY;
+    }, false);
 
-    /* Restaure la position en désactivant scroll-behavior:smooth le temps du retour */
-    function restoreScroll() {
-        document.documentElement.style.scrollBehavior = 'auto';
-        document.body.style.scrollBehavior = 'auto';
-        window.scrollTo(0, savedScrollY);
-        setTimeout(function () {
-            document.documentElement.style.scrollBehavior = '';
-            document.body.style.scrollBehavior = '';
-        }, 100);
-    }
+    // Retour au point mémorisé lors de la fermeture
+    video.addEventListener('webkitendfullscreen', () => {
+        window.scrollTo(0, scrollPos);
+    }, false);
 
-    /* ── Correctif #1 : querySelectorAll → toutes les vidéos de la page ── */
-    var videos = document.querySelectorAll('video');
-
-    videos.forEach(function (video) {
-
-        /* iOS / Safari — événements webkit natifs sur l'élément vidéo */
-        video.addEventListener('webkitbeginfullscreen', saveScroll);
-        video.addEventListener('webkitendfullscreen', function () {
-            setTimeout(restoreScroll, 100);
-        });
-
-        /* Chrome / Firefox / Edge — fullscreenchange sur l'élément */
-        video.addEventListener('fullscreenchange', function () {
-            if (document.fullscreenElement === video) {
-                saveScroll();
-            } else {
-                setTimeout(restoreScroll, 100);
-            }
-        });
-    });
-
-    /* ── Correctif #2 : fullscreenchange sur document (couvre tous navigateurs) ── */
-    document.addEventListener('fullscreenchange', function () {
+    // Support pour les autres navigateurs (Android/Chrome)
+    document.addEventListener('fullscreenchange', () => {
         if (document.fullscreenElement) {
-            saveScroll();
+            scrollPos = window.scrollY;
         } else {
-            setTimeout(restoreScroll, 100);
+            // Un délai infime suffit, inutile de désactiver le scroll-behavior
+            setTimeout(() => {
+                window.scrollTo(0, scrollPos);
+            }, 100);
         }
-    });
-
-    /* ── Correctif #3 : webkitfullscreenchange sur document (Safari desktop) ── */
-    document.addEventListener('webkitfullscreenchange', function () {
-        if (document.webkitFullscreenElement) {
-            saveScroll();
-        } else {
-            setTimeout(restoreScroll, 100);
-        }
-    });
-
-    /* ── Correctif #4 : visibilitychange — bug iOS Safari retour à zéro ── */
-    document.addEventListener('visibilitychange', function () {
-        if (document.visibilityState === 'visible' && savedScrollY > 0) {
-            setTimeout(restoreScroll, 150);
-        }
-    });
-
-});
-        </script>
-    
+    }, false);
+})();
+</script>
+ 
 </body>
 </html>
