@@ -1,20 +1,37 @@
 {
   "name": "KGM Expertise Territoriale",
   "short_name": "KGM Expert",
-  "start_url": "./index.html",
+  "description": "Expertise en marketing territorial, SIG et développement local au Togo.",
+  "lang": "fr-TG",
+  "dir": "ltr",
+  "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#00264d",
   "theme_color": "#00264d",
+  "categories": ["education", "business", "government"],
   "icons": [
     {
       "src": "images/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "images/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot-mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "prefer_related_applications": false
 }
