@@ -520,41 +520,6 @@
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
         document.getElementById('date-modif').textContent = dateModif.toLocaleDateString('fr-FR', options);
 </script>
-    <script>
-(function() {
-    const video = document.querySelector('video');
-    if (!video) return;
-
-    // Fonction qui fige ou libère le scroll
-    function toggleScrollLock(lock) {
-        if (lock) {
-            // Mémorise la position et bloque le défilement
-            const scrollY = window.scrollY;
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollY}px`;
-            document.body.style.width = '100%';
-        } else {
-            // Libère le défilement et restaure la position
-            const scrollY = document.body.style.top.replace('-', '').replace('px', '');
-            document.body.style.position = '';
-            document.body.style.top = '';
-            window.scrollTo(0, parseInt(scrollY || '0'));
-        }
-    }
-
-    // Écouteurs pour le passage en plein écran
-    video.addEventListener('webkitbeginfullscreen', () => toggleScrollLock(true));
-    video.addEventListener('webkitendfullscreen', () => toggleScrollLock(false));
-
-    document.addEventListener('fullscreenchange', () => {
-        if (document.fullscreenElement) {
-            toggleScrollLock(true);
-        } else {
-            toggleScrollLock(false);
-        }
-    });
-})();
-</script>
  
 </body>
 </html>
