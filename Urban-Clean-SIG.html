@@ -26,6 +26,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
 
   <style>
     :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
@@ -81,7 +82,6 @@
     #flash-msg { position: fixed; top: 85px; left: 50%; transform: translateX(-50%); z-index: 5000; background: var(--kgm-green); color: white; padding: 10px 20px; border-radius: 50px; font-weight: bold; box-shadow: 0 12px 30px rgba(0,0,0,0.22); display: none; animation: fadeInDown 0.5s; backdrop-filter: blur(12px); }
     @keyframes fadeInDown { from { opacity: 0; top: 50px; } to { opacity: 1; top: 85px; } }
 
-    /* STYLES AJOUTÉS POUR LES OPTIONS DE SUIVI DANS LE MENU */
     .menu-section-title { padding: 10px 25px 5px 25px; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px; }
     .menu-filter-select { width: 80%; margin: 5px 10%; padding: 8px; border-radius: 5px; border: none; background: rgba(255,255,255,0.15); color: white; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: bold; outline: none; cursor: pointer; }
     .menu-filter-select option { background: var(--kgm-blue); color: white; }
@@ -90,10 +90,8 @@
     .status-badge.cours { background: #fd7e14; }
     .status-badge.resolu { background: #28a745; }
     
-    /* STYLE APPLIQUÉ SUR LE SELECT DE STATUT DANS LES POPUPS POUR LES EXPERTS */
     .popup-status-select { margin-top: 5px; padding: 3px 6px; font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: bold; border-radius: 4px; border: 1px solid #ccc; outline: none; color: #333; }
 
-    /* INTERVENTIONS CHIRURGICALES DE RESPONSIVITÉ COMPLÈTE (TOUS ÉCRANS) */
     @media (max-width: 400px) {
         header h1 { font-size: 0.8em; width: 50%; margin-left: -55px; }
         header p { font-size: 0.65em; width: 50%; margin-left: -55px; }
@@ -108,21 +106,19 @@
         .ui-controls { bottom: 25px; left: 50%; transform: translateX(-50%); }
         @keyframes slideUp { from { bottom: 0px; opacity: 0; } to { bottom: 25px; opacity: 1; } }
     }
-        /* --- BLOC CHIRURGICAL POUR LE NAVIGATEUR FACEBOOK --- */
-        #map {
-            touch-action: none !important;
-            -webkit-tap-highlight-color: transparent;
-        }
+    #map {
+        touch-action: none !important;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        .leaflet-container {
-            cursor: grab;
-            touch-action: pan-x pan-y !important;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-  
+    .leaflet-container {
+        cursor: grab;
+        touch-action: pan-x pan-y !important;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -178,7 +174,7 @@
 </header>
 
 <div class="ticker">
-    <div class="ticker-text">🌿 <strong>Stop à l’insalubrité !</strong> Devenez acteur de la propreté de votre quartier en signalant les zones critiques via notre portail. Vos alertes sont transmises instantanément à la mairie pour une intervention rapide. Avec URBAN-CLEAN de KGM Expertise, quelques minutes suffisent pour protéger notre santé et assainir notre cadre de vie. Ensemble, rendons nos communes exemplaires ! Source de données géospatiales : Géoportail Togo et Openstreetmap 🌿</div>
+    <div class="ticker-text">🌿 <strong>Stop à l’insalubrité !</strong> Devenez actor de la propreté de votre quartier en signalant les zones critiques via notre portail. Vos alertes sont transmises instantanément à la mairie pour une intervention rapide. Avec URBAN-CLEAN de KGM Expertise, quelques minutes suffisent pour protéger notre santé et assainir notre cadre de vie. Ensemble, rendons nos communes exemplaires ! Source de données géospatiales : Géoportail Togo et Openstreetmap 🌿</div>
 </div>
   
 <div id="map"></div>
@@ -299,11 +295,12 @@
     var userPos = null;
     var userCircle = null;
     var data = [];
-    var currentFilterStatus = "tous"; // Variable de suivi globale pour les filtres
+    var currentFilterStatus = "tous";
     var markers = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 50 }).addTo(map);
     var chart1, chart2;
+    // VARIABLE CHIRURGICALE POUR LE STOCKAGE ET LA GESTION DYNAMIQUE DE LA COUCHE BUFFER ET DES SIGNALEMENTS EN COURS
+    var activeBufferLayer = null;
 
-    // DEFINITION ULTRA-FIABLE ET SECURISEE DES ROLES GESTIONNAIRES (MAIRIE / ADMIN KGM EXPERTISE)
     const ADMIN_EMAILS = ["mirabiliagnimdou@gmail.com", "kgmexpertise@gmail.com"];
 
     fetch('./communes.geojson')
@@ -313,9 +310,31 @@
                 style: { color: "#00264d", weight: 2, fillOpacity: 0.05, interactive: true },
                 onEachFeature: (f, l) => {
                     let nom = f.properties["Noms des communes"] || f.properties["Nom_Commune"] || f.properties["nom"]; 
+                    
+                    // CALCUL CHIRURGICAL DU PÉRIMÈTRE ET DE LA SUPERFICIE PAR COMMUNE AVEC TURF.JS (ZÉRO ERREUR)
+                    let superficieKm2 = 0;
+                    let perimetreKm = 0;
+                    try {
+                        if (f.geometry) {
+                            superficieKm2 = turf.area(f) / 1000000; // Conversion de m² en km²
+                            perimetreKm = turf.length(f, {units: 'kilometers'});
+                        }
+                    } catch(err) {
+                        console.error("Erreur de calcul métrique sur la commune:", err);
+                    }
+
                     if(nom) {
                         l.bindTooltip(nom, { permanent: true, direction: "center", className: "commune-label" });
                     }
+
+                    // INTEGRATION DANS LA POPUP DE LA COMMUNE SANS ALTERATION DES LIENS DE L'EXPERT
+                    let popupCommune = `<div style="font-family:'Montserrat',sans-serif; min-width:200px;">
+                        <h4 style="margin:0 0 5px 0; color:var(--kgm-blue); text-transform:uppercase;">${escapeHtml(nom)}</h4>
+                        <hr style="border:none; border-top:1px solid #eee; margin:5px 0;">
+                        <i class="fas fa-chart-area" style="color:var(--kgm-green)"></i> <b>Superficie :</b> ${superficieKm2.toFixed(2)} km²<br>
+                        <i class="fas fa-vector-square" style="color:var(--kgm-blue)"></i> <b>Périmètre :</b> ${perimetreKm.toFixed(2)} km
+                    </div>`;
+                    l.bindPopup(popupCommune);
                 }
             }).addTo(map);
         })
@@ -423,20 +442,16 @@
     return L.divIcon({ html: htmlIcons[type] || htmlIcons.dechets, className: 'c-icon', iconSize: [34, 34], iconAnchor: [17, 17] });
 };
 
-
-    /* PROTECTION XSS : échappement des données utilisateur avant injection HTML */
     function escapeHtml(str) {
         if (!str) return '';
         return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     }
 
-    /* FONCTION DE FILTRAGE ASSOCIEE AU SELECT DU MENU */
     function filtrerStatutSurCarte(statut) {
         currentFilterStatus = statut;
         refresh();
     }
 
-    // FONCTION CHIRURGICALE POUR LA MISE A JOURE PARTIELLE DU STATUT PAR UN EXPERT / MAIRIE
     async function changerStatutDirect(docId, nouveauStatut) {
         document.getElementById('loadingOverlay').style.display = 'flex';
         try {
@@ -448,26 +463,40 @@
         document.getElementById('loadingOverlay').style.display = 'none';
     }
 
+    // FONCTION CHIRURGICALE DE GENERATION DE ZONE TAMPON (BUFFER) SECURISÉE AUTOUR DES CRASSES ET ALERTES
+    function afficherZoneTamponSignalement(lat, lng, typeAlerte) {
+        if(activeBufferLayer) map.removeLayer(activeBufferLayer);
+        
+        try {
+            let pointGeojson = turf.point([lng, lat]);
+            // Configuration de la distance selon le type d'alerte ou rayon fixe standard d'assainissement (ex: 150 mètres soit 0.15 km)
+            let bufferGeojson = turf.buffer(pointGeojson, 0.15, {units: 'kilometers'});
+            
+            activeBufferLayer = L.geoJSON(bufferGeojson, {
+                style: { color: "#ff4d4d", weight: 1, fillColor: "#ff4d4d", fillOpacity: 0.25, dashArray: "4, 4" }
+            }).addTo(map);
+        } catch(err) {
+            console.error("Erreur d'exécution Turf.js sur le buffer spatial:", err);
+        }
+    }
+
     function refresh() {
         markers.clearLayers();
+        if(activeBufferLayer) { map.removeLayer(activeBufferLayer); activeBufferLayer = null; }
         let counts = {dechets:0, pollution:0, securite:0};
         let qCounts = {};
         
-        // Dictionnaire des labels de statuts pour injection claire dans la popup
         const statusLabels = {
             "attente": "<span class='status-badge attente'>⏳ En attente</span>",
             "cours": "<span class='status-badge cours'>⚙️ En cours</span>",
             "resolu": "<span class='status-badge resolu'>✅ Résolu</span>"
         };
 
-        // Verification du role administratif de l'utilisateur connecte
         let estGestionnaire = currentUser && ADMIN_EMAILS.includes(currentUser.email);
 
         data.forEach(d => {
-            // Initialisation rétrocompatible du statut s'il n'existe pas en BDD
             let itemStatus = d.status || "attente";
 
-            // Application chirurgicale du filtre dynamique sélectionné
             if (currentFilterStatus !== "tous") {
                 if (currentFilterStatus === "mes_signalements") {
                     if (!currentUser || d.userId !== currentUser.uid) return;
@@ -478,7 +507,6 @@
 
             let popupContent = `<div style="min-width:180px;"><b style="color:var(--kgm-blue)">${escapeHtml(d.quartier)}</b><br><i>${escapeHtml(d.desc)}</i><br>`;
             
-            // INCORPORATION CELLULAIRE DE L'INTERFACE D'ACTION RESERVEE COMPTE GESTIONNAIRE VS VISU CITOYENNE
             if (estGestionnaire) {
                 popupContent += `Suivi : <select class="popup-status-select" onchange="changerStatutDirect('${d.id}', this.value)">
                     <option value="attente" ${itemStatus === 'attente' ? 'selected' : ''}>⏳ En attente</option>
@@ -497,7 +525,17 @@
                     <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimerDoc('${d.id}')"></i>
                 </div>`;
             }
-            if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: getDynamicIcon(d.type, itemStatus)}).addTo(markers).bindPopup(popupContent);
+            
+            if(d.lat && d.lng) {
+                let markerElement = L.marker([d.lat, d.lng], {icon: getDynamicIcon(d.type, itemStatus)});
+                
+                // APPEL CHIRURGICAL DU BUFFER LORS DU CLIC SUR LE SIGNALEMENT CITOYEN SANS CONFLIT DE COORDONNÉES
+                markerElement.on('click', () => {
+                    afficherZoneTamponSignalement(d.lat, d.lng, d.type);
+                });
+
+                markerElement.addTo(markers).bindPopup(popupContent);
+            }
             if(counts.hasOwnProperty(d.type)) counts[d.type]++;
             qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
         });
@@ -536,7 +574,7 @@
         document.getElementById('dateInput').value = d.date;
         document.getElementById('heureInput').value = d.heure;
         document.getElementById('typeSelect').value = d.type;
-        document.getElementById('statusSelect').value = d.status || "attente"; // Chargement du statut en mode édition
+        document.getElementById('statusSelect').value = d.status || "attente";
         document.getElementById('modalForm').style.display = 'flex';
         map.closePopup();
     }
@@ -551,8 +589,6 @@
         }
     }
 
-    /* CORRECTIF CHIRURGICAL : POSITION AVEC POPUP REFERMABLE */
-    /* STRATÉGIE LOCALISATION : réseau rapide d'abord (~2-3s), GPS précis en fallback */
     var localisationPrecise = false;
 
     function lancerLocalisation() {
@@ -572,7 +608,6 @@
 
     map.on('locationerror', (e) => {
         if (!localisationPrecise) {
-            /* Échec réseau rapide → on retente avec GPS précis */
             localisationPrecise = true;
             showFlash('📍 Tentative GPS précis…');
             map.locate({ enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
@@ -591,7 +626,7 @@
         document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
         document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         document.getElementById('descInput').value = "";
-        document.getElementById('statusSelect').value = "attente"; // Valeur par défaut lors de la création d'un signalement
+        document.getElementById('statusSelect').value = "attente";
     }
     function fermerModal() { document.getElementById('modalForm').style.display='none'; }
     function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
@@ -607,7 +642,7 @@
                     const scale = max_width / img.width;
                     canvas.width = max_width;
                     canvas.height = img.height * scale;
-                    const ctx = canvas.getBlob ? canvas.getContext('2d') : canvas.getContext('2d');
+                    const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                     canvas.toBlob(resolve, 'image/jpeg', 0.7);
                 };
@@ -645,11 +680,10 @@
             if(photoFile) {
                 const compressedBlob = await compressImage(photoFile);
                 let formData = new FormData(); formData.append("image", compressedBlob);
-                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
+                const res = await fetch(`https://api.ibb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
                 const imgData = await res.json(); photoUrl = imgData.data.url;
             }
             
-            // Isolation de la structure de mise à jour pour garantir la préservation des métadonnées initiales du citoyen
             if(!editId) {
                 const signalementData = { 
                     quartier: q, 
@@ -657,7 +691,7 @@
                     desc: escapeHtml(description), 
                     date: document.getElementById('dateInput').value, 
                     heure: document.getElementById('heureInput').value, 
-                    status: "attente", // Forçage strict à la création du signalement citoyen
+                    status: "attente",
                     photo: photoUrl, 
                     userId: currentUser.uid,
                     lat: userPos.lat,
@@ -665,7 +699,6 @@
                 };
                 await db.collection('signalements').add(signalementData);
             } else {
-                // Modification par le citoyen : le champ status est exclu pour éviter toute corruption ou fraude
                 const updateData = {
                     quartier: q,
                     type: document.getElementById('typeSelect').value,
@@ -685,7 +718,6 @@
     function togglePanel(id) { document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active')); }
     function effacerPhotoSelectionnee() { document.getElementById('photoInput').value = ""; }
 
-    /* MICRO INTERACTIONS PREMIUM */
     document.querySelectorAll('.ui-btn').forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             btn.style.transition = 'all 0.25s ease';
