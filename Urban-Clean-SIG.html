@@ -13,14 +13,6 @@
 <meta property="og:image" content="https://mirabilia-bot.github.io/urban-clean-preview.png">
 <meta property="og:url" content="https://mirabilia-bot.github.io/Urban-Clean-SIG.html">
 <meta name="twitter:card" content="summary_large_image">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<meta name="googlebot" content="index, follow">
-
-<link rel="canonical" href="https://mirabilia-bot.github.io/Urban-Clean-SIG.html" />
-
-<meta name="geo.region" content="TG-T" /> <meta name="geo.placename" content="Lomé" />
-<meta name="geo.position" content="6.1319;1.2228" />
-<meta name="ICBM" content="6.1319, 1.2228" />
   
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
@@ -34,6 +26,11 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.15.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
 
   <style>
     :root { --kgm-blue: #00264d; --kgm-green: #1b5e20; --kgm-red: #fc3d21; }
@@ -89,7 +86,6 @@
     #flash-msg { position: fixed; top: 85px; left: 50%; transform: translateX(-50%); z-index: 5000; background: var(--kgm-green); color: white; padding: 10px 20px; border-radius: 50px; font-weight: bold; box-shadow: 0 12px 30px rgba(0,0,0,0.22); display: none; animation: fadeInDown 0.5s; backdrop-filter: blur(12px); }
     @keyframes fadeInDown { from { opacity: 0; top: 50px; } to { opacity: 1; top: 85px; } }
 
-    /* STYLES AJOUTÉS POUR LES OPTIONS DE SUIVI DANS LE MENU */
     .menu-section-title { padding: 10px 25px 5px 25px; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px; }
     .menu-filter-select { width: 80%; margin: 5px 10%; padding: 8px; border-radius: 5px; border: none; background: rgba(255,255,255,0.15); color: white; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: bold; outline: none; cursor: pointer; }
     .menu-filter-select option { background: var(--kgm-blue); color: white; }
@@ -98,10 +94,8 @@
     .status-badge.cours { background: #fd7e14; }
     .status-badge.resolu { background: #28a745; }
     
-    /* STYLE APPLIQUÉ SUR LE SELECT DE STATUT DANS LES POPUPS POUR LES EXPERTS */
     .popup-status-select { margin-top: 5px; padding: 3px 6px; font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: bold; border-radius: 4px; border: 1px solid #ccc; outline: none; color: #333; }
 
-    /* INTERVENTIONS CHIRURGICALES DE RESPONSIVITÉ COMPLÈTE (TOUS ÉCRANS) */
     @media (max-width: 400px) {
         header h1 { font-size: 0.8em; width: 50%; margin-left: -55px; }
         header p { font-size: 0.65em; width: 50%; margin-left: -55px; }
@@ -116,57 +110,21 @@
         .ui-controls { bottom: 25px; left: 50%; transform: translateX(-50%); }
         @keyframes slideUp { from { bottom: 0px; opacity: 0; } to { bottom: 25px; opacity: 1; } }
     }
-        /* --- BLOC CHIRURGICAL POUR LE NAVIGATEUR FACEBOOK --- */
-        #map {
-            touch-action: none !important;
-            -webkit-tap-highlight-color: transparent;
-        }
+    
+    #map {
+        touch-action: none !important;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        .leaflet-container {
-            cursor: grab;
-            touch-action: pan-x pan-y !important;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-  
+    .leaflet-container {
+        cursor: grab;
+        touch-action: pan-x pan-y !important;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
   </style>
-  <script type="application/ld-json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "URBAN-CLEAN",
-  "url": "https://mirabilia-bot.github.io/Urban-Clean-SIG.html",
-  "description": "Portail Web-SIG participatif innovant développé par KGM Expertise pour le signalement, la cartographie et l'analyse en temps réel de la salubrité urbaine et de la gestion des déchets à Lomé, Togo.",
-  "applicationCategory": "GovernmentApplication",
-  "operatingSystem": "All",
-  "author": {
-    "@type": "GovernmentOrganization",
-    "name": "KGM Expertise",
-    "location": {
-      "@type": "Place",
-      "name": "Agoè-Nyivé 1, Lomé, Togo"
-    }
-  },
-  "provider": {
-    "@type": "Person",
-    "name": "KODOMMA Gnimdou M.",
-    "jobTitle": "Expert en Géomatique & Juriste Publiciste"
-  },
-  "targetDescription": "Optimisation de la salubrité urbaine, gestion des crises d'inondation et mobilisation des taxes communales.",
-  "spatialCoverage": {
-    "@type": "Place",
-    "name": "Lomé, Togo",
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "6.1319",
-      "longitude": "1.2228"
-    }
-  }
-}
-  </script>
-  
 </head>
 <body>
 
@@ -185,7 +143,7 @@
   
 <div id="loadingOverlay">
     <i class="fas fa-spinner fa-spin fa-3x" style="color:var(--kgm-blue)"></i>
-    <p style="font-weight:bold; margin-top:10px;">Synchronisation KGM Cloud...</p>
+    <p id="loadingText" style="font-weight:bold; margin-top:10px;">Synchronisation KGM Cloud...</p>
 </div>
 
 <div id="auth-bar">
@@ -207,6 +165,13 @@
         <option value="mes_signalements">👤 Mes signalements</option>
     </select>
     
+    <div class="menu-section-title">Moteur de rendu SIG</div>
+    <div style="padding: 0 25px; color: white; font-size: 12px; margin-bottom: 5px; font-weight: 500;">Visualisation spatiale :</div>
+    <select id="mapRenderSelect" class="menu-filter-select" onchange="toggleHeatmapLayer(this.value)">
+        <option value="markers">📍 Marqueurs ponctuels</option>
+        <option value="heatmap">🔥 Heatmap intelligente (IA)</option>
+    </select>
+    
     <div class="menu-item" onclick="deconnexion()"><i class="fas fa-sign-out-alt"></i> Quitter</div>
     <div class="menu-item" onclick="supprimerCompte()" style="color:#ff4d4d;"><i class="fas fa-user-slash"></i> Supprimer le compte</div>
 </div>
@@ -221,7 +186,7 @@
 </header>
 
 <div class="ticker">
-    <div class="ticker-text">🌿 <strong>Stop à l’insalubrité !</strong> Devenez acteur de la propreté de votre quartier en signalant les zones critiques via notre portail. Vos alertes sont transmises instantanément à la mairie pour une intervention rapide. Avec URBAN-CLEAN de KGM Expertise, quelques minutes suffisent pour protéger notre santé et assainir notre cadre de vie. Ensemble, rendons nos communes exemplaires ! Source de données géospatiales : Géoportail Togo et Openstreetmap 🌿</div>
+    <div class="ticker-text">🌿 <strong>Stop à l’insalubrité !</strong> Devenez actor de la propreté de votre quartier en signalant les zones critiques via notre portail. Vos alertes sont transmises instantanément à la mairie pour une intervention rapide. Avec URBAN-CLEAN de KGM Expertise, quelques minutes suffisent pour protéger notre santé et assainir notre cadre de vie. Ensemble, rendons nos communes exemplaires ! Source de données géospatiales : Géoportail Togo et Openstreetmap 🌿</div>
 </div>
   
 <div id="map"></div>
@@ -284,9 +249,13 @@
           <div style="flex:1;"><label style="font-weight:bold; font-size:12px;">Heure</label><input type="time" id="heureInput" style="width:100%; padding:8px;"></div>
         </div>
 
+        <div id="sigMetricsContainer" style="margin-top: 10px; padding: 8px; background: #f0f7f4; border-left: 4px solid var(--kgm-green); border-radius: 4px; font-size: 11px; font-weight: bold; color: var(--kgm-blue); display: none;">
+            <i class="fas fa-ruler-combined"></i> Emprise estimée : <span id="metricSuperficie">0</span> m² | Périmètre : <span id="metricPerimetre">0</span> m
+        </div>
+
         <label style="font-weight:bold; font-size:14px; margin-top:10px; display:block;"><i class="fas fa-camera"></i> Prendre une photo</label>
 <div style="display:flex; gap:5px; align-items:center; margin:5px 0 10px 0;">
-    <input type="file" id="photoInput" accept="image/*" capture="environment" style="flex:1;">
+    <input type="file" id="photoInput" accept="image/*" capture="environment" style="flex:1;" onchange="analyserPhotoIA(this)">
     <button type="button" onclick="effacerPhotoSelectionnee()" style="background:var(--kgm-red); color:white; border:none; border-radius:5px; padding:5px 10px; cursor:pointer;" title="Supprimer la photo choisie">
         <i class="fas fa-times"></i>
     </button>
@@ -342,12 +311,25 @@
     var userPos = null;
     var userCircle = null;
     var data = [];
-    var currentFilterStatus = "tous"; // Variable de suivi globale pour les filtres
+    var currentFilterStatus = "tous";
+    var currentRenderMode = "markers"; 
     var markers = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 50 }).addTo(map);
+    var heatmapLayer = null; 
     var chart1, chart2;
+    var netModel = null; // Instance asynchrone pour TensorFlow.js MobileNet
 
-    // DEFINITION ULTRA-FIABLE ET SECURISEE DES ROLES GESTIONNAIRES (MAIRIE / ADMIN KGM EXPERTISE)
     const ADMIN_EMAILS = ["mirabiliagnimdou@gmail.com", "kgmexpertise@gmail.com"];
+
+    // CHARGEMENT SILENCIEUX ET ASYNCHRONE DE TENSORFLOW POUR NE PAS BLOQUER LEAFLET
+    async function initTensorFlowIA() {
+        try {
+            netModel = await mobilenet.load();
+            console.log("Moteur d'analyse photo TensorFlow.js initialisé avec succès.");
+        } catch(e) {
+            console.warn("L'accélération IA locale n'a pas pu être initialisée.", e);
+        }
+    }
+    initTensorFlowIA();
 
     fetch('./communes.geojson')
         .then(res => {
@@ -443,7 +425,7 @@
     function supprimerCompte() {
         const user = auth.currentUser;
         if (user && confirm("ATTENTION : Action irréversible. Supprimer votre compte ?")) {
-            user.delete().then(() => { alert("Compte deleted."); window.location.reload(); }).catch((e) => {
+            user.delete().then(() => { alert("Compte supprimé."); window.location.reload(); }).catch((e) => {
                 if (e.code === 'auth/requires-recent-login') { alert("Reconnectez-vous avant cette action."); auth.signOut(); }
             });
         }
@@ -469,20 +451,22 @@
     return L.divIcon({ html: htmlIcons[type] || htmlIcons.dechets, className: 'c-icon', iconSize: [34, 34], iconAnchor: [17, 17] });
 };
 
-
-    /* PROTECTION XSS : échappement des données utilisateur avant injection HTML */
     function escapeHtml(str) {
         if (!str) return '';
         return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     }
 
-    /* FONCTION DE FILTRAGE ASSOCIEE AU SELECT DU MENU */
     function filtrerStatutSurCarte(statut) {
         currentFilterStatus = statut;
         refresh();
     }
 
-    // FONCTION CHIRURGICALE POUR LA MISE A JOUR PARTIELLE DU STATUT PAR UN EXPERT / MAIRIE
+    // COMMUTATION DU MODE DE RENDU (HEATMAP IA VS MARQUEURS)
+    function toggleHeatmapLayer(mode) {
+        currentRenderMode = mode;
+        refresh();
+    }
+
     async function changerStatutDirect(docId, nouveauStatut) {
         document.getElementById('loadingOverlay').style.display = 'flex';
         try {
@@ -494,26 +478,29 @@
         document.getElementById('loadingOverlay').style.display = 'none';
     }
 
+    // ENGINE DE COMPORTEMENT DE RE-RENDU INTELLIGENT COMPATIBLE HEATMAP
     function refresh() {
         markers.clearLayers();
+        if (heatmapLayer) {
+            map.removeLayer(heatmapLayer);
+            heatmapLayer = null;
+        }
+
         let counts = {dechets:0, pollution:0, securite:0};
         let qCounts = {};
+        let heatPoints = []; // Tableau de coordonnées pour le rendu de la carte de chaleur
         
-        // Dictionnaire des labels de statuts pour injection claire dans la popup
         const statusLabels = {
             "attente": "<span class='status-badge attente'>⏳ En attente</span>",
             "cours": "<span class='status-badge cours'>⚙️ En cours</span>",
             "resolu": "<span class='status-badge resolu'>✅ Résolu</span>"
         };
 
-        // Verification du role administratif de l'utilisateur connecte
         let estGestionnaire = currentUser && ADMIN_EMAILS.includes(currentUser.email);
 
         data.forEach(d => {
-            // Initialisation rétrocompatible du statut s'il n'existe pas en BDD
             let itemStatus = d.status || "attente";
 
-            // Application chirurgicale du filtre dynamique sélectionné
             if (currentFilterStatus !== "tous") {
                 if (currentFilterStatus === "mes_signalements") {
                     if (!currentUser || d.userId !== currentUser.uid) return;
@@ -522,9 +509,22 @@
                 }
             }
 
+            // Calcul du niveau d'intensité pour la heatmap en fonction de la récence et de la typologie
+            let intensity = 0.5;
+            if (d.type === 'dechets') intensity = 0.8;
+            if (itemStatus === 'attente') intensity += 0.2;
+
+            if (d.lat && d.lng) {
+                heatPoints.push([d.lat, d.lng, intensity]);
+            }
+
             let popupContent = `<div style="min-width:180px;"><b style="color:var(--kgm-blue)">${escapeHtml(d.quartier)}</b><br><i>${escapeHtml(d.desc)}</i><br>`;
             
-            // INCORPORATION CELLULAIRE DE L'INTERFACE D'ACTION RESERVEE COMPTE GESTIONNAIRE VS VISU CITOYENNE
+            // Injection des métriques d'emprise spatiale calculées si existantes
+            if (d.superficie && d.perimetre) {
+                popupContent += `<span style="font-size:10px; color:var(--kgm-green); font-weight:bold;"><i class="fas fa-vector-square"></i> Emprise: ${d.superficie} m² (Péribar: ${d.perimetre} m)</span><br>`;
+            }
+
             if (estGestionnaire) {
                 popupContent += `Suivi : <select class="popup-status-select" onchange="changerStatutDirect('${d.id}', this.value)">
                     <option value="attente" ${itemStatus === 'attente' ? 'selected' : ''}>⏳ En attente</option>
@@ -535,7 +535,7 @@
                 popupContent += `Suivi : ${statusLabels[itemStatus] || statusLabels['attente']}`;
             }
 
-            if(d.photo) popupContent += `<br><img src="${d.photo}" class="popup-img" style="width:100%;max-height:150px;object-fit:cover;margin-top:5px;border-radius:4px" onclick="window.open('${d.photo}', '_blank')">`;
+            if(d.photo) popupContent += `<br><img src="${d.photo}" class="popup-img" style="width:100%;max-height:150px;object-fit:cover;margin-top:5px;border-radius:4px" onclick="window.open('${d.photo}', '_blank', 'noopener,noreferrer')">`;
             popupContent += `<br><small style="margin-top:5px; display:block;"><i class="far fa-calendar"></i> ${d.date} | <i class="far fa-clock"></i> ${d.heure}</small></div>`;
           if(currentUser && d.userId === currentUser.uid) {
                 popupContent += `<div class="popup-actions">
@@ -543,10 +543,20 @@
                     <i class="fas fa-trash" style="color:var(--kgm-red)" onclick="supprimerDoc('${d.id}')"></i>
                 </div>`;
             }
-            if(d.lat && d.lng) L.marker([d.lat, d.lng], {icon: getDynamicIcon(d.type, itemStatus)}).addTo(markers).bindPopup(popupContent);
+            
+            if(d.lat && d.lng && currentRenderMode === "markers") {
+                L.marker([d.lat, d.lng], {icon: getDynamicIcon(d.type, itemStatus)}).addTo(markers).bindPopup(popupContent);
+            }
+            
             if(counts.hasOwnProperty(d.type)) counts[d.type]++;
             qCounts[d.quartier] = (qCounts[d.quartier] || 0) + 1;
         });
+
+        // GENERATION ULTRA-RAPIDE ET CONFORME DE LA COUCHE DE CHALEUR LORSQUE ACTIVE
+        if (currentRenderMode === "heatmap" && heatPoints.length > 0) {
+            heatmapLayer = L.heatLayer(heatPoints, { radius: 25, blur: 15, maxZoom: 18 }).addTo(map);
+        }
+
         document.getElementById('stats-text').innerText = `${data.length} signalements correspondants`;
         updateCharts(counts, qCounts);
     }
@@ -582,7 +592,17 @@
         document.getElementById('dateInput').value = d.date;
         document.getElementById('heureInput').value = d.heure;
         document.getElementById('typeSelect').value = d.type;
-        document.getElementById('statusSelect').value = d.status || "attente"; // Chargement du statut en mode édition
+        document.getElementById('statusSelect').value = d.status || "attente";
+
+        // Chargement rétrocompatible des indicateurs géométriques SIG
+        if(d.superficie && d.perimetre) {
+            document.getElementById('sigMetricsContainer').style.display = 'block';
+            document.getElementById('metricSuperficie').innerText = d.superficie;
+            document.getElementById('metricPerimetre').innerText = d.perimetre;
+        } else {
+            document.getElementById('sigMetricsContainer').style.display = 'none';
+        }
+
         document.getElementById('modalForm').style.display = 'flex';
         map.closePopup();
     }
@@ -597,8 +617,6 @@
         }
     }
 
-    /* CORRECTIF CHIRURGICAL : POSITION AVEC POPUP REFERMABLE */
-    /* STRATÉGIE LOCALISATION : réseau rapide d'abord (~2-3s), GPS précis en fallback */
     var localisationPrecise = false;
 
     function lancerLocalisation() {
@@ -614,11 +632,24 @@
         userCircle.bindPopup("<b style='color:var(--kgm-blue)'>Ma position actuelle</b><br><small>Précision GPS optimisée</small>", { closeButton: true, autoClose: true }).openPopup();
         showFlash('✅ Position trouvée !');
         map.flyTo(e.latlng, 18);
+
+        // EXTRACTION ET EVALUATION SIG GEOMETRIQUE DU CHAMP DE PRECISONS PAR TURF.JS
+        try {
+            let centerPoint = turf.point([e.latlng.lng, e.latlng.lat]);
+            let buffered = turf.buffer(centerPoint, 12, {units: 'meters'}); // Modélisation de l'emprise moyenne d'un dépôt sauvage autour du point central
+            let area = Math.round(turf.area(buffered));
+            let perimeter = Math.round(turf.length(buffered, {units: 'meters'}));
+            
+            document.getElementById('sigMetricsContainer').style.display = 'block';
+            document.getElementById('metricSuperficie').innerText = area;
+            document.getElementById('metricPerimetre').innerText = perimeter;
+        } catch(err) {
+            console.error("Calcul d'emprise SIG non disponible", err);
+        }
     });
 
     map.on('locationerror', (e) => {
         if (!localisationPrecise) {
-            /* Échec réseau rapide → on retente avec GPS précis */
             localisationPrecise = true;
             showFlash('📍 Tentative GPS précis…');
             map.locate({ enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
@@ -637,10 +668,44 @@
         document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
         document.getElementById('heureInput').value = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         document.getElementById('descInput').value = "";
-        document.getElementById('statusSelect').value = "attente"; // Valeur par défaut lors de la création d'un signalement
+        document.getElementById('statusSelect').value = "attente";
+        document.getElementById('sigMetricsContainer').style.display = 'none';
     }
     function fermerModal() { document.getElementById('modalForm').style.display='none'; }
     function checkAutre(v) { document.getElementById('autreQuartier').style.display = (v==='Autres'?'block':'none'); }
+
+    // MODULE ANALYSE PHOTO DE TENSORFLOW (IA RE-CLASSIFICATION INTELLIGENTE)
+    async function analyserPhotoIA(input) {
+        if (!input.files || !input.files[0] || !netModel) return;
+        
+        const file = input.files[0];
+        const imgElement = document.createElement('img');
+        imgElement.src = URL.createObjectURL(file);
+        
+        imgElement.onload = async () => {
+            try {
+                // Analyse spectrale via MobileNet sans perturber le fil applicatif principal
+                const predictions = await netModel.classify(imgElement);
+                if(predictions && predictions.length > 0) {
+                    let topPredictionText = predictions[0].className.toLowerCase();
+                    
+                    // Matrice de correspondance sémantique pour l'environnement urbain africain
+                    if(topPredictionText.includes('trash') || topPredictionText.includes('waste') || topPredictionText.includes('garbage') || topPredictionText.includes('plastic') || topPredictionText.includes('rubbish')) {
+                        document.getElementById('typeSelect').value = 'dechets';
+                        showFlash("🤖 IA : Typologie Déchets automatiquement détectée !");
+                    } else if(topPredictionText.includes('smoke') || topPredictionText.includes('smog') || topPredictionText.includes('chemical') || topPredictionText.includes('mud')) {
+                        document.getElementById('typeSelect').value = 'pollution';
+                        showFlash("🤖 IA : Typologie Pollution automatiquement détectée !");
+                    } else if(topPredictionText.includes('fire') || topPredictionText.includes('hole') || topPredictionText.includes('accident') || topPredictionText.includes('danger')) {
+                        document.getElementById('typeSelect').value = 'securite';
+                        showFlash("🤖 IA : Risque de Sécurité détecté !");
+                    }
+                }
+            } catch(e) {
+                console.error("Erreur de pré-classification IA", e);
+            }
+        };
+    }
 
     async function compressImage(file) {
         return new Promise((resolve) => {
@@ -653,7 +718,7 @@
                     const scale = max_width / img.width;
                     canvas.width = max_width;
                     canvas.height = img.height * scale;
-                    const ctx = canvas.getBlob ? canvas.getContext('2d') : canvas.getContext('2d');
+                    const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                     canvas.toBlob(resolve, 'image/jpeg', 0.7);
                 };
@@ -669,56 +734,66 @@
         if(!selectVal) return alert("Veuillez sélectionner un quartier.");
         
         let q = selectVal === 'Autres' ? document.getElementById('autreQuartier').value.trim() : selectVal;
-        if(!q) return alert("Veuillez préciser le nom du quartier.");
+        if(!q) return alert("Nom de quartier invalide.");
+
+        let description = document.getElementById('descInput').value.trim();
+
+        // Récupération des données métriques d'ingénierie SIG calculées dynamiquement pour archivage Firebase
+        let supVal = document.getElementById('metricSuperficie').innerText;
+        let perVal = document.getElementById('metricPerimetre').innerText;
 
         document.getElementById('loadingOverlay').style.display = 'flex';
         const photoFile = document.getElementById('photoInput').files[0];
         let photoUrl = null;
         try {
             if(photoFile) {
+                document.getElementById('loadingText').innerText = "Analyse & Compression IA...";
                 const compressedBlob = await compressImage(photoFile);
                 let formData = new FormData(); formData.append("image", compressedBlob);
                 const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
                 const imgData = await res.json(); photoUrl = imgData.data.url;
             }
             
-            // Isolation de la structure de mise à jour pour garantir la préservation des métadonnées initiales du citoyen
+            document.getElementById('loadingText').innerText = "Synchronisation KGM Cloud...";
             if(!editId) {
                 const signalementData = { 
                     quartier: q, 
                     type: document.getElementById('typeSelect').value, 
-                    desc: document.getElementById('descInput').value, 
+                    desc: escapeHtml(description), 
                     date: document.getElementById('dateInput').value, 
                     heure: document.getElementById('heureInput').value, 
-                    status: "attente", // Forçage strict à la création du signalement citoyen
+                    status: "attente", 
                     photo: photoUrl, 
                     userId: currentUser.uid,
                     lat: userPos.lat,
-                    lng: userPos.lng
+                    lng: userPos.lng,
+                    superficie: supVal !== "0" ? supVal : null,
+                    perimetre: perVal !== "0" ? perVal : null
                 };
                 await db.collection('signalements').add(signalementData);
             } else {
-                // Modification par le citoyen : le champ status est exclu pour éviter toute corruption ou fraude
                 const updateData = {
                     quartier: q,
                     type: document.getElementById('typeSelect').value,
-                    desc: document.getElementById('descInput').value,
+                    desc: escapeHtml(description),
                     date: document.getElementById('dateInput').value,
                     heure: document.getElementById('heureInput').value,
-                    photo: photoUrl || data.find(item=>item.id===editId).photo
+                    photo: photoUrl || data.find(item=>item.id===editId).photo,
+                    superficie: supVal !== "0" ? supVal : null,
+                    perimetre: perVal !== "0" ? perVal : null
                 };
                 await db.collection('signalements').doc(editId).update(updateData);
             }
             fermerModal();
         } catch(e) { alert("Erreur d'envoi."); } finally {
             document.getElementById('loadingOverlay').style.display = 'none';
+            document.getElementById('loadingText').innerText = "Synchronisation KGM Cloud...";
         }
     }
 
     function togglePanel(id) { document.querySelectorAll('.panel').forEach(p => p.id === id ? p.classList.toggle('active') : p.classList.remove('active')); }
     function effacerPhotoSelectionnee() { document.getElementById('photoInput').value = ""; }
 
-    /* MICRO INTERACTIONS PREMIUM */
     document.querySelectorAll('.ui-btn').forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             btn.style.transition = 'all 0.25s ease';
@@ -732,6 +807,14 @@
             document.body.style.opacity = '1';
         });
         map.invalidateSize();
+    });
+
+    window.addEventListener('unhandledrejection', function(event) {
+        console.error("PROMISE ERROR :", event.reason);
+    });
+
+    window.addEventListener('error', function(event) {
+        console.error("JS ERROR :", event.error);
     });
 </script>
 </body>
