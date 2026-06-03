@@ -1,93 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://mirabilia-bot.github.io/</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.00</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/blog.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/marketing-territorial-togo.html</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/Urban-Clean-SIG.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/budget-participatif-togo-kgm.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/article-gestion-dechets-agoe.html</loc>
-    <lastmod>2026-04-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/article-pdc-communal.html</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/article-sig-gestion.html</loc>
-    <lastmod>2026-04-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/article-loi-2019.html</loc>
-    <lastmod>2026-04-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/delimitation-territoriale-togo.html</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/gestion-patrimoine-communal-sig-togo.html</loc>
-    <lastmod>2026-05-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/cartographie.html</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/gestion-inondations-lome.html</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/villes-durables-togo.html</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://mirabilia-bot.github.io/maitrise-ouvrage-communale.html</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    <!-- ========================================= -->
+    <!-- KGM EXPERTISE - SITE PRINCIPAL -->
+    <!-- ========================================= -->
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/blog.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.70</priority>
+    </url>
+
+    <!-- ========================================= -->
+    <!-- SOLUTIONS STRATÉGIQUES -->
+    <!-- ========================================= -->
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/marketing-territorial-togo.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/Urban-Clean-SIG.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/budget-participatif-togo-kgm.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/cartographie.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/gestion-patrimoine-communal-sig-togo.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/gestion-inondations-lome.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/villes-durables-togo.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/maitrise-ouvrage-communale.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <!-- ========================================= -->
+    <!-- ARTICLES D'EXPERTISE -->
+    <!-- ========================================= -->
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/article-gestion-dechets-agoe.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.60</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/article-pdc-communal.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.60</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/article-sig-gestion.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.60</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/article-loi-2019.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.60</priority>
+    </url>
+
+    <url>
+        <loc>https://mirabilia-bot.github.io/delimitation-territoriale-togo.html</loc>
+        <lastmod>2026-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.60</priority>
+    </url>
+
 </urlset>
