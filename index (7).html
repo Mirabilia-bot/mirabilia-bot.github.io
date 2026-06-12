@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGM EXPERTISE | Service Cartographique, Digitale, SIG & Juridique</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00264d">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="KGM Expertise">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <link rel="canonical" href="https://mirabilia-bot.github.io/" />
+    <meta name="description" content="Solutions géospatiales et expertise en gouvernance territoriale au Togo. Découvrez les travaux de KODOMMA Gnimdou M. en SIG et gestion des collectivités locales.">
+    <link rel="icon" type="image/png" href="icon.png?v=1">
+    <meta name="keywords" content="SIG au Togo, Décentralisation Togo, KODOMMA Gnimdou M., Cartographie, Collectivités territoriales, Géoréférencement, Agoè-Nyivé, communes, régions, PDC, Finances locales, fiscalité, loi 2019-006 Togo">
+    <meta name="author" content="KODOMMA Gnimdou M.">
+    <meta name="google-site-verification" content="-7vJonOV-E8R4exVse0UIUmaqGVrzrsvSD4_Jr7TlWI" />
+
+    <meta property="og:title" content="KGM EXPERTISE">
+    <meta property="og:description" content="Solutions géospatiales et expertise juridique pour les collectivités territoriales du Togo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mirabilia-bot.github.io/">
+    <meta property="og:image" content="https://mirabilia-bot.github.io/header-expert.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="KGM EXPERTISE">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KGM EXPERTISE | SIG & Gouvernance Territoriale au Togo">
+    <meta name="twitter:description" content="Solutions géospatiales et expertise juridique pour les collectivités territoriales du Togo.">
+    <meta name="twitter:image" content="https://mirabilia-bot.github.io/header-expert.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HQ96VB6Y8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9HQ96VB6Y8');
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "KGM EXPERTISE",
+  "alternateName": ["KGM Expertise", "KODOMMA Gnimdou M."],
+  "url": "https://mirabilia-bot.github.io/",
+  "sameAs": ["https://github.com/mirabilia-bot"]
+}
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "KODOMMA Gnimdou M.",
+  "url": "https://mirabilia-bot.github.io/",
+  "jobTitle": "spécialiste SIG & Consultant en gouvernance territoriale et développement",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lomé",
+    "addressCountry": "TG"
+  },
+  "description": "Expert en gestion des collectivités locales, décentralisation et Systèmes d'Information Géographique (SIG) au Togo.",
+  "knowsAbout": ["développement local", "Décentralisation", "SIG", "Cartographie", "Gouvernance Territoriale"]
+}
+    </script>
+
+
+
+    <style>
+    /* ═══════════════════════════════════════════════════════════════
+       KGM EXPERTISE — PREMIUM INSTITUTIONAL DESIGN SYSTEM
+       Design language: ArcGIS × Apple × NASA Earth Data
+    ═══════════════════════════════════════════════════════════════ */
+
+    :root {
+        /* Core Palette */
+        --deep-navy:    #020c1b;
+        --navy:         #0a1628;
+        --navy-mid:     #0d2137;
+        --navy-card:    #112240;
+        --cobalt:       #0b3d91;
+        --teal:         #00875a;
+        --teal-bright:  #00c472;
+        --gold:         #d4af37;
+        --gold-light:   #f0ce6a;
+        --gold-pale:    rgba(212,175,55,0.12);
+        --light:        #ccd6f6;
+        --lightest:     #e6f1ff;
+        --muted:        #8892b0;
+        --surface:      rgba(17, 34, 64, 0.85);
+        --glass:        rgba(10, 22, 40, 0.72);
+
+        /* Semantic */
+        --primary:  #0a1628;
+        --secondary: #00875a;
+        --accent:   #d4af37;
+        --text:     #ccd6f6;
+
+        /* Type */
+        --font-display: 'Crimson Pro', Georgia, serif;
+        --font-ui:      'Space Grotesk', 'Inter', sans-serif;
+        --font-body:    'Inter', sans-serif;
+
+        /* Spacing */
+        --section-pad: 100px 8%;
+        --nav-h: 72px;
+
+        /* Effects */
+        --glow-gold:  0 0 40px rgba(212,175,55,0.25);
+        --glow-teal:  0 0 30px rgba(0,135,90,0.3);
+        --glow-blue:  0 0 40px rgba(11,61,145,0.4);
+        --card-shadow: 0 20px 60px rgba(2,12,27,0.5);
+
+        /* Transitions */
+        --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* ── DARK MODE (auto + manual) ── */
+    @media (prefers-color-scheme: light) {
+        :root {
+            --deep-navy:    #e8edf2;
+            --navy:         #f4f7fa;
+            --navy-mid:     #eaeef3;
+            --navy-card:    #ffffff;
+            --cobalt:       #0b3d91;
+            --teal:         #006633;
+            --teal-bright:  #005c2e;
+            --gold:         #9a6e00;
+            --gold-light:   #7a5500;
+            --gold-pale:    rgba(154,110,0,0.1);
+            --light:        #0d2137;
+            --lightest:     #020c1b;
+            --muted:        #2c4a62;
+            --surface:      rgba(255,255,255,0.95);
+            --glass:        rgba(232,237,242,0.92);
+            --text:         #0d2137;
+            --card-shadow:  0 8px 32px rgba(10,22,40,0.12);
+            --glow-teal:    0 0 20px rgba(0,102,51,0.15);
+            --glow-blue:    0 0 20px rgba(11,61,145,0.15);
+        }
+    }
+
+    [data-theme="dark"] {
+        --deep-navy:    #020c1b;
+        --navy:         #0a1628;
+        --navy-mid:     #0d2137;
+        --navy-card:    #112240;
+        --light:        #ccd6f6;
+        --lightest:     #e6f1ff;
+        --muted:        #8892b0;
+        --surface:      rgba(17, 34, 64, 0.85);
+        --glass:        rgba(10, 22, 40, 0.72);
+        --text:         #ccd6f6;
+    }
+
+    [data-theme="light"] {
+        --deep-navy:    #e8edf2;
+        --navy:         #f4f7fa;
+        --navy-mid:     #eaeef3;
+        --navy-card:    #ffffff;
+        --cobalt:       #0b3d91;
+        --teal:         #006633;
+        --teal-bright:  #005c2e;
+        --gold:         #9a6e00;
+        --gold-light:   #7a5500;
+        --gold-pale:    rgba(154,110,0,0.1);
+        --light:        #0d2137;
+        --lightest:     #020c1b;
+        --muted:        #2c4a62;
+        --surface:      rgba(255,255,255,0.95);
+        --glass:        rgba(232,237,242,0.92);
+        --text:         #0d2137;
+        --card-shadow:  0 8px 32px rgba(10,22,40,0.12);
+        --glow-teal:    0 0 20px rgba(0,102,51,0.15);
+        --glow-blue:    0 0 20px rgba(11,61,145,0.15);
+    }
+
+    /* ══ LIGHT MODE OVERRIDES — contraste & lisibilité ══ */
+    @media (prefers-color-scheme: light) { :root { --font-body-color: #0d2137; } }
+    [data-theme="light"], @media (prefers-color-scheme: light) { :root {} }
+
+    :is([data-theme="light"], :root:not([data-theme="dark"]):not(.no-theme)):is(html[data-theme="light"]) .hero-eyebrow,
+    [data-theme="light"] .hero-eyebrow {
+        background: rgba(0,92,46,0.1); border-color: rgba(0,92,46,0.4); color: #004d26;
+    }
+    [data-theme="light"] .hero h1 .accent-word { color: #7a5500; }
+    [data-theme="light"] .hero-quote { color: #5c3e00; }
+    [data-theme="light"] .hero-desc { color: #1a3a5f; }
+    [data-theme="light"] .hero-desc strong { color: #0a1628; }
+    [data-theme="light"] .section-eyebrow { color: #004d26; }
+    [data-theme="light"] .section-title { color: #020c1b; }
+    [data-theme="light"] .section-subtitle { color: #2c4a62; }
+    [data-theme="light"] .card { background: #fff; border-color: rgba(0,0,0,0.08); border-top-color: #006633; }
+    [data-theme="light"] .card h3 { color: #004d26; }
+    [data-theme="light"] .card p { color: #2c4a62; }
+    [data-theme="light"] .tech-badge { background: #fff; border-color: rgba(0,0,0,0.1); color: #0d2137; }
+    [data-theme="light"] .tech-badge:hover { border-color: #9a6e00; color: #020c1b; }
+    [data-theme="light"] .tech-badge-dot { background: #006633; box-shadow: 0 0 6px rgba(0,102,51,0.4); }
+    [data-theme="light"] .stat-block { border-right-color: rgba(0,0,0,0.08); }
+    [data-theme="light"] .stat-number { color: #9a6e00; }
+    [data-theme="light"] .stat-label { color: #2c4a62; }
+    [data-theme="light"] .stat-icon { opacity: 0.8; }
+    [data-theme="light"] .analyse-card { background: #fff; border-color: rgba(0,0,0,0.08); }
+    [data-theme="light"] .analyse-card h3 { color: #020c1b; }
+    [data-theme="light"] .analyse-card p { color: #2c4a62; }
+    [data-theme="light"] .analyse-card a.read-link { color: #004d26; border-bottom-color: rgba(0,77,38,0.3); }
+    [data-theme="light"] .analyse-tag { background: rgba(0,102,51,0.1); color: #004d26; border-color: rgba(0,102,51,0.25); }
+    [data-theme="light"] .analyse-tag.red { background: rgba(198,40,40,0.08); color: #b71c1c; border-color: rgba(198,40,40,0.2); }
+    [data-theme="light"] .analyse-tag.blue { background: rgba(11,61,145,0.08); color: #0b3d91; border-color: rgba(11,61,145,0.2); }
+    [data-theme="light"] .analyse-tag.gold { background: rgba(154,110,0,0.1); color: #7a5500; border-color: rgba(154,110,0,0.25); }
+    [data-theme="light"] .timeline-year { color: #7a5500; }
+    [data-theme="light"] .timeline-title { color: #020c1b; }
+    [data-theme="light"] .timeline-desc { color: #2c4a62; }
+    [data-theme="light"] .timeline::before { background: linear-gradient(180deg, #9a6e00, transparent 90%); }
+    [data-theme="light"] .timeline-dot { background: #9a6e00; border-color: #eaeef3; }
+    [data-theme="light"] .res-item { background: #fff; border-left-color: #0b3d91; }
+    [data-theme="light"] .res-item h4 { color: #020c1b; }
+    [data-theme="light"] .res-item p { color: #2c4a62; }
+    [data-theme="light"] .download { color: #004d26; border-color: rgba(0,77,38,0.35); background: rgba(0,102,51,0.05); }
+    [data-theme="light"] .observatoire-inner { background: #fff; border-color: rgba(11,61,145,0.25); }
+    [data-theme="light"] .observatoire-title { color: #020c1b; }
+    [data-theme="light"] .observatoire-sub { color: #2c4a62; }
+    [data-theme="light"] .footer-brand p { color: #2c4a62; }
+    [data-theme="light"] .footer-col ul li a { color: #2c4a62; }
+    [data-theme="light"] .footer-col ul li a:hover { color: #020c1b; }
+    [data-theme="light"] .footer-col h4 { color: #7a5500; }
+    [data-theme="light"] .footer-bottom p { color: #2c4a62; }
+    [data-theme="light"] .footer-brand .footer-logo { color: #020c1b; }
+    [data-theme="light"] footer { background: #dde3ea; border-top-color: rgba(154,110,0,0.3); }
+    [data-theme="light"] .analyses-header-left h2 { color: #020c1b; }
+    [data-theme="light"] .analyses-header a { color: #004d26; }
+    [data-theme="light"] .analyses-header-left .title-bar { background: linear-gradient(90deg, #9a6e00, transparent); }
+    [data-theme="light"] .pwa-note { background: rgba(194,24,91,0.05); border-color: rgba(194,24,91,0.25); color: #2c4a62; }
+    [data-theme="light"] .bottom-nav { background: rgba(232,237,242,0.97); border-top-color: rgba(154,110,0,0.2); }
+    [data-theme="light"] .bottom-nav-item { color: #2c4a62; }
+    [data-theme="light"] .bottom-nav-item.active,
+    [data-theme="light"] .bottom-nav-item:hover { color: #7a5500; }
+    [data-theme="light"] nav { border-bottom-color: rgba(154,110,0,0.2); }
+    [data-theme="light"] .nav-links a { color: #1a3a5f; }
+    [data-theme="light"] .nav-links a:hover,
+    [data-theme="light"] .nav-links a[aria-current="page"] { color: #7a5500; background: rgba(154,110,0,0.08); }
+    [data-theme="light"] .expertise-meta-item { color: #2c4a62; }
+    [data-theme="light"] .expertise-meta-item strong { color: #0d2137; }
+    [data-theme="light"] .expertise-intro-headline { color: #020c1b; }
+    [data-theme="light"] .expertise-intro-desc { color: #2c4a62; }
+    [data-theme="light"] .expertise-image-caption { color: #2c4a62; }
+    [data-theme="light"] .expertise-image-caption strong { color: #7a5500; }
+    [data-theme="light"] .hero-portrait { border-color: rgba(154,110,0,0.5); }
+    [data-theme="light"] #contact .section-subtitle { color: #2c4a62; }
+
+    /* Même règles via media query pour les utilisateurs sans JS ou sans toggle */
+    @media (prefers-color-scheme: light) {
+        .hero-eyebrow { background: rgba(0,92,46,0.1); border-color: rgba(0,92,46,0.4); color: #004d26; }
+        .hero h1 .accent-word { color: #7a5500; }
+        .hero-quote { color: #5c3e00; }
+        .hero-desc { color: #1a3a5f; }
+        .hero-desc strong { color: #0a1628; }
+        .section-eyebrow { color: #004d26; }
+        .section-title { color: #020c1b; }
+        .section-subtitle { color: #2c4a62; }
+        .card { background: #fff; border-color: rgba(0,0,0,0.08); border-top-color: #006633; }
+        .card h3 { color: #004d26; }
+        .card p { color: #2c4a62; }
+        .tech-badge { background: #fff; border-color: rgba(0,0,0,0.1); color: #0d2137; }
+        .tech-badge-dot { background: #006633; }
+        .stat-number { color: #9a6e00; }
+        .stat-label { color: #2c4a62; }
+        .analyse-card { background: #fff; border-color: rgba(0,0,0,0.08); }
+        .analyse-card h3 { color: #020c1b; }
+        .analyse-card p { color: #2c4a62; }
+        .analyse-card a.read-link { color: #004d26; }
+        .analyse-tag { background: rgba(0,102,51,0.1); color: #004d26; border-color: rgba(0,102,51,0.25); }
+        .analyse-tag.red { color: #b71c1c; }
+        .analyse-tag.blue { color: #0b3d91; }
+        .analyse-tag.gold { color: #7a5500; }
+        .timeline-year { color: #7a5500; }
+        .timeline-title { color: #020c1b; }
+        .timeline-desc { color: #2c4a62; }
+        .timeline-dot { background: #9a6e00; }
+        .res-item { background: #fff; }
+        .res-item h4 { color: #020c1b; }
+        .res-item p { color: #2c4a62; }
+        .download { color: #004d26; border-color: rgba(0,77,38,0.35); }
+        .observatoire-inner { background: #fff; }
+        .observatoire-title { color: #020c1b; }
+        .observatoire-sub { color: #2c4a62; }
+        footer { background: #dde3ea; }
+        .footer-brand p, .footer-col ul li a, .footer-bottom p { color: #2c4a62; }
+        .footer-brand .footer-logo { color: #020c1b; }
+        .footer-col h4 { color: #7a5500; }
+        .analyses-header-left h2 { color: #020c1b; }
+        .analyses-header a { color: #004d26; }
+        .nav-links a { color: #1a3a5f; }
+        .expertise-meta-item { color: #2c4a62; }
+        .expertise-meta-item strong { color: #0d2137; }
+        .expertise-intro-headline { color: #020c1b; }
+        .expertise-intro-desc { color: #2c4a62; }
+        .pwa-note { color: #2c4a62; }
+        .bottom-nav-item { color: #2c4a62; }
+        .bottom-nav-item.active { color: #7a5500; }
+    }
+
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: var(--font-body);
+        color: var(--light);
+        background: var(--deep-navy);
+        line-height: 1.7;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SKIP LINK ACCESSIBILITY ── */
+    .skip-link {
+        position: absolute; top: -100px; left: 10px; z-index: 9999;
+        background: var(--teal); color: white; padding: 8px 16px;
+        border-radius: 4px; text-decoration: none; font-weight: bold;
+        transition: top 0.2s;
+    }
+    .skip-link:focus { top: 10px; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ══════════════════════════════════════════
+       NAVBAR — GLASSMORPHISM PREMIUM
+    ══════════════════════════════════════════ */
+    nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+        height: var(--nav-h);
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 0 5%;
+        background: var(--glass);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid rgba(212,175,55,0.15);
+        transition: all 0.4s var(--ease-smooth);
+    }
+
+    nav.scrolled {
+        height: 60px;
+        background: rgba(10,22,40,0.95);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    /* Logo */
+    .logo {
+        font-family: var(--font-ui);
+        font-weight: 700;
+        color: var(--lightest);
+        display: flex; align-items: center; gap: 12px;
+        text-decoration: none;
+        letter-spacing: 0.02em;
+    }
+
+    .logo-icon {
+        width: 38px; height: 38px;
+        background: linear-gradient(135deg, var(--cobalt), var(--teal));
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 15px rgba(11,61,145,0.4);
+        flex-shrink: 0;
+    }
+
+    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-name { font-size: 1rem; color: var(--lightest); }
+    .logo-sub { font-size: 0.65rem; color: var(--gold); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Nav links */
+    .nav-links {
+        display: flex; align-items: center; gap: 6px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--muted);
+        font-family: var(--font-ui);
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        padding: 7px 14px;
+        border-radius: 20px;
+        transition: all 0.25s var(--ease-smooth);
+        position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+        color: var(--lightest);
+        background: rgba(212,175,55,0.12);
+    }
+
+    .nav-links a[aria-current="page"] {
+        color: var(--gold);
+    }
+
+    /* Theme toggle & mobile hamburger */
+    .nav-actions {
+        display: flex; align-items: center; gap: 10px;
+    }
+
+    .theme-toggle {
+        width: 36px; height: 36px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+        color: var(--muted);
+    }
+    .theme-toggle:hover { background: rgba(212,175,55,0.15); color: var(--gold); border-color: var(--gold); }
+
+    /* Hamburger */
+    .hamburger {
+        display: none;
+        flex-direction: column; gap: 5px;
+        background: none; border: none; cursor: pointer;
+        padding: 6px; z-index: 1100;
+    }
+    .hamburger span {
+        display: block; width: 22px; height: 2px;
+        background: var(--light);
+        border-radius: 2px;
+        transition: all 0.35s var(--ease-smooth);
+        transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile fullscreen menu */
+    .mobile-menu {
+        display: none;
+        position: fixed; inset: 0; z-index: 1050;
+        background: rgba(2,12,27,0.97);
+        backdrop-filter: blur(30px);
+        flex-direction: column; align-items: center; justify-content: center;
+        gap: 8px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s var(--ease-smooth);
+    }
+    .mobile-menu.open {
+        opacity: 1;
+        pointer-events: all;
+    }
+    .mobile-menu a {
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: var(--light);
+        text-decoration: none;
+        padding: 10px 30px;
+        transition: color 0.2s;
+        letter-spacing: 0.02em;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-menu-close {
+        position: absolute; top: 24px; right: 24px;
+        background: none; border: none; cursor: pointer;
+        font-size: 1.5rem; color: var(--muted);
+        width: 40px; height: 40px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%;
+        transition: all 0.2s;
+    }
+    .mobile-menu-close:hover { color: var(--gold); background: rgba(212,175,55,0.1); }
+
+    /* ══════════════════════════════════════════
+       HERO — IMMERSIVE GEOSPATIAL
+    ══════════════════════════════════════════ */
+    .hero {
+        min-height: 100vh;
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+        padding: calc(var(--nav-h) + 40px) 5% 60px;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    /* Animated background canvas */
+    #hero-canvas {
+        position: absolute; inset: 0;
+        z-index: 0;
+        opacity: 0.6;
+    }
+
+    /* Gradient overlay */
+    .hero::before {
+        content: '';
+        position: absolute; inset: 0; z-index: 1;
+        background:
+            radial-gradient(ellipse 80% 60% at 50% 0%, rgba(11,61,145,0.35) 0%, transparent 70%),
+            radial-gradient(ellipse 60% 80% at 100% 100%, rgba(0,135,90,0.2) 0%, transparent 60%),
+            linear-gradient(180deg, rgba(2,12,27,0.4) 0%, rgba(2,12,27,0.75) 100%);
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative; z-index: 2;
+        max-width: 900px; margin: 0 auto;
+        display: flex; flex-direction: column; align-items: center; gap: 28px;
+    }
+
+    /* Eyebrow label */
+    .hero-eyebrow {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: rgba(212,175,55,0.1);
+        border: 1px solid rgba(212,175,55,0.3);
+        border-radius: 30px;
+        padding: 6px 18px;
+        font-family: var(--font-ui);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        color: var(--gold);
+        text-transform: uppercase;
+    }
+    .hero-eyebrow::before {
+        content: '';
+        width: 6px; height: 6px;
+        background: var(--teal-bright);
+        border-radius: 50%;
+        animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* Main headline */
+    .hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 700;
+        color: var(--lightest);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+    }
+    .hero h1 .accent-word { color: var(--gold); }
+
+    /* Portrait with halo */
+    .hero-portrait-wrap {
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+        margin: 8px 0;
+    }
+
+    .portrait-halo {
+        position: absolute;
+        width: 320px; height: 320px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(212,175,55,0.25) 0%, rgba(11,61,145,0.2) 40%, transparent 70%);
+        filter: blur(30px);
+        animation: halo-breathe 4s ease-in-out infinite;
+        z-index: 0;
+    }
+    @keyframes halo-breathe {
+        0%, 100% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .portrait-ring {
+        position: absolute;
+        width: 280px; height: 280px;
+        border-radius: 50%;
+        border: 1px solid rgba(212,175,55,0.25);
+        animation: ring-rotate 20s linear infinite;
+    }
+    .portrait-ring::before {
+        content: '';
+        position: absolute;
+        top: -3px; left: 50%;
+        width: 6px; height: 6px;
+        background: var(--gold);
+        border-radius: 50%;
+        margin-left: -3px;
+        box-shadow: 0 0 10px var(--gold);
+    }
+    @keyframes ring-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .hero-portrait {
+        position: relative; z-index: 1;
+        width: 220px; height: 220px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid rgba(212,175,55,0.4);
+        box-shadow: 0 0 0 8px rgba(212,175,55,0.07), 0 20px 60px rgba(0,0,0,0.5);
+        display: block;
+        background: var(--navy-card);
+    }
+
+    .hero-quote {
+        font-family: 'Dancing Script', cursive;
+        font-size: clamp(1rem, 2.5vw, 1.35rem);
+        color: var(--gold-light);
+        font-style: italic;
+        max-width: 540px;
+        line-height: 1.4;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+
+    .hero-desc {
+        font-family: var(--font-body);
+        font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+        color: var(--muted);
+        max-width: 560px;
+        line-height: 1.65;
+    }
+    .hero-desc strong { color: var(--light); font-weight: 600; }
+
+    /* Hero CTA */
+    .hero-cta-group {
+        display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--gold), #c49a2d);
+        color: #020c1b;
+        padding: 14px 36px;
+        border-radius: 40px;
+        font-family: var(--font-ui);
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        border: none; cursor: pointer;
+        display: inline-flex; align-items: center; gap: 8px;
+        transition: all 0.3s var(--ease-smooth);
+        box-shadow: 0 8px 24px rgba(212,175,55,0.3);
+        position: relative; overflow: hidden;
+    }
+    .btn-primary::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+        opacity: 0; transition: opacity 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(212,175,55,0.45); }
+    .btn-primary:hover::after { opacity: 1; }
+
+    /* Alias for existing code */
+    .btn-main { background: linear-gradient(135deg, var(--gold), #c49a2d); color: #020c1b; padding: 14px 36px; text-decoration: none; border-radius: 40px; font-family: var(--font-ui); font-size: 0.88rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s var(--ease-smooth); box-shadow: 0 8px 24px rgba(212,175,55,0.3); border: none; cursor: pointer; }
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(212,175,55,0.45); }
+
+    .btn-ghost {
+        background: transparent;
+        color: var(--light);
+        padding: 13px 30px;
+        border-radius: 40px;
+        border: 1px solid rgba(204,214,246,0.25);
+        font-family: var(--font-ui); font-size: 0.88rem; font-weight: 500;
+        text-decoration: none;
+        display: inline-flex; align-items: center; gap: 8px;
+        transition: all 0.3s var(--ease-smooth);
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.06); }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+        position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+        z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px;
+        opacity: 0.5; animation: float-up 2.5s ease-in-out infinite;
+        color: var(--muted); font-size: 0.7rem; font-family: var(--font-ui); letter-spacing: 0.1em;
+    }
+    .scroll-indicator svg { animation: scroll-arrow 2.5s ease-in-out infinite; }
+    @keyframes float-up {
+        0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+        50% { opacity: 0.7; transform: translateX(-50%) translateY(5px); }
+    }
+
+    /* ══════════════════════════════════════════
+       STATS STRIP — KGM EN CHIFFRES
+    ══════════════════════════════════════════ */
+    .stats-strip {
+        background: var(--navy-card);
+        border-top: 1px solid rgba(212,175,55,0.12);
+        border-bottom: 1px solid rgba(212,175,55,0.12);
+        padding: 60px 5%;
+    }
+
+    .stats-strip-inner {
+        max-width: 1100px; margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+    }
+
+    .stat-block {
+        padding: 32px 20px;
+        text-align: center;
+        position: relative;
+        border-right: 1px solid rgba(212,175,55,0.08);
+    }
+    .stat-block:last-child { border-right: none; }
+
+    .stat-number {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: var(--gold);
+        line-height: 1;
+        display: block;
+    }
+
+    .stat-unit {
+        font-size: 0.8em;
+        color: var(--gold-light);
+    }
+
+    .stat-label {
+        margin-top: 8px;
+        font-family: var(--font-ui);
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        display: block;
+    }
+
+    .stat-icon {
+        font-size: 1.4rem;
+        display: block;
+        margin-bottom: 10px;
+        opacity: 0.7;
+    }
+
+    /* ══════════════════════════════════════════
+       SECTIONS — GENERAL
+    ══════════════════════════════════════════ */
+    section {
+        padding: var(--section-pad);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        scroll-margin-top: var(--nav-h);
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 64px;
+    }
+
+    .section-eyebrow {
+        display: inline-block;
+        font-family: var(--font-ui);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: var(--teal-bright);
+        text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+
+    .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+        font-weight: 700;
+        color: var(--lightest);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+        color: var(--muted);
+        max-width: 560px;
+        margin: 0 auto;
+        line-height: 1.65;
+    }
+
+    /* Gold accent underline */
+    .title-accent {
+        display: inline-block;
+        position: relative;
+    }
+    .title-accent::after {
+        content: '';
+        position: absolute;
+        bottom: -6px; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+        border-radius: 2px;
+    }
+
+    /* ══════════════════════════════════════════
+       EXPERTISE SECTION
+    ══════════════════════════════════════════ */
+    #expertise { background: var(--navy); }
+
+    .expertise-intro {
+        max-width: 900px; margin: 0 auto 60px;
+        padding: 32px;
+        background: var(--navy-card);
+        border-radius: 16px;
+        border: 1px solid rgba(212,175,55,0.12);
+        display: flex; flex-direction: column; gap: 20px;
+    }
+
+    .expertise-intro-headline {
+        font-family: var(--font-ui);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--lightest);
+    }
+    .expertise-intro-desc {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .expertise-image-card {
+        background: var(--navy-card);
+        border-radius: 16px;
+        border: 1px solid rgba(212,175,55,0.1);
+        overflow: hidden;
+        max-width: 900px; margin: 0 auto 60px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s;
+    }
+    .expertise-image-card:hover { transform: translateY(-4px); box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+    .expertise-image-card img { width: 100%; height: auto; display: block; cursor: zoom-in; }
+    .expertise-image-caption {
+        padding: 14px 20px;
+        background: rgba(212,175,55,0.05);
+        border-top: 1px solid rgba(212,175,55,0.1);
+        font-size: 0.85rem;
+        color: var(--muted);
+        text-align: center;
+        font-family: var(--font-ui);
+    }
+    .expertise-image-caption strong { color: var(--gold-light); }
+
+    .expertise-meta {
+        max-width: 900px; margin: 0 auto 60px;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .expertise-meta-item {
+        padding: 16px 20px;
+        border-left: 3px solid var(--teal);
+        background: rgba(0,135,90,0.05);
+        border-radius: 0 8px 8px 0;
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.55;
+    }
+    .expertise-meta-item:last-child { border-left-color: var(--cobalt); background: rgba(11,61,145,0.08); }
+    .expertise-meta-item strong { color: var(--light); }
+
+    /* Cards grid */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        max-width: 1200px; margin: 0 auto;
+    }
+
+    /* Premium card */
+    .card {
+        background: var(--navy-card);
+        padding: 32px 28px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.06);
+        border-top: 3px solid var(--teal);
+        transition: all 0.4s var(--ease-smooth);
+        position: relative;
+        overflow: hidden;
+        height: auto; min-height: 220px;
+        display: flex; flex-direction: column;
+    }
+    .card::before {
+        content: '';
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(ellipse at top left, rgba(0,135,90,0.08), transparent 60%);
+        opacity: 0;
+        transition: opacity 0.4s;
+    }
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 60px rgba(0,0,0,0.4), var(--glow-teal);
+        border-color: rgba(0,135,90,0.4);
+        border-top-color: var(--teal-bright);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+        width: 48px; height: 48px;
+        background: rgba(0,135,90,0.12);
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 20px;
+        border: 1px solid rgba(0,135,90,0.2);
+        flex-shrink: 0;
+    }
+
+    .card h3 {
+        font-family: var(--font-ui);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--teal-bright);
+        margin-bottom: 12px;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.65;
+        flex: 1;
+    }
+
+    /* ══════════════════════════════════════════
+       OBSERVATOIRE SIG BANNER
+    ══════════════════════════════════════════ */
+    .observatoire-banner {
+        margin: 0;
+        padding: 24px 5%;
+        background: linear-gradient(90deg, rgba(11,61,145,0.2), rgba(0,135,90,0.15));
+        border-top: 1px solid rgba(11,61,145,0.3);
+        border-bottom: 1px solid rgba(0,135,90,0.2);
+    }
+    .observatoire-inner {
+        max-width: 600px; margin: 0 auto;
+        background: var(--navy-card);
+        border-radius: 14px;
+        border: 1px solid rgba(11,61,145,0.3);
+        padding: 18px 24px;
+        display: flex; align-items: center; gap: 16px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        transition: all 0.3s;
+    }
+    .observatoire-inner:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.4), var(--glow-blue); border-color: rgba(11,61,145,0.6); }
+
+    .observatoire-badge {
+        flex-shrink: 0;
+        width: 44px; height: 44px;
+        background: linear-gradient(135deg, var(--cobalt), var(--teal));
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    .observatoire-text { flex-grow: 1; }
+    .observatoire-title {
+        font-family: var(--font-ui);
+        font-size: 0.9rem; font-weight: 700;
+        color: var(--lightest);
+        letter-spacing: 0.04em;
+        margin-bottom: 2px;
+    }
+    .observatoire-sub {
+        font-size: 0.75rem; color: var(--muted); font-style: italic;
+    }
+
+    .observatoire-btn {
+        width: 40px; height: 40px;
+        background: linear-gradient(135deg, var(--cobalt), #0d52b8);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        text-decoration: none;
+        color: white; font-size: 1rem;
+        box-shadow: 0 4px 16px rgba(11,61,145,0.4);
+        transition: all 0.3s;
+        flex-shrink: 0;
+    }
+    .observatoire-btn:hover { transform: scale(1.1); box-shadow: 0 8px 24px rgba(11,61,145,0.6); }
+
+    /* ══════════════════════════════════════════
+       ANALYSES SECTION
+    ══════════════════════════════════════════ */
+    #analyses { background: var(--navy-mid); }
+
+    .analyses-header {
+        display: flex; justify-content: space-between; align-items: flex-end;
+        margin-bottom: 40px;
+        flex-wrap: wrap; gap: 16px;
+    }
+    .analyses-header-left h2 {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+        color: var(--lightest);
+        letter-spacing: -0.02em;
+    }
+    .analyses-header-left .title-bar {
+        width: 50px; height: 3px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+        margin-top: 10px; border-radius: 2px;
+    }
+    .analyses-header a {
+        font-family: var(--font-ui);
+        font-size: 0.85rem; font-weight: 600;
+        color: var(--teal-bright);
+        text-decoration: none;
+        display: inline-flex; align-items: center; gap: 6px;
+        transition: gap 0.2s;
+    }
+    .analyses-header a:hover { gap: 10px; }
+
+    .analyses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 22px;
+        max-width: 1200px; margin: 0 auto;
+    }
+
+    .analyse-card {
+        background: var(--navy-card);
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.05);
+        padding: 28px;
+        display: flex; flex-direction: column;
+        transition: all 0.35s var(--ease-smooth);
+        position: relative; overflow: hidden;
+        height: 100%;
+    }
+    .analyse-card::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(135deg, rgba(212,175,55,0.04), transparent);
+        opacity: 0;
+        transition: opacity 0.35s;
+    }
+    .analyse-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        border-color: rgba(212,175,55,0.2);
+    }
+    .analyse-card:hover::after { opacity: 1; }
+
+    .analyse-tag {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 30px;
+        font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+        width: fit-content;
+        background: rgba(0,135,90,0.12);
+        color: var(--teal-bright);
+        border: 1px solid rgba(0,135,90,0.2);
+    }
+    .analyse-tag.red { background: rgba(198,40,40,0.12); color: #ef5350; border-color: rgba(198,40,40,0.2); }
+    .analyse-tag.blue { background: rgba(11,61,145,0.15); color: #64b5f6; border-color: rgba(11,61,145,0.3); }
+    .analyse-tag.gold { background: rgba(212,175,55,0.1); color: var(--gold); border-color: rgba(212,175,55,0.2); }
+
+    .analyse-card h3 {
+        font-family: var(--font-display);
+        font-size: 1.2rem; font-weight: 600;
+        color: var(--lightest);
+        line-height: 1.35;
+        margin-bottom: 14px;
+        flex-shrink: 0;
+    }
+
+    .analyse-card p {
+        font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+        flex-grow: 1; margin-bottom: 20px;
+    }
+
+    .analyse-card a.read-link {
+        font-family: var(--font-ui);
+        font-size: 0.82rem; font-weight: 600;
+        color: var(--teal-bright);
+        text-decoration: none;
+        display: inline-flex; align-items: center; gap: 6px;
+        border-bottom: 1px solid rgba(0,196,114,0.25);
+        padding-bottom: 2px;
+        align-self: flex-start;
+        transition: all 0.2s;
+    }
+    .analyse-card a.read-link:hover { gap: 10px; color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ══════════════════════════════════════════
+       TECHNOLOGIES SECTION
+    ══════════════════════════════════════════ */
+    .technologies-section {
+        background: var(--navy);
+        padding: var(--section-pad);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .tech-badges {
+        display: flex; flex-wrap: wrap; gap: 12px;
+        justify-content: center;
+        max-width: 900px; margin: 0 auto;
+    }
+
+    .tech-badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 10px 20px;
+        background: var(--navy-card);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 40px;
+        font-family: var(--font-ui);
+        font-size: 0.82rem; font-weight: 500;
+        color: var(--light);
+        transition: all 0.3s var(--ease-smooth);
+        cursor: default;
+        position: relative; overflow: hidden;
+    }
+    .tech-badge::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent);
+        opacity: 0; transition: opacity 0.3s;
+    }
+    .tech-badge:hover {
+        transform: translateY(-3px) scale(1.03);
+        border-color: rgba(212,175,55,0.35);
+        color: var(--lightest);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .tech-badge:hover::before { opacity: 1; }
+    .tech-badge-dot {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: var(--teal-bright);
+        box-shadow: 0 0 8px var(--teal-bright);
+    }
+
+    /* ══════════════════════════════════════════
+       TIMELINE SECTION
+    ══════════════════════════════════════════ */
+    .timeline-section {
+        background: var(--navy-mid);
+        padding: var(--section-pad);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .timeline {
+        max-width: 800px; margin: 0 auto;
+        position: relative;
+        padding-left: 40px;
+    }
+    .timeline::before {
+        content: '';
+        position: absolute; left: 12px; top: 0; bottom: 0;
+        width: 1px;
+        background: linear-gradient(180deg, var(--gold), transparent 90%);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 44px;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.6s var(--ease-smooth);
+    }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+        position: absolute; left: -34px; top: 4px;
+        width: 14px; height: 14px;
+        border-radius: 50%;
+        background: var(--gold);
+        border: 3px solid var(--navy-mid);
+        box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+    }
+
+    .timeline-year {
+        font-family: var(--font-ui);
+        font-size: 0.72rem; font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+
+    .timeline-title {
+        font-family: var(--font-ui);
+        font-size: 1rem; font-weight: 600;
+        color: var(--lightest);
+        margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+        font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+    }
+
+
+
+    /* ══════════════════════════════════════════
+       RESSOURCES SECTION
+    ══════════════════════════════════════════ */
+    #ressources { background: var(--navy-mid); }
+
+    .res-item {
+        background: var(--navy-card);
+        padding: 24px;
+        margin: 0 auto 14px auto;
+        max-width: 1200px; width: 100%;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 4px solid var(--cobalt);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-left: 4px solid var(--cobalt);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        transition: all 0.3s var(--ease-smooth);
+    }
+    .res-item:hover { transform: translateX(4px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
+
+    .res-tag {
+        display: inline-block;
+        padding: 3px 10px; border-radius: 4px;
+        font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .res-item h4 {
+        color: var(--lightest);
+        font-family: var(--font-ui);
+        font-size: 0.95rem; font-weight: 600;
+        margin-bottom: 5px;
+    }
+    .res-item p {
+        font-size: 0.82rem; color: var(--muted); line-height: 1.5;
+    }
+
+    .download {
+        color: var(--teal-bright); font-weight: 600; text-decoration: none;
+        border: 1px solid rgba(0,196,114,0.3); padding: 9px 18px;
+        border-radius: 8px; font-family: var(--font-ui); font-size: 0.82rem;
+        transition: all 0.3s; white-space: nowrap; flex-shrink: 0;
+        background: rgba(0,135,90,0.06);
+    }
+    .download:hover { background: rgba(0,135,90,0.15); border-color: var(--teal-bright); transform: translateY(-2px); }
+
+    /* ══════════════════════════════════════════
+       CONTACT SECTION
+    ══════════════════════════════════════════ */
+    #contact { background: var(--navy); text-align: center; }
+    #contact .section-subtitle { margin-bottom: 48px; }
+
+    .contact-grid {
+        display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+    }
+    .contact-link {
+        color: var(--teal-bright);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--gold); }
+
+    /* ══════════════════════════════════════════
+       FOOTER PREMIUM
+    ══════════════════════════════════════════ */
+    footer {
+        background: var(--deep-navy);
+        padding: 64px 8% 32px;
+        border-top: 1px solid rgba(212,175,55,0.15);
+    }
+
+    .footer-inner {
+        max-width: 1100px; margin: 0 auto;
+        display: grid; grid-template-columns: 2fr 1fr 1fr;
+        gap: 48px; margin-bottom: 48px;
+    }
+
+    .footer-brand .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1.4rem; font-weight: 700;
+        color: var(--lightest);
+        letter-spacing: 0.02em;
+        display: flex; align-items: center; gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .footer-brand p {
+        font-size: 0.85rem; color: var(--muted);
+        line-height: 1.7; max-width: 320px;
+    }
+
+    .footer-col h4 {
+        font-family: var(--font-ui);
+        font-size: 0.75rem; font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.1em; text-transform: uppercase;
+        margin-bottom: 18px;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+        font-size: 0.85rem; color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+        display: inline-flex; align-items: center; gap: 6px;
+    }
+    .footer-col ul li a:hover { color: var(--light); }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.06);
+        padding-top: 24px;
+        display: flex; justify-content: space-between; align-items: center;
+        flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 0.75rem; color: var(--muted); opacity: 0.6; }
+
+    /* ══════════════════════════════════════════
+       BOTTOM NAV MOBILE
+    ══════════════════════════════════════════ */
+    .bottom-nav {
+        display: none;
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+        background: rgba(10,22,40,0.97);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(212,175,55,0.15);
+        padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+    }
+
+    .bottom-nav-inner {
+        display: flex; justify-content: space-around; align-items: center;
+    }
+
+    .bottom-nav-item {
+        display: flex; flex-direction: column; align-items: center; gap: 3px;
+        text-decoration: none; color: var(--muted);
+        font-family: var(--font-ui); font-size: 0.6rem; font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 10px;
+        transition: all 0.2s;
+    }
+    .bottom-nav-item svg { width: 20px; height: 20px; }
+    .bottom-nav-item.active,
+    .bottom-nav-item:hover { color: var(--gold); }
+
+    /* ══════════════════════════════════════════
+       ANIMATION UTILITIES
+    ══════════════════════════════════════════ */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Ripple effect */
+    .ripple-host {
+        position: relative; overflow: hidden;
+    }
+    .ripple {
+        position: absolute; border-radius: 50%;
+        background: rgba(255,255,255,0.25);
+        transform: scale(0);
+        animation: ripple-anim 0.6s linear;
+        pointer-events: none;
+    }
+    @keyframes ripple-anim {
+        to { transform: scale(4); opacity: 0; }
+    }
+
+    /* Gradient text */
+    .text-gradient {
+        background: linear-gradient(135deg, var(--gold), var(--teal-bright));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+        .stats-strip-inner { grid-template-columns: repeat(2, 1fr); }
+        .stat-block { border-right: none; border-bottom: 1px solid rgba(212,175,55,0.08); }
+        .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+        :root { --section-pad: 70px 5%; }
+        .nav-links { display: none; }
+        .hamburger { display: flex; }
+        .mobile-menu { display: flex; }
+        .bottom-nav { display: block; }
+        section { padding: 70px 5% !important; padding-bottom: 90px !important; }
+        .hero { min-height: 100svh; }
+        .hero-portrait { width: 180px; height: 180px; }
+        .portrait-halo { width: 250px; height: 250px; }
+        .portrait-ring { width: 225px; height: 225px; }
+        .analyses-header { flex-direction: column; align-items: flex-start; }
+        .analyses-grid { grid-template-columns: 1fr; }
+        .grid { grid-template-columns: 1fr; }
+        .expertise-meta { grid-template-columns: 1fr; }
+        .res-item { flex-direction: column; align-items: flex-start; gap: 14px; }
+        .res-item .download, .res-item button { width: 100%; text-align: center; }
+        .tech-badges { gap: 8px; }
+        footer { padding-bottom: 80px; }
+    }
+
+    @media (max-width: 480px) {
+        .stats-strip-inner { grid-template-columns: repeat(2, 1fr); }
+        .hero h1 { font-size: 2rem; }
+        .hero-cta-group { flex-direction: column; align-items: center; }
+        .btn-primary, .btn-ghost, .btn-main { width: 100%; justify-content: center; }
+        .contact-grid { flex-direction: column; align-items: center; }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+        .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ══════════════════════════════════════════
+       INLINE SECTION OVERRIDES (kept from original)
+    ══════════════════════════════════════════ */
+    .pwa-note {
+        background: rgba(194,24,91,0.08);
+        border: 1px dashed rgba(194,24,91,0.3);
+        border-radius: 8px;
+        padding: 14px; font-size: 0.75rem;
+        color: var(--muted); line-height: 1.5;
+        margin-top: 12px;
+    }
+    .pwa-note strong { color: #f48fb1; }
+
+    </style>
+
+
+</head>
+<body>
+
+<!-- ═══ SKIP LINK ═══ -->
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<!-- ═══ MOBILE FULLSCREEN MENU ═══ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation mobile">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Fermer le menu">✕</button>
+    <a href="#expertise" onclick="closeMobileMenu()">Expertise</a>
+    <a href="./blog.html" onclick="closeMobileMenu()">Analyses</a>
+    <a href="#ressources" onclick="closeMobileMenu()">Ressources</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ═══ NAV GLASSMORPHISM ═══ -->
+<nav role="navigation" aria-label="Navigation principale" id="mainNav">
+    <a href="./index.html" class="logo" target="_self">
+        <div class="logo-icon" aria-hidden="true">🏛️</div>
+        <div class="logo-text">
+            <span class="logo-name">DÉCENTRALISATION</span>
+            <span class="logo-sub">AU TOGO</span>
+        </div>
+    </a>
+    <div class="nav-links">
+        <a href="#expertise" target="_self" aria-current="page">Expertise</a>
+        <a href="./blog.html" target="_self">Analyses</a>
+        <a href="#ressources" target="_self">Ressources</a>
+        <a href="#contact" target="_self">Contact</a>
+    </div>
+    <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">🌙</button>
+        <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<main id="main-content">
+
+    <!-- ═══════════════════════════════════════
+         HERO — GÉOSPATIAL IMMERSIF
+    ═══════════════════════════════════════ -->
+    <header class="hero" id="accueil">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+        <div class="hero-content">
+            <span class="hero-eyebrow reveal">Intelligence Territoriale · Togo</span>
+
+            <h1 class="reveal reveal-delay-1">
+                <span class="title-accent">KGM</span>
+                <span class="accent-word"> EXPERTISE</span>
+            </h1>
+
+            <div class="hero-portrait-wrap reveal reveal-delay-2">
+                <div class="portrait-halo" aria-hidden="true"></div>
+                <div class="portrait-ring" aria-hidden="true"></div>
+                <!-- Avatar SVG inline — expert togolais, affichage immédiat sans dépendance fichier -->
+                <svg class="hero-portrait" width="220" height="220" viewBox="0 0 220 220"
+                     xmlns="http://www.w3.org/2000/svg"
+                     role="img"
+                     aria-label="KODOMMA Gnimdou M., spécialiste SIG et consultant en gouvernance territoriale au Togo">
+
+                    <!-- Fond cercle -->
+                    <defs>
+                        <clipPath id="circle-clip">
+                            <circle cx="110" cy="110" r="107"/>
+                        </clipPath>
+                        <radialGradient id="bg-grad" cx="50%" cy="40%" r="60%">
+                            <stop offset="0%" stop-color="#1a3a5f"/>
+                            <stop offset="100%" stop-color="#0a1628"/>
+                        </radialGradient>
+                        <radialGradient id="skin-grad" cx="45%" cy="35%" r="65%">
+                            <stop offset="0%" stop-color="#6b3a22"/>
+                            <stop offset="100%" stop-color="#4a2512"/>
+                        </radialGradient>
+                        <radialGradient id="face-grad" cx="45%" cy="30%" r="60%">
+                            <stop offset="0%" stop-color="#7a4228"/>
+                            <stop offset="100%" stop-color="#5c3018"/>
+                        </radialGradient>
+                        <linearGradient id="suit-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#1c2e4a"/>
+                            <stop offset="100%" stop-color="#0d1c2e"/>
+                        </linearGradient>
+                        <linearGradient id="collar-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#f0f4f8"/>
+                            <stop offset="100%" stop-color="#d8e4f0"/>
+                        </linearGradient>
+                    </defs>
+
+                    <g clip-path="url(#circle-clip)">
+                        <!-- Background -->
+                        <rect width="220" height="220" fill="url(#bg-grad)"/>
+
+                        <!-- Subtle background pattern — grid géospatial -->
+                        <g stroke="rgba(212,175,55,0.06)" stroke-width="0.8" fill="none">
+                            <line x1="0" y1="40" x2="220" y2="40"/>
+                            <line x1="0" y1="80" x2="220" y2="80"/>
+                            <line x1="0" y1="120" x2="220" y2="120"/>
+                            <line x1="0" y1="160" x2="220" y2="160"/>
+                            <line x1="40" y1="0" x2="40" y2="220"/>
+                            <line x1="80" y1="0" x2="80" y2="220"/>
+                            <line x1="120" y1="0" x2="120" y2="220"/>
+                            <line x1="160" y1="0" x2="160" y2="220"/>
+                        </g>
+
+                        <!-- BODY / COSTUME -->
+                        <!-- Veste sombre — épaules larges -->
+                        <ellipse cx="110" cy="210" rx="82" ry="48" fill="url(#suit-grad)"/>
+                        <!-- Épaule gauche -->
+                        <path d="M28 195 Q30 158 55 148 Q75 140 90 148 L88 165 Q72 158 58 165 Q40 172 38 200 Z" fill="#1c2e4a"/>
+                        <!-- Épaule droite -->
+                        <path d="M192 195 Q190 158 165 148 Q145 140 130 148 L132 165 Q148 158 162 165 Q180 172 182 200 Z" fill="#1c2e4a"/>
+
+                        <!-- Chemise blanche / col -->
+                        <path d="M92 148 Q100 155 110 157 Q120 155 128 148 L124 170 Q118 165 110 166 Q102 165 96 170 Z" fill="url(#collar-grad)"/>
+
+                        <!-- Cravate — couleur or/kgm -->
+                        <path d="M107 157 L113 157 L116 195 L110 200 L104 195 Z" fill="#b8962e"/>
+                        <path d="M107 157 L113 157 L111 163 L109 163 Z" fill="#d4af37"/>
+
+                        <!-- Col de veste en V -->
+                        <path d="M92 148 L78 162 L96 170 L110 166" fill="none" stroke="#0d1c2e" stroke-width="1.5"/>
+                        <path d="M128 148 L142 162 L124 170 L110 166" fill="none" stroke="#0d1c2e" stroke-width="1.5"/>
+
+                        <!-- Revers veste gauche -->
+                        <path d="M78 162 L88 165 L96 170 L92 148 Z" fill="#162640"/>
+                        <!-- Revers veste droite -->
+                        <path d="M142 162 L132 165 L124 170 L128 148 Z" fill="#162640"/>
+
+                        <!-- COU -->
+                        <rect x="100" y="131" width="20" height="20" rx="4" fill="url(#skin-grad)"/>
+
+                        <!-- TÊTE -->
+                        <!-- Forme du visage — légèrement ovale africain -->
+                        <ellipse cx="110" cy="108" rx="38" ry="43" fill="url(#face-grad)"/>
+
+                        <!-- Oreilles -->
+                        <ellipse cx="72" cy="110" rx="7" ry="10" fill="#5c3018"/>
+                        <ellipse cx="148" cy="110" rx="7" ry="10" fill="#5c3018"/>
+                        <!-- Détail intérieur oreilles -->
+                        <ellipse cx="72" cy="110" rx="4" ry="6" fill="#4a2512"/>
+                        <ellipse cx="148" cy="110" rx="4" ry="6" fill="#4a2512"/>
+
+                        <!-- CHEVEUX — coupe courte, texture africaine -->
+                        <ellipse cx="110" cy="76" rx="38" ry="20" fill="#1a0e08"/>
+                        <path d="M72 100 Q70 80 80 70 Q95 62 110 65 Q125 62 140 70 Q150 80 148 100" fill="#1a0e08"/>
+                        <!-- Texture légère cheveux -->
+                        <path d="M82 72 Q88 68 95 70" stroke="#2a1810" stroke-width="1.2" fill="none"/>
+                        <path d="M118 70 Q125 68 134 72" stroke="#2a1810" stroke-width="1.2" fill="none"/>
+                        <path d="M75 88 Q78 82 84 80" stroke="#2a1810" stroke-width="1" fill="none"/>
+                        <path d="M136 80 Q142 82 145 88" stroke="#2a1810" stroke-width="1" fill="none"/>
+
+                        <!-- SOURCILS — épais et nets -->
+                        <path d="M88 94 Q98 90 106 93" stroke="#1a0e08" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                        <path d="M114 93 Q122 90 132 94" stroke="#1a0e08" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+                        <!-- YEUX -->
+                        <!-- Œil gauche -->
+                        <ellipse cx="98" cy="103" rx="9" ry="6.5" fill="white"/>
+                        <ellipse cx="98" cy="103" rx="6" ry="5.5" fill="#2c1810"/>
+                        <ellipse cx="98" cy="103" rx="4" ry="4" fill="#0d0806"/>
+                        <circle cx="100" cy="101" r="1.5" fill="white" opacity="0.9"/>
+                        <!-- Paupière gauche -->
+                        <path d="M89 100 Q98 96 107 100" stroke="#3a2015" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+                        <!-- Œil droit -->
+                        <ellipse cx="122" cy="103" rx="9" ry="6.5" fill="white"/>
+                        <ellipse cx="122" cy="103" rx="6" ry="5.5" fill="#2c1810"/>
+                        <ellipse cx="122" cy="103" rx="4" ry="4" fill="#0d0806"/>
+                        <circle cx="124" cy="101" r="1.5" fill="white" opacity="0.9"/>
+                        <!-- Paupière droite -->
+                        <path d="M113 100 Q122 96 131 100" stroke="#3a2015" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+                        <!-- NEZ -->
+                        <path d="M107 107 Q108 118 104 122 Q110 125 116 122 Q112 118 113 107" fill="#4a2512" opacity="0.7"/>
+                        <ellipse cx="104" cy="122" rx="5" ry="3.5" fill="#3e1e0e" opacity="0.8"/>
+                        <ellipse cx="116" cy="122" rx="5" ry="3.5" fill="#3e1e0e" opacity="0.8"/>
+                        <!-- Narine gauche -->
+                        <ellipse cx="103" cy="122" rx="3" ry="2" fill="#2a1008"/>
+                        <!-- Narine droite -->
+                        <ellipse cx="117" cy="122" rx="3" ry="2" fill="#2a1008"/>
+
+                        <!-- BOUCHE — expression neutre professionnelle -->
+                        <path d="M100 131 Q110 136 120 131" stroke="#3a1a08" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                        <!-- Lèvre supérieure -->
+                        <path d="M100 131 Q105 128 110 129 Q115 128 120 131" fill="#5c2e18" opacity="0.6"/>
+                        <!-- Lèvre inférieure -->
+                        <path d="M100 131 Q110 136 120 131 Q115 135 110 136 Q105 135 100 131" fill="#7a3c20" opacity="0.5"/>
+
+                        <!-- Légère ombre sous le menton -->
+                        <ellipse cx="110" cy="150" rx="20" ry="5" fill="rgba(0,0,0,0.25)"/>
+
+                        <!-- Monture lunettes optionnelle — touche intellectuelle -->
+                        <rect x="87" y="97" width="22" height="15" rx="4" fill="none" stroke="#d4af37" stroke-width="1.8" opacity="0.75"/>
+                        <rect x="111" y="97" width="22" height="15" rx="4" fill="none" stroke="#d4af37" stroke-width="1.8" opacity="0.75"/>
+                        <line x1="109" y1="103" x2="111" y2="103" stroke="#d4af37" stroke-width="1.5" opacity="0.75"/>
+                        <line x1="87" y1="103" x2="84" y2="101" stroke="#d4af37" stroke-width="1.5" opacity="0.75"/>
+                        <line x1="133" y1="103" x2="136" y2="101" stroke="#d4af37" stroke-width="1.5" opacity="0.75"/>
+                    </g>
+
+                    <!-- Bordure dorée -->
+                    <circle cx="110" cy="110" r="107" fill="none" stroke="rgba(212,175,55,0.4)" stroke-width="3"/>
+                </svg>
+            </div>
+
+            <p class="hero-quote reveal reveal-delay-3">
+                "La maîtrise du territoire pour un développement local durable."
+            </p>
+
+            <p class="hero-desc reveal reveal-delay-3">
+                L'expertise technique en <strong>Systèmes d'Information Géographique (SIG)</strong>
+                au service du développement des Collectivités Territoriales.
+            </p>
+
+            <div class="hero-cta-group reveal reveal-delay-4">
+                <a href="#ressources" class="btn-primary ripple-host">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    Consulter les Ressources
+                </a>
+                <a href="#expertise" class="btn-ghost">
+                    Découvrir l'expertise
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator" aria-hidden="true">
+            <span style="letter-spacing:0.12em;">DÉFILER</span>
+            <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="1" width="14" height="22" rx="7"/>
+                <circle cx="8" cy="7" r="2" fill="currentColor" stroke="none">
+                    <animate attributeName="cy" values="7;15;7" dur="2s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════
+         STATS — KGM EN CHIFFRES
+    ═══════════════════════════════════════ -->
+    <div class="stats-strip" aria-label="KGM en chiffres">
+        <div class="stats-strip-inner">
+            <div class="stat-block reveal">
+                <span class="stat-icon" aria-hidden="true">🗺️</span>
+                <span class="stat-number" data-target="50" data-suffix="+">0</span>
+                <span class="stat-label">Communes cartographiées</span>
+            </div>
+            <div class="stat-block reveal reveal-delay-1">
+                <span class="stat-icon" aria-hidden="true">📊</span>
+                <span class="stat-number" data-target="10" data-suffix="+">0</span>
+                <span class="stat-label">Analyses publiées</span>
+            </div>
+            <div class="stat-block reveal reveal-delay-2">
+                <span class="stat-icon" aria-hidden="true">⚖️</span>
+                <span class="stat-number" data-target="5" data-suffix="">0</span>
+                <span class="stat-label">Régions couvertes</span>
+            </div>
+            <div class="stat-block reveal reveal-delay-3">
+                <span class="stat-icon" aria-hidden="true">🏛️</span>
+                <span class="stat-number" data-target="2019" data-suffix="">0</span>
+                <span class="stat-label">Loi-cadre maîtrisée</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         EXPERTISE SECTION
+    ═══════════════════════════════════════ -->
+    <section id="expertise">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">Domaines d'Expertise</span>
+            <h2 class="section-title"><span class="title-accent">Ingénierie Géomatique</span>, Digitale &amp; Conseil Juridique</h2>
+            <p class="section-subtitle">Une approche intégrée alliant la précision de la cartographie numérique et l'expertise digitale à la rigueur du droit pour accompagner vos projets territoriaux et d'affaires.</p>
+        </div>
+
+        <div class="expertise-image-card reveal">
+            <a href="./expertise-cartographie-sig-kodomma-gnimdou.png" target="_blank" title="Voir en plein écran">
+                <img src="expertise-cartographie-sig-kodomma-gnimdou.png"
+                     alt="Expertise SIG et Cartographie - KODOMMA Gnimdou M."
+                     loading="lazy">
+            </a>
+            <div class="expertise-image-caption">
+                <strong>📊 Cliquez sur l'image</strong> pour explorer les solutions techniques
+            </div>
+        </div>
+
+        <div class="expertise-meta reveal">
+            <div class="expertise-meta-item">
+                <strong>Outils de pointe :</strong> Maîtrise avancée de QGIS et de la télédétection par satellite.
+            </div>
+            <div class="expertise-meta-item">
+                <strong>Conformité légale :</strong> Analyse rigoureuse sous l'angle des textes juridiques en vigueur.
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card reveal">
+                <div class="card-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00c472" stroke-width="1.8"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                </div>
+                <h3>Cartographie SIG</h3>
+                <p>Maîtrise du géoréférencement pour la gestion foncière, l'urbanisme et le suivi des infrastructures communales et régionales.</p>
+            </div>
+            <div class="card reveal reveal-delay-1">
+                <div class="card-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00c472" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>Gouvernance Locale</h3>
+                <p>Accompagnement dans l'application de la Loi n° 2019-006 pour une administration décentralisée efficace.</p>
+            </div>
+            <div class="card reveal reveal-delay-2">
+                <div class="card-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00c472" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                </div>
+                <h3>Services Numériques</h3>
+                <p>Optimisation des ressources propres des communes et régions via la digitalisation (Paiements mobiles, e-services).</p>
+            </div>
+            <div class="card reveal reveal-delay-3">
+                <div class="card-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00c472" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+                </div>
+                <h3>Analyse Spatiale</h3>
+                <p>Traitement de données géographiques complexes et production de cartes thématiques d'aide à la décision.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Observatoire SIG banner (conserved + upgraded) -->
+    <div class="observatoire-banner reveal" style="padding:24px 5%;">
+        <div class="observatoire-inner" style="max-width:600px;margin:0 auto;">
+            <div class="observatoire-badge" aria-hidden="true">🗺️</div>
+            <div class="observatoire-text">
+                <div class="observatoire-title">Observatoire SIG</div>
+                <div class="observatoire-sub">Infrastructures Sanitaires &amp; Territoires</div>
+            </div>
+            <a href="cartographie.html" class="observatoire-btn" aria-label="Accéder à l'Observatoire SIG">➔</a>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TECHNOLOGIES MAÎTRISÉES
+    ═══════════════════════════════════════ -->
+    <section class="technologies-section" aria-label="Technologies maîtrisées">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">Stack Technique</span>
+            <h2 class="section-title">Technologies <span class="text-gradient">Maîtrisées</span></h2>
+            <p class="section-subtitle">Un arsenal d'outils au service de la précision géospatiale et de la gouvernance numérique.</p>
+        </div>
+        <div class="tech-badges reveal">
+            <span class="tech-badge"><span class="tech-badge-dot"></span>QGIS</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>ArcGIS</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Leaflet.js</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Télédétection</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Géoréférencement</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Cartographie SIG</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>PWA / Web Apps</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Loi n°2019-006</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>PDC Communal</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Fiscalité Locale</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Open Data</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Analyse Spatiale</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>SIG Foncier</span>
+            <span class="tech-badge"><span class="tech-badge-dot"></span>Intelligence Territoriale</span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         TIMELINE D'EXPERTISE
+    ═══════════════════════════════════════ -->
+    <section class="timeline-section" aria-label="Parcours d'expertise">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">Parcours</span>
+            <h2 class="section-title">Timeline d'<span class="title-accent">Expertise</span></h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">Formation</div>
+                <div class="timeline-title">Spécialisation en SIG & Géomatique</div>
+                <div class="timeline-desc">Acquisition des fondements techniques en Systèmes d'Information Géographique, télédétection et cartographie numérique appliqués aux territoires africains.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">Expertise Juridique</div>
+                <div class="timeline-title">Maîtrise du Cadre Légal de la Décentralisation</div>
+                <div class="timeline-desc">Analyse approfondie de la Loi n°2019-006 portant organisation des collectivités territoriales au Togo et de ses implications pour la gouvernance locale.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">Déploiement</div>
+                <div class="timeline-title">Cartographie des Communes Togolaises</div>
+                <div class="timeline-desc">Travaux de géoréférencement et cartographie des ressorts territoriaux, notamment dans la région d'Agoè-Nyivé, contribuant à la délimitation administrative.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">Numérique</div>
+                <div class="timeline-title">Lancement de KGM EXPERTISE — Plateforme Digitale</div>
+                <div class="timeline-desc">Création de la plateforme numérique institutionnelle, de l'Observatoire SIG et du portail URBAN-CLEAN pour la gouvernance territoriale intelligente au Togo.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">Aujourd'hui</div>
+                <div class="timeline-title">Référence en Intelligence Territoriale</div>
+                <div class="timeline-desc">Production d'analyses stratégiques, de guides pratiques et d'outils cartographiques au service des décideurs, collectivités et partenaires techniques.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         DERNIÈRES ANALYSES
+    ═══════════════════════════════════════ -->
+    <section id="analyses" style="background: var(--navy-mid); padding: var(--section-pad);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="analyses-header reveal">
+                <div class="analyses-header-left">
+                    <h2>Dernières Analyses</h2>
+                    <div class="title-bar"></div>
+                </div>
+                <a href="./blog.html" target="_self">Toutes les analyses →</a>
+            </div>
+
+            <div class="analyses-grid">
+                <div class="analyse-card reveal">
+                    <span class="analyse-tag">Gouvernance &amp; Développement Local</span>
+                    <h3>Le marketing territorial dans les collectivités togolaises</h3>
+                    <p>Comment transformer nos collectivités locales en pôles d'attraction économiques ? Face à une fiscalité locale faible et à l'absence de marques-villes, découvrez les leviers concrets et les outils SIG pour passer d'un concept importé à une véritable stratégie de développement local au Togo.</p>
+                    <a href="./marketing-territorial-togo.html" target="_self" class="read-link">Lire l'analyse →</a>
+                </div>
+                <div class="analyse-card reveal reveal-delay-1">
+                    <span class="analyse-tag">Environnement</span>
+                    <h3>Vers la Ville Durable Togolaise : Un Impératif de Résilience</h3>
+                    <p>Planifier la transition écologique locale grâce à la Trame Verte et Bleue et l'optimisation des flux urbains.</p>
+                    <a href="./villes-durables-togo.html" target="_self" class="read-link">Lire l'analyse →</a>
+                </div>
+                <div class="analyse-card reveal reveal-delay-2">
+                    <span class="analyse-tag red">Risques &amp; SIG</span>
+                    <h3>Inondations à Lomé : Sortir de la Fatalité par le SIG</h3>
+                    <p>Comment la modélisation numérique du terrain peut transformer la gestion des risques à Bè Ahligo et Léo 2000.</p>
+                    <a href="./gestion-inondations-lome.html" target="_self" class="read-link">Lire l'analyse →</a>
+                </div>
+                <div class="analyse-card reveal">
+                    <span class="analyse-tag blue">Gouvernance &amp; Droit</span>
+                    <h3>La Maîtrise d'Ouvrage Communale : Défi de l'Efficacité Publique</h3>
+                    <p>Analyse de la loi n°2019-006 et du rôle de l'assistance technique pour sécuriser les investissements locaux au Togo.</p>
+                    <a href="./maitrise-ouvrage-communale.html" target="_self" class="read-link">Lire l'analyse →</a>
+                </div>
+                <div class="analyse-card reveal reveal-delay-1">
+                    <span class="analyse-tag blue">Gouvernance &amp; SIG</span>
+                    <h3>L'Inventaire Numérique du Patrimoine Communal</h3>
+                    <p>Analyse sur la sécurisation du domaine public au Togo et l'importance du SIG pour booster les recettes non fiscales.</p>
+                    <a href="./gestion-patrimoine-communal-sig-togo.html" target="_self" class="read-link">Lire l'analyse →</a>
+                </div>
+                <div class="analyse-card reveal reveal-delay-2">
+                    <span class="analyse-tag gold">Droit &amp; Territoire</span>
+                    <h3>Délimitation territoriale des communes</h3>
+                    <p>Analyse des enjeux juridiques et techniques de la définition des ressorts territoriaux au Togo.</p>
+                    <a href="./delimitation-territoriale-togo.html" target="_self" class="read-link">Lire l'article →</a>
+                </div>
+                <div class="analyse-card reveal">
+                    <span class="analyse-tag">Environnement</span>
+                    <h3>Gestion des déchets à Agoè-Nyivé 1</h3>
+                    <p>Analyse des failles budgétaires et techniques de la gestion des déchets ménagers.</p>
+                    <a href="./article-gestion-dechets-agoe.html" target="_self" class="read-link">Lire l'article →</a>
+                </div>
+                <div class="analyse-card reveal reveal-delay-1">
+                    <span class="analyse-tag">Analyse</span>
+                    <h3>L'impact des SIG dans la gestion territoriale</h3>
+                    <p>Comment l'outil cartographique révolutionne la levée de l'impôt foncier et la planification urbaine au Togo...</p>
+                    <a href="./article-sig-gestion.html" target="_self" class="read-link">Lire l'article →</a>
+                </div>
+                <div class="analyse-card reveal reveal-delay-2">
+                    <span class="analyse-tag gold">Guide</span>
+                    <h3>Réussir son PDC (Plan de Développement Communal)</h3>
+                    <p>Les 5 étapes clés pour une planification stratégique efficace au service des citoyens.</p>
+                    <a href="./article-pdc-communal.html" target="_self" class="read-link">Lire le guide →</a>
+                </div>
+                <div class="analyse-card reveal">
+                    <span class="analyse-tag gold">Juridique</span>
+                    <h3>L'impact de la Loi N°2019-006 sur la gouvernance locale</h3>
+                    <p>Analyse du cadre législatif et des défis de l'autonomie financière locale.</p>
+                    <a href="./article-loi-2019.html" target="_self" class="read-link">Lire l'analyse →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         RESSOURCES
+    ═══════════════════════════════════════ -->
+    <section id="ressources">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">Documentation</span>
+            <h2 class="section-title">Ressources de <span class="title-accent">Référence</span></h2>
+        </div>
+
+        <div class="grid" style="margin-bottom:16px;">
+            <div class="res-item reveal" style="border-left-color: var(--cobalt); flex-direction: column; align-items: flex-start; gap: 14px; max-width: 100%;">
+                <div style="flex-grow:1;">
+                    <span class="res-tag" style="background:rgba(11,61,145,0.15); color:#64b5f6; border:1px solid rgba(11,61,145,0.3);">DOCUMENT OFFICIEL</span>
+                    <h4>Loi sur la Décentralisation (Togo)</h4>
+                    <p>Loi n° 2019-006 - Cadre juridique officiel régissant les collectivités territoriales.</p>
+                </div>
+                <a href="./loi-decentralisation.pdf" target="_self" class="download">Consulter</a>
+            </div>
+
+            <div class="res-item reveal reveal-delay-1" style="border-left-color: var(--gold); flex-direction: column; align-items: flex-start; gap: 14px; max-width: 100%; background: rgba(212,175,55,0.04);">
+                <div style="flex-grow:1;">
+                    <span class="res-tag" style="background:rgba(212,175,55,0.12); color:var(--gold); border:1px solid rgba(212,175,55,0.25);">EXPERTISE SIG</span>
+                    <h4>Guide du Géoréférencement v1.0</h4>
+                    <p>Manuel complet pour techniciens SIG (Format PDF).</p>
+                    <p style="color:var(--gold-light); font-weight:bold; font-size:1rem; margin-top:8px;">Prix : 1 000 FCFA</p>
+                </div>
+                <a href="https://wa.me/22893019105?text=Bonjour%20M.%20KODOMMA,%20je%20souhaite%20acheter%20votre%20Guide%20du%20Géoréférencement"
+                   target="_blank"
+                   style="background: linear-gradient(135deg, var(--teal), #005c3a); color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-family: var(--font-ui); font-weight: bold; font-size: 0.85rem; transition: all 0.3s;">
+                    Commander via WhatsApp
+                </a>
+            </div>
+
+            <div class="res-item reveal reveal-delay-2" style="border-left-color: #e91e63; flex-direction: column; align-items: flex-start; gap: 14px; max-width: 100%;">
+                <div style="width:100%; flex-grow:1;">
+                    <span class="res-tag" style="background:rgba(233,30,99,0.1); color:#f48fb1; border:1px solid rgba(233,30,99,0.25);">PLATEFORME DIGITALE</span>
+                    <h4>Accès à l'Application</h4>
+                    <p>Interface de gestion et de consultation des données territoriales (PWA).</p>
+                    <div class="pwa-note">
+                        <strong>Note :</strong> L'App est déjà active. Appuyez pour l'installer sur votre écran d'accueil (Mobile/PC) ou essayer l'Installation manuelle : Appuyez sur les 3 points d'accès au menu (⋮) en haut ou en bas à droite de votre navigateur. Cherchez et sélectionnez 'Ajouter à l'écran d'accueil' ou 'Installer l'application'. C'est la méthode la plus rapide si le bouton automatique est bloqué par le système.
+                    </div>
+                </div>
+                <button id="installApp" onclick="triggerInstall()"
+                    style="display:none; color:var(--teal-bright); font-weight:bold; border:1px solid rgba(0,196,114,0.4); background:rgba(0,135,90,0.08); padding:10px 20px; border-radius:8px; cursor:pointer; font-family:var(--font-ui); font-size:0.9rem; margin-top:8px; transition:all 0.3s;">
+                    Installer l'Application 📲
+                </button>
+            </div>
+
+            <div class="res-item reveal" style="border-left-color: #4caf50; flex-direction: column; align-items: flex-start; gap: 14px; max-width: 100%; background: rgba(76,175,80,0.04);">
+                <div style="flex-grow:1;">
+                    <span class="res-tag" style="background:rgba(76,175,80,0.12); color:#81c784; border:1px solid rgba(76,175,80,0.25);">ACTION CITOYENNE</span>
+                    <h4>Portail URBAN-CLEAN | KGM Expertise</h4>
+                    <p>Signalez l'insalubrité dans votre commune pour un environnement propre et sain.</p>
+                </div>
+                <a href="Urban-Clean-SIG.html" class="download" style="background: rgba(46,125,50,0.15); border-color: rgba(76,175,80,0.4); color: #81c784; text-align: center;">Accéder au Portail 🚨</a>
+            </div>
+        </div>
+
+        <div class="reveal" style="margin-top:30px; padding:24px; background:var(--navy-card); border-radius:12px; text-align:center; border:1px solid rgba(255,255,255,0.06);">
+            <p style="font-size:0.95rem; color:var(--light);">
+                💬 <strong style="color:var(--lightest);">Besoin d'une assistance personnalisée ?</strong><br>
+                <a href="https://wa.me/22893019105" target="_blank" class="contact-link" style="color:var(--teal-bright); font-size:1.05rem; font-weight:600;">
+                    Démarrer une discussion sur WhatsApp
+                </a>
+            </p>
+        </div>
+    </section>
+
+<!-- ═══════════════════════════════════════
+         CONTACT
+    ═══════════════════════════════════════ -->
+    <section id="contact">
+        <div class="section-header reveal">
+            <span class="section-eyebrow">Collaboration</span>
+            <h2 class="section-title">Collaborons <span class="title-accent">ensemble</span></h2>
+            <p class="section-subtitle">
+                Besoin d'un accompagnement pour la cartographie de votre ressort territorial, la réalisation d'un PDC, une expertise en gestion locale ou une étude de marché et d'impact ?
+            </p>
+        </div>
+        <div class="contact-grid reveal">
+            <a href="https://wa.me/22893019105" target="_blank"
+               style="background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 16px 36px; text-decoration: none; border-radius: 50px; font-family: var(--font-ui); font-weight: bold; display: inline-flex; align-items: center; gap: 12px; transition: all 0.3s; box-shadow: 0 8px 24px rgba(37,211,102,0.25);"
+               onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 14px 36px rgba(37,211,102,0.4)';"
+               onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 24px rgba(37,211,102,0.25)';">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:22px;height:22px;filter:brightness(0) invert(1);">
+                <span>Discuter sur WhatsApp</span>
+            </a>
+            <a href="mailto:kgmexpertise@gmail.com"
+               style="background: linear-gradient(135deg, var(--cobalt), #0d52b8); color: white; padding: 16px 36px; text-decoration: none; border-radius: 50px; font-family: var(--font-ui); font-weight: bold; display: inline-flex; align-items: center; gap: 12px; transition: all 0.3s; box-shadow: 0 8px 24px rgba(11,61,145,0.3);"
+               onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 14px 36px rgba(11,61,145,0.5)';"
+               onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 24px rgba(11,61,145,0.3)';">
+                <img src="https://www.gstatic.com/images/icons/material/system/2x/mail_white_24dp.png" alt="Mail" style="width:22px;height:22px;">
+                <span>Envoyer un Mail</span>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════
+     FOOTER PREMIUM INSTITUTIONNEL
+═══════════════════════════════════════ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="footer-logo">
+                <div class="logo-icon" aria-hidden="true" style="width:32px;height:32px;font-size:0.9rem;">🏛️</div>
+                KODOMMA Gnimdou M.
+            </div>
+            <p>Spécialiste SIG et gestionnaire des collectivités locales | Consultant en Gouvernance Territoriale et développement local au Togo.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="#expertise">Expertise SIG</a></li>
+                <li><a href="./blog.html">Analyses</a></li>
+                <li><a href="#ressources">Ressources</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="cartographie.html">Observatoire SIG</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Domaines</h4>
+            <ul>
+                <li><a href="#expertise">Cartographie & SIG</a></li>
+                <li><a href="#expertise">Gouvernance Locale</a></li>
+                <li><a href="#expertise">Services Numériques</a></li>
+                <li><a href="Urban-Clean-SIG.html">URBAN-CLEAN</a></li>
+                <li><a href="mailto:kgmexpertise@gmail.com">kgmexpertise@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; KGM - KODOMMA Gnimdou M. 2026 - Togo. Tous droits réservés.</p>
+        <p style="font-size:0.7rem; opacity:0.4;">Solutions géospatiales et gouvernance territoriale</p>
+    </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     BOTTOM NAV MOBILE
+═══════════════════════════════════════ -->
+<nav class="bottom-nav" aria-label="Navigation rapide mobile">
+    <div class="bottom-nav-inner">
+        <a href="#accueil" class="bottom-nav-item active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            Accueil
+        </a>
+        <a href="#expertise" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Expertise
+        </a>
+        <a href="./blog.html" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Analyses
+        </a>
+        <a href="#ressources" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Ressources
+        </a>
+        <a href="#contact" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Contact
+        </a>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+/* ══════════════════════════════════════
+   HERO CANVAS — Geospatial Animation
+══════════════════════════════════════ */
+(function initHeroCanvas() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], lines = [];
+    const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light' &&
+                         !window.matchMedia('(prefers-color-scheme: light)').matches ||
+                         document.documentElement.getAttribute('data-theme') === 'dark';
+
+    function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+
+    // Particles (coordinate nodes)
+    for (let i = 0; i < 60; i++) {
+        particles.push({
+            x: Math.random(),
+            y: Math.random(),
+            vx: (Math.random() - 0.5) * 0.0003,
+            vy: (Math.random() - 0.5) * 0.0003,
+            r: Math.random() * 2 + 1,
+            pulse: Math.random() * Math.PI * 2
+        });
+    }
+
+    function drawFrame() {
+        ctx.clearRect(0, 0, W, H);
+
+        const dark = isDark();
+        const nodeColor = dark ? 'rgba(212,175,55,' : 'rgba(11,61,145,';
+        const lineColor = dark ? 'rgba(0,135,90,' : 'rgba(0,135,90,';
+
+        particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy;
+            p.pulse += 0.02;
+            if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
+            if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0;
+        });
+
+        // Draw lines between nearby particles
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = (particles[i].x - particles[j].x) * W;
+                const dy = (particles[i].y - particles[j].y) * H;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 160) {
+                    const alpha = (1 - dist/160) * 0.3;
+                    ctx.beginPath();
+                    ctx.strokeStyle = `${lineColor}${alpha})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.moveTo(particles[i].x * W, particles[i].y * H);
+                    ctx.lineTo(particles[j].x * W, particles[j].y * H);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Draw nodes
+        particles.forEach(p => {
+            const pulse = (Math.sin(p.pulse) + 1) * 0.5;
+            ctx.beginPath();
+            ctx.arc(p.x * W, p.y * H, p.r * (0.8 + pulse * 0.4), 0, Math.PI * 2);
+            ctx.fillStyle = `${nodeColor}${0.4 + pulse * 0.3})`;
+            ctx.fill();
+        });
+
+        // Longitude/latitude grid lines
+        ctx.setLineDash([3, 12]);
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = dark ? 'rgba(204,214,246,0.07)' : 'rgba(26,58,95,0.06)';
+        for (let x = 0; x <= W; x += W/8) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+        }
+        for (let y = 0; y <= H; y += H/6) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        }
+        ctx.setLineDash([]);
+
+        requestAnimationFrame(drawFrame);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    // Reduce motion check
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        requestAnimationFrame(drawFrame);
+    }
+})();
+
+/* ══════════════════════════════════════
+   INTERSECTION OBSERVER — Reveal
+══════════════════════════════════════ */
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            revealObserver.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal, .timeline-item').forEach(el => revealObserver.observe(el));
+
+/* ══════════════════════════════════════
+   ANIMATED COUNTERS
+══════════════════════════════════════ */
+function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 1800;
+    const start = performance.now();
+
+    function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            animateCounter(e.target);
+            counterObserver.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number[data-target]').forEach(el => counterObserver.observe(el));
+
+/* ══════════════════════════════════════
+   NAVBAR — scroll effect
+══════════════════════════════════════ */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* ══════════════════════════════════════
+   HAMBURGER / MOBILE MENU
+══════════════════════════════════════ */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', mobileMenu.classList.contains('open'));
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+
+function closeMobileMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+}
+
+mobileMenuClose.addEventListener('click', closeMobileMenu);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
+
+/* ══════════════════════════════════════
+   DARK/LIGHT THEME TOGGLE
+══════════════════════════════════════ */
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+let currentTheme = localStorage.getItem('kgm-theme') ||
+                   (prefersDark.matches ? 'dark' : 'light');
+
+function applyTheme(theme) {
+    htmlEl.setAttribute('data-theme', theme);
+    themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('kgm-theme', theme);
+    currentTheme = theme;
+}
+applyTheme(currentTheme);
+
+themeToggle.addEventListener('click', () => {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+});
+
+/* ══════════════════════════════════════
+   RIPPLE EFFECT
+══════════════════════════════════════ */
+document.querySelectorAll('.ripple-host').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        const r = document.createElement('span');
+        r.className = 'ripple';
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        r.style.width = r.style.height = size + 'px';
+        r.style.left = (e.clientX - rect.left - size/2) + 'px';
+        r.style.top  = (e.clientY - rect.top  - size/2) + 'px';
+        btn.appendChild(r);
+        setTimeout(() => r.remove(), 700);
+    });
+});
+
+/* ══════════════════════════════════════
+   BOTTOM NAV — active section tracking
+══════════════════════════════════════ */
+const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+const sections = ['accueil','expertise','analyses','ressources','contact'];
+
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            const id = e.target.id || e.target.closest('section')?.id;
+            bottomNavItems.forEach(item => {
+                const href = item.getAttribute('href');
+                item.classList.toggle('active', href === '#' + id);
+            });
+        }
+    });
+}, { threshold: 0.4 });
+
+sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) sectionObserver.observe(el);
+});
+
+
+
+/* ══════════════════════════════════════
+   SERVICE WORKER
+══════════════════════════════════════ */
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js?v=4')
+            .then(() => console.log('KGM App installée !'))
+            .catch(err => console.log('Erreur SW', err));
+    });
+}
+
+var deferredPrompt;
+var btnInstall = document.getElementById('installApp');
+
+window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (btnInstall) btnInstall.style.display = 'inline-block';
+});
+
+function triggerInstall() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+    } else {
+        alert("Cliquez sur le menu (⋮) puis sur 'Installer' ou 'Ajouter à l'écran d'accueil'.");
+    }
+}
+
+/* Analyses — show first 3 only on page load */
+const articles = document.querySelectorAll('.analyse-card');
+articles.forEach(function(article, index) {
+    if (index >= 3) {
+        article.style.display = 'none';
+    }
+});
+</script>
+
+</body>
+</html>
