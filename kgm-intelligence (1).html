@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGM Intelligence | Centre d'Analyse Territoriale — Togo</title>
+    <link rel="canonical" href="https://mirabilia-bot.github.io/blog.html" />
+    <meta name="description" content="Centre d'intelligence territoriale de référence sur la gouvernance locale au Togo. Analyses SIG, géomatique, décentralisation, droit des collectivités et développement durable. Par KODOMMA Gnimdou M.">
+    <meta name="keywords" content="Analyses décentralisation Togo, SIG et territoire, KODOMMA Gnimdou M., gouvernance locale, ressources collectivités territoriales, ressources financières des communes au Togo, cartographie Togo, gestion communale, PDC, planification locale au Togo, intelligence territoriale, géomatique Togo">
+    <meta name="author" content="KODOMMA Gnimdou M.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <meta property="og:title" content="KGM Intelligence | Centre d'Analyse Territoriale — Togo">
+    <meta property="og:description" content="Expertise technique et juridique de référence pour le développement des collectivités territoriales au Togo. SIG, géomatique, gouvernance, décentralisation.">
+    <meta property="og:type" content="blog">
+    <meta property="og:url" content="https://mirabilia-bot.github.io/blog.html">
+    <meta property="og:image" content="https://mirabilia-bot.github.io/header-expert.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="KGM EXPERTISE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KGM Intelligence | Centre d'Analyse Territoriale — Togo">
+    <meta name="twitter:description" content="Expertise technique et juridique pour les collectivités territoriales du Togo.">
+    <meta name="twitter:image" content="https://mirabilia-bot.github.io/header-expert.png">
+
+    <link rel="icon" type="image/png" href="icon.png?v=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#061828">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Blog",
+          "name": "KGM Intelligence — Centre d'Analyse Territoriale",
+          "description": "Analyses juridiques et techniques sur la décentralisation et le développement territorial au Togo.",
+          "url": "https://mirabilia-bot.github.io/blog.html",
+          "image": "https://mirabilia-bot.github.io/header-expert.png",
+          "inLanguage": "fr-FR",
+          "publisher": {
+            "@type": "Person",
+            "@id": "https://mirabilia-bot.github.io/#kodomma",
+            "name": "KODOMMA Gnimdou M.",
+            "jobTitle": "Spécialiste SIG & Consultant en Gouvernance Territoriale",
+            "address": { "@type": "PostalAddress", "addressLocality": "Lomé", "addressCountry": "TG" }
+          }
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://mirabilia-bot.github.io/",
+          "name": "KGM Expertise",
+          "potentialAction": { "@type": "SearchAction", "target": "https://mirabilia-bot.github.io/blog.html?q={search_term_string}", "query-input": "required name=search_term_string" }
+        }
+      ]
+    }
+    </script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('sw.js?v=4');
+        });
+      }
+    </script>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   KGM INTELLIGENCE — DESIGN SYSTEM
+   Palette: Deep Navy · Signal Green · Gold · Slate · Obsidian
+   Typography: Space Grotesk (display) · Crimson Pro (editorial) · Inter (ui)
+   Signature: Animated SVG territorial grid + glassmorphic intelligence cards
+═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* CORE PALETTE */
+  --navy-950: #030f1a;
+  --navy-900: #061828;
+  --navy-800: #0a2540;
+  --navy-700: #0d3158;
+  --navy-600: #104070;
+  --navy-500: #1a5490;
+  --navy-400: #2470b8;
+
+  --green-900: #003d1f;
+  --green-800: #005c2e;
+  --green-700: #007540;
+  --green-600: #009150;
+  --green-500: #00a85e;
+  --green-400: #00c26e;
+  --green-300: #00de80;
+
+  --gold-600: #a07a00;
+  --gold-500: #c4980a;
+  --gold-400: #d4af37;
+  --gold-300: #e8cc70;
+  --gold-200: #f4e4a6;
+
+  --slate-100: #f0f4f8;
+  --slate-200: #e2eaf2;
+  --slate-300: #c8d8e8;
+  --slate-400: #94aec4;
+  --slate-500: #607d8b;
+  --slate-600: #445566;
+  --slate-700: #2c3a48;
+  --slate-800: #1a2530;
+  --slate-900: #0d1520;
+
+  /* SEMANTIC TOKENS */
+  --primary: var(--navy-800);
+  --secondary: var(--green-700);
+  --accent: var(--gold-400);
+  --surface: #ffffff;
+  --surface-alt: var(--slate-100);
+  --text-primary: var(--slate-800);
+  --text-secondary: var(--slate-600);
+  --text-muted: var(--slate-400);
+  --border: var(--slate-200);
+
+  /* GLASS */
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.12);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.25);
+
+  /* ELEVATIONS */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-xl: 0 24px 64px rgba(0,0,0,0.16), 0 8px 24px rgba(0,0,0,0.08);
+
+  /* RADIUS */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 32px;
+  --r-full: 9999px;
+
+  /* MOTION */
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 480ms;
+  --dur-xslow: 800ms;
+
+  /* NAV HEIGHT */
+  --nav-h: 72px;
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  --surface: var(--navy-900);
+  --surface-alt: var(--navy-800);
+  --text-primary: #e8f0f8;
+  --text-secondary: var(--slate-300);
+  --text-muted: var(--slate-400);
+  --border: rgba(255,255,255,0.08);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.5);
+  --shadow-xl: 0 24px 64px rgba(0,0,0,0.6);
+  --glass-bg: rgba(10,37,64,0.5);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-primary);
+  background: var(--surface);
+  line-height: 1.7;
+  padding-top: var(--nav-h);
+  transition: background var(--dur-slow) var(--ease-smooth), color var(--dur-slow) var(--ease-smooth);
+  overflow-x: hidden;
+}
+main { flex: 1; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+
+/* ─── SKIP LINK ─── */
+.skip-link {
+  position: absolute; top: -100px; left: 10px; z-index: 9999;
+  background: var(--secondary); color: white; padding: 8px 16px;
+  border-radius: var(--r-sm); text-decoration: none; font-weight: 600;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 10px; }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--navy-500); border-radius: 3px; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--navy-500); }
+
+/* ─── SELECTION ─── */
+::selection { background: rgba(0,165,94,0.2); color: var(--green-900); }
+[data-theme="dark"] ::selection { background: rgba(0,165,94,0.3); color: var(--green-300); }
+
+/* ════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
+  height: var(--nav-h);
+  background: rgba(6,24,40,0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center;
+  padding: 0 5%;
+  transition: all var(--dur-base) var(--ease-smooth);
+}
+.nav.scrolled {
+  background: rgba(3,15,26,0.97);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+.nav-inner {
+  width: 100%; max-width: 1300px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; flex-shrink: 0;
+}
+.logo-mark {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--green-600), var(--navy-500));
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 800; color: white;
+  letter-spacing: -0.5px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,166,82,0.25);
+  position: relative; overflow: hidden;
+  flex-shrink: 0;
+}
+.logo-mark::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+}
+.logo-text { color: white; line-height: 1.2; }
+.logo-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: -0.3px; }
+.logo-subtitle { font-size: 0.65rem; color: var(--gold-300); font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.9; }
+
+.nav-links {
+  display: flex; align-items: center; gap: 4px;
+  list-style: none;
+}
+.nav-links a {
+  display: block; padding: 7px 14px; border-radius: var(--r-sm);
+  text-decoration: none; color: rgba(255,255,255,0.72); font-size: 0.875rem; font-weight: 500;
+  transition: all var(--dur-fast) var(--ease-smooth);
+  white-space: nowrap;
+}
+.nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+.nav-links a[aria-current="page"] {
+  color: white; background: rgba(0,165,94,0.18);
+  border: 1px solid rgba(0,165,94,0.25);
+}
+
+.nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+/* Dark mode toggle */
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: var(--r-sm);
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: rgba(255,255,255,0.7); transition: all var(--dur-fast);
+  flex-shrink: 0;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.12); color: white; }
+
+/* Search trigger */
+.nav-search-btn {
+  height: 36px; padding: 0 14px; border-radius: var(--r-sm);
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.55); font-size: 0.8rem; font-family: 'Inter', sans-serif;
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+  white-space: nowrap; transition: all var(--dur-fast);
+  min-width: 160px;
+}
+.nav-search-btn:hover { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); }
+.nav-search-btn kbd {
+  margin-left: auto; font-size: 0.7rem; color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.07); padding: 2px 6px; border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 8px;
+  width: 40px; height: 40px; align-items: center; justify-content: center;
+  border-radius: var(--r-sm);
+}
+.hamburger span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: all var(--dur-base); }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ════════════════════════════════════════
+   SEARCH OVERLAY
+════════════════════════════════════════ */
+.search-overlay {
+  position: fixed; inset: 0; z-index: 5000;
+  background: rgba(3,15,26,0.92); backdrop-filter: blur(24px);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 12vh;
+  opacity: 0; pointer-events: none; transition: opacity var(--dur-base) var(--ease-smooth);
+}
+.search-overlay.active { opacity: 1; pointer-events: all; }
+.search-box {
+  width: 100%; max-width: 680px; padding: 0 20px;
+}
+.search-input-wrap {
+  position: relative; margin-bottom: 20px;
+}
+.search-input-wrap svg {
+  position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+  color: var(--slate-400); pointer-events: none;
+}
+#search-input {
+  width: 100%; padding: 18px 20px 18px 56px;
+  font-size: 1.2rem; font-family: 'Inter', sans-serif;
+  background: var(--navy-800); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--r-lg); color: white; outline: none;
+  transition: border-color var(--dur-fast);
+}
+#search-input::placeholder { color: var(--slate-500); }
+#search-input:focus { border-color: var(--green-500); }
+.search-close {
+  position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.07); border: none; color: var(--slate-400);
+  padding: 6px 10px; border-radius: var(--r-sm); cursor: pointer; font-size: 0.8rem;
+  transition: all var(--dur-fast);
+}
+.search-close:hover { background: rgba(255,255,255,0.14); color: white; }
+#search-results {
+  display: flex; flex-direction: column; gap: 8px; max-height: 50vh; overflow-y: auto;
+  padding-right: 4px;
+}
+.search-result-item {
+  display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--r-md); text-decoration: none; color: white;
+  transition: all var(--dur-fast); cursor: pointer;
+}
+.search-result-item:hover { background: rgba(0,165,94,0.1); border-color: rgba(0,165,94,0.2); }
+.search-result-icon { font-size: 1.3rem; flex-shrink: 0; }
+.search-result-title { font-weight: 500; font-size: 0.95rem; margin-bottom: 2px; }
+.search-result-meta { font-size: 0.78rem; color: var(--slate-400); }
+.search-no-results { text-align: center; padding: 30px; color: var(--slate-400); }
+.search-hint { text-align: center; margin-top: 16px; font-size: 0.8rem; color: var(--slate-500); }
+
+/* ════════════════════════════════════════
+   HERO — IMMERSIVE INTELLIGENCE COMMAND
+════════════════════════════════════════ */
+.hero {
+  position: relative; min-height: 92vh;
+  background: var(--navy-950);
+  display: flex; align-items: center; overflow: hidden;
+}
+
+/* Animated grid background */
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,165,94,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,165,94,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* Orbiting light blobs */
+.hero-orb {
+  position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
+  filter: blur(80px); opacity: 0.18;
+  animation: orbFloat 12s ease-in-out infinite;
+}
+.hero-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--navy-500), transparent);
+  top: -200px; left: -100px; animation-delay: 0s;
+}
+.hero-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, var(--green-700), transparent);
+  bottom: -100px; right: 5%; animation-delay: -4s; opacity: 0.14;
+}
+.hero-orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #1a5490, transparent);
+  top: 30%; right: 15%; animation-delay: -8s; opacity: 0.1;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  33% { transform: translateY(-30px) scale(1.05); }
+  66% { transform: translateY(20px) scale(0.97); }
+}
+
+/* Topo lines */
+.hero-topo {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M200 50 C280 50 350 120 350 200 C350 280 280 350 200 350 C120 350 50 280 50 200 C50 120 120 50 200 50Z' fill='none' stroke='%2300a85e' stroke-width='1'/%3E%3Cpath d='M200 80 C265 80 320 135 320 200 C320 265 265 320 200 320 C135 320 80 265 80 200 C80 135 135 80 200 80Z' fill='none' stroke='%2300a85e' stroke-width='1'/%3E%3Cpath d='M200 110 C250 110 290 150 290 200 C290 250 250 290 200 290 C150 290 110 250 110 200 C110 150 150 110 200 110Z' fill='none' stroke='%2300a85e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+.hero-content {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 1300px; margin: 0 auto;
+  padding: 80px 5%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.hero-left { max-width: 600px; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,165,94,0.12); border: 1px solid rgba(0,165,94,0.25);
+  color: var(--green-400); padding: 6px 14px; border-radius: var(--r-full);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s var(--ease-out) 0.1s both;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green-400);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700; line-height: 1.1;
+  color: white; letter-spacing: -1.5px;
+  margin-bottom: 8px;
+  animation: fadeInUp 0.8s var(--ease-out) 0.2s both;
+}
+.hero-title-accent {
+  background: linear-gradient(135deg, var(--green-400), var(--gold-400));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: rgba(255,255,255,0.55); font-style: italic;
+  margin-bottom: 24px; line-height: 1.5;
+  animation: fadeInUp 0.8s var(--ease-out) 0.3s both;
+}
+.hero-desc {
+  font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.75;
+  margin-bottom: 36px;
+  animation: fadeInUp 0.8s var(--ease-out) 0.4s both;
+}
+.hero-actions {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  animation: fadeInUp 0.8s var(--ease-out) 0.5s both;
+}
+
+/* Hero stats panel */
+.hero-stats-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  animation: fadeInRight 0.9s var(--ease-out) 0.3s both;
+}
+.stat-card {
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg); padding: 20px 24px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  position: relative; overflow: hidden;
+  transition: transform var(--dur-base) var(--ease-spring), border-color var(--dur-base);
+}
+.stat-card:hover { transform: translateX(-4px); border-color: rgba(0,165,94,0.3); }
+.stat-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,165,94,0.05), transparent);
+}
+.stat-card-inner { position: relative; display: flex; align-items: center; gap: 16px; }
+.stat-icon {
+  width: 44px; height: 44px; border-radius: var(--r-md); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  background: rgba(0,165,94,0.12); border: 1px solid rgba(0,165,94,0.2);
+}
+.stat-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem; font-weight: 700; color: white; line-height: 1;
+  letter-spacing: -1px;
+}
+.stat-value span { font-size: 1.1rem; color: var(--green-400); }
+.stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-trend {
+  margin-left: auto; font-size: 0.72rem; font-weight: 600;
+  color: var(--green-400); background: rgba(0,165,94,0.1);
+  padding: 3px 8px; border-radius: var(--r-full);
+}
+
+/* Decorative map pin scatter */
+.hero-map-decor {
+  position: absolute; bottom: 0; right: 0; width: 50%; height: 100%;
+  opacity: 0.06; pointer-events: none; z-index: 0;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ════════════════════════════════════════
+   BUTTONS
+════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: var(--r-md);
+  font-size: 0.9rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer;
+  transition: all var(--dur-base) var(--ease-spring);
+  font-family: 'Inter', sans-serif; letter-spacing: 0.2px;
+  white-space: nowrap; position: relative; overflow: hidden;
+}
+.btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0); transition: background var(--dur-fast);
+}
+.btn:hover::after { background: rgba(255,255,255,0.07); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-600), var(--green-700));
+  color: white;
+  box-shadow: 0 4px 16px rgba(0,117,64,0.35), 0 1px 3px rgba(0,0,0,0.2);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,117,64,0.45), 0 2px 6px rgba(0,0,0,0.2); }
+.btn-outline {
+  background: transparent; color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.35); color: white; transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent; color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { background: var(--surface-alt); color: var(--text-primary); }
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
+  color: white;
+  box-shadow: 0 4px 16px rgba(196,152,10,0.3);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,152,10,0.4); }
+.btn-sm { padding: 8px 16px; font-size: 0.82rem; }
+.btn-lg { padding: 16px 32px; font-size: 1rem; }
+.btn-icon { width: 40px; height: 40px; padding: 0; justify-content: center; border-radius: var(--r-sm); }
+
+/* ════════════════════════════════════════
+   SECTION LAYOUT
+════════════════════════════════════════ */
+.section { padding: 96px 5%; }
+.section-inner { max-width: 1300px; margin: 0 auto; }
+.section-header { margin-bottom: 56px; }
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--green-600); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+}
+[data-theme="dark"] .section-eyebrow { color: var(--green-400); }
+.section-eyebrow-line { display: block; width: 24px; height: 2px; background: var(--green-600); border-radius: 2px; }
+[data-theme="dark"] .section-eyebrow-line { background: var(--green-400); }
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700; line-height: 1.15; letter-spacing: -0.8px;
+  color: var(--text-primary); margin-bottom: 16px;
+}
+.section-desc {
+  font-size: 1rem; color: var(--text-secondary); max-width: 580px; line-height: 1.75;
+}
+.section-header.centered { text-align: center; }
+.section-header.centered .section-desc { margin: 0 auto; }
+.section-header.centered .section-eyebrow { justify-content: center; }
+
+/* ════════════════════════════════════════
+   FILTER BAR
+════════════════════════════════════════ */
+.filter-bar {
+  position: sticky; top: var(--nav-h); z-index: 100;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+[data-theme="dark"] .filter-bar {
+  background: rgba(6,24,40,0.95);
+}
+.filter-bar-inner {
+  max-width: 1300px; margin: 0 auto; padding: 0 5%;
+  display: flex; align-items: center; gap: 10px;
+  overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
+  padding-top: 14px; padding-bottom: 14px;
+}
+.filter-bar-inner::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; border-radius: var(--r-full);
+  font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap;
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: all var(--dur-fast) var(--ease-smooth);
+  flex-shrink: 0;
+}
+.filter-btn:hover { color: var(--text-primary); border-color: var(--green-600); background: rgba(0,117,64,0.05); }
+.filter-btn.active {
+  background: var(--navy-800); color: white; border-color: var(--navy-800);
+}
+[data-theme="dark"] .filter-btn.active { background: var(--green-700); border-color: var(--green-700); }
+.filter-count-badge {
+  font-size: 0.7rem; background: rgba(0,0,0,0.1); color: inherit;
+  padding: 1px 6px; border-radius: var(--r-full);
+  display: inline-block;
+}
+.filter-btn.active .filter-count-badge { background: rgba(255,255,255,0.2); }
+
+.filter-result-count {
+  margin-left: auto; font-size: 0.78rem; color: var(--text-muted);
+  white-space: nowrap; flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════
+   FEATURED ANALYSIS (ANALYSE VEDETTE)
+════════════════════════════════════════ */
+.featured-section {
+  background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-800) 100%);
+  padding: 80px 5%; position: relative; overflow: hidden;
+}
+.featured-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, transparent, var(--green-600), transparent);
+}
+.featured-section::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+}
+.featured-inner { max-width: 1300px; margin: 0 auto; }
+.featured-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.featured-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.25);
+  color: var(--gold-300); padding: 5px 12px; border-radius: var(--r-full);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.featured-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; line-height: 1.2;
+  color: white; margin-bottom: 16px;
+}
+.featured-excerpt { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 28px; font-size: 0.95rem; }
+.featured-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+.featured-meta-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+.featured-visual {
+  position: relative; background: var(--glass-bg);
+  border: 1px solid var(--glass-border); border-radius: var(--r-xl);
+  padding: 28px; display: flex; align-items: center; justify-content: center;
+  min-height: 280px; overflow: hidden;
+}
+.featured-visual-bg {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0,165,94,0.08), rgba(26,84,144,0.08));
+}
+
+/* ════════════════════════════════════════
+   ARTICLE CARDS — PREMIUM
+════════════════════════════════════════ */
+.articles-section {
+  background: var(--surface-alt);
+  padding: 64px 5% 96px;
+}
+[data-theme="dark"] .articles-section { background: var(--navy-950); }
+
+.articles-grid {
+  max-width: 1300px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  display: flex; flex-direction: column;
+  transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base) var(--ease-smooth), opacity var(--dur-base);
+  overflow: hidden; position: relative;
+}
+[data-theme="dark"] .card { background: var(--navy-800); border-color: rgba(255,255,255,0.06); }
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
+.card.hidden { display: none; }
+.card.fade-out { opacity: 0; transform: scale(0.97); }
+
+/* Card top accent strip */
+.card-accent-strip {
+  height: 3px; width: 100%;
+  background: linear-gradient(90deg, var(--green-600), var(--green-400));
+}
+.card[data-category*="JURIDIQUE"] .card-accent-strip { background: linear-gradient(90deg, var(--navy-600), var(--navy-400)); }
+.card[data-category*="ENVIRONNEMENT"] .card-accent-strip { background: linear-gradient(90deg, #2e7d32, #66bb6a); }
+.card[data-category*="SIG"] .card-accent-strip { background: linear-gradient(90deg, var(--green-700), var(--green-400)); }
+
+.card-body { padding: 22px 22px 20px; flex: 1; display: flex; flex-direction: column; }
+
+.card-meta {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;
+}
+
+.category-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: var(--r-full);
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  background: rgba(0,117,64,0.1); color: var(--green-700); border: 1px solid rgba(0,117,64,0.15);
+}
+[data-theme="dark"] .category-badge { background: rgba(0,165,94,0.1); color: var(--green-400); border-color: rgba(0,165,94,0.2); }
+
+.card[data-category*="JURIDIQUE"] .category-badge { background: rgba(10,37,64,0.08); color: var(--navy-700); border-color: rgba(10,37,64,0.12); }
+[data-theme="dark"] .card[data-category*="JURIDIQUE"] .category-badge { background: rgba(36,112,184,0.12); color: var(--navy-400); border-color: rgba(36,112,184,0.2); }
+
+.card[data-category*="ENVIRONNEMENT"] .category-badge { background: rgba(46,125,50,0.08); color: #2e7d32; border-color: rgba(46,125,50,0.15); }
+[data-theme="dark"] .card[data-category*="ENVIRONNEMENT"] .category-badge { background: rgba(102,187,106,0.1); color: #66bb6a; border-color: rgba(102,187,106,0.2); }
+
+.read-time {
+  font-size: 0.72rem; color: var(--text-muted);
+  display: flex; align-items: center; gap: 4px;
+}
+.pub-date { font-size: 0.72rem; color: var(--text-muted); margin-left: auto; }
+
+.card h3 {
+  font-family: 'Crimson Pro', serif; color: var(--text-primary);
+  font-size: 1.28rem; line-height: 1.35; font-weight: 600;
+  margin-bottom: 10px; letter-spacing: -0.2px;
+  transition: color var(--dur-fast);
+}
+.card:hover h3 { color: var(--secondary); }
+[data-theme="dark"] .card:hover h3 { color: var(--green-400); }
+
+.card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 18px; flex: 1; }
+
+.card-footer {
+  padding: 14px 22px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+[data-theme="dark"] .card-footer { border-top-color: rgba(255,255,255,0.06); }
+
+.card-link {
+  color: var(--secondary); font-weight: 600; text-decoration: none;
+  font-size: 0.82rem; display: inline-flex; align-items: center; gap: 5px;
+  transition: all var(--dur-fast); letter-spacing: 0.2px;
+}
+.card-link:hover { gap: 8px; }
+.card-link svg { transition: transform var(--dur-fast); }
+.card-link:hover svg { transform: translateX(3px); }
+[data-theme="dark"] .card-link { color: var(--green-400); }
+
+.card-impact {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+.impact-dot {
+  display: flex; align-items: center; gap: 3px;
+  font-size: 0.7rem; color: var(--text-muted);
+}
+.impact-dot svg { color: var(--gold-400); }
+
+/* ════════════════════════════════════════
+   OBSERVATOIRE TERRITORIAL
+════════════════════════════════════════ */
+.observatory-section {
+  background: var(--surface); padding: 96px 5%;
+}
+[data-theme="dark"] .observatory-section { background: var(--navy-900); }
+
+.observatory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+
+.observatory-cards { display: flex; flex-direction: column; gap: 16px; }
+.obs-card {
+  background: var(--surface-alt); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 20px 22px;
+  display: flex; gap: 16px; align-items: flex-start;
+  transition: all var(--dur-base) var(--ease-spring);
+  cursor: default;
+}
+[data-theme="dark"] .obs-card { background: var(--navy-800); border-color: rgba(255,255,255,0.06); }
+.obs-card:hover { transform: translateX(6px); box-shadow: var(--shadow-md); border-color: var(--green-500); }
+.obs-icon {
+  width: 44px; height: 44px; border-radius: var(--r-md); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  background: linear-gradient(135deg, rgba(0,117,64,0.1), rgba(0,117,64,0.05));
+  border: 1px solid rgba(0,117,64,0.15);
+}
+.obs-content { flex: 1; min-width: 0; }
+.obs-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; color: var(--text-primary); }
+.obs-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px; }
+.obs-value .unit { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+.obs-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+.obs-bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+.obs-bar-fill { height: 100%; background: linear-gradient(90deg, var(--green-600), var(--green-400)); border-radius: 2px; transition: width 1.5s var(--ease-smooth); width: 0; }
+.obs-source { font-size: 0.68rem; color: var(--gold-500); margin-top: 6px; font-style: italic; }
+[data-theme="dark"] .obs-source { color: var(--gold-300); }
+
+/* Regions schema (replaces invented map) */
+.regions-schema { display: flex; flex-direction: column; gap: 8px; }
+.region-row { width: 100%; }
+.region-badge {
+  display: flex; align-items: center; gap: 12px; padding: 11px 14px;
+  border-radius: var(--r-md); border: 1px solid;
+  transition: all var(--dur-fast);
+}
+.region-badge:hover { transform: translateX(4px); }
+.region-num {
+  font-family: 'Space Grotesk', sans-serif; font-size: 0.68rem; font-weight: 700;
+  color: white; background: var(--navy-700); padding: 3px 7px;
+  border-radius: var(--r-sm); white-space: nowrap; flex-shrink: 0;
+}
+.region-info { flex: 1; min-width: 0; }
+.region-name { font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
+.region-chef { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+.region-tag {
+  font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px;
+  color: var(--green-600); background: rgba(0,117,64,.08);
+  padding: 2px 8px; border-radius: var(--r-full); white-space: nowrap; flex-shrink: 0;
+}
+[data-theme="dark"] .region-tag { color: var(--green-400); background: rgba(0,165,94,.1); }
+.map-source-note {
+  font-size: 0.68rem; color: var(--text-muted); margin-top: 16px;
+  font-style: italic; border-top: 1px solid var(--border); padding-top: 12px;
+  line-height: 1.6;
+}
+
+/* SVG Togo Map */
+.togo-map-wrap {
+  background: var(--surface-alt); border: 1px solid var(--border);
+  border-radius: var(--r-xl); padding: 28px;
+  position: relative;
+}
+[data-theme="dark"] .togo-map-wrap { background: var(--navy-800); border-color: rgba(255,255,255,0.06); }
+.map-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 20px; }
+/* map-source-note already defined via obs-source and map-source-note rules above */
+
+/* ════════════════════════════════════════
+   TIMELINE
+════════════════════════════════════════ */
+.timeline-section { background: var(--surface-alt); padding: 80px 5%; }
+[data-theme="dark"] .timeline-section { background: var(--navy-950); }
+
+.timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 0 20px; }
+.timeline::before {
+  content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+  top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--green-600) 5%, var(--green-600) 95%, transparent);
+}
+.timeline-item {
+  display: flex; gap: 0; margin-bottom: 32px; position: relative;
+  align-items: flex-start;
+}
+.timeline-item:nth-child(odd) { flex-direction: row; }
+.timeline-item:nth-child(even) { flex-direction: row-reverse; }
+.timeline-content {
+  flex: 1; padding: 0 28px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 16px 20px;
+  max-width: calc(50% - 20px);
+  transition: all var(--dur-base) var(--ease-spring);
+}
+[data-theme="dark"] .timeline-content { background: var(--navy-800); border-color: rgba(255,255,255,0.06); }
+.timeline-content:hover { transform: scale(1.02); box-shadow: var(--shadow-lg); }
+.timeline-dot {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: 14px; height: 14px; background: var(--green-600);
+  border-radius: 50%; border: 3px solid var(--surface-alt);
+  top: 18px; z-index: 1; flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(0,117,64,0.15);
+}
+[data-theme="dark"] .timeline-dot { border-color: var(--navy-950); }
+.timeline-date { font-size: 0.7rem; color: var(--green-600); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+[data-theme="dark"] .timeline-date { color: var(--green-400); }
+.timeline-title { font-family: 'Crimson Pro', serif; font-size: 1rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; margin-bottom: 4px; }
+.timeline-cat { font-size: 0.72rem; color: var(--text-muted); }
+.timeline-spacer { flex: 1; max-width: calc(50% - 20px); }
+
+/* ════════════════════════════════════════
+   KGM INTELLIGENCE (AI QUERY CENTER)
+════════════════════════════════════════ */
+.intelligence-section {
+  background: linear-gradient(160deg, var(--navy-950) 0%, var(--navy-900) 100%);
+  padding: 96px 5%; position: relative; overflow: hidden;
+}
+.intelligence-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+}
+.intelligence-inner { max-width: 900px; margin: 0 auto; }
+.ai-interface {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r-xl); overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+}
+.ai-header {
+  padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(0,0,0,0.2);
+}
+.ai-dots { display: flex; gap: 6px; }
+.ai-dot { width: 10px; height: 10px; border-radius: 50%; }
+.ai-dot:nth-child(1) { background: #ff5f57; }
+.ai-dot:nth-child(2) { background: #febc2e; }
+.ai-dot:nth-child(3) { background: #28c840; }
+.ai-title { font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 500; margin-left: 4px; }
+.ai-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: var(--green-400); }
+.ai-status-dot { width: 6px; height: 6px; background: var(--green-400); border-radius: 50%; animation: pulse-dot 2s infinite; }
+
+.ai-chat { padding: 24px; min-height: 280px; display: flex; flex-direction: column; gap: 16px; }
+.ai-message { display: flex; gap: 12px; max-width: 88%; }
+.ai-message.assistant { align-self: flex-start; }
+.ai-message.user { align-self: flex-end; flex-direction: row-reverse; }
+.ai-avatar {
+  width: 32px; height: 32px; border-radius: var(--r-sm); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 0.8rem;
+  background: rgba(0,165,94,0.2); border: 1px solid rgba(0,165,94,0.3); color: var(--green-400);
+  font-weight: 700;
+}
+.ai-message.user .ai-avatar { background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.25); color: var(--gold-300); }
+.ai-bubble {
+  padding: 12px 16px; border-radius: var(--r-md); font-size: 0.875rem; line-height: 1.6;
+  color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.ai-message.user .ai-bubble { background: rgba(0,117,64,0.15); border-color: rgba(0,117,64,0.2); text-align: right; }
+
+.ai-input-wrap {
+  padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex; gap: 10px; align-items: center;
+  background: rgba(0,0,0,0.15);
+}
+.ai-input-suggestions { padding: 8px 20px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.ai-suggestion {
+  padding: 5px 12px; border-radius: var(--r-full); font-size: 0.75rem;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.55); cursor: pointer; transition: all var(--dur-fast); white-space: nowrap;
+}
+.ai-suggestion:hover { background: rgba(0,165,94,0.1); border-color: rgba(0,165,94,0.2); color: var(--green-400); }
+#ai-query {
+  flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r-md); color: white; padding: 10px 16px;
+  font-size: 0.88rem; font-family: 'Inter', sans-serif; outline: none;
+  resize: none;
+  transition: border-color var(--dur-fast);
+}
+#ai-query:focus { border-color: rgba(0,165,94,0.4); }
+#ai-query::placeholder { color: rgba(255,255,255,0.3); }
+.ai-send-btn {
+  width: 40px; height: 40px; border-radius: var(--r-md); flex-shrink: 0;
+  background: linear-gradient(135deg, var(--green-600), var(--green-700));
+  border: none; color: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+  transition: all var(--dur-fast);
+  box-shadow: 0 4px 12px rgba(0,117,64,0.3);
+}
+.ai-send-btn:hover { transform: scale(1.05); box-shadow: 0 6px 18px rgba(0,117,64,0.4); }
+.ai-thinking { display: flex; gap: 4px; align-items: center; padding: 8px 12px; }
+.ai-thinking-dot { width: 6px; height: 6px; background: var(--green-500); border-radius: 50%; animation: thinkDot 1.2s ease-in-out infinite; }
+.ai-thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+.ai-thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes thinkDot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ════════════════════════════════════════
+   RECOMMENDATIONS
+════════════════════════════════════════ */
+.reco-section { background: var(--surface); padding: 80px 5%; }
+[data-theme="dark"] .reco-section { background: var(--navy-900); }
+.reco-scroll { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 8px; -ms-overflow-style: none; scrollbar-width: none; }
+.reco-scroll::-webkit-scrollbar { display: none; }
+.reco-card {
+  flex-shrink: 0; width: 280px; background: var(--surface-alt);
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 20px; transition: all var(--dur-base) var(--ease-spring);
+  cursor: pointer;
+}
+[data-theme="dark"] .reco-card { background: var(--navy-800); border-color: rgba(255,255,255,0.06); }
+.reco-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--green-600); }
+.reco-tag { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--green-600); margin-bottom: 8px; }
+[data-theme="dark"] .reco-tag { color: var(--green-400); }
+.reco-title { font-family: 'Crimson Pro', serif; font-size: 1.05rem; font-weight: 600; color: var(--text-primary); line-height: 1.35; margin-bottom: 10px; }
+.reco-meta { font-size: 0.73rem; color: var(--text-muted); display: flex; gap: 10px; }
+
+/* ════════════════════════════════════════
+   CONSULTATION CENTER (CONTACT)
+════════════════════════════════════════ */
+.contact-section {
+  background: linear-gradient(160deg, var(--navy-900) 0%, #0d2840 60%, var(--navy-800) 100%);
+  padding: 96px 5%; position: relative; overflow: hidden;
+}
+.contact-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, transparent, var(--green-500), transparent);
+}
+.contact-inner { max-width: 1300px; margin: 0 auto; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.contact-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700;
+  color: white; line-height: 1.15; letter-spacing: -0.8px; margin-bottom: 16px;
+}
+.contact-desc { color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 32px; }
+.contact-services { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.contact-service {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: var(--r-md);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+  font-size: 0.875rem; color: rgba(255,255,255,0.75);
+  transition: all var(--dur-fast);
+}
+.contact-service:hover { background: rgba(0,165,94,0.08); border-color: rgba(0,165,94,0.15); }
+.service-icon { font-size: 1.1rem; flex-shrink: 0; }
+.contact-ctas { display: flex; flex-direction: column; gap: 14px; }
+.contact-cta {
+  display: flex; align-items: center; gap: 14px; padding: 18px 24px;
+  border-radius: var(--r-lg); text-decoration: none; color: white;
+  transition: all var(--dur-base) var(--ease-spring);
+  border: 1px solid transparent; position: relative; overflow: hidden;
+}
+.contact-cta::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0); transition: background var(--dur-fast); }
+.contact-cta:hover::after { background: rgba(255,255,255,0.05); }
+.contact-cta:hover { transform: translateX(4px); }
+.contact-cta-wa { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.2); }
+.contact-cta-mail { background: rgba(26,84,144,0.2); border-color: rgba(26,84,144,0.3); }
+.contact-cta-icon {
+  width: 44px; height: 44px; border-radius: var(--r-md); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+}
+.contact-cta-wa .contact-cta-icon { background: rgba(37,211,102,0.15); }
+.contact-cta-mail .contact-cta-icon { background: rgba(26,84,144,0.25); }
+.contact-cta-label { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-bottom: 2px; }
+.contact-cta-action { font-weight: 600; font-size: 0.95rem; }
+.contact-cta-arrow { margin-left: auto; color: rgba(255,255,255,0.3); font-size: 1.1rem; transition: transform var(--dur-fast); }
+.contact-cta:hover .contact-cta-arrow { transform: translateX(4px); color: rgba(255,255,255,0.6); }
+
+/* ════════════════════════════════════════
+   READING MODE (IMMERSIVE)
+════════════════════════════════════════ */
+.reading-progress {
+  position: fixed; top: var(--nav-h); left: 0; right: 0; height: 2px;
+  z-index: 1999; background: transparent; pointer-events: none;
+}
+.reading-progress-bar {
+  height: 100%; background: linear-gradient(90deg, var(--green-600), var(--green-400));
+  width: 0%; transition: width 100ms linear;
+}
+
+/* ════════════════════════════════════════
+   BACK TO TOP + FAB
+════════════════════════════════════════ */
+#back-to-top {
+  position: fixed; bottom: 32px; right: 28px; z-index: 1500;
+  width: 44px; height: 44px; border-radius: var(--r-md);
+  background: var(--navy-800); color: white; border: 1px solid rgba(255,255,255,0.1);
+  font-size: 1rem; cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-base), transform var(--dur-base) var(--ease-spring), background var(--dur-fast);
+  display: flex; align-items: center; justify-content: center;
+}
+#back-to-top.visible { opacity: 1; pointer-events: auto; }
+#back-to-top:hover { transform: translateY(-3px); background: var(--green-700); }
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer {
+  background: var(--navy-950); color: rgba(255,255,255,0.6);
+  padding: 48px 5% 24px; width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-inner { max-width: 1300px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px;
+}
+.footer-brand-name {
+  font-family: 'Crimson Pro', serif; font-size: 1.3rem; font-weight: 600;
+  color: white; margin-bottom: 6px;
+}
+.footer-brand-role { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+.footer-col-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color var(--dur-fast); }
+.footer-links a:hover { color: white; }
+.footer-bottom {
+  padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+.footer-tech { font-size: 0.73rem; color: rgba(255,255,255,0.25); display: flex; align-items: center; gap: 6px; }
+.footer-tech a { color: inherit; text-decoration: none; }
+
+/* ════════════════════════════════════════
+   UTILITY & ANIMATIONS
+════════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity var(--dur-xslow) var(--ease-out), transform var(--dur-xslow) var(--ease-out);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 100ms; }
+.reveal-delay-2 { transition-delay: 200ms; }
+.reveal-delay-3 { transition-delay: 300ms; }
+.reveal-delay-4 { transition-delay: 400ms; }
+
+.counter-val { display: inline-block; }
+
+/* Divider */
+.divider { height: 1px; background: var(--border); margin: 0; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE — MOBILE FIRST
+   Base = mobile (320-479px)
+   sm  = 480px+
+   md  = 640px+
+   lg  = 1024px+
+   xl  = 1280px+
+════════════════════════════════════════ */
+
+/* ── Base mobile (tout <480px) ── */
+:root {
+  --px: 16px;           /* horizontal padding global */
+}
+
+/* Nav mobile : cacher liens, afficher hamburger */
+.nav { padding: 0 var(--px); }
+.nav-links { display: none; }
+.hamburger { display: flex; }
+
+/* Nav search : icône seule sur mobile */
+.nav-search-btn { display: none; }
+.nav-search-icon-mobile {
+  width: 36px; height: 36px; border-radius: var(--r-sm);
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.65); flex-shrink: 0;
+  transition: all var(--dur-fast);
+}
+.nav-search-icon-mobile:hover { background: rgba(255,255,255,.14); color: white; }
+
+/* Hero : colonne unique */
+.hero-content {
+  grid-template-columns: 1fr;
+  padding: 56px var(--px) 48px;
+  gap: 32px;
+}
+.hero-stats-panel {
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.stat-card { padding: 16px; }
+.stat-value { font-size: 1.6rem; }
+
+/* Hero actions : colonne sur très petit écran */
+.hero-actions { flex-direction: column; }
+.hero-actions .btn { width: 100%; justify-content: center; }
+
+/* Sections : padding réduit */
+.section { padding: 60px var(--px); }
+.section-title { font-size: 1.7rem; }
+
+/* Featured : colonne unique, sans visual */
+.featured-section { padding: 56px var(--px); }
+.featured-grid { grid-template-columns: 1fr; gap: 32px; }
+.featured-visual { display: none; } /* masqué < 640, trop petit */
+
+/* Filter bar : scroll horizontal */
+.filter-bar-inner { padding: 10px var(--px); gap: 7px; }
+.filter-btn { padding: 5px 12px; font-size: 0.76rem; }
+
+/* Articles : 1 colonne */
+.articles-section { padding: 52px var(--px) 72px; }
+.articles-grid { grid-template-columns: 1fr; gap: 14px; }
+
+/* Observatory */
+.observatory-section { padding: 60px var(--px); }
+.observatory-grid { grid-template-columns: 1fr; gap: 24px; }
+.observatory-cards { gap: 12px; }
+.obs-card { padding: 16px 18px; }
+.togo-map-wrap { padding: 20px; }
+
+/* Timeline : linéaire, gauche */
+.timeline-section { padding: 60px var(--px); }
+.timeline { padding: 0 0 0 28px; }
+.timeline::before { left: 8px; top: 0; bottom: 0; transform: none; }
+.timeline-item { flex-direction: column !important; margin-bottom: 20px; }
+.timeline-content { max-width: 100%; padding: 14px 16px; }
+.timeline-dot { left: -20px; top: 16px; }
+.timeline-spacer { display: none; }
+
+/* AI Intelligence */
+.intelligence-section { padding: 60px var(--px); }
+.ai-chat { min-height: 180px; max-height: 260px; }
+.ai-input-suggestions { padding: 8px 14px 0; gap: 6px; }
+.ai-suggestion { font-size: 0.7rem; padding: 4px 10px; }
+#ai-query { font-size: 0.82rem; }
+
+/* Reco */
+.reco-section { padding: 56px var(--px); }
+.reco-card { width: 232px; }
+.reco-card { padding: 16px; }
+
+/* Contact */
+.contact-section { padding: 60px var(--px); }
+.contact-grid { grid-template-columns: 1fr; gap: 36px; }
+.contact-title { font-size: 1.8rem; }
+.contact-services { gap: 8px; }
+.contact-service { font-size: 0.82rem; padding: 10px 12px; }
+.contact-ctas { gap: 10px; }
+.contact-cta { padding: 14px 16px; }
+
+/* Footer */
+footer { padding: 40px var(--px) 20px; }
+.footer-top { grid-template-columns: 1fr; gap: 24px; }
+.footer-bottom { flex-direction: column; gap: 6px; align-items: flex-start; }
+
+/* Back to top */
+#back-to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; }
+
+/* ── sm : 480px+ ── */
+@media (min-width: 480px) {
+  :root { --px: 20px; }
+  .hero-actions { flex-direction: row; flex-wrap: wrap; }
+  .hero-actions .btn { width: auto; }
+  .hero-stats-panel { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .articles-grid { grid-template-columns: 1fr; } /* reste 1 col jusqu'à md */
+  .featured-meta { gap: 14px; }
+}
+
+/* ── md : 640px+ ── */
+@media (min-width: 640px) {
+  :root { --px: 24px; --nav-h: 68px; }
+  .featured-visual { display: flex; min-height: 220px; }
+  .articles-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
+  .contact-services { gap: 10px; }
+  .ai-chat { max-height: 300px; }
+  .reco-card { width: 256px; }
+  .hero-content { padding: 68px var(--px) 56px; }
+}
+
+/* ── lg : 1024px+ ── */
+@media (min-width: 1024px) {
+  :root { --px: 5%; --nav-h: 72px; }
+
+  /* Nav desktop */
+  .nav { padding: 0 var(--px); }
+  .nav-links {
+    display: flex; list-style: none;
+    position: static; flex-direction: row;
+    background: none; backdrop-filter: none;
+    gap: 4px; padding: 0;
+  }
+  .nav-links a {
+    font-size: 0.875rem; padding: 7px 14px;
+    border-radius: var(--r-sm); color: rgba(255,255,255,.72);
+    font-size: 0.875rem; width: auto; text-align: left;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+  .nav-links a[aria-current="page"] { color: white; background: rgba(0,165,94,.18); border: 1px solid rgba(0,165,94,.25); }
+  .hamburger { display: none; }
+  .nav-search-icon-mobile { display: none; }
+  .nav-search-btn { display: flex; min-width: 160px; }
+
+  /* Hero : 2 colonnes */
+  .hero-content {
+    grid-template-columns: 1fr 1fr;
+    padding: 80px var(--px);
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-actions { flex-direction: row; }
+  .hero-actions .btn { width: auto; }
+  .hero-stats-panel { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .stat-value { font-size: 1.9rem; }
+
+  /* Featured : 2 colonnes */
+  .featured-section { padding: 72px var(--px); }
+  .featured-grid { grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .featured-visual { display: flex; }
+
+  /* Articles : 3 colonnes */
+  .articles-section { padding: 60px var(--px) 88px; }
+  .articles-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+  /* Observatory : 2 colonnes */
+  .observatory-section { padding: 88px var(--px); }
+  .observatory-grid { grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
+
+  /* Timeline : centré, zigzag */
+  .timeline-section { padding: 80px var(--px); }
+  .timeline { padding: 0 20px; max-width: 800px; }
+  .timeline::before { left: 50%; transform: translateX(-50%); }
+  .timeline-item { flex-direction: row !important; margin-bottom: 28px; }
+  .timeline-item:nth-child(even) { flex-direction: row-reverse !important; }
+  .timeline-content { max-width: calc(50% - 20px); }
+  .timeline-dot { left: 50%; transform: translateX(-50%); top: 18px; }
+  .timeline-spacer { display: block; flex: 1; max-width: calc(50% - 20px); }
+
+  /* AI */
+  .intelligence-section { padding: 88px var(--px); }
+  .ai-chat { min-height: 240px; max-height: 360px; }
+
+  /* Contact : 2 colonnes */
+  .contact-section { padding: 88px var(--px); }
+  .contact-grid { grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .contact-title { font-size: 2.5rem; }
+
+  /* Footer */
+  footer { padding: 48px var(--px) 24px; }
+  .footer-top { grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+}
+
+/* ── xl : 1280px+ ── */
+@media (min-width: 1280px) {
+  .articles-grid { grid-template-columns: repeat(3, 1fr); }
+  .hero-content { gap: 60px; }
+  .stat-value { font-size: 2rem; }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.1ms !important; }
+  .hero-orb { animation: none; }
+}
+
+/* ─── Print ─── */
+@media print {
+  .nav, #back-to-top, .search-overlay, .reading-progress, .ai-interface { display: none !important; }
+  body { padding-top: 0; color: black; }
+  .hero { min-height: auto; background: white; color: black; }
+  .card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- Skip link -->
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress" aria-hidden="true">
+  <div class="reading-progress-bar" id="reading-bar"></div>
+</div>
+
+<!-- Back to top -->
+<button id="back-to-top" aria-label="Retour en haut de page">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- ════════ NAV ════════ -->
+<nav class="nav" role="navigation" aria-label="Navigation principale">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">KGM</div>
+      <div class="logo-text">
+        <div class="logo-title">Décentralisation</div>
+        <div class="logo-subtitle">AU TOGO</div>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="nav-menu" role="list">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="blog.html" aria-current="page">Analyses</a></li>
+      <li><a href="index.html#ressources">Ressources</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <!-- Icône recherche visible uniquement sur mobile (<1024px) -->
+      <button class="nav-search-icon-mobile" id="open-search-mobile" aria-label="Rechercher">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="M14 14l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <!-- Bouton recherche complet visible sur desktop (≥1024px) -->
+      <button class="nav-search-btn" id="open-search" aria-label="Rechercher">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="M14 14l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Recherche rapide
+        <kbd class="kbd-hint">⌘K</kbd>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Basculer le thème">☀️</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════ SEARCH OVERLAY ════════ -->
+<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Recherche intelligente">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="M14 14l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="search-input" placeholder="Rechercher une analyse, un thème, une loi…" autocomplete="off" aria-label="Recherche">
+      <button class="search-close" id="close-search" aria-label="Fermer la recherche">Échap</button>
+    </div>
+    <div id="search-results" role="listbox" aria-label="Résultats de recherche"></div>
+    <p class="search-hint">Appuyez sur <kbd>↵</kbd> pour confirmer · <kbd>Échap</kbd> pour fermer</p>
+  </div>
+</div>
+
+<main id="main-content">
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-topo" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+        Centre d'Intelligence Territoriale
+      </div>
+      <h1 class="hero-title" id="hero-title">
+        Analyses &amp;<br>
+        <span class="hero-title-accent">Perspectives</span>
+      </h1>
+      <p class="hero-subtitle">Gouvernance · SIG · Décentralisation · Développement</p>
+      <p class="hero-desc">
+        Un espace de réflexion stratégique et d'expertise appliquée sur la gouvernance territoriale,
+        la géomatique et le développement des collectivités au Togo.
+        Analyses fondées sur la recherche, l'expérience de terrain et les meilleures pratiques internationales.
+      </p>
+      <div class="hero-actions">
+        <a href="#analyses" class="btn btn-primary btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Explorer les analyses
+        </a>
+        <button class="btn btn-outline btn-lg" id="hero-search-btn">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="M14 14l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Recherche rapide
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-stats-panel" aria-label="Indicateurs territoriaux">
+      <div class="stat-card">
+        <div class="stat-card-inner">
+          <div class="stat-icon" aria-hidden="true">📊</div>
+          <div>
+            <div class="stat-value"><span class="counter-val" data-target="11">0</span><span>+</span></div>
+            <div class="stat-label">Analyses publiées</div>
+          </div>
+          <div class="stat-trend">↑ Actif</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-inner">
+          <div class="stat-icon" aria-hidden="true">🏛️</div>
+          <div>
+            <div class="stat-value"><span class="counter-val" data-target="117">0</span></div>
+            <div class="stat-label">Communes au Togo</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-inner">
+          <div class="stat-icon" aria-hidden="true">🗺️</div>
+          <div>
+            <div class="stat-value"><span class="counter-val" data-target="5">0</span></div>
+            <div class="stat-label">Régions cartographiées</div>
+          </div>
+          <div class="stat-trend">SIG</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-inner">
+          <div class="stat-icon" aria-hidden="true">📅</div>
+          <div>
+            <div class="stat-value"><span class="counter-val" data-target="2026">0</span></div>
+            <div class="stat-label">Cycle de publication</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ANALYSE VEDETTE ════════ -->
+<section class="featured-section" aria-labelledby="featured-title">
+  <div class="featured-inner">
+    <div class="featured-grid">
+      <div>
+        <div class="featured-badge" aria-label="Analyse vedette">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="currentColor" opacity=".5"/><circle cx="5" cy="5" r="2" fill="currentColor"/></svg>
+          Analyse Vedette
+        </div>
+        <h2 class="featured-title" id="featured-title">
+          Le marketing territorial dans les collectivités togolaises
+        </h2>
+        <p class="featured-excerpt">
+          Comment transformer nos communes en pôles d'attraction économiques ? Face à une fiscalité locale faible et à l'absence de marques-villes, cette analyse explore les leviers concrets et les outils SIG pour passer d'un concept importé à une véritable stratégie de développement local au Togo.
+        </p>
+        <div class="featured-meta">
+          <div class="featured-meta-item">
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"/></svg>
+            <time datetime="2026-05-20">20 mai 2026</time>
+          </div>
+          <div class="featured-meta-item">
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            10 min de lecture
+          </div>
+          <div class="featured-meta-item">🏷️ SIG · Gouvernance</div>
+        </div>
+        <a href="marketing-territorial-togo.html" class="btn btn-gold btn-lg">
+          Lire l'analyse complète
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="featured-visual" aria-hidden="true">
+        <div class="featured-visual-bg"></div>
+        <!-- SVG Territorial Marketing Illustration -->
+        <svg viewBox="0 0 400 280" style="width:100%;max-width:360px;position:relative;z-index:1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fg1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#009150" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#1a5490" stop-opacity="0.8"/>
+            </linearGradient>
+            <linearGradient id="fg2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#d4af37" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#a07a00" stop-opacity="0.5"/>
+            </linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- Grid base -->
+          <rect x="0" y="0" width="400" height="280" fill="none"/>
+          <g opacity="0.12">
+            <line x1="0" y1="56" x2="400" y2="56" stroke="#00a85e" stroke-width="0.5"/>
+            <line x1="0" y1="112" x2="400" y2="112" stroke="#00a85e" stroke-width="0.5"/>
+            <line x1="0" y1="168" x2="400" y2="168" stroke="#00a85e" stroke-width="0.5"/>
+            <line x1="0" y1="224" x2="400" y2="224" stroke="#00a85e" stroke-width="0.5"/>
+            <line x1="80" y1="0" x2="80" y2="280" stroke="#00a85e" stroke-width="0.5"/>
+            <line x1="160" y1="0" x2="160" y2="280" stroke="#00a85e" stroke-width="0.5"/>
+            <line x1="240" y1="0" x2="240" y2="280" stroke="#00a85e" stroke-width="0.5"/>
+            <line x1="320" y1="0" x2="320" y2="280" stroke="#00a85e" stroke-width="0.5"/>
+          </g>
+          <!-- Togo silhouette (simplified) -->
+          <path d="M160 30 L200 25 L230 40 L240 80 L235 130 L225 170 L230 200 L220 240 L200 255 L185 245 L180 220 L175 195 L170 175 L155 160 L150 140 L145 110 L140 80 L145 50 Z" fill="url(#fg1)" opacity="0.25"/>
+          <!-- Region boundaries -->
+          <path d="M145 105 L240 100" stroke="#00c26e" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+          <path d="M148 135 L235 130" stroke="#00c26e" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+          <path d="M151 165 L228 168" stroke="#00c26e" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+          <path d="M155 195 L228 200" stroke="#00c26e" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+          <!-- Data points (cities) -->
+          <circle cx="190" cy="235" r="10" fill="url(#fg2)" filter="url(#glow)"/>
+          <circle cx="190" cy="235" r="5" fill="#d4af37"/>
+          <text x="206" y="239" fill="#d4af37" font-size="10" font-family="Inter,sans-serif" font-weight="600">Lomé</text>
+          <circle cx="185" cy="165" r="7" fill="url(#fg1)" filter="url(#glow)"/>
+          <circle cx="185" cy="165" r="3.5" fill="#00c26e"/>
+          <text x="198" y="169" fill="#00c26e" font-size="9" font-family="Inter,sans-serif">Atakpamé</text>
+          <circle cx="180" cy="105" r="6" fill="url(#fg1)" filter="url(#glow)"/>
+          <circle cx="180" cy="105" r="3" fill="#00de80"/>
+          <text x="192" y="109" fill="#00de80" font-size="9" font-family="Inter,sans-serif">Sokodé</text>
+          <circle cx="175" cy="55" r="6" fill="url(#fg1)" filter="url(#glow)"/>
+          <circle cx="175" cy="55" r="3" fill="#00de80"/>
+          <text x="187" y="59" fill="#00de80" font-size="9" font-family="Inter,sans-serif">Kara</text>
+          <!-- Connection lines -->
+          <line x1="190" y1="235" x2="185" y2="165" stroke="rgba(0,194,110,0.3)" stroke-width="1.5"/>
+          <line x1="185" y1="165" x2="180" y2="105" stroke="rgba(0,194,110,0.3)" stroke-width="1.5"/>
+          <line x1="180" y1="105" x2="175" y2="55" stroke="rgba(0,194,110,0.3)" stroke-width="1.5"/>
+          <!-- Stats bubbles -->
+          <rect x="268" y="48" width="120" height="48" rx="8" fill="rgba(0,165,94,0.15)" stroke="rgba(0,165,94,0.3)" stroke-width="1"/>
+          <text x="278" y="66" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Inter,sans-serif" text-transform="uppercase" letter-spacing="1">Attractivité</text>
+          <text x="278" y="84" fill="#00c26e" font-size="18" font-family="Space Grotesk,sans-serif" font-weight="700">+32%</text>
+          <rect x="268" y="108" width="120" height="48" rx="8" fill="rgba(26,84,144,0.15)" stroke="rgba(26,84,144,0.3)" stroke-width="1"/>
+          <text x="278" y="126" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Inter,sans-serif">Communes</text>
+          <text x="278" y="144" fill="#2470b8" font-size="18" font-family="Space Grotesk,sans-serif" font-weight="700">117</text>
+          <rect x="268" y="168" width="120" height="48" rx="8" fill="rgba(212,175,55,0.1)" stroke="rgba(212,175,55,0.25)" stroke-width="1"/>
+          <text x="278" y="186" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Inter,sans-serif">Couverture SIG</text>
+          <text x="278" y="204" fill="#d4af37" font-size="18" font-family="Space Grotesk,sans-serif" font-weight="700">68%</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FILTER BAR ════════ -->
+<div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrer les analyses par catégorie">
+  <div class="filter-bar-inner">
+    <button class="filter-btn active" aria-pressed="true" data-filter="all">
+      Toutes <span class="filter-count-badge">11</span>
+    </button>
+    <button class="filter-btn" aria-pressed="false" data-filter="JURIDIQUE">
+      🏛 Juridique <span class="filter-count-badge">6</span>
+    </button>
+    <button class="filter-btn" aria-pressed="false" data-filter="SIG">
+      🗺 SIG <span class="filter-count-badge">5</span>
+    </button>
+    <button class="filter-btn" aria-pressed="false" data-filter="ENVIRONNEMENT">
+      🌿 Environnement <span class="filter-count-badge">3</span>
+    </button>
+    <span class="filter-result-count" role="status" aria-live="polite" id="filter-count">11 analyses disponibles</span>
+  </div>
+</div>
+
+<!-- ════════ ARTICLES GRID ════════ -->
+<section class="articles-section" id="analyses" aria-labelledby="analyses-title">
+  <div style="max-width:1300px;margin:0 auto 40px;padding:0 5%;">
+    <div class="section-header">
+      <div class="section-eyebrow">
+        <span class="section-eyebrow-line"></span>
+        Analyses &amp; Ressources
+      </div>
+      <h2 class="section-title" id="analyses-title">Intelligence territoriale</h2>
+      <p class="section-desc">Explorez nos analyses approfondies sur la gouvernance locale, le droit des collectivités, la géomatique et l'environnement au Togo.</p>
+    </div>
+  </div>
+
+  <div class="articles-grid" id="cards-container">
+
+    <!-- Carte 1 -->
+    <article class="card reveal" data-category="SIG">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Analyse</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            4 min
+          </span>
+          <time class="pub-date" datetime="2026-04-22">22 avr. 2026</time>
+        </div>
+        <h3>L'impact des SIG dans la gestion territoriale</h3>
+        <p>Comment l'outil cartographique révolutionne la levée de l'impôt foncier et la planification urbaine au Togo...</p>
+      </div>
+      <div class="card-footer">
+        <a href="article-sig-gestion.html" class="card-link" aria-label="Lire l'article : L'impact des SIG dans la gestion territoriale">
+          Lire l'article
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            Populaire
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 2 -->
+    <article class="card reveal reveal-delay-1" data-category="JURIDIQUE">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Guide</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            3 min
+          </span>
+          <time class="pub-date" datetime="2026-04-22">22 avr. 2026</time>
+        </div>
+        <h3>Réussir son PDC (Plan de Développement Communal)</h3>
+        <p>Les 5 étapes clés pour une planification stratégique efficace au service des citoyens.</p>
+      </div>
+      <div class="card-footer">
+        <a href="article-pdc-communal.html" class="card-link" aria-label="Lire le guide : Réussir son PDC (Plan de Développement Communal)">
+          Lire le guide
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            Essentiel
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 3 -->
+    <article class="card reveal reveal-delay-2" data-category="JURIDIQUE">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Juridique</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            5 min
+          </span>
+          <time class="pub-date" datetime="2026-04-22">22 avr. 2026</time>
+        </div>
+        <h3>L'impact de la Loi n° 2019-006 sur la gouvernance locale</h3>
+        <p>Analyse approfondie du nouveau cadre législatif et des défis de l'autonomie financière des collectivités locales.</p>
+      </div>
+      <div class="card-footer">
+        <a href="article-loi-2019.html" class="card-link" aria-label="Lire l'analyse : L'impact de la Loi n° 2019-006 sur la gouvernance locale">
+          Lire l'analyse
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            Référence
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 4 -->
+    <article class="card reveal" data-category="ENVIRONNEMENT">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Environnement</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            4 min
+          </span>
+          <time class="pub-date" datetime="2026-04-26">26 avr. 2026</time>
+        </div>
+        <h3>Gestion des déchets à Agoè-Nyivé 1 : Défis et Perspectives</h3>
+        <p>Diagnostic des failles structurelles et financières de la gestion des déchets solides ménagers...</p>
+      </div>
+      <div class="card-footer">
+        <a href="article-gestion-dechets-agoe.html" class="card-link" aria-label="Lire l'article : Gestion des déchets à Agoè-Nyivé 1">
+          Lire l'article
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">🌿 Terrain</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 5 -->
+    <article class="card reveal reveal-delay-1" data-category="JURIDIQUE SIG">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Droit &amp; Territoire</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            6 min
+          </span>
+          <time class="pub-date" datetime="2026-04-30">30 avr. 2026</time>
+        </div>
+        <h3>La délimitation des communes : Entre imprécision textuelle et rigueur cartographique</h3>
+        <p>Analyse des enjeux juridiques et techniques de la définition des ressorts territoriaux au Togo. Comment le SIG sécurise l'action publique...</p>
+      </div>
+      <div class="card-footer">
+        <a href="delimitation-territoriale-togo.html" class="card-link" aria-label="Lire l'article : La délimitation des communes au Togo">
+          Lire l'article
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">⭐ Vedette</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 6 -->
+    <article class="card reveal reveal-delay-2" data-category="SIG JURIDIQUE">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Gouvernance &amp; SIG</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            4 min
+          </span>
+          <time class="pub-date" datetime="2026-05-02">02 mai 2026</time>
+        </div>
+        <h3>L'Inventaire Numérique du Patrimoine : Levier Oublié de la Décentralisation</h3>
+        <p>Analyse sur la sécurisation du domaine public au Togo. Pourquoi le SIG est la clé d'une souveraineté financière locale.</p>
+      </div>
+      <div class="card-footer">
+        <a href="gestion-patrimoine-communal-sig-togo.html" class="card-link" aria-label="Lire l'article : L'Inventaire Numérique du Patrimoine Communal">
+          Lire l'article
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">💡 Innovation</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 7 -->
+    <article class="card reveal" data-category="JURIDIQUE">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Gouvernance &amp; Droit</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            3 min
+          </span>
+          <time class="pub-date" datetime="2026-05-05">5 mai 2026</time>
+        </div>
+        <h3>La Maîtrise d'Ouvrage Communale au Togo</h3>
+        <p>Analyse critique sur le transfert de compétences et l'impératif de performance pour les nouveaux exécutifs locaux...</p>
+      </div>
+      <div class="card-footer">
+        <a href="maitrise-ouvrage-communale.html" class="card-link" aria-label="Lire l'analyse : La Maîtrise d'Ouvrage Communale au Togo">
+          Lire l'analyse
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">🔍 Critique</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 8 -->
+    <article class="card reveal reveal-delay-1" data-category="SIG ENVIRONNEMENT">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Risques &amp; SIG</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            8 min
+          </span>
+          <time class="pub-date" datetime="2026-05-06">6 mai 2026</time>
+        </div>
+        <h3>Inondations à Lomé : Sortir de la fatalité</h3>
+        <p>Comment l'intelligence spatiale et le SIG peuvent remplacer le pompage d'urgence pour une résilience durable...</p>
+      </div>
+      <div class="card-footer">
+        <a href="gestion-inondations-lome.html" class="card-link" aria-label="Lire l'article : Inondations à Lomé, sortir de la fatalité">
+          Lire l'article
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">⚡ Urgent</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 9 -->
+    <article class="card reveal reveal-delay-2" data-category="ENVIRONNEMENT">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Environnement</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            10 min
+          </span>
+          <time class="pub-date" datetime="2026-05-06">6 mai 2026</time>
+        </div>
+        <h3>Vers la Ville Durable Togolaise</h3>
+        <p>Réconcilier croissance urbaine et équilibre écologique : les défis de la transition verte au Togo...</p>
+      </div>
+      <div class="card-footer">
+        <a href="villes-durables-togo.html" class="card-link" aria-label="Lire l'analyse : Vers la Ville Durable Togolaise">
+          Lire l'analyse
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">🌱 Prospective</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 10 -->
+    <article class="card reveal" data-category="JURIDIQUE">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Gouvernance &amp; Droit</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            4 min
+          </span>
+          <time class="pub-date" datetime="2026-05-13">13 mai 2026</time>
+        </div>
+        <h3>Le Budget Participatif au Togo</h3>
+        <p>Le Budget Participatif comme levier de refondation de l'action publique locale, adossé à la Loi n°2019-006...</p>
+      </div>
+      <div class="card-footer">
+        <a href="budget-participatif-togo-kgm.html" class="card-link" aria-label="Lire l'analyse : Le Budget Participatif au Togo">
+          Lire l'analyse
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">📢 Citoyen</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 11 -->
+    <article class="card reveal reveal-delay-1" data-category="SIG">
+      <div class="card-accent-strip"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="category-badge">Gouvernance &amp; Développement Local</span>
+          <span class="read-time">
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            10 min
+          </span>
+          <time class="pub-date" datetime="2026-05-20">20 mai 2026</time>
+        </div>
+        <h3>Le marketing territorial dans les collectivités togolaises</h3>
+        <p>Comment transformer nos communes en pôles d'attraction économiques ? Face à une fiscalité locale faible et à l'absence de marques-villes, découvrez les leviers concrets et les outils SIG pour passer d'un concept importé à une véritable stratégie de développement local au Togo.</p>
+      </div>
+      <div class="card-footer">
+        <a href="marketing-territorial-togo.html" class="card-link" aria-label="Lire l'analyse : Le marketing territorial dans les collectivités togolaises">
+          Lire l'analyse
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="card-impact">
+          <span class="impact-dot">⭐ Nouveau</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ════════ OBSERVATOIRE TERRITORIAL ════════ -->
+<section class="observatory-section" id="observatoire" aria-labelledby="obs-title">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">
+        <span class="section-eyebrow-line"></span>
+        Observatoire
+      </div>
+      <h2 class="section-title" id="obs-title">Observatoire Territorial du Togo</h2>
+      <p class="section-desc">Données vérifiées sur la décentralisation au Togo. Fondées exclusivement sur des textes législatifs et des sources officielles.</p>
+    </div>
+
+    <div class="observatory-grid">
+      <div class="observatory-cards">
+
+        <div class="obs-card reveal">
+          <div class="obs-icon" aria-hidden="true">🏛️</div>
+          <div class="obs-content">
+            <div class="obs-title">Communes (Code CGCT 2019)</div>
+            <div class="obs-value"><span class="counter-val" data-target="117">0</span> <span class="unit">communes</span></div>
+            <div class="obs-desc">Le Togo compte 117 communes organisées en 5 régions depuis la Loi n°2019-006 portant Code Général des Collectivités Territoriales.</div>
+            <div class="obs-source">Source : Loi n°2019-006 du 26 juin 2019</div>
+          </div>
+        </div>
+
+        <div class="obs-card reveal reveal-delay-1">
+          <div class="obs-icon" aria-hidden="true">🗺️</div>
+          <div class="obs-content">
+            <div class="obs-title">Régions administratives</div>
+            <div class="obs-value"><span class="counter-val" data-target="5">0</span> <span class="unit">régions</span></div>
+            <div class="obs-desc">Maritime, Plateaux, Centrale, Kara et Savanes. Chaque région regroupe plusieurs communes et préfectures dotées d'exécutifs élus.</div>
+            <div class="obs-source">Source : Organisation administrative officielle du Togo</div>
+          </div>
+        </div>
+
+        <div class="obs-card reveal reveal-delay-2">
+          <div class="obs-icon" aria-hidden="true">⚖️</div>
+          <div class="obs-content">
+            <div class="obs-title">Loi fondatrice de la décentralisation</div>
+            <div class="obs-value" style="font-size:1.1rem;letter-spacing:-0.5px;">Loi n°2019-006</div>
+            <div class="obs-desc">Promulguée le 26 juin 2019, cette loi portant Code Général des Collectivités Territoriales encadre l'organisation, les compétences et les ressources des communes togolaises.</div>
+            <div class="obs-source">Source : Journal Officiel de la République Togolaise</div>
+          </div>
+        </div>
+
+        <div class="obs-card reveal">
+          <div class="obs-icon" aria-hidden="true">📅</div>
+          <div class="obs-content">
+            <div class="obs-title">Premières élections locales</div>
+            <div class="obs-value" style="font-size:1.2rem;letter-spacing:-0.5px;">Juin 2019</div>
+            <div class="obs-desc">Le Togo a organisé ses premières élections de conseillers municipaux en juin 2019, dotant chaque commune d'un conseil élu au suffrage universel direct.</div>
+            <div class="obs-source">Source : Commission Électorale Nationale Indépendante (CENI) — Togo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Schéma territorial vérifié — remplace toute carte SVG inventée -->
+      <div class="togo-map-wrap reveal">
+        <div class="map-title">🗺 Régions administratives du Togo</div>
+
+        <!-- Schéma en liste structurée : aucune donnée géographique inventée -->
+        <div class="regions-schema" role="list" aria-label="Régions du Togo du nord au sud">
+
+          <div class="region-row" role="listitem">
+            <div class="region-badge" style="background:rgba(0,117,64,.08);border-color:rgba(0,117,64,.15);">
+              <span class="region-num">N°1</span>
+              <div class="region-info">
+                <div class="region-name">Savanes</div>
+                <div class="region-chef">Chef-lieu : Dapaong</div>
+              </div>
+              <div class="region-tag">Nord</div>
+            </div>
+          </div>
+
+          <div class="region-row" role="listitem">
+            <div class="region-badge" style="background:rgba(0,117,64,.08);border-color:rgba(0,117,64,.15);">
+              <span class="region-num">N°2</span>
+              <div class="region-info">
+                <div class="region-name">Kara</div>
+                <div class="region-chef">Chef-lieu : Kara</div>
+              </div>
+              <div class="region-tag">Centre-Nord</div>
+            </div>
+          </div>
+
+          <div class="region-row" role="listitem">
+            <div class="region-badge" style="background:rgba(0,117,64,.08);border-color:rgba(0,117,64,.15);">
+              <span class="region-num">N°3</span>
+              <div class="region-info">
+                <div class="region-name">Centrale</div>
+                <div class="region-chef">Chef-lieu : Sokodé</div>
+              </div>
+              <div class="region-tag">Centre</div>
+            </div>
+          </div>
+
+          <div class="region-row" role="listitem">
+            <div class="region-badge" style="background:rgba(0,117,64,.08);border-color:rgba(0,117,64,.15);">
+              <span class="region-num">N°4</span>
+              <div class="region-info">
+                <div class="region-name">Plateaux</div>
+                <div class="region-chef">Chef-lieu : Atakpamé</div>
+              </div>
+              <div class="region-tag">Centre-Sud</div>
+            </div>
+          </div>
+
+          <div class="region-row" role="listitem">
+            <div class="region-badge" style="background:rgba(0,165,94,.12);border-color:rgba(0,165,94,.3);">
+              <span class="region-num" style="background:var(--green-700)">N°5</span>
+              <div class="region-info">
+                <div class="region-name" style="color:var(--green-600)">Maritime</div>
+                <div class="region-chef">Chef-lieu : Lomé <span style="color:var(--gold-500)">★ Capitale</span></div>
+              </div>
+              <div class="region-tag" style="background:rgba(0,165,94,.12);color:var(--green-600)">Sud · Analyses ↑</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-source-note">
+          Sources : Organisation administrative de la République Togolaise. Les analyses publiées couvrent des problématiques transversales s'appliquant à l'ensemble des communes, avec un focus particulier sur la région Maritime et la capitale Lomé.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TIMELINE ════════ -->
+<section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
+  <div style="max-width:1300px;margin:0 auto;padding:0 5%;">
+    <div class="section-header centered">
+      <div class="section-eyebrow">
+        <span class="section-eyebrow-line"></span>
+        Chronologie
+      </div>
+      <h2 class="section-title" id="timeline-title">Timeline des publications</h2>
+      <p class="section-desc">Suivez l'évolution des analyses et les cycles de publication thématiques.</p>
+    </div>
+  </div>
+
+  <div class="timeline" aria-label="Chronologie des publications">
+    <div class="timeline-item">
+      <div class="timeline-content reveal">
+        <div class="timeline-date">22 Avril 2026</div>
+        <div class="timeline-title">Lancement du cycle SIG</div>
+        <div class="timeline-cat">3 analyses · SIG · Juridique · Guide</div>
+      </div>
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-spacer"></div>
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-content reveal">
+        <div class="timeline-date">26 Avril 2026</div>
+        <div class="timeline-title">Focus Environnement & Déchets</div>
+        <div class="timeline-cat">1 analyse · Agoè-Nyivé · Terrain</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content reveal">
+        <div class="timeline-date">30 Avril — 2 Mai 2026</div>
+        <div class="timeline-title">Semaine de la délimitation territoriale</div>
+        <div class="timeline-cat">2 analyses · Droit territorial · Patrimoine</div>
+      </div>
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-spacer"></div>
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-content reveal">
+        <div class="timeline-date">5 — 6 Mai 2026</div>
+        <div class="timeline-title">Gouvernance & Résilience urbaine</div>
+        <div class="timeline-cat">3 analyses · MOC · Inondations · Ville durable</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content reveal">
+        <div class="timeline-date">13 — 20 Mai 2026</div>
+        <div class="timeline-title">Innovations de gouvernance locale</div>
+        <div class="timeline-cat">2 analyses · Budget participatif · Marketing territorial</div>
+      </div>
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ KGM INTELLIGENCE (AI) ════════ -->
+<section class="intelligence-section" id="intelligence" aria-labelledby="ai-title">
+  <div class="intelligence-inner">
+    <div class="section-header centered" style="margin-bottom:40px;">
+      <div class="section-eyebrow" style="justify-content:center;color:var(--gold-300);">
+        <span class="section-eyebrow-line" style="background:var(--gold-400)"></span>
+        IA Territoriale
+      </div>
+      <h2 class="section-title" id="ai-title" style="color:white;">KGM Intelligence</h2>
+      <p class="section-desc" style="color:rgba(255,255,255,0.5);margin:0 auto;">
+        Interrogez la base de connaissances territoriales. Posez vos questions sur la gouvernance locale, le droit des collectivités et les SIG au Togo.
+      </p>
+    </div>
+
+    <div class="ai-interface reveal">
+      <div class="ai-header">
+        <div class="ai-dots" aria-hidden="true">
+          <div class="ai-dot"></div>
+          <div class="ai-dot"></div>
+          <div class="ai-dot"></div>
+        </div>
+        <span class="ai-title">KGM Intelligence — Base de connaissances territoriales</span>
+        <div class="ai-status" aria-label="Statut : en ligne">
+          <div class="ai-status-dot" aria-hidden="true"></div>
+          En ligne
+        </div>
+      </div>
+
+      <div class="ai-input-suggestions" aria-label="Questions suggérées">
+        <button class="ai-suggestion" onclick="askSuggestion(this)">Qu'est-ce qu'un PDC ?</button>
+        <button class="ai-suggestion" onclick="askSuggestion(this)">Loi 2019-006 expliquée</button>
+        <button class="ai-suggestion" onclick="askSuggestion(this)">SIG et fiscalité locale</button>
+        <button class="ai-suggestion" onclick="askSuggestion(this)">Budget participatif Togo</button>
+        <button class="ai-suggestion" onclick="askSuggestion(this)">Communes et développement</button>
+      </div>
+
+      <div class="ai-chat" id="ai-chat" role="log" aria-live="polite" aria-label="Conversation avec KGM Intelligence">
+        <div class="ai-message assistant">
+          <div class="ai-avatar" aria-hidden="true">K</div>
+          <div class="ai-bubble">
+            Bonjour. Je suis <strong>KGM Intelligence</strong>, votre assistant en gouvernance territoriale et SIG au Togo. Posez-moi vos questions sur la décentralisation, le droit des collectivités, la géomatique ou le développement local.
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-input-wrap">
+        <textarea id="ai-query" rows="1" placeholder="Posez votre question sur la gouvernance territoriale au Togo…" aria-label="Votre question" onkeydown="handleAiKeydown(event)"></textarea>
+        <button class="ai-send-btn" id="ai-send" onclick="sendAiQuery()" aria-label="Envoyer la question">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ RECOMMANDATIONS ════════ -->
+<section class="reco-section" id="recommandations" aria-labelledby="reco-title">
+  <div style="max-width:1300px;margin:0 auto;padding:0 5%;">
+    <div class="section-header" style="margin-bottom:28px;">
+      <div class="section-eyebrow">
+        <span class="section-eyebrow-line"></span>
+        Pour aller plus loin
+      </div>
+      <h2 class="section-title" id="reco-title">Analyses recommandées</h2>
+    </div>
+    <div class="reco-scroll" role="list" aria-label="Analyses recommandées">
+      <div class="reco-card" role="listitem" onclick="window.location='delimitation-territoriale-togo.html'" style="cursor:pointer;">
+        <div class="reco-tag">🗺 SIG · Juridique</div>
+        <div class="reco-title">Délimitation des communes : imprécision textuelle et rigueur cartographique</div>
+        <div class="reco-meta"><span>6 min</span><span>30 avr. 2026</span></div>
+      </div>
+      <div class="reco-card" role="listitem" onclick="window.location='article-loi-2019.html'" style="cursor:pointer;">
+        <div class="reco-tag">🏛 Juridique</div>
+        <div class="reco-title">Impact de la Loi n° 2019-006 sur la gouvernance locale</div>
+        <div class="reco-meta"><span>5 min</span><span>22 avr. 2026</span></div>
+      </div>
+      <div class="reco-card" role="listitem" onclick="window.location='gestion-inondations-lome.html'" style="cursor:pointer;">
+        <div class="reco-tag">⚡ SIG · Environnement</div>
+        <div class="reco-title">Inondations à Lomé : Sortir de la fatalité</div>
+        <div class="reco-meta"><span>8 min</span><span>6 mai 2026</span></div>
+      </div>
+      <div class="reco-card" role="listitem" onclick="window.location='villes-durables-togo.html'" style="cursor:pointer;">
+        <div class="reco-tag">🌿 Environnement</div>
+        <div class="reco-title">Vers la Ville Durable Togolaise</div>
+        <div class="reco-meta"><span>10 min</span><span>6 mai 2026</span></div>
+      </div>
+      <div class="reco-card" role="listitem" onclick="window.location='article-sig-gestion.html'" style="cursor:pointer;">
+        <div class="reco-tag">🗺 SIG</div>
+        <div class="reco-title">L'impact des SIG dans la gestion territoriale</div>
+        <div class="reco-meta"><span>4 min</span><span>22 avr. 2026</span></div>
+      </div>
+      <div class="reco-card" role="listitem" onclick="window.location='budget-participatif-togo-kgm.html'" style="cursor:pointer;">
+        <div class="reco-tag">🏛 Gouvernance</div>
+        <div class="reco-title">Le Budget Participatif au Togo</div>
+        <div class="reco-meta"><span>4 min</span><span>13 mai 2026</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT / CONSULTATION ════════ -->
+<section class="contact-section" id="contact" aria-labelledby="contact-title">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div>
+        <div class="featured-badge" style="margin-bottom:20px;">
+          <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="currentColor" opacity=".5"/><circle cx="5" cy="5" r="2" fill="currentColor"/></svg>
+          Centre de Consultation Premium
+        </div>
+        <h2 class="contact-title" id="contact-title">
+          Collaborons<br><span style="background:linear-gradient(135deg,var(--green-400),var(--gold-400));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">ensemble</span>
+        </h2>
+        <p class="contact-desc">
+          Besoin d'un accompagnement pour la cartographie de votre ressort territorial, la réalisation d'un PDC, une expertise en gestion locale ou une étude de marché et d'impact ?
+        </p>
+        <div class="contact-services">
+          <div class="contact-service">
+            <span class="service-icon">🗺️</span>
+            Cartographie SIG et ressorts territoriaux
+          </div>
+          <div class="contact-service">
+            <span class="service-icon">📋</span>
+            Élaboration et révision de PDC
+          </div>
+          <div class="contact-service">
+            <span class="service-icon">🏛️</span>
+            Expertise en gouvernance locale et droit des collectivités
+          </div>
+          <div class="contact-service">
+            <span class="service-icon">📊</span>
+            Études d'impact et de marché territorial
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-ctas">
+          <a href="https://wa.me/22893019105" target="_blank" rel="noopener noreferrer" class="contact-cta contact-cta-wa">
+            <div class="contact-cta-icon">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="" aria-hidden="true" style="width:22px;height:22px;filter:brightness(0) invert(1);">
+            </div>
+            <div>
+              <div class="contact-cta-label">Discussion directe</div>
+              <div class="contact-cta-action">Discuter sur WhatsApp</div>
+            </div>
+            <div class="contact-cta-arrow" aria-hidden="true">→</div>
+          </a>
+          <a href="mailto:kgmexpertise@gmail.com" class="contact-cta contact-cta-mail">
+            <div class="contact-cta-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="contact-cta-label">Consultation formelle</div>
+              <div class="contact-cta-action">Envoyer un Mail</div>
+            </div>
+            <div class="contact-cta-arrow" aria-hidden="true">→</div>
+          </a>
+        </div>
+
+        <div style="margin-top:28px;padding:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:var(--r-lg);">
+          <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;font-weight:700;">Basé à Lomé, Togo</div>
+          <div style="display:flex;gap:20px;align-items:center;">
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.6;">
+              <div>KODOMMA Gnimdou M.</div>
+              <div style="color:rgba(255,255,255,0.35);font-size:0.78rem;">Spécialiste SIG · Consultant en Gouvernance Territoriale</div>
+            </div>
+            <div style="margin-left:auto;font-size:1.8rem;">🇹🇬</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">KODOMMA Gnimdou M.</div>
+        <div class="footer-brand-role">
+          Spécialiste SIG et gestionnaire des collectivités locales<br>
+          Consultant en Gouvernance Territoriale — Lomé, Togo
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Analyses</div>
+        <ul class="footer-links">
+          <li><a href="article-sig-gestion.html">SIG &amp; Territoire</a></li>
+          <li><a href="article-pdc-communal.html">PDC Communal</a></li>
+          <li><a href="article-loi-2019.html">Loi 2019-006</a></li>
+          <li><a href="marketing-territorial-togo.html">Marketing territorial</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#expertise">Expertise</a></li>
+          <li><a href="blog.html" aria-current="page">Analyses</a></li>
+          <li><a href="index.html#ressources">Ressources</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; KGM — KODOMMA Gnimdou M. 2026 — Togo. Tous droits réservés.</div>
+      <div class="footer-tech">
+        Centre d'Intelligence Territoriale · <a href="https://mirabilia-bot.github.io" target="_blank" rel="noopener">mirabilia-bot.github.io</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+'use strict';
+
+/* ─── DATA: Articles index for search ─── */
+const ARTICLES = [
+  { title: "L'impact des SIG dans la gestion territoriale", cat: "SIG", time: "4 min", url: "article-sig-gestion.html", date: "22 avr. 2026", icon: "🗺" },
+  { title: "Réussir son PDC (Plan de Développement Communal)", cat: "Juridique", time: "3 min", url: "article-pdc-communal.html", date: "22 avr. 2026", icon: "📋" },
+  { title: "L'impact de la Loi n° 2019-006 sur la gouvernance locale", cat: "Juridique", time: "5 min", url: "article-loi-2019.html", date: "22 avr. 2026", icon: "🏛" },
+  { title: "Gestion des déchets à Agoè-Nyivé 1 : Défis et Perspectives", cat: "Environnement", time: "4 min", url: "article-gestion-dechets-agoe.html", date: "26 avr. 2026", icon: "🌿" },
+  { title: "La délimitation des communes : Entre imprécision textuelle et rigueur cartographique", cat: "Droit & SIG", time: "6 min", url: "delimitation-territoriale-togo.html", date: "30 avr. 2026", icon: "⚖" },
+  { title: "L'Inventaire Numérique du Patrimoine : Levier Oublié de la Décentralisation", cat: "Gouvernance", time: "4 min", url: "gestion-patrimoine-communal-sig-togo.html", date: "02 mai 2026", icon: "🏗" },
+  { title: "La Maîtrise d'Ouvrage Communale au Togo", cat: "Gouvernance", time: "3 min", url: "maitrise-ouvrage-communale.html", date: "05 mai 2026", icon: "🔨" },
+  { title: "Inondations à Lomé : Sortir de la fatalité", cat: "SIG · Risques", time: "8 min", url: "gestion-inondations-lome.html", date: "06 mai 2026", icon: "🌊" },
+  { title: "Vers la Ville Durable Togolaise", cat: "Environnement", time: "10 min", url: "villes-durables-togo.html", date: "06 mai 2026", icon: "🌱" },
+  { title: "Le Budget Participatif au Togo", cat: "Gouvernance", time: "4 min", url: "budget-participatif-togo-kgm.html", date: "13 mai 2026", icon: "💰" },
+  { title: "Le marketing territorial dans les collectivités togolaises", cat: "SIG · Dev. Local", time: "10 min", url: "marketing-territorial-togo.html", date: "20 mai 2026", icon: "📍" }
+];
+
+/* ─── KNOWLEDGE BASE for AI ─── */
+const KB = {
+  "pdc": "Un Plan de Développement Communal (PDC) est un outil stratégique de planification locale au Togo. Il définit les priorités de développement d'une commune sur 5 à 7 ans, en cohérence avec les politiques nationales. Il comprend un diagnostic territorial, une vision, des axes stratégiques et un plan d'investissement. Voir notre analyse : <a href='article-pdc-communal.html' style='color:var(--green-400)'>Réussir son PDC</a>.",
+  "loi 2019": "La Loi n°2019-006 du 26 juin 2019 portant Code Général des Collectivités Territoriales du Togo est le texte fondateur de la décentralisation. Elle définit l'organisation, les compétences et les ressources des 117 communes togolaises. Elle crée notamment les conseils de préfecture, les communes à statut particulier et encadre le transfert de compétences. Analyse détaillée : <a href='article-loi-2019.html' style='color:var(--green-400)'>L'impact de la Loi 2019-006</a>.",
+  "sig": "Les Systèmes d'Information Géographique (SIG) sont des outils numériques permettant de collecter, gérer et analyser des données spatiales. Au Togo, leur application en gouvernance locale permet : la délimitation précise des communes, l'inventaire du patrimoine foncier, la gestion des risques (inondations), la planification urbaine et l'optimisation de la fiscalité locale. Voir : <a href='article-sig-gestion.html' style='color:var(--green-400)'>SIG et gestion territoriale</a>.",
+  "budget participatif": "Le Budget Participatif est un mécanisme de démocratie participative permettant aux citoyens de décider de l'affectation d'une partie du budget communal. Au Togo, la Loi n°2019-006 créé les bases légales pour son déploiement. Il constitue un levier de transparence budgétaire et de renforcement du lien entre la commune et ses administrés. Analyse : <a href='budget-participatif-togo-kgm.html' style='color:var(--green-400)'>Le Budget Participatif au Togo</a>.",
+  "communes": "Le Togo compte 117 communes depuis les élections locales de 2019. Elles sont organisées en 5 régions (Maritime, Plateaux, Centrale, Kara, Savanes) et disposent d'une personnalité juridique et d'une autonomie financière. La commune de Lomé, capitale, a un statut particulier avec 5 arrondissements.",
+  "inondations": "Les inondations à Lomé constituent un défi majeur de gouvernance urbaine. Notre analyse montre que les outils SIG permettent une cartographie préventive des zones à risques, une gestion optimisée du drainage et une résilience durable, alternatives au simple pompage d'urgence. <a href='gestion-inondations-lome.html' style='color:var(--green-400)'>Lire l'analyse complète</a>.",
+  "marketing territorial": "Le marketing territorial est une stratégie permettant aux communes de valoriser leurs atouts pour attirer investisseurs, entreprises et talents. Au Togo, son déploiement nécessite d'adapter les pratiques internationales au contexte local (fiscalité faible, identités culturelles fortes). Le SIG joue un rôle central dans la mise en valeur des potentialités territoriales. <a href='marketing-territorial-togo.html' style='color:var(--green-400)'>Lire l'analyse</a>.",
+  "default": "Je suis spécialisé dans la gouvernance territoriale, la décentralisation, le droit des collectivités et les SIG au Togo. Je peux vous informer sur les communes togolaises, la Loi 2019-006, les Plans de Développement Communal, les outils SIG, le budget participatif, et bien d'autres sujets. Reformulez votre question en précisant le thème souhaité."
+};
+
+/* ─── THEME TOGGLE ─── */
+const themeToggle = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('kgm-theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', function() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('kgm-theme', next);
+  this.textContent = next === 'dark' ? '☀️' : '🌙';
+});
+
+/* ─── NAV SCROLL ─── */
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ─── HAMBURGER ─── */
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+hamburger.addEventListener('click', function() {
+  const open = navMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+navMenu.querySelectorAll('a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    navMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ─── SEARCH ─── */
+const searchOverlay = document.getElementById('search-overlay');
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+function openSearch() {
+  searchOverlay.classList.add('active');
+  setTimeout(function() { searchInput.focus(); }, 80);
+  document.body.style.overflow = 'hidden';
+}
+function closeSearch() {
+  searchOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('open-search').addEventListener('click', openSearch);
+document.getElementById('hero-search-btn').addEventListener('click', openSearch);
+document.getElementById('close-search').addEventListener('click', closeSearch);
+searchOverlay.addEventListener('click', function(e) { if (e.target === searchOverlay) closeSearch(); });
+
+document.addEventListener('keydown', function(e) {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+  if (e.key === 'Escape' && searchOverlay.classList.contains('active')) closeSearch();
+});
+
+function renderSearchResults(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) { searchResults.innerHTML = ''; return; }
+  const hits = ARTICLES.filter(function(a) {
+    return a.title.toLowerCase().includes(q) || a.cat.toLowerCase().includes(q);
+  });
+  if (!hits.length) {
+    searchResults.innerHTML = '<div class="search-no-results">Aucun résultat pour « ' + escHtml(query) + ' »</div>';
+    return;
+  }
+  searchResults.innerHTML = hits.map(function(a) {
+    return '<a href="' + a.url + '" class="search-result-item" role="option">' +
+      '<div class="search-result-icon" aria-hidden="true">' + a.icon + '</div>' +
+      '<div><div class="search-result-title">' + escHtml(a.title) + '</div>' +
+      '<div class="search-result-meta">' + escHtml(a.cat) + ' · ' + a.time + ' · ' + a.date + '</div></div>' +
+      '</a>';
+  }).join('');
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+searchInput.addEventListener('input', function() { renderSearchResults(this.value); });
+
+/* ─── FILTER ─── */
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var category = this.getAttribute('data-filter');
+    var cards = document.querySelectorAll('.card');
+    var countEl = document.getElementById('filter-count');
+    document.querySelectorAll('.filter-btn').forEach(function(b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    this.classList.add('active');
+    this.setAttribute('aria-pressed', 'true');
+    var count = 0;
+    cards.forEach(function(card) {
+      var cats = (card.getAttribute('data-category') || '').toUpperCase();
+      var visible = (category === 'all') || cats.includes(category);
+      card.classList.toggle('hidden', !visible);
+      if (visible) count++;
+    });
+    countEl.textContent = category === 'all'
+      ? count + ' analyses disponibles'
+      : count + ' analyse' + (count > 1 ? 's' : '') + ' trouvée' + (count > 1 ? 's' : '');
+  });
+});
+
+/* ─── BACK TO TOP ─── */
+var backBtn = document.getElementById('back-to-top');
+window.addEventListener('scroll', function() {
+  backBtn.classList.toggle('visible', window.scrollY > 300);
+});
+backBtn.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ─── READING PROGRESS ─── */
+var progressBar = document.getElementById('reading-bar');
+window.addEventListener('scroll', function() {
+  var d = document.documentElement;
+  var scrolled = d.scrollTop || document.body.scrollTop;
+  var total = d.scrollHeight - d.clientHeight;
+  var pct = total > 0 ? (scrolled / total) * 100 : 0;
+  progressBar.style.width = pct + '%';
+});
+
+/* ─── COUNTER ANIMATION ─── */
+function animateCounter(el) {
+  var target = parseInt(el.getAttribute('data-target'), 10);
+  var start = 0;
+  var duration = 1600;
+  var startTime = null;
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    var progress = Math.min((ts - startTime) / duration, 1);
+    var ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(start + (target - start) * ease);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ─── INTERSECTION OBSERVER (reveal + counters + obs bars) ─── */
+var revealObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+
+var counterObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter-val').forEach(function(el) { counterObs.observe(el); });
+
+var barObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var fill = entry.target;
+      var w = fill.getAttribute('data-width');
+      fill.style.width = w + '%';
+      barObs.unobserve(fill);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.obs-bar-fill').forEach(function(el) { barObs.observe(el); });
+
+/* ─── MOBILE SEARCH BUTTON ─── */
+var mobileSearchBtn = document.getElementById('open-search-mobile');
+if (mobileSearchBtn) {
+  mobileSearchBtn.addEventListener('click', openSearch);
+}
+
+/* ─── KGM INTELLIGENCE (AI) ─── */
+var aiChat = document.getElementById('ai-chat');
+var aiQuery = document.getElementById('ai-query');
+var aiSend = document.getElementById('ai-send');
+
+function escHtmlAi(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function lookupKB(q) {
+  var ql = q.toLowerCase();
+  for (var key in KB) {
+    if (key !== 'default' && ql.includes(key)) return KB[key];
+  }
+  return KB['default'];
+}
+
+function addMessage(text, role, isHtml) {
+  var msg = document.createElement('div');
+  msg.className = 'ai-message ' + role;
+  msg.innerHTML =
+    '<div class="ai-avatar" aria-hidden="true">' + (role === 'assistant' ? 'K' : 'V') + '</div>' +
+    '<div class="ai-bubble">' + (isHtml ? text : escHtmlAi(text)) + '</div>';
+  aiChat.appendChild(msg);
+  aiChat.scrollTop = aiChat.scrollHeight;
+  return msg;
+}
+
+function showThinking() {
+  var msg = document.createElement('div');
+  msg.className = 'ai-message assistant';
+  msg.id = 'ai-thinking-msg';
+  msg.innerHTML =
+    '<div class="ai-avatar" aria-hidden="true">K</div>' +
+    '<div class="ai-bubble"><div class="ai-thinking">' +
+    '<div class="ai-thinking-dot"></div><div class="ai-thinking-dot"></div><div class="ai-thinking-dot"></div>' +
+    '</div></div>';
+  aiChat.appendChild(msg);
+  aiChat.scrollTop = aiChat.scrollHeight;
+}
+
+function sendAiQuery() {
+  var q = aiQuery.value.trim();
+  if (!q) return;
+  addMessage(q, 'user', false);
+  aiQuery.value = '';
+  aiSend.disabled = true;
+  showThinking();
+  setTimeout(function() {
+    var thinking = document.getElementById('ai-thinking-msg');
+    if (thinking) thinking.remove();
+    var answer = lookupKB(q);
+    addMessage(answer, 'assistant', true);
+    aiSend.disabled = false;
+  }, 900 + Math.random() * 600);
+}
+
+function handleAiKeydown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendAiQuery(); }
+}
+
+function askSuggestion(btn) {
+  aiQuery.value = btn.textContent.trim();
+  sendAiQuery();
+}
+
+aiQuery.addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+
+/* cards fade handled by .hidden class + CSS transition */
+
+/* ─── CARD HOVER PARALLAX ─── */
+document.querySelectorAll('.card').forEach(function(card) {
+  card.addEventListener('mousemove', function(e) {
+    var rect = this.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var dx = (e.clientX - cx) / rect.width;
+    var dy = (e.clientY - cy) / rect.height;
+    this.style.transform = 'translateY(-6px) rotateX(' + (-dy * 4) + 'deg) rotateY(' + (dx * 4) + 'deg)';
+  });
+  card.addEventListener('mouseleave', function() {
+    this.style.transform = '';
+    this.style.transition = '';
+  });
+});
+
+</script>
+
+</body>
+</html>
