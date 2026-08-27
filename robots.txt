@@ -5,19 +5,15 @@
 # - Indexation maximale
 # - Découverte par les moteurs de recherche et systèmes IA
 # - Accès aux ressources publiques
-# - Exclusion des zones purement techniques
+# - Exclusion des zones techniques
 # - Sitemap officiel
 # ============================================================
-
-# ------------------------------------------------------------
-# 1. ACCÈS GÉNÉRAL — TOUT CRAWLER
-# ------------------------------------------------------------
 
 User-agent: *
 Allow: /
 
 # ------------------------------------------------------------
-# 2. ZONES TECHNIQUES / NON DESTINÉES À L'INDEXATION
+# ZONES TECHNIQUES
 # ------------------------------------------------------------
 
 Disallow: /admin/
@@ -35,7 +31,7 @@ Disallow: /dev/
 Disallow: /debug/
 
 # ------------------------------------------------------------
-# 3. FICHIERS TECHNIQUES / SAUVEGARDES
+# FICHIERS DE SAUVEGARDE / TEMPORAIRES
 # ------------------------------------------------------------
 
 Disallow: /*.log$
@@ -45,23 +41,7 @@ Disallow: /*.old$
 Disallow: /*.backup$
 
 # ------------------------------------------------------------
-# 4. RESSOURCES PUBLIQUES
-# ------------------------------------------------------------
-# HTML, CSS, JavaScript, images, PDF et autres ressources
-# publiques restent accessibles aux crawlers.
-
-Allow: /*.html$
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.png$
-Allow: /*.webp$
-Allow: /*.svg$
-Allow: /*.pdf$
-
-# ------------------------------------------------------------
-# 5. SITEMAP XML
+# SITEMAP
 # ------------------------------------------------------------
 
 Sitemap: https://mirabilia-bot.github.io/sitemap.xml
