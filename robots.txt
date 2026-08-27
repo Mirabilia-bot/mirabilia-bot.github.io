@@ -1,17 +1,67 @@
-# Blocage des bots inutiles (Scrapers gourmands qui ralentissent le site)
-User-agent: GPTBot
-Disallow: /
+# ============================================================
+# KGM EXPERTISE — ROBOTS.TXT
+# ============================================================
+# Politique :
+# - Indexation maximale
+# - Découverte par les moteurs de recherche et systèmes IA
+# - Accès aux ressources publiques
+# - Exclusion des zones purement techniques
+# - Sitemap officiel
+# ============================================================
 
-User-agent: ChatGPT-User
-Disallow: /
+# ------------------------------------------------------------
+# 1. ACCÈS GÉNÉRAL — TOUT CRAWLER
+# ------------------------------------------------------------
 
-User-agent: CCBot
-Disallow: /
-
-# Autorisation pour les moteurs de recherche et réseaux sociaux
 User-agent: *
 Allow: /
-# Disallow: /admin/  <-- Ajoutez ceci si vous avez une partie privée
 
-# Sitemap dédié
+# ------------------------------------------------------------
+# 2. ZONES TECHNIQUES / NON DESTINÉES À L'INDEXATION
+# ------------------------------------------------------------
+
+Disallow: /admin/
+Disallow: /private/
+Disallow: /backup/
+Disallow: /backups/
+Disallow: /tmp/
+Disallow: /temp/
+Disallow: /test/
+Disallow: /tests/
+Disallow: /draft/
+Disallow: /drafts/
+Disallow: /logs/
+Disallow: /dev/
+Disallow: /debug/
+
+# ------------------------------------------------------------
+# 3. FICHIERS TECHNIQUES / SAUVEGARDES
+# ------------------------------------------------------------
+
+Disallow: /*.log$
+Disallow: /*.bak$
+Disallow: /*.tmp$
+Disallow: /*.old$
+Disallow: /*.backup$
+
+# ------------------------------------------------------------
+# 4. RESSOURCES PUBLIQUES
+# ------------------------------------------------------------
+# HTML, CSS, JavaScript, images, PDF et autres ressources
+# publiques restent accessibles aux crawlers.
+
+Allow: /*.html$
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+Allow: /*.pdf$
+
+# ------------------------------------------------------------
+# 5. SITEMAP XML
+# ------------------------------------------------------------
+
 Sitemap: https://mirabilia-bot.github.io/sitemap.xml
