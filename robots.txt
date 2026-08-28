@@ -1,47 +1,4 @@
-# ============================================================
-# KGM EXPERTISE — ROBOTS.TXT
-# ============================================================
-# Politique :
-# - Indexation maximale
-# - Découverte par les moteurs de recherche et systèmes IA
-# - Accès aux ressources publiques
-# - Exclusion des zones techniques
-# - Sitemap officiel
-# ============================================================
-
 User-agent: *
 Allow: /
-
-# ------------------------------------------------------------
-# ZONES TECHNIQUES
-# ------------------------------------------------------------
-
-Disallow: /admin/
-Disallow: /private/
-Disallow: /backup/
-Disallow: /backups/
-Disallow: /tmp/
-Disallow: /temp/
-Disallow: /test/
-Disallow: /tests/
-Disallow: /draft/
-Disallow: /drafts/
-Disallow: /logs/
-Disallow: /dev/
-Disallow: /debug/
-
-# ------------------------------------------------------------
-# FICHIERS DE SAUVEGARDE / TEMPORAIRES
-# ------------------------------------------------------------
-
-Disallow: /*.log$
-Disallow: /*.bak$
-Disallow: /*.tmp$
-Disallow: /*.old$
-Disallow: /*.backup$
-
-# ------------------------------------------------------------
-# SITEMAP
-# ------------------------------------------------------------
 
 Sitemap: https://mirabilia-bot.github.io/sitemap.xml
