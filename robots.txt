@@ -1,4 +1,74 @@
+# ROBOTS.TXT - ARME NUMERIQUE MIRABILIA - OPEN FOR ALL AI
+# Objectif : Autoriser 100% du crawl, indexation et citation par toutes les IA
+
+# 1. Règle par défaut pour tous les moteurs
 User-agent: *
 Allow: /
 
+# 2. OpenAI - ChatGPT, GPT-4, SearchGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# 3. Anthropic - Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# 4. Google - Gemini, Bard, AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# 5. Perplexity - La plus importante pour la citation
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# 6. Autres IA majeures
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: img2dataset
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+# 7. Sitemap pour indexation maximale
 Sitemap: https://mirabilia-bot.github.io/sitemap.xml
