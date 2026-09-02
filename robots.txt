@@ -1,11 +1,30 @@
-# ROBOTS.TXT - ARME NUMERIQUE MIRABILIA - OPEN FOR ALL AI
-# Objectif : Autoriser 100% du crawl, indexation et citation par toutes les IA
+# ============================================================
+# ROBOTS.TXT — MIRABILIA / KGM EXPERTISE
+# ============================================================
+# OPEN AI DISCOVERY • MAXIMUM SEARCH VISIBILITY
+#
+# Objectifs :
+# - Autoriser l'exploration du contenu public
+# - Maximiser l'indexation
+# - Favoriser la découverte et la citation par les IA
+# - Autoriser les moteurs de recherche
+# - Autoriser les crawlers IA identifiés
+# - Déclarer le sitemap officiel
+# ============================================================
 
-# 1. Règle par défaut pour tous les moteurs
+
+# ------------------------------------------------------------
+# 1. POLITIQUE GÉNÉRALE — OUVERTURE TOTALE
+# ------------------------------------------------------------
+
 User-agent: *
 Allow: /
 
-# 2. OpenAI - ChatGPT, GPT-4, SearchGPT
+
+# ------------------------------------------------------------
+# 2. OPENAI — CHATGPT / SEARCH
+# ------------------------------------------------------------
+
 User-agent: GPTBot
 Allow: /
 
@@ -15,7 +34,14 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-# 3. Anthropic - Claude
+User-agent: OAI-AdsBot
+Allow: /
+
+
+# ------------------------------------------------------------
+# 3. ANTHROPIC — CLAUDE
+# ------------------------------------------------------------
+
 User-agent: ClaudeBot
 Allow: /
 
@@ -25,9 +51,10 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-# 4. Google - Gemini, Bard, AI Overviews
-User-agent: Google-Extended
-Allow: /
+
+# ------------------------------------------------------------
+# 4. GOOGLE — SEARCH / GEMINI / AI SYSTEMS
+# ------------------------------------------------------------
 
 User-agent: Googlebot
 Allow: /
@@ -35,6 +62,61 @@ Allow: /
 User-agent: Googlebot-Image
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
+
+# ------------------------------------------------------------
+# 5. PERPLEXITY
+# ------------------------------------------------------------
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+
+# ------------------------------------------------------------
+# 6. AUTRES CRAWLERS / SYSTÈMES IA
+# ------------------------------------------------------------
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: img2dataset
+Allow: /
+
+
+# ------------------------------------------------------------
+# 7. SITEMAP
+# ------------------------------------------------------------
+
+Sitemap: https://mirabilia-bot.github.io/sitemap.xml
 # 5. Perplexity - La plus importante pour la citation
 User-agent: PerplexityBot
 Allow: /
