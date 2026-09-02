@@ -1,17 +1,7 @@
 # ============================================================
-# ROBOTS.TXT — MIRABILIA / KGM EXPERTISE
+# ROBOTS.TXT — MIRABILIA / KGM EXPERTISE — v2.1
+# OPEN DISCOVERY • MAXIMUM SEARCH VISIBILITY • AI READY
 # ============================================================
-# OPEN AI DISCOVERY • MAXIMUM SEARCH VISIBILITY
-#
-# Objectifs :
-# - Autoriser l'exploration du contenu public
-# - Maximiser l'indexation
-# - Favoriser la découverte et la citation par les IA
-# - Autoriser les moteurs de recherche
-# - Autoriser les crawlers IA identifiés
-# - Déclarer le sitemap officiel
-# ============================================================
-
 
 # ------------------------------------------------------------
 # 1. POLITIQUE GÉNÉRALE — OUVERTURE TOTALE
@@ -20,9 +10,8 @@
 User-agent: *
 Allow: /
 
-
 # ------------------------------------------------------------
-# 2. OPENAI — CHATGPT / SEARCH
+# 2. OPENAI — CHATGPT / SEARCH / ADS
 # ------------------------------------------------------------
 
 User-agent: GPTBot
@@ -37,7 +26,6 @@ Allow: /
 User-agent: OAI-AdsBot
 Allow: /
 
-
 # ------------------------------------------------------------
 # 3. ANTHROPIC — CLAUDE
 # ------------------------------------------------------------
@@ -51,9 +39,8 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-
 # ------------------------------------------------------------
-# 4. GOOGLE — SEARCH / GEMINI / AI SYSTEMS
+# 4. GOOGLE — SEARCH / AI
 # ------------------------------------------------------------
 
 User-agent: Googlebot
@@ -62,9 +49,14 @@ Allow: /
 User-agent: Googlebot-Image
 Allow: /
 
+User-agent: Googlebot-Video
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
+User-agent: AdsBot-Google
+Allow: /
 
 # ------------------------------------------------------------
 # 5. PERPLEXITY
@@ -76,9 +68,18 @@ Allow: /
 User-agent: Perplexity-User
 Allow: /
 
+# ------------------------------------------------------------
+# 6. MICROSOFT / BING — RECHERCHE WEB
+# ------------------------------------------------------------
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: BingPreview
+Allow: /
 
 # ------------------------------------------------------------
-# 6. AUTRES CRAWLERS / SYSTÈMES IA
+# 7. AUTRES CRAWLERS / SYSTÈMES IA
 # ------------------------------------------------------------
 
 User-agent: cohere-ai
@@ -111,46 +112,14 @@ Allow: /
 User-agent: img2dataset
 Allow: /
 
+User-agent: Amazonbot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
 
 # ------------------------------------------------------------
-# 7. SITEMAP
+# 8. SITEMAP OFFICIEL
 # ------------------------------------------------------------
 
-Sitemap: https://mirabilia-bot.github.io/sitemap.xml
-# 5. Perplexity - La plus importante pour la citation
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Perplexity-User
-Allow: /
-
-# 6. Autres IA majeures
-User-agent: cohere-ai
-Allow: /
-
-User-agent: Bytespider
-Allow: /
-
-User-agent: Meta-ExternalAgent
-Allow: /
-
-User-agent: FacebookBot
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: YouBot
-Allow: /
-
-User-agent: img2dataset
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: Diffbot
-Allow: /
-
-# 7. Sitemap pour indexation maximale
 Sitemap: https://mirabilia-bot.github.io/sitemap.xml
