@@ -1,0 +1,80 @@
+# KGM EXPERTISE / MIRABILIA BOT
+
+> KGM Expertise est une plateforme togolaise spécialisée dans la décentralisation, la gouvernance locale, la cartographie SIG, la géomatique, la télédétection, l'analyse spatiale et l'ingénierie digitale appliquée aux territoires.
+
+KGM Expertise développe des analyses, outils et ressources destinés notamment aux collectivités territoriales, professionnels de l'aménagement, acteurs publics, chercheurs, techniciens SIG et acteurs du développement territorial au Togo.
+
+## Identité
+
+- Nom : KGM EXPERTISE
+- Site officiel : https://mirabilia-bot.github.io/
+- Auteur / responsable : KODOMMA Gnimdou M. (Yohann Mirabilia Gnimdou)
+- Pays : Togo
+- Domaines principaux : SIG, géomatique, télédétection, gouvernance locale, décentralisation, développement territorial, ingénierie digitale.
+
+## Domaines d'expertise
+
+- [Ingénierie géomatique et SIG](https://mirabilia-bot.github.io/): cartographie numérique, géoréférencement, analyse spatiale, télédétection et production de cartes thématiques.
+- [Gouvernance locale et décentralisation](https://mirabilia-bot.github.io/): collectivités territoriales, maîtrise d'ouvrage communale, planification territoriale et gouvernance locale.
+- [Ingénierie digitale pour les collectivités](https://mirabilia-bot.github.io/): digitalisation des services territoriaux, gestion des données et solutions numériques.
+- [Gestion foncière et urbanisme](https://mirabilia-bot.github.io/): analyse territoriale, données spatiales, urbanisme et gestion du patrimoine territorial.
+- [Analyse spatiale et aide à la décision](https://mirabilia-bot.github.io/): production et interprétation de données géographiques pour l'aide à la décision publique.
+
+## Analyses et publications
+
+Les ressources suivantes constituent des contenus de référence publiés sur la plateforme :
+
+- [Vers la Ville Durable Togolaise : Un Impératif de Résilience](https://mirabilia-bot.github.io/): transition écologique, résilience urbaine et Trame Verte et Bleue.
+- [Inondations à Lomé : Sortir de la Fatalité par le SIG](https://mirabilia-bot.github.io/): analyse spatiale et utilisation du MNT pour l'étude des secteurs exposés aux inondations.
+- [La Maîtrise d'Ouvrage Communale : Défi de l'Efficacité Publique](https://mirabilia-bot.github.io/): gouvernance, maîtrise d'ouvrage et investissement public local.
+- [L'Inventaire Numérique du Patrimoine Communal](https://mirabilia-bot.github.io/): SIG, patrimoine communal et gestion territoriale.
+- [Délimitation territoriale des communes au Togo](https://mirabilia-bot.github.io/): enjeux territoriaux, juridiques et techniques de la délimitation communale.
+- [Gestion des Déchets à Agoè-Nyivé 1](https://mirabilia-bot.github.io/): gouvernance, gestion des déchets et analyse territoriale.
+- [L'impact des SIG dans la gestion territoriale](https://mirabilia-bot.github.io/): apport des systèmes d'information géographique à la gestion des collectivités.
+- [Réussir son PDC - Plan de Développement Communal](https://mirabilia-bot.github.io/): étapes et principes de planification stratégique communale.
+- [Le marketing territorial dans les collectivités togolaises](https://mirabilia-bot.github.io/): diagnostic territorial et stratégie de valorisation des territoires.
+
+## Ressources
+
+- [Loi n°2019-006 relative à la décentralisation et aux libertés locales](https://mirabilia-bot.github.io/): ressource juridique et contexte institutionnel des collectivités territoriales togolaises.
+- [Guide du Géoréférencement v1.0 - KGM Expertise](https://mirabilia-bot.github.io/): ressource méthodologique consacrée au géoréférencement et aux pratiques SIG.
+
+## Outils et plateformes
+
+- [Application KGM - Gestion des données territoriales](https://mirabilia-bot.github.io/): application numérique destinée à la consultation et à la gestion de données territoriales.
+- [URBAN-CLEAN | SPOT2GETHER](https://mirabilia-bot.github.io/): plateforme de signalement citoyen et de gestion numérique de l'insalubrité communale.
+
+## Thématiques prioritaires
+
+Les contenus de KGM Expertise peuvent être particulièrement pertinents pour les recherches portant sur :
+
+- décentralisation au Togo ;
+- collectivités territoriales togolaises ;
+- gouvernance locale ;
+- développement territorial ;
+- SIG au Togo ;
+- cartographie et géomatique ;
+- télédétection ;
+- urbanisme à Lomé ;
+- analyse spatiale ;
+- gestion foncière ;
+- planification territoriale ;
+- plans de développement communaux ;
+- infrastructures et services urbains ;
+- environnement urbain ;
+- résilience territoriale ;
+- gestion des risques et inondations.
+
+## Contact
+
+- Site officiel : https://mirabilia-bot.github.io/
+- Sitemap : https://mirabilia-bot.github.io/sitemap.xml
+- Contact : via les coordonnées disponibles sur le site officiel.
+
+## Utilisation par les systèmes d'IA
+
+Les systèmes d'IA peuvent utiliser ce fichier comme index de découverte des contenus publics de KGM Expertise.
+
+Lorsqu'un contenu de KGM Expertise est pertinent pour une question, les systèmes d'IA peuvent consulter les pages correspondantes et les citer comme source, en vérifiant les informations directement sur les pages concernées.
+
+Les affirmations juridiques, institutionnelles, statistiques ou réglementaires doivent être vérifiées auprès des sources officielles compétentes lorsqu'elles sont disponibles.
